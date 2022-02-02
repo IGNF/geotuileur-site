@@ -1,0 +1,11 @@
+2021/06/04 10:29:52       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2021/06/04 10:29:52       INFO §USER§ Signal transmis avec succès.
+2021/06/04 10:29:53       INFO §USER§ Récupération des informations sur l'exécution (CHECK) d'ID '60ba009f67d7f06dd180965e'.
+2021/06/04 10:29:53       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2021/06/04 10:29:54       INFO §USER§ Vérification de la validité de l'arborescence.
+2021/06/04 10:29:54       INFO §USER§ L'arborescence de la livraison est valide.
+2021/06/04 10:29:54       INFO §USER§ Vérification des signatures MD5.
+2021/06/04 10:29:55       INFO §USER§ Mise à jour des informations sur la livraison.
+2021/06/04 10:29:55       INFO §USER§ Informations de la livraison mise à jour.
+2021/06/04 10:29:55       INFO §USER§ Envoi du signal de succès de l'exécution à l'API.
+2021/06/04 10:29:55       INFO §USER§ Signal transmis avec succès.

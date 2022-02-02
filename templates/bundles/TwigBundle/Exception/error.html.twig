@@ -1,0 +1,18 @@
+{# error page #}
+{% extends "base.html.twig" %}
+{% trans_default_domain "PlageWebClient" %}
+
+{% set hasBreadcrumb = 0 %}
+{% set pageTitle = 'error.title'|trans %}
+
+{% block title %}{{ status_code ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block body %}
+{% apply spaceless %}
+    <div class="container-content">
+        <h2>
+            {{ 'error.default'|trans({'%status_code%': status_code, '%status_text%': status_text}) }}
+        </h2>
+    </div>
+{% endapply %}
+{% endblock %}

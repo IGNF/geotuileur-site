@@ -1,0 +1,37 @@
+{% trans_default_domain "PlageWebClient" %}
+{% set pageTitle = "user.me.heading" | trans %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ 'user.me.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+    <div class="container-content container-content--smaller">
+        <div class="wysiwyg">
+            <ul>
+                <li><strong>{{ "user.me.first_name"| trans }}&nbsp;:</strong> {{ user.first_name }}</li>
+                <li><strong>{{ "user.me.last_name"| trans }}&nbsp;:</strong> {{ user.last_name }}</li>
+                <li><strong>{{ "user.me.email"| trans }}&nbsp;:</strong> {{ user.email }}</li>
+                <li><strong>{{ "user.me.creation"| trans }}&nbsp;:</strong> {{ user.creation|format_datetime('full', 'medium', 'dd MMMM yyyy ', locale= app.request.locale) }}</li>
+                <li><strong>{{ "user.me.id"| trans }}&nbsp;:</strong> {{ user._id }}</li>
+            </ul>
+
+            <p>{{ "user.me.member"| trans }}</p>
+            <ul>
+            {% for member in user.communities_member %}
+                <li>
+                    <a href="{{ path('plage_datastore_view', { datastoreId: member.community.datastore }) }}">
+                        {{ member.community.name }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}

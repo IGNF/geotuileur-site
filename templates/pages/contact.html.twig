@@ -1,0 +1,52 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'contact.title'| trans %}
+
+{% block title %} {{ 'contact.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+
+    <div class="container-content container-content--smaller">
+        <div class="wysiwyg">
+            {{ 'contact.about'|trans({'%URL%': path('plage_doc')})|raw}}
+        </div>
+
+        {{ form_start(form) }}
+
+        <div class="form-group">
+            <div class="float-target-parent">
+                {{ form_label(form.userEmail) }}
+                {{ form_widget(form.userEmail) }}
+            </div>
+            {{ form_errors(form.userEmail) }}
+        </div>
+
+        <div class="form-group form-group-textarea">
+            <div class="float-target-parent">
+                {{ form_label(form.message) }}
+                {{ form_widget(form.message) }}
+            </div>
+            {{ form_errors(form.message) }}
+        </div>
+
+        <p>
+            {{ "contact.personal_data"|trans }}<br/>
+            <a href="https://www.ign.fr/institut/donnees-caractere-personnel" target="_blank">{{ "contact.personal_data_link"|trans }}</a>
+        </p>
+        
+        {{ form_widget(form.importance, {'attr': {'style': "display:none"}} ) }}
+        {{ form_row( form.submit ) }}   
+
+        {{ form_end(form) }}
+    </div>
+
+
+    {% endapply %}
+{% endblock %}

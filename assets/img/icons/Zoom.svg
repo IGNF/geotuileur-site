@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="75px" viewBox="0 0 38 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>12.Elements Map/Zoom</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="38" height="75" rx="3"></rect>
+        <filter x="-39.5%" y="-20.0%" width="178.9%" height="140.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.0352941176   0 0 0 0 0.0862745098   0 0 0 0 0.145098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="12.Elements-Map/Zoom" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ZOOM">
+            <g id="Rectangle">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <rect id="Rectangle" fill="#DDE1E6" x="0" y="37" width="38" height="1"></rect>
+            <path d="M20,15 L20,19 L24,19 L24,21 L20,21 L20,25 L18,25 L18,21 L14,21 L14,19 L18,19 L18,15 L20,15 Z" id="PLUS" fill="#091625"></path>
+            <g id="MOINS" transform="translate(14.000000, 55.000000)" fill="#091625">
+                <rect id="Rectangle-Copy-2" x="0" y="0" width="10" height="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

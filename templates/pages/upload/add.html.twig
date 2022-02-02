@@ -1,0 +1,73 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+{% set step_num = 1 %}
+
+{% block title %} {{ 'pyramid.upload_data.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% set pageTitle = 'pyramid.upload_data.heading'| trans %}
+
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+    <div class="container-content">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center mb-2">{{ 'pyramid.upload_data.drop_file_title' | trans }}</h2>
+
+                {{ form_start(form, {'attr': {'id': 'upload-form'}}) }}
+                {{ form_errors(form) }}
+                <div class="d-flex justify-content-center flex-column align-items-center drop-zone" id="dropzone">
+                    <div>
+                        <div class="text-center"><img src="{{ asset('build/img/home/Deposer.png') }}"></div>
+                        <div class="mt-1 text-center"><strong>{{ 'pyramid.upload_data.drop_file_here'| trans }}</strong></div>
+                    </div>
+                </div>
+
+                <div class="mt-1 mb-2">
+                    {{ form_widget(form.file,{'attr' : {'data-url': oneup_uploader_endpoint('gallery')}}) }}
+                </div>
+
+                <p class="description">
+                    <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.file_formats'| trans({'%help_url%': path('plage_doc') ~ '#/upload' }) | raw }}
+                </p>
+
+                <div class="my-1 progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="progress-upload" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="form-group hidden-part">
+                    <div class="float-target-parent">
+                        {{ form_label(form.pyramid_name) }}
+                        {{ form_widget(form.pyramid_name) }}
+                    </div>
+                    <p class="description">
+                        <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.name_help' | trans }}
+                    </p>
+                </div>
+                <div class="form-group hidden-part">
+                    {{ form_label(form.srs) }}
+                    {{ form_widget(form.srs) }}
+                    <p class="description">
+                        <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.srs_help' | trans({'%help_url%': path('plage_doc') ~ '#/upload?id=projection'}) | raw }}
+                    </p>
+                </div>
+                <div class="hidden-part text-center mt-2">
+                    {{ form_label(form.submit) }}
+                    {{ form_widget(form.submit) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('upload-add') }}
+{% endblock %}

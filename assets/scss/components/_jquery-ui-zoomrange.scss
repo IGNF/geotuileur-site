@@ -1,0 +1,47 @@
+.ui-zoom-range {
+    padding-bottom: 1em;
+}
+
+.ui-zoom-slider {
+    margin: 1rem;
+
+    .ui-zoom-label {
+        position: absolute;
+        width: 2rem;
+        margin-left: -1rem;
+        text-align: center;
+        margin-top: 1.8rem;
+        font-size: 1rem;
+    }
+
+    .ui-slider-range {
+        background-color: $brand-secondary;
+    }
+
+    .ui-slider-handle {     
+        background-color: $brand-primary;
+        border-radius: 1em;
+        cursor: ew-resize;
+        &.ui-state-default {
+            background-color: $brand-primary;
+        }
+        &:hover,  &.ui-state-active {
+            background-color: $brand-dark;
+            border-color: $brand-dark;
+        }
+    }
+}
+
+
+
+.ui-map-zoom-levels {
+    display: flex;
+    .ui-top-zoom-level, .ui-bottom-zoom-level {
+        border: 1px solid $gray-400;
+        flex: 0 1 50%;
+        margin: 0 1em;
+    }
+    .ui-bottom-zoom-level {
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,205 @@
+.map {
+    width: 100%;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+}
+
+div[id^="GPlayersList"] {
+    width: 300px;
+
+    .GPlayerOpacity input[type="range"] {
+        
+        &::-moz-range-track {
+            background-size: 300px 3px;
+            width: auto;
+        }
+        &::-ms-track {
+            background-size: 300px 3px;
+            width: auto;
+        }
+        &::-webkit-slider-runnable-track {
+            background-size: 300px 3px;
+            width: auto;
+        }
+    }
+
+}
+
+// Info sur les couches
+div[id^="GPlayerInfoDescription"]  {
+    font-size: 1em;
+    p {
+        margin-bottom: 0;
+    }
+}
+
+// Popup montrant les attributs d'un objet de la couche de tuiles vectorielles
+.gp-feature-info-div {
+    border-radius: .8em;
+    color: $gray-900;
+    font-size: .8em;
+    .closer { // black closing button
+        background-color: transparent;
+        filter: brightness(0);
+    }
+    .gp-attname-others-span {
+        font-weight: bold;
+    }
+}
+
+// surcharge pour remplacer les couleurs et des boutons ol
+.ol-control {
+    background-color: transparent;
+    padding: 0;
+    &:hover {
+        background-color: transparent;
+    }
+    button {
+        background-color: white;
+        border: solid 1px $gray-400;
+        color: $gray-900;
+        font-size: 2.5rem;
+        font-weight: normal;
+        height: 3rem;
+        margin: .2em;
+        width: 3rem;
+        &:active, &:focus {
+            background-color: white;
+            color: $gray-900;
+        }
+        &:hover {
+            background-color: $mainColor;
+            color: white;
+        }
+    }
+}
+
+// position des zooms
+.ol-zoom {
+    left: .5rem;
+    top: .5rem;
+    .ol-zoom-in, .ol-zoom-out {
+        border-radius: 0;
+    }
+}
+
+// Recherche de lieu
+[id^="GPsearchEngine-"] {
+    left: 4.8rem !important; // largeur du zoom (3.4rem) + position du zoom (.5rem) + marge
+    top: 1rem !important;
+
+    .GPshowAdvancedToolPicto {
+        background-color: transparent;
+        border: solid 1px $gray-400;
+        border-radius: 0;
+        height: 3rem;
+        padding: 0;
+        width: 3rem;
+        &:hover {
+            background-color: $mainColor;
+        }
+    }
+    .GPshowAdvancedToolOpen {
+        background-color: black;
+        filter: invert(1); // fond blanc, picto noir en inversant
+        height: 100%;
+        padding: 0;
+        width: 100%;
+        &:hover {
+            background-color: $mainColor;
+            filter: none;
+        }
+    }
+    form[id^="GPsearchInput-"] {
+        border: solid 1px $gray-400;
+        height: 3rem;
+        left: 0;
+        input {
+            border: solid 1px $gray-400;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+    div[id^="GPsearchInputReset"] {
+        filter: brightness(0);
+        height: 100%;
+        width: 3rem;
+
+    }
+}
+
+// Layer-switcher
+div[id^="GPlayerSwitcher-"] {
+    right: .5rem !important;
+    top: .5rem !important;
+    label[id^="GPshowLayersListPicto"] {
+        background-color: transparent;
+        height: 3rem;
+        width: 3rem;
+        &:hover {
+            background-color: $mainColor !important;
+            filter: none !important;
+        }
+        span[id^="GPshowLayersListClose"] {
+            background-color: rgba(0,0,0,.3) !important;
+        }
+    }
+    .GPshowAdvancedToolPicto:hover .GPshowAdvancedToolOpen {
+        background-color: $mainColor;
+        filter: none;
+    }
+    span[id^="GPshowLayersListOpen"], span[id^="GPshowLayersListClose"] {
+        background-color: black;
+        filter: invert(1);
+        height: 100%;
+        left: 0;
+        padding: 0;
+        top: 0;
+        width: 100%;
+        &:hover {
+            background-color: $mainColor;
+            filter: none;
+        }
+    }
+    input[type="checkbox"]:checked + div + label[id^="GPshowLayersListPicto"] {
+        background-color: white;
+        &:hover span[id^="GPshowLayersListClose"] {
+            background-color: $mainColor;
+            filter: 0;
+        }
+    }
+
+    .GPshowLayerAdvancedTools {
+        filter: brightness(0); // Couleur des chevrons pour déplier, replier les infos d'une couche
+    }
+    .GPlayerRemove {
+        display: none !important; // Cache la poubelle de suppression d'une couche
+    }
+}
+
+// Infos sur une couche
+div[id^="GPlayerInfoContent"] {
+    div[id^="GPlayerInfoTitle"] {
+        color: $gray-900;
+        border-bottom-color: $gray-900;
+    }
+    div[id^="GPlayerInfoClose"] {
+        filter: brightness(0);
+    }
+}
+
+// Echelle
+div.ol-scale-line {
+    background-color: white;
+    border-radius: 0;
+    bottom: .5rem;
+    left: .5rem;
+    .ol-scale-line-inner {
+        border: 1px solid $gray-900;
+        border-top: 0;
+        color: $gray-900;
+        font-size: 1.2rem;
+        margin: .2rem;
+    }
+}

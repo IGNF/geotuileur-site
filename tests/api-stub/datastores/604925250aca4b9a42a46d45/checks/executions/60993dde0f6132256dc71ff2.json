@@ -1,0 +1,17 @@
+{
+    "_id": "60993dde0f6132256dc71ff2",
+    "status": "FAILURE",
+    "creation": "2021-05-10T14:06:22.586Z",
+    "upload": {
+        "_id": "60993dbfe6cda349c3506d12",
+        "name": "Livraison de mise \u00e0 jour du jeu de donn\u00e9es Pays du monde",
+        "type": "VECTOR",
+        "visibility": "PRIVATE"
+    },
+    "check": {
+        "_id": "604924f10aca4b4cdfa46d3b",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2021-05-10T14:06:32.694Z",
+    "finish": "2021-05-10T14:06:36.384Z"
+}

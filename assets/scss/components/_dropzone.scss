@@ -1,0 +1,13 @@
+.drop-zone {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed $gray-400; 
+    color: $gray-400;
+    img {
+        filter: grayscale(1);
+    }
+}
+
+.hidden-part {
+    display: none;
+}

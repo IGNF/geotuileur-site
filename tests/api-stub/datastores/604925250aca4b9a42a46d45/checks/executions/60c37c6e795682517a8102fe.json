@@ -1,0 +1,17 @@
+{
+    "_id": "60c37c6e795682517a8102fe",
+    "status": "SUCCESS",
+    "creation": "2021-06-11T15:08:30.788Z",
+    "upload": {
+        "_id": "60c37c6d138f85b611873995",
+        "name": "test test test2",
+        "type": "VECTOR",
+        "visibility": "PRIVATE"
+    },
+    "check": {
+        "_id": "604924f10aca4b4cdfa46d3b",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2021-06-11T15:08:32.280Z",
+    "finish": "2021-06-11T15:08:36.296Z"
+}

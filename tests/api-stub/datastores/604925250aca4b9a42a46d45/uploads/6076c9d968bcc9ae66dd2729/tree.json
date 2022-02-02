@@ -1,0 +1,58 @@
+[
+    {
+        "name": "annexes",
+        "children": [],
+        "size": 0,
+        "type": "directory"
+    },
+    {
+        "name": "data",
+        "children": [
+            {
+                "name": "hydrographie.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "hydrographie.insert.csv",
+                "size": 140399,
+                "extension": ".csv",
+                "type": "file"
+            },
+            {
+                "name": "lacs.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "lacs.insert.csv",
+                "size": 63256,
+                "extension": ".csv",
+                "type": "file"
+            }
+        ],
+        "size": 203655,
+        "type": "directory"
+    },
+    {
+        "name": "metadata",
+        "children": [
+            {
+                "name": "INSPIRE",
+                "children": [],
+                "size": 0,
+                "type": "directory"
+            },
+            {
+                "name": "ISOAP",
+                "children": [],
+                "size": 0,
+                "type": "directory"
+            }
+        ],
+        "size": 0,
+        "type": "directory"
+    }
+]

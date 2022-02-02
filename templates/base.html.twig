@@ -1,0 +1,205 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{# surcharger à 0 pour les pages où ne pas faire apparaitre le menu latéral gauche #}
+{% set hasNavLeft = (hasNavLeft|default(0)) %}
+{% set sidebarLeft = (sideBarLeft|default(0)) %}
+{% set sidebarRight = (sidebarRight|default(0)) %}
+{# surcharger avec un ou plusieurs noms de classes pour appliquer des styles spécifiques #}
+{% set bodyclass = (bodyclass|default('')) %}
+{# pas de breadcrumb par défaut, surcharger à 1 pour les pages où le breadcrumb serait nécessaire #}
+{% set hasBreadcrumb = (hasBreadcrumb|default(0)) %}
+
+<!DOCTYPE html>
+<html lang="{{ app.request.getLocale() }}">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+        {% block meta %} {# pour insertion de balises meta supplementaires #} {% endblock %}
+
+        {# Titre sous la forme : Titre de la Page - Nom du site #}
+        <title>{% block title %}{{ app_title }}{% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags("app") }}
+        {% endblock %}
+    </head>
+
+    <body class="{{ bodyclass }}">
+        {% include "components/_flash_messages.html.twig" %}
+
+        <ul class="nav-skip">
+            <li><a href="#main">{{ "site.go_to_content"|trans }}</a></li>
+        </ul>
+
+        <div class="body-wrapper {% if hasNavLeft %} layout-navLeft{% else %} layout-default{% endif %}{% if sidebarLeft %} layout-sidebarLeft{% endif %}{% if sidebarRight %} layout-sidebarRight{% endif %}{% if bodyclass %} {{ bodyclass }}{% endif %}">
+
+            {# TODO fixer en haut de la page #}
+            {% include "components/_notifications_bar.html.twig" %}
+
+            <header class="header header-principal" role="banner">
+                <div class="header-principal--left">
+                    {# logo et menu principal mobile et latéral gauche #}
+                    <div class="header-principal__logo">
+                        <a href="{{ path('plage_home')}}" class="header-principal__logo-link" title="{{ "home.title" | trans }} - {{ app_title }}">
+                            <img src="{{ asset('build/img/logo-rf-01_0.jpg') }}" alt="Logo programme Géoplateforme">
+                            <span class="header-principal__name">{{ app_title }}</span>
+                        </a>
+                    </div>
+                    {#<div class="header-principal__nav">
+                        <nav class="navbar navbar--mobile navbar-light" role="navigation" aria-label="Menu principal mobile" tabindex="-1" id="menuPrincipalMobileTarget">
+                            <button class="navbar-toggler btn--plain btn--primary" type="button" data-target="#menuPrincipalMobile" aria-controls="menuPrincipalMobile" aria-expanded="false">
+                                <span class="navbar-toggler--icon icon-burger" aria-hidden="true"></span>
+                                <span class="navbar-toggler--text">{{ "site.menu"|trans }}</span>
+                            </button>
+
+                            <div class="navbar-collapse" id="menuPrincipalMobile">
+                                <button class="navbar-toggler-close btn-close" type="button" data-target="#menuPrincipalMobile" aria-controls="menuPrincipalMobile" aria-expanded="false">
+                                    <span class="icon-close" aria-hidden="true"></span>
+                                    <span class="sr-only">{{ "site.close_menu"|trans }}</span>
+                                </button>
+                                {{ knp_menu_render('ign_collaboratif_top_menu', { 'activeClass': 'is-active' }) }}
+                            </div>
+                        </nav>
+
+                        {% if hasNavLeft %}
+                        <nav class="navbar navbar--desktop navbar-light" role="navigation" aria-label="Menu principal" tabindex="-1" id="menuLeftDesktopTarget">
+                            <button class="navbar-toggler btn--plain btn--primary" type="button" data-target="#menuLeftDesktop" aria-controls="menuLeftDesktop" aria-expanded="false">
+                                <span class="navbar-toggler--icon icon-burger" aria-hidden="false"></span>
+                                <span class="navbar-toggler--text">{{ "site.menu"|trans }}</span>
+                            </button>
+                            <div class="navbar-collapse" id="menuLeftDesktop">
+                                {{ knp_menu_render('ign_collaboratif_top_menu', { 'style': 'tabs', 'currentClass': 'is-active' }) }}
+                            </div>
+                        </nav>
+                        {% endif %}
+                    </div> #}
+                </div>
+
+                <div class="header-principal--right">
+                    {# menus horizontaux + compte #}
+
+                    {% block customheader %}
+                        {# Block à surcharger pour les pages ne souhaitant pas la même navigation #}
+                        <nav class="navbar--desktop" role="navigation" aria-label="Menu principal"> 
+                            <ul class="navbar-nav navbar-nav--portails">
+                            {% block customheaderNav %}
+                            {# Exemple :
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Institut</a>
+                                </li>
+                                <li class="nav-item is-active">
+                                    <a class="nav-link" href="#">[Active] Agenda <span class="sr-only">(page courante)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link external-link" href="#" target="_blank" title="[_blank] Item (Nouvelle fenêtre)">[_blank] Item<span class="icon-external-link" aria-hidden="true"></span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Presse</a>
+                                </li>
+                            #}
+                            {% endblock %}
+                            </ul>
+                        </nav>
+
+                        {% include '/components/_header-principal-custom.html.twig' %}
+                    {% endblock %}
+
+                    {# acces parametres accessibilite #}
+                    <button class="btn btn-icon--header d-none d-lg-block" type="button" data-toggle="modal" data-target="#modalAccess">
+                        <span class="icon-access" aria-hidden="true"></span>
+                        <span class="sr-only">Paramètres d'accessibilité</span>
+                    </button>
+
+                </div>
+            </header>
+
+            <main id="main" class="main" role="main" tabindex="-1">
+
+                {% if step_num is defined %}
+                    {% import "components/_stepper.html.twig" as pyramid_macros %}
+					{{ pyramid_macros.steps(step_num) }}
+                {% else %}
+                    {% if pageTitle is defined %}
+                        {% include "components/_page-title.html.twig"%}
+                    {% endif %}
+				{% endif %}
+
+                {# fil d'ariane (n'apparait pas sur la page d'accueil) #}
+                {% if hasBreadcrumb %}
+                <div class="container-content container-content--smaller">
+                    <nav class="breadcrumb-wrapper" role="navigation" aria-label="Fil d'ariane">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{ path('plage_home') }}">
+                                    {{ "home.breadcrumb" | trans }}
+                                </a>
+                            </li>
+                            {% block breadcrumb %}
+                            {# Exemple :
+                            <li class="breadcrumb-item"><a href="#">Lorem</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Ipsum active</li>
+                            #}
+                            {% endblock %}
+                        </ol>
+                    </nav>
+                </div>
+                {% endif %}
+
+                {% block body %}{% endblock %}
+
+            </main>
+
+            {# footer #}
+            {% include 'components/_footer.html.twig' %}
+
+            {# Contenu du access modal #}
+            {% include 'components/_access-header.html.twig' %}
+
+        </div>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+            {# fosjsrouting #}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+            
+            {# bazinga traducteur #}
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'PlageWebClient', 'locales': 'fr' }) }}"></script>
+
+            {# Analytics avec Piwik #}
+            <script type="text/javascript">
+                var _paq = _paq || [];
+                _paq.push(['trackPageView']);
+                _paq.push(['enableLinkTracking']);
+                _paq.push([function() {
+                    var self = this;
+                    function getOriginalVisitorCookieTimeout() {
+                        var now = new Date(),
+                        nowTs = Math.round(now.getTime() / 1000),
+                        visitorInfo = self.getVisitorInfo();
+                        var createTs = parseInt(visitorInfo[2]);
+                        var cookieTimeout = 33696000; // 13 mois en secondes
+                        var originalTimeout = createTs + cookieTimeout - nowTs;
+                        return originalTimeout;
+                    }
+                    this.setVisitorCookieTimeout( getOriginalVisitorCookieTimeout() );
+                }]);
+                (function() {
+                    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.ign.fr/piwik/";
+                    _paq.push(['setTrackerUrl', u+'piwik.php']);
+                    _paq.push(['setSiteId', 61]);
+                    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+                })();
+            </script>
+            <noscript><p><img src="http://piwik.ign.fr/piwik/piwik.php?idsite=61" style="border:0;" alt="" /></p></noscript>
+            {# End Piwik Code #}
+        {% endblock %}
+    </body>
+</html>

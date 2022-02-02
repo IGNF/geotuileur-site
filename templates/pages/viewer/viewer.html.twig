@@ -1,0 +1,30 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+{% set bodyclass = 'layout-fullscreen' %}
+
+{# __LAYER__ replaced when the tile layer is added to the map #}
+{% block title %} {{ '__LAYER__' ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("viewer") }}
+{% endblock %}
+
+{% block customheader %}
+	<h1 id="tiles-layer-title">{# filled when layer is added to the map #}</h1>
+    {# no help, no user menu #}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+        <div id="map" class="map"></div>
+    {% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('viewer') }}
+{% endblock %}

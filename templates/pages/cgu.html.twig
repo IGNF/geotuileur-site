@@ -1,0 +1,21 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'cgu.title'| trans %}
+
+{% block title %} {{ 'cgu.title'| trans ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+        <div class="container-content container-content--smaller">
+            <div class="wysiwyg">
+                <p>Contenu à venir</p>
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}

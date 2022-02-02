@@ -1,0 +1,57 @@
+[
+    {
+        "name": "data",
+        "children": [
+            {
+                "name": "hydrographie.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "hydrographie.insert.csv",
+                "size": 140399,
+                "extension": ".csv",
+                "type": "file"
+            },
+            {
+                "name": "lacs.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "lacs.insert.csv",
+                "size": 63256,
+                "extension": ".csv",
+                "type": "file"
+            },
+            {
+                "name": "pays.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "pays.insert.csv",
+                "size": 351193,
+                "extension": ".csv",
+                "type": "file"
+            },
+            {
+                "name": "villes.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "villes.insert.csv",
+                "size": 40002,
+                "extension": ".csv",
+                "type": "file"
+            }
+        ],
+        "size": 594850,
+        "type": "directory"
+    }
+]

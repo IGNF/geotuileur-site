@@ -1,0 +1,10 @@
+2021/06/11 14:33:32       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2021/06/11 14:33:32       INFO §USER§ Signal transmis avec succès.
+2021/06/11 14:33:32       INFO §USER§ Récupération des informations sur l'exécution (PROCESSING) d'ID '60c3743b67d7f02ab181105a'.
+2021/06/11 14:33:32       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2021/06/11 14:33:33       INFO §USER§ Récupération des informations sur la sortie de l'exécution d'ID '60c3743b67d7f02ab181105a'.
+2021/06/11 14:33:33       INFO §USER§ Les informations sur la donnée en sortie de l'exécution ont été récupérées et stockées.
+2021/06/11 14:33:33       INFO §USER§ Validation des paramètres d'exécution.
+2021/06/11 14:33:33      ERROR §USER§ La table suivi_covid n'existe pas dans la donnée à mettre à jour, le shapefile suivi_covid.dbf ne pourra pas être intégré
+2021/06/11 14:33:34       INFO §USER§ Envoi du signal d'échec de l'exécution à l'API.
+2021/06/11 14:33:34       INFO §USER§ Signal transmis avec succès.

@@ -1,0 +1,11 @@
+{# Menu de navigation en header pour un espace de travail #}
+{% if active_page is not defined %} {% set active_page = null %} {% endif %}
+<li class="nav-item {% if active_page == "dashboard" %}is-active{% endif %}">
+    <a class="nav-link" href="{{ path('plage_datastore_view', {datastoreId: datastore._id}) }}">Tableau de bord</a>
+</li>
+<li class="nav-item  {% if active_page == "members" %}is-active{% endif %}">
+    <a class="nav-link" href="{{ path('plage_datastore_view_members', {datastoreId: datastore._id}) }}">Membres</a>
+</li>
+<li class="nav-item  {% if active_page == "storage" %}is-active{% endif %}">
+    <a class="nav-link" href="{{ path('plage_datastore_manage_storage', {datastoreId: datastore._id}) }}">Gérer mon espace</a>
+</li>

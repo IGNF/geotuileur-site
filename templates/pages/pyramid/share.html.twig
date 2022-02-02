@@ -1,0 +1,154 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+{% set pageTitle = "" %}
+
+{% block title %} {{ 'pyramid.share.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("pyramid-share") }}
+{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+	<div class="container-content">
+        {% set _pyramid = pyramid|json_encode()|raw %}
+        {% set _styles = styles|json_encode()|raw %}
+        <div class="share">
+            {# La carte #}
+            <div id="map-target" data-pyramid="{{ _pyramid }}" data-styles="{{ _styles }}" data-defstyle="{{ defaultStyle }}"></div> 
+            {# Les differents liens #}
+            <div id="links" class="p-1">
+                <div class="wysiwyg">
+                    <h3 class="mt-0">{{ 'pyramid.share.links_title'|trans() }}</h3>
+
+                    <p>{{ 'pyramid.share.links_description'|trans() }}</p>
+
+                    <div class="coverable">
+                        <p class="help-block">
+                            <i class="icon-question text-primary"></i>&nbsp;
+                            {{ 'pyramid.share.links_help'|trans({'%help_url%': path('plage_doc')~"#/broadcast?id=diffusez-votre-flux" }) | raw }}
+                        </p>
+
+                        {# Lien public vers la carte #}
+                        <div class="block-link">
+                            <label>{{ 'pyramid.share.view_url'|trans() }}</label>
+                            <div class="block-url">
+                                <input id="viewer-url"
+                                    class="form-control text-truncate-ellipsis"
+                                    type="text"
+                                    readonly="readonly"/>
+                                <button class="btn link copy-link" data-src="viewer-url" title="{{ 'pyramid.share.copy_url'| trans }}">
+                                    <i class="icons-link-white"></i>
+                                </button> 
+                            </div>
+                        </div>
+
+                        {# popover à afficher à la première visite uniquement #}
+                        <div class="warning-personalize text-center" style="display: none;">
+                            <div class="title">
+                                <span class="close-warning float-right">
+                                    <i class="icon-close"></i>
+                                </span>
+                            </div>
+                            <div class="warning-logo">
+                                <i class="icons-style-white"></i>
+                            </div>
+                            <p>
+                                {{ 'pyramid.share.warning'|trans()|raw|nl2br }}
+                            </p>
+                            <button class="btn btn-sm btn--ghost btn--white close-warning">{{ 'pyramid.share.understood'|trans() }}</button>
+                        </div>
+
+                    </div>
+
+                    
+
+                    {# Code html iframe #}
+                    <div class="block-link">
+                        <label>{{ 'pyramid.share.iframe_code'|trans() }}</label>
+                        <div class="block-url">
+                            <textarea id="iframe-code" class="form-control" readonly="readonly"></textarea>
+                            <button class="btn link copy-link" data-src="iframe-code" title="{{ 'pyramid.share.copy_code'| trans }}">
+                                <i class="icons-link-white"></i>
+                            </button> 
+                        </div>
+                    </div>
+
+                    <h3 class="mt-1">{{ 'pyramid.share.for_developers'|trans() }}</h3>
+
+                    <div class="block-link">
+                        <label>{{ 'pyramid.share.flow_url'|trans() }}</label>
+                        <div class="block-url">
+                            <input 
+                                class="form-control text-truncate-ellipsis" 
+                                id="tile-url" 
+                                type="text" 
+                                value={{ pyramid.tags.tms_url }}
+                                readonly="readonly"
+                            >
+                            <button class="btn link copy-link" data-src="tile-url" title="{{ 'pyramid.share.copy_url'| trans }}">
+                                <i class="icons-link-white"></i>
+                            </button> 
+                        </div>
+                    </div> 
+                    
+                    <div class="block-link">
+                        <label>{{ 'pyramid.share.styles'|trans() }}</label>
+                        <div class="block-url">
+        
+                            {% if styles|length %}
+                                <select class="form-control w-100" id="styles">
+                                    {% for id, datas in styles %}
+                                        <option value={{ datas.url }} {% if id == defaultStyle %}selected="selected"{% endif %}>{{ datas.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="btn link copy-link" title="{{ 'pyramid.share.copy_url'| trans }}" data-src="styles">
+                                    <i class="icons-link-white"></i>
+                                </button>
+                            {% else %}
+                                                    
+                            <input type="text"
+                                class="form-control text-secondary"
+                                readonly="readonly"
+                                value="{{ 'pyramid.share.no_style_defined'|trans() }}"/>
+                            {% endif %}
+                        </div>
+                    </div> 
+
+                    
+                    <div class="mx-1">
+                        <button class="btn btn--plain btn--gray form-control disabled">
+                            <i class="icon-mail"></i>&nbsp;{{ 'pyramid.share.send_email'|trans() }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {# Les outils #}
+            <div id="tools">
+                <div class="btn active">
+                    <i class="icons-share-white"></i><br/>
+                    <span>{{ 'pyramid.share.title' | trans }}</span>
+                </div>
+                <a class="btn"
+                    href="{{ path('plage_style_manage', {datastoreId: datastore._id, pyramidId: pyramid._id})}}">
+                    <i class="icons-style-white"></i><br/>
+                    <span>{{ 'pyramid.style.title' | trans }}</span>
+                </a>
+            </div>   
+        </div>
+	</div>
+	{% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ encore_entry_script_tags('pyramid-share') }}
+{% endblock %}

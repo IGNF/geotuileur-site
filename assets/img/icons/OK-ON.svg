@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Btn/Check/OK-ON</title>
+    <g id="Btn/Check/OK-ON" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#3993F3" cx="18" cy="18" r="18"></circle>
+        <g id="02.Icons/Check" transform="translate(5.000000, 5.000000)" fill="#FFFFFF">
+            <path d="M9.95294118,19.4823529 L4.55294118,13.8705882 C4.12941176,13.4470588 4.12941176,12.8117647 4.55294118,12.3882353 C4.97647059,11.9647059 5.61176471,11.9647059 6.03529412,12.3882353 L9.95294118,16.4117647 L19.3764706,6.56470588 C19.8,6.14117647 20.4352941,6.14117647 20.8588235,6.56470588 C21.2823529,6.98823529 21.2823529,7.62352941 20.8588235,8.04705882 L9.95294118,19.4823529 Z" id="Path"></path>
+        </g>
+    </g>
+</svg>

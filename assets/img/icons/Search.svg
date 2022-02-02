@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>12.Elements Map/Search</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="38" height="38" rx="3"></rect>
+        <filter x="-39.5%" y="-39.5%" width="178.9%" height="178.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.0352941176   0 0 0 0 0.0862745098   0 0 0 0 0.145098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M15.4351136,14.7469466 L15.1377753,14.4586124 C16.1784595,13.2412016 16.8049938,11.6607033 16.8049938,9.94137752 C16.8049938,6.10760132 13.714799,3 9.9024969,3 C6.09019477,3 3,6.10760132 3,9.94137752 C3,13.7751537 6.09019477,16.882755 9.9024969,16.882755 C11.6121923,16.882755 13.1838377,16.2526915 14.3944295,15.2061454 L14.6811486,15.5051586 L14.6811486,16.3488029 L18.6983498,20.2935833 C19.0956554,20.6837265 19.7379302,20.6780015 20.1163455,20.2974547 L20.3013899,20.111368 C20.6872216,19.7233629 20.6751651,19.0883931 20.2822273,18.7007841 L16.2740325,14.7469466 L15.4351136,14.7469466 Z M9.9024969,14.7469466 C7.25830963,14.7469466 5.1238452,12.6004591 5.1238452,9.94137752 C5.1238452,7.28229597 7.25830963,5.13580847 9.9024969,5.13580847 C12.5466842,5.13580847 14.6811486,7.28229597 14.6811486,9.94137752 C14.6811486,12.6004591 12.5466842,14.7469466 9.9024969,14.7469466 L9.9024969,14.7469466 Z" id="path-3"></path>
+    </defs>
+    <g id="12.Elements-Map/Search" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <use fill="#0093FB" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+        <g id="02.Icons/Fullscreen" transform="translate(7.000000, 7.000000)">
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <use id="Mask" fill="#FFFFFF" xlink:href="#path-3"></use>
+        </g>
+    </g>
+</svg>

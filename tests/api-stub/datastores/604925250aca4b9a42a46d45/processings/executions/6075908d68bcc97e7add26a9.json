@@ -1,0 +1,33 @@
+{
+    "_id": "6075908d68bcc97e7add26a9",
+    "processing": {
+        "_id": "6049259702974d30e9ddbd9f",
+        "name": "Pays du monde"
+    },
+    "parameters": {},
+    "creation": "2021-04-13T12:37:33.970Z",
+    "status": "FAILURE",
+    "launch": "2021-04-13T12:37:34.026Z",
+    "start": "2021-04-13T12:38:25.852Z",
+    "finish": "2021-04-13T12:43:59.273Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "6075906e68bcc9aa07dd26a2",
+                "name": "Paysdumonde_pqgis_2021_04_13-14_37_02",
+                "type": "VECTOR",
+                "srs": "EPSG:4326",
+                "status": "CLOSED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "605cdd9bdd43a0651911b6c0",
+            "name": "Pays du monde",
+            "status": "GENERATED",
+            "srs": "EPSG:4326"
+        }
+    }
+}

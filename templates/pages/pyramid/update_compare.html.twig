@@ -1,0 +1,57 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+
+{% block title %}
+    {{ 'pyramid.update_compare.title'| trans ~ ' - ' ~ parent() }}
+{% endblock %}
+
+{% block customheaderNav %}
+    {{ include("components/_workspace_header.html.twig")}}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+    <div class="container-fluid">
+        {% set _pyramid = pyramid|json_encode()|raw %}
+        {% set _pyramid_initial = pyramid_initial|json_encode()|raw %}
+        <div class="row p-2">
+            <div class="col-lg">
+                <div class="row mb-2">
+                    <div class="col d-flex align-items-center">
+                        <h6 class="m-0">{{ 'pyramid.update_compare.old_version'|trans }}</h6>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <a href="{{ path('plage_pyramid_update_validate', { datastoreId: datastore._id, pyramidId: pyramid._id, validate: "no" }) }}" class="btn btn--plain btn--primary btn-sm">Conserver le flux actuel</a>
+                    </div>
+                </div>
+                <div id="map-target-initial" class="map" data-pyramid="{{ _pyramid_initial }}"></div>
+            </div>
+            <div class="col-lg">
+                <div class="row mb-2">
+                    <div class="col d-flex align-items-center">
+                        <h6 class="m-0">{{ 'pyramid.update_compare.new_version'|trans }}</h6>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <a href="{{ path('plage_pyramid_update_validate', { datastoreId: datastore._id, pyramidId: pyramid._id, validate: "yes" }) }}" class="btn btn--plain btn--primary btn-sm">Valider la nouvelle version</a>
+                    </div>
+                </div>
+                <div id="map-target-update" class="map" data-pyramid="{{ _pyramid }}"></div>
+            </div>
+        </div>
+
+        <p class="wysiwyg text-center">
+            <a href="{{ path('plage_datastore_view', { datastoreId: datastore._id }) }}">
+                {{ 'pyramid.update_compare.cancel'|trans }}
+            </a>     
+        </p>                   
+    </div>
+    {% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('pyramid-update-compare') }}
+{% endblock %}

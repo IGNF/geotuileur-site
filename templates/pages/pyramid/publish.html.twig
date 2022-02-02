@@ -1,0 +1,133 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+{% set step_num = 3 %}
+
+{% block title %}
+	{{ 'pyramid.form_publish.heading'| trans ~ ' - ' ~ parent() }}
+{% endblock %}
+
+{% set pageTitle = 'pyramid.form_publish.heading'| trans %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("pyramid-publish") }}
+{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+	<div class="container-content">
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+                <h2 class="text-center">{{ 'pyramid.form_publish.heading' | trans }}</h2>
+                <p>{{ 'pyramid.form_publish.lead' | trans({'%help_url%': path('plage_doc')~"#/publish" }) | raw }}</p>
+				<div class="container">
+                    <p class="small text-right">{{ 'mandatory_fields'|trans }}</p>
+					{{ form_start(form) }}
+
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        <div class="form-group mb-1">
+                            <div class="float-target-parent">
+                                {{ form_label(form.name) }}
+                                {{ form_widget(form.name, {'attr': { 'data-tms-url': tms_url }}) }}
+                            </div>
+                            {{ form_errors(form.name) }}
+                            <p class="description mb-0"><i class="icon-question"></i>&nbsp;{{ 'pyramid.form_publish.name_help' | trans }}</p>
+                        </div>
+                        <div class="float-target-parent">
+                            {{ form_label(form.address_preview) }}
+                            {{ form_widget(form.address_preview) }}
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        <div class="form-group mb-0">
+                            <div class="float-target-parent">
+                                {{ form_label(form.title) }}
+                                {{ form_widget(form.title) }}
+                            </div>
+                            {{ form_errors(form.title) }}
+                            <p class="description mb-0">
+                                <i class="icon-question"></i>&nbsp;{{ 'pyramid.form_publish.title_help' | trans }}
+                            </p>
+                        </div>
+                    </fieldset>
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        <div class="form-group form-group-textarea mb-0">
+                            <div class="float-target-parent">
+                                {{ form_label(form.description) }}
+                                {{ form_widget(form.description) }}
+                            </div>
+                            {{ form_errors(form.description) }}
+                            <p class="description mb-0">
+                                <i class="icon-question"></i>&nbsp;{{ 'pyramid.form_publish.description_help'| trans }}
+                            </p>
+                        </div>
+                    </fieldset>
+
+                    {# Attributions #}
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        <div class="form-group form-group-textarea mb-1">
+                            <div class="float-target-parent">
+                                {{ form_label(form.legal_notices) }}
+                                {{ form_widget(form.legal_notices) }}
+                            </div>
+                            {{ form_errors(form.legal_notices) }}
+                        </div>
+                        <div class="form-group form-group-textarea mb-0">
+                            <div class="float-target-parent">
+                                {{ form_label(form.attribution_url) }}
+                                {{ form_widget(form.attribution_url) }}
+                            </div>
+                            {{ form_errors(form.attribution_url) }}
+                        </div>
+                        <p class="description mb-0">
+                            <i class="icon-question"></i>&nbsp;{{ 'pyramid.form_publish.legal_notices_help' | trans }}
+                        </p>
+                    </fieldset>
+
+                    {# Mots clés #}
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        <div class="form-group mb-0" id="gp-keywords">
+                            <label>{{ 'pyramid.form_publish.choose_keywords'| trans }}</label>
+                            <input type="text" class="form-control" id="keywords" 
+                                data-url="{{ asset('build/data/thematic-inspire.json') }}"
+                                {% if keywords is defined and keywords is not null %}
+                                    data-initial-keywords='{{ keywords }}'
+                                {% endif %}
+                            >
+                        </div>
+                        <p class="description mb-0">
+                            <i class="icon-question"></i>&nbsp;{{ 'pyramid.form_publish.keywords_help' | trans }}
+                        </p>
+                    </fieldset>
+
+                    {# Valider #}
+                    <div class="text-center">
+                        {{ form_row(form.submit) }}
+                    </div>
+                    {{ form_end(form) }}
+
+					<p class="wysiwyg text-center">
+						<a href="{{ path('plage_datastore_view', { datastoreId: datastoreId }) }}">
+							{{ 'pyramid.form_publish.cancel'| trans }}
+						</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ encore_entry_script_tags('pyramid-publish') }}
+{% endblock %}

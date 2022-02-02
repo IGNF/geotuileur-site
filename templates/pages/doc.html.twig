@@ -1,0 +1,26 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'doc.title'| trans %}
+
+{% block title %} {{ 'doc.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+    <div class="container-content">
+        <div id="doc-container">
+            {# iframe included in javascript #}
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ encore_entry_script_tags('doc') }}
+{% endblock %}

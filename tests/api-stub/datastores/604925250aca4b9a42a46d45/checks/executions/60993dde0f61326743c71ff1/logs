@@ -1,0 +1,8 @@
+2021/05/10 14:06:32       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2021/05/10 14:06:33       INFO §USER§ Signal transmis avec succès.
+2021/05/10 14:06:34       INFO §USER§ Récupération des informations sur l'exécution (CHECK) d'ID '60993dde0f61326743c71ff1'.
+2021/05/10 14:06:34       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2021/05/10 14:06:35       INFO §USER§ Vérification de la validité de l'arborescence.
+2021/05/10 14:06:35      ERROR §USER§ La racine de la livraison doit contenir uniquement le dossier data
+2021/05/10 14:06:35       INFO §USER§ Envoi du signal d'échec de l'exécution à l'API.
+2021/05/10 14:06:36       INFO §USER§ Signal transmis avec succès.

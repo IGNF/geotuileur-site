@@ -1,0 +1,27 @@
+{
+    "creation": "2021-05-10T14:33:35.156Z",
+    "_id": "60b0ee8f138f857b42868c9f",
+    "communities_member": [
+        {
+            "rights": {
+                "community_rights": true,
+                "uploads_rights": true,
+                "stored_data_rights": true,
+                "processings_rights": true,
+                "datastore_rights": true
+            },
+            "community": {
+                "public": false,
+                "_id": "604925250aca4b19c8a46d43",
+                "name": "Bac \u00e0 sable",
+                "technical_name": "bacasable",
+                "supervisor": "6049249b8da56da90f290171",
+                "datastore": "604925250aca4b9a42a46d45"
+            }
+        }
+    ],
+    "email": "sylvain.lafay@ign.fr",
+    "first_name": "Sylvain",
+    "last_call": "2021-07-15T16:13:25.670Z",
+    "last_name": "Lafay"
+}

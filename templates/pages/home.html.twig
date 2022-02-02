@@ -1,0 +1,126 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% import "components/_editorial-macros.html.twig" as editorial_macros %}
+
+{% block title %}{{ 'home.title'| trans ~ ' - ' ~ parent() }}{% endblock %}
+
+{% set hasBreadcrumb = 0 %}
+
+{% set pageTitle = "home.heading" | trans %}
+
+{% set titleLeadContent = 'home.lead' | trans %}
+
+{% if app.user %}
+    {% set titleBtn = {'target': path('plage_datastore_index'), 'text': 'home.start'|trans } %}
+{% else %}
+    {% set titleBtn = {'target': path('plage_security_login'), 'text': 'home.start'|trans } %}
+{% endif %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+
+    <div class="container-content block-space" id="how-it-works">
+        <div class="o-mea">
+            <h2>Comment ça marche ?</h2>
+            <div class="mea-container">
+                <div class="mea-item bg-gray-200">
+                    <a href="{{ path('plage_doc')~'#upload' }}">
+                        <img class="mea-img" src="{{ asset('build/img/home/Deposer.png') }}"/>
+                        <h3>Je dépose ma donnée</h3>
+                    </a>
+                </div>
+                <div class="mea-item bg-gray-200">
+                    <a href="{{ path('plage_doc')~'#generate' }}">
+                        <img class="mea-img" src="{{ asset('build/img/home/Tuile@1x.png') }}"/>
+                        <h3>Je crée mon flux</h3>
+                    </a>
+                </div>
+                <div class="mea-item bg-gray-200">
+                    <a href="{{ path('plage_doc')~'#publish' }}">
+                        <img class="mea-img" src="{{ asset('build/img/home/Diffuser@1x.png') }}"/>
+                        <h3>Je publie mon flux</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {# Bloc Démo #}
+    {# <div class="container-content">
+        <div class="o-banner o-banner--bg">
+            <a class="o-banner__inner" href="#">
+                <div class="container-content o-banner__inner--smaller">
+                    <h2 class="o-banner__title h1">Découvrez le service avant de vous lancer</h2>
+                    <div class="o-banner__btn">
+                        <span class="btn btn-active-effect btn-width--lg btn--plain btn--primary">Voir la vidéo</span>
+                    </div>
+                </div>
+            </a>
+            <div class="m-media-background" aria-hidden="true">
+                 <img src="{{ asset('build/img/home/Portail_Pro1.png') }}" alt="" />
+            </div>
+        </div>
+    </div> #}
+
+    <div class="paragraph container-content container-content--smaller container-content--fake-col wysiwyg paragraph--type--text-button paragraph--view-mode--default">
+        <h2 class="text-center">Un ensemble de services pour vous accompagner</h2>
+    </div>
+
+    {{ editorial_macros.paragraph_with_image(
+        asset('build/img/home/Espace-travail-securise_0.jpg'),
+        "",
+        "",
+        "Profitez d'un espace de travail sécurisé", "Nous vous fournissons un espace de travail pour importer et stocker temporairement vos données et vos flux. Le service accepte les formats Geopackage et CSV.",
+        "left") }}
+
+    {{ editorial_macros.paragraph_with_image(
+        asset('build/img/home/rendu-graphique.jpg'),
+        "",
+        "",
+        "Personnalisez le rendu graphique de vos données",
+        "Importez vos styles depuis votre ordinateur rapidement. Vous pourrez bientôt créer de nouveaux styles en utilisant les outils de personnalisation intégrés.",
+        "right") }}
+
+    {{ editorial_macros.paragraph_with_image(
+        asset('build/img/home/Diffuser-flux.jpg'),
+        "",
+        "",
+        "Diffusez votre flux personnalisé où vous voulez",
+        "Partagez vos données avec votre communauté via votre application web ou mobile, ou directement sur un logiciel SIG.",
+        "left") }}
+
+    {{ editorial_macros.paragraph_with_image(
+        asset('build/img/home/collaborer.jpg'),
+        "",
+        "",
+        "Collaborez, créez des cartes en équipe",
+        "Tout votre travail d’équipe au même endroit !",
+        "right") }}
+
+    {# Bloc aide #}
+    <div class="container-content">
+        <div class="o-banner o-banner--bg">
+            <a class="o-banner__inner" href="{{ path('plage_doc') }}">
+                <div class="container-content o-banner__inner--smaller">
+                    <h2 class="o-banner__title h1">Besoin d'aide ?</h2>
+                    <p class="o-banner__desc">Consultez toutes les ressources à votre disposition, pour devenir un pro des tuiles vectorielles !</p>
+                    <div class="o-banner__btn">
+                        <span class="btn btn-active-effect btn-width--lg btn--plain btn--primary">Consulter</span>
+                    </div>
+                </div>
+            </a>
+            <div class="m-media-background" aria-hidden="true">
+                 <img src="{{ asset('build/img/home/test_visuel6.jpg') }}" alt="" />
+            </div>
+        </div>
+    </div>
+
+    {% endapply %}
+{% endblock %}

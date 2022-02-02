@@ -1,0 +1,21 @@
+[
+    {
+        "name": "data",
+        "children": [
+            {
+                "name": "pays",
+                "size": 0,
+                "extension": "",
+                "type": "file"
+            }
+        ],
+        "size": 0,
+        "type": "directory"
+    },
+    {
+        "name": "pays.md5",
+        "size": 42,
+        "extension": ".md5",
+        "type": "file"
+    }
+]

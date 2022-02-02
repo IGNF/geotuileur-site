@@ -1,0 +1,60 @@
+// Couleurs de la charte 2020 univers carto
+
+$univers-carto-dark: #307ccd;
+$univers-carto-primary: #3993f3;
+$univers-carto-secondary: #7eb9f7;
+$univers-carto-light: #e1eefd;
+
+// Couleurs univers institut
+$univers-institut-dark: #7aa43e;
+$univers-institut-primary: #90c149;
+$univers-institut-secondary: #b6d688;
+$univers-institut-light: #eef5e3;
+
+// Couleurs univers pro
+$univers-professionnel-dark: #3c23b6;
+$univers-professionnel-primary: #472ad6;
+$univers-professionnel-secondary: #8774e4;
+$univers-professionnel-light: #e3dff8;
+
+// Couleurs univers particulier
+$univers-particulier-dark: #26a581;
+$univers-particulier-primary: #2dc398;
+$univers-particulier-secondary: #77d8bc;
+$univers-particulier-light: #dff6ef;
+
+// Couleurs de mise en avant
+$univers-accent-dark: #cd6f3a;
+$univers-accent-primary: #f18345;
+$univers-accent-secondary: #f5ae85;
+$univers-accent-light: #fcece3;
+
+// Différents gris pour créer du contraste
+$gray-900: #091625; // grey_1
+$gray-800: #3f4a55; // grey_2
+$gray-600: #788089; // grey_3
+$gray-400: #b8bcc1; // grey_4
+$gray-300: #dde1e6; // grey_5
+$gray-200: #e9ecef; // grey_6
+$gray-100: #f4f6f8; // grey_7
+
+// Alias pour les couleurs du thèmes
+// (pour ne pas avoir à changer l'univers partout dans les autres feuilles de styles)
+
+$mainColor: $univers-carto-primary;
+$brand-primary: $univers-carto-primary;
+$brand-secondary: $univers-carto-secondary;
+$brand-dark: $univers-carto-dark;
+$brand-light: $univers-carto-light;
+
+$brand-success: $univers-institut-primary;
+$text-success: $univers-institut-dark;
+$faded-success: $univers-institut-light;
+
+$brand-warning: #f0ad4e; // orange
+$text-warning: #8a6d3b; // orange foncé
+$faded-warning: #fcf8e3; // orange pale
+
+$brand-danger: #f45648; // rouge (déduit des erreurs de validation de formulaire du design system 2020)
+$text-danger: #a94442; // titre des modal-danger
+$faded-danger: #f2dede; // rouge pale

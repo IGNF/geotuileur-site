@@ -1,0 +1,445 @@
+valid: "Valider"
+cancel: "Annuler"
+add: "Ajouter"
+information: "Information"
+mandatory_fields: "* Champs obligatoires"
+browse: "Parcourir"
+
+site:
+    go_to_content: "Aller au contenu"
+
+    subfooter:
+        newsletter:
+            title: "Découvrez la lettre d'information Géoplateforme"
+            description: "pour ne rien manquer de l'actualité du programme"
+        social_networks:
+            title: "Suivez-nous en temps réel"
+            description: "Rejoignez nos communautés sur les réseaux sociaux"
+            followers: "abonnés"
+
+    footer:
+        contact_us: "Nous contacter"
+        portals: "Les portails"
+        quick_access: "Accès rapide"
+        personal_data: "Données à caractère personnel"
+        phone: "Tél. : 01 43 98 80 00"
+        all_addresses: "Toutes nos adresses"
+
+    accessibility:
+        title: "Paramètres d'accessibilité"
+        contrast:
+            title: "Contrastes"
+            default: "Défaut"
+            reinforced: "Renforcés"
+        linespacing:
+            title: "Interlignage"
+            default: "Défaut"
+            increased: "Augmenté"
+
+nav:
+    signup: "M'inscrire"
+    login: "Me connecter"
+    logout: "Me déconnecter"
+
+# page d'erreur
+error:
+    title: "Une erreur est survenue"
+    code: "Erreur %code%"
+    404: "Petite erreur d'orientation..."
+    404_desc: "Si vous avez suivi un lien quelque part sur l'une de nos pages, merci de nous le <a href='%url_contact%' target='_self'>signaler</a> pour que nous puissions corriger cette erreur.<br>Sinon, essayez de revenir à la <a href='%url_home%' target='_self'>page d'accueil</a> et de naviguer à partir de là."
+    500: "Le serveur a rencontré une erreur interne."
+    403: "Vous n'êtes pas autorisé à afficher cette ressource ou exécuter cette action."
+    400: "La requête est mal formulée."
+    default: "Le serveur a retourné une erreur : %status_code% %status_text%"
+
+# pages
+home:
+    title: "Accueil"
+    breadcrumb: "Accueil"
+    heading: "Transformez vos données géographiques en tuiles vectorielles simplement et diffusez-les n'importe où"
+    lead: ""
+    start: "Commencer"
+
+login:
+    title: "Identifiez-vous"
+
+
+user:
+    me:
+        title: "Mes informations"
+        heading: "Mes informations"
+        breadcrumb: "Mes informations"
+        first_name: "Prénom"
+        last_name: "Nom"
+        email: "Email"
+        creation: "Date d'inscription"
+        id: "Identifiant"
+        member: "Vous avez accès aux espaces de travail :"
+
+datastore:
+    index:
+        title: "Mes espaces de travail"
+        access: "Accédez à votre espace de travail %name%"
+        access_action: "Accéder"
+        access_test: "Testez le service sur l'espace de test"
+        access_test_action: "Accéder"
+        contact: "Contactez nos services pour ajouter un espace de travail"
+
+    dashboard:
+        title: "Espace de travail %name%"
+        number_of_members: "{0} Aucun membre|{1} %count% membre|]1,Inf[ %count% membres"
+        create_pyramid: "Créer un nouveau flux"
+        update_pyramid: "Mettre à jour un flux"
+        menus:
+            update: "Remplacer les données"
+            personalize: "Gérer les styles"
+            update_published: "Modifier les informations de publication"
+            unpublish: "Dépublier"
+            remove: "Supprimer"
+
+    storage:
+        title: "Gérer l'espace de %name%"
+        description: "Cette page vous permet de voir en un seul coup d'oeil \
+            le volume de vos données et votre situation par rapport aux différents \
+            quotas qui vous sont alloués."
+        POSTGRESQL_storage: "Données intégrées en base"
+        POSTGRESQL_storage_details:
+            "Il s'agit de l'espace occupé par des données \
+            sur les serveurs PostgreSQL de votre espace de travail. Il s'agit de données \
+            intérmédiaires qui ne sont pas directement visibles de vos utilisateurs."
+        FILESYSTEM_storage: "Données intégrées sous forme de fichiers"
+        FILESYSTEM_storage_details: "Cet espace est utilisé par le Géotuileur pour le stockage des pyramides de tuiles vectorielles."
+        S3_storage: "Stockage de masse"
+        S3_storage_details:
+            "Cet espace est utilisé par le Géotuileur pour le stockage des pyramides de \
+            tuiles vectorielles. Il est plus performant que le stockage sous forme de fichiers."
+        uploads_storage: "Données déposées"
+        uploads_storage_details:
+            "Il s'agit de l'espace occupé par les fichiers de \
+            données bruts que vous avez téléversés (fichiers csv, geopackage...). \
+            Ces fichiers sont normalement supprimés dès l'intégration en base réussie \
+            de vos données. Il est possible qu'il reste des traces de fichiers dans \
+            cet espace lorsque les intégrations en base ont échoué."
+        annexes_storage: "Fichiers annexes"
+        annexes_storage_details: "Cet espace est occupé par les fichiers mis à \
+            disposition de vos utilisateurs via des adresses publiques. Il s'agit \
+            généralement des fichiers de style au format JSON qui servent à \
+            symboliser vos pyramides de tuiles vecteur."
+        endpoints: "Points de publication"
+        endpoints_details: "Il s'agit du nombre de couches publiées dans votre espace de travail."
+
+    members:
+        title: "Membres de %name%"
+        you: "(c'est vous)"
+
+upload:
+    view:
+        title: "Détails d'une livraison"
+    form:
+        pyramid_name: "Nommez votre donnée"
+        srs: "Indiquez la projection de vos données"
+        file: "Fichier"
+        submit: "Etape suivante"
+    checks:
+        types:
+            asked: Demandées
+            in_progress: En cours
+            passed: Passées
+            failed: Echouées
+
+    global:
+        status:
+            CREATED: "Créée"
+            OPEN: "Ouverte"
+            CLOSED: "Fermée"
+            GENERATING: "En cours de génération"
+            GENERATED: "Générée"
+            UNSTABLE: "Instable"
+            MODIFYING: "En cours de modification"
+            WAITING: "En attente"
+            CHECKING: "Vérification en cours"
+            PROGRESS: "En cours d'exécution"
+            SUCCESS: "Réussie"
+            FAILURE: "Échouée"
+            ABORTED: "Annulée"
+            DELETED: "Supprimée"
+            PUBLISHED: "Publiée"
+            UNPUBLISHED: "Retirée"
+        visibility:
+            PUBLIC: "Publique"
+            PRIVATE: "Privée"
+        data_type:
+            VECTOR: "Données vectorielles"
+            ARCHIVE: "Données archives"
+
+stored_data:
+    report:
+        progress_title: "Rapport d'avancement de la génération de %stored_data_name%"
+        progress_help: "Vos données sont en cours de génération. Vous trouverez ci-dessous des informations techniques sur le processus en cours."
+        integration_title: "Rapport d'intégration de la base de données %stored_data_name%"
+        integration_help: "Vos données ont été intégrées en base. Elles peuvent être transformées en tuiles vectorielles."
+        integration_failure_help: "Vos données n'ont pas pu être intégrées en base de données et ne pourront pas être transformées en tuiles vectorielles. Vous trouverez ci-dessous des informations techniques concernant les processus exécutés et les problèmes rencontrés. Si ces éléments ne vous suffisent pas à identifier comment modifier vos données pour que le processus aboutisse à votre prochaine tentative, n'hésitez pas à nous contacter en nous fournissant l'URL de ce rapport."
+        generation_title: "Rapport de génération de la pyramide de tuiles vectorielles %stored_data_name%"
+        generation_help: "Vos tuiles vectorielles ont été générées avec succès à partir de vos données."
+        generation_failure_help: "Les tuiles vectorielles n'ont pas pu être générées correctement. Vous trouverez ci-dessous des informations techniques concernant les processus exécutés et les problèmes rencontrés."
+        step_upload: "Téléversement du fichier"
+        details: "Détails techniques :"
+        upload_name: "Nom :"
+        upload_id: "Identifiant du téléversement :"
+        upload_srs: "Projection :"
+        upload_file_tree: "Contenu des fichiers livrés"
+        upload_size: "Taille :"
+        execution_id: "Identifiant de l'exécution :"
+        output_data_id: "Identifiant de la donnée en sortie :"
+        log: "Journal :"
+        no_log_check: "Aucun journal trouvé pour cette vérification"
+        no_log_processing: "Aucun journal trouvé pour cette exécution de traitement"
+        link_to_report: "Plus d'informations sur cette donnée"
+        data_details: "Détails sur les données"
+        data_structure: "Structure"
+        tile_levels: "Niveaux de pyramide"
+        table_name: "Table %name%"
+        attribute_name: "Attribut"
+        attribute_type: "Type"
+        extent: "Emprise géographique des données"
+        delete_advise: "La génération de cette donnée a échoué. Il n'est pas possible de continuer à partir d'ici. Après avoir pris connaissance de ce rapport, vous pouvez supprimer cette donnée pour la faire disparaitre des actions à terminer de votre tableau de bord et libérer de l'espace."
+        back: "Retour au tableau de bord"
+    global:
+        status:
+            CREATED: "Créée"
+            OPEN: "Ouverte"
+            CLOSED: "Fermée"
+            GENERATING: "En cours de génération"
+            GENERATED: "Générée"
+            UNSTABLE: "Instable"
+            MODIFYING: "En cours de modification"
+            WAITING: "En attente"
+            PROGRESS: "En cours d'exécution"
+            SUCCESS: "Réussie"
+            FAILURE: "Échouée"
+            ABORTED: "Annulée"
+            DELETED: "Supprimée"
+            PUBLISHED: "Publiée"
+            UNPUBLISHED: "Retirée"
+        visibility:
+            PUBLIC: "Publique"
+            PRIVATE: "Privée"
+        data_type:
+            VECTOR-DB: "Données vectorielles en BD PostgreSQL"
+            ROK4-PYRAMID-RASTER: "Tuiles raster"
+            ROK4-PYRAMID-VECTOR: "Tuiles vecteur"
+
+check:
+    global:
+        status:
+            WAITING: "En attente"
+            PROGRESS: "En cours d'exécution"
+            SUCCESS: "Réussie"
+            FAILURE: "Échouée"
+            ABORTED: "Annulée"
+            DELETED: "Supprimée"
+
+processing:
+    index:
+        title: Traitements
+        heading: Traitements
+        breadcrumb: Traitements
+    launch:
+        title: Lancer un traitement
+        heading: Lancer un traitement
+        breadcrumb: Lancer un traitement
+        back_to_upload_index: Annuler et revenir à la liste des livraisons
+        back_to_stored_data_index: Annuler et revenir à la liste des données stockées
+    global:
+        status:
+            WAITING: "En attente"
+            PROGRESS: "En cours d'exécution"
+            SUCCESS: "Réussie"
+            FAILURE: "Échouée"
+            ABORTED: "Annulée"
+            DELETED: "Supprimée"
+
+pyramid:
+    upload_data:
+        title: Déposer un fichier
+        heading: Déposer un fichier
+        drop_file_title: Déposez votre fichier de données
+        drop_file_here: "Glissez-déposez votre fichier ici"
+        browse_files: "ou sélectionnez un fichier"
+        file_formats: 'Formats de fichiers autorisés : archive zip contenant un Geopackage (recommandé) ou un CSV. Pour tout savoir sur les formats de fichiers autorisés et comment bien préparer votre donnée avant de la déposer, consultez <a href="%help_url%" target="_blank">l''aide en ligne</a>'
+        name_help: "Il s'agit d'un nom technique qui n'est pas visible par votre utilisateur final. Il apparaitra uniquement dans votre espace de travail. Choisissez un nom explicite."
+        srs_help: 'Nous avons essayé de détecter automatiquement la projection de vos données, mais nous nous sommes peut-être trompés. Modifiez ce choix si besoin. Qu''est-ce qu''une projection ? <a href="%help_url%" target="_blank">Consultez la documentation</a>'
+        cancel: "Annuler et revenir au tableau de bord"
+        int_workflow_steps:
+            SEND_FILES_API: Chargement des fichiers
+            UPLOAD_CHECKS: Vérifications standard et vecteur
+            INTEGRATION_PROCESSING: Intégration en base de données
+            LAUNCH_PYRAMID_CREAT_PROCESSING: Lancement de la génération de la pyramide de mise à jour
+    share:
+        title: "Diffuser"
+        heading: "Diffuser"
+        links_title: "Diffusez votre flux"
+        links_description: Copiez vos adresses pour les utiliser dans vos applications SIG ou web.
+        links_help: Comment diffuser votre flux ? <a href="%help_url%" target="_blank">Voir les exemples d'utilisation</a>
+        view_url: "Lien public vers la carte"
+        flow_url: "Adresse du flux de données"
+        warning: |
+            Vous n'êtes pas satisfait du rendu graphique&nbsp;?
+            Personnalisez votre flux.
+        understood: "J'ai compris"
+        styles: "Vos styles"
+        no_style_defined: "Aucun style défini pour ce flux"
+        copy_url: "Copier le lien"
+        url_copied: "Le lien a été copié"
+        copy_code: "Copier le code"
+        iframe_code: "Code html de l'iframe"
+        for_developers: "Pour les developpeurs"
+        send_email: "Envoyez par mail"
+        flow_is_published: "<h4>Félicitations, votre flux vecteur tuilé est publié !</h4>"
+        flow_is_published_explain: |
+            Vous allez pouvoir le partager auprès de votre communauté dès
+            à présent, ou le personnaliser avant de la diffuser.
+    style:
+        title: Gérer les styles
+        create_help: Comment créer un style? <a href="%create_url%" target="_blank">Voir la documentation</a>
+        import: "Importer un style"
+        name: "Donnez un nom *"
+        name_not_empty: "Le nom est obligatoire"
+        name_exists: "Ce nom existe déjà"
+        type_not_authorized: "Ce type de fichier n'est pas autorisé"
+        add_wait_msg: "Ajout du style en cours ..."
+        add_failed: "L'ajout du style s'est mal passé."
+        remove_failed: "La suppression du style s'est mal passée."
+        remove_wait_msg: "Suppression du style en cours ..."
+        change_default_failed: "La mise à jour du style par défaut s'est mal passée côté serveur."
+        change_default_wait_msg: "Mise à jour du style par défaut en cours ..."
+        download_failed: "Le téléchargement du style s'est mal passé."
+
+    form_add:
+        title: "Créer le flux"
+        heading: "Paramétrez votre flux"
+        generalize_heading: "Choisissez les options de généralisation"
+        generalize_lead: "Le processus de généralisation permet de simplifier et d'adapter vos données à l'échelle de la visualisation pour améliorer la lisibilité de votre carte. <a href='%url%' target='_blank'>En savoir plus</a>"
+        name: "Nommez votre flux"
+        name_placeholder: "Saisissez le nom de votre flux"
+        name_help: "Il s'agit du nom technique du flux qui apparaitra dans votre espace de travail, il ne sera pas publié en ligne. Si vous le renommez, choisissez un nom explicite."
+        zoom_levels_help: "Les niveaux de zoom de la pyramide de tuiles vectorielles sont prédéfinis. Choisissez les bornes minimum et maximum de votre pyramide de tuiles en vous aidant des deux cartes. Tous les niveaux intermédiaires seront générés. <a href='%url%' traget='_blank'>En savoir plus</a>"
+        next_table: "Table suivante"
+        sample_heading: "Des doutes sur votre configuration ? Générez un échantillon."
+        generate_sample: "Générer un échantillon"
+        create_sample: "Définissez la zone pour l'échantillon"
+        explain_generate_sample: |
+            En choisissant de générer un échantillon, vous pourrez visualiser votre flux de tuiles vectorielles sur une zone restreinte 
+            et ainsi confirmer votre paramétrage ou le modifier s'il ne vous convient pas.
+            Vous obtiendrez ainsi un résultat plus rapide que si vous générez les tuiles vectorielles sur l'intégralité de vos données.
+            Pour en savoir plus sur l'échantillon, <a href='%URL%' target='_blank'>consultez l'aide</a>.
+        bbox_title: "Définissez la zone pour l'échantillon"
+        center_zone: |
+            Déplacez la carte ou utilisez l'outil de recherche pour choisir l'emplacement de votre échantillon.
+            Choisissez un endroit où vous êtes certain de trouver des données.
+            La taille de l'échantillon est limité à 10x10 tuiles vectorielles au niveau de zoom maximum que vous avez défini.
+        compose_heading: "Composez votre flux"
+        composition: "Composez votre flux à partir de vos données"
+        tippecanoe:
+            options: "Choisissez une option de généralisation"
+            simplify_forms: "Simplification de données hétérogènes"
+            simplify_forms_explain: "Toutes les formes sont simplifiées."
+            keep_nodes: "Simplification de réseau"
+            keep_nodes_explain: "Toutes les formes sont simplifiées et les noeuds du réseau sont conservés."
+            delete_smallest: "Simplification de données linéaires autres"
+            delete_smallest_explain: "Les petits objets sont supprimés."
+            keep_cover: "Schématisation de données surfaciques"
+            keep_cover_explain: "Les formes sont simplifiées en conservant une couverture du territoire."
+            keep_densest_delete_smallest: "Sélection de données surfaciques"
+            keep_densest_delete_smallest_explain: "Les données les plus représentatives sont conservées et les plus petites supprimées. Ce choix est pertinent si 3 attributs ou moins sont conservés à l'étape précédente."
+            merge_same_attributes_and_simplify: "Fusion attributaire de données surfaciques"
+            merge_same_attributes_and_simplify_explain: "Les objets qui ont les mêmes valeurs d’attribut sont fusionnés tout en simplifiant les formes et en supprimant les petites surfaces. Ce choix est pertinent si 3 attributs ou moins sont conservés à l'étape précédente."
+            keep_shared_edges: "Harmonisation de données surfaciques"
+            keep_shared_edges_explain: "Les formes sont simplifiées en conservant les limites partagées entre deux surfaces "
+        min_and_max_zoom: "Choisissez les niveaux de zoom minimum et maximum"
+        attributes: "Choisissez les attributs de la table"
+        attributes_help: |
+            Cochez les attributs à conserver dans votre flux de tuiles vectorielles.
+            Ces attributs seront notamment accessibles au clic sur une carte par vos
+            utilisateurs. En limitant le nombre d'attributs, vous allégez le volume des tuiles
+            et améliorez la fluidité d'affichage. Ne conservez que les attributs utiles à vos utilisateurs.
+            Si vous ne conservez aucun attribut, vos tuiles vectorielles ne contiendront que des géométries
+            et les possibilités de symbolisation seront limitées.
+            <a href='%url%' target='_blank'>En savoir plus</a>
+        previous_step: "Etape précédente"
+        next_step: "Valider"
+        submit: "Valider"
+    form_publish:
+        heading: "Décrivez et publiez votre flux"
+        lead: "Apportez un maximum d’informations à vos utilisateurs en décrivant votre flux le plus précisément possible. <a href=\"%help_url%\" target=\"_blank\">consultez l'aide en ligne</a>"
+        name: "Donnez un nom à votre flux"
+        name_help: "Il s'agit d'un nom technique qui sera visible de vos utilisateurs dans l'adresse de votre flux. Il doit être composé uniquement de lettres, chiffres, tirets (-), underscores (_), ou points (.). Exemple : ma_couche. Ce nom ne doit pas déjà être utilisé par un autre flux."
+        title: "Donnez un titre à votre flux"
+        title_help: "Ce titre est le nom sous lequel apparaitra votre flux dans les gestionnaires de couche des SIG ou de vos applications web."
+        address_preview: "Aperçu de l'adresse finale"
+        description: "Description"
+        description_help: "Cette description complète le titre pour expliciter davantage le contenu de votre flux pour vos utilisateurs. Exemple : Affichage des lacs, réservoirs, rivières et cours d'eaux en France"
+        legal_notices: "Mentions légales, source des données"
+        legal_notices_help: "Informez les utilisateurs de votre flux des mentions à faire figurer sur les cartes lorsqu'ils utilisent votre flux. Exemple : \"source IGN BDTOPO®\". Ce texte sera affiché au bas des cartes sous forme de lien cliquable pointant vers l'URL indiquée."
+        attribution_url: "URL d'attribution"
+        choose_keywords: "Choisissez vos mots clés"
+        keywords_help: "Utilisez l'auto-complétion ou saisissez librement des mots clés en appuyant sur Entrée après chaque mot clé. L'auto complétion est proposée à partir d'un catalogue de termes communs aux spécifications INSPIRE. Les mots clés participent à décrire votre flux et peuvent aider à le trouver si vous le référencez dans un catalogue."
+        cancel: "Annuler et revenir au tableau de bord"
+    steps:
+        upload_data: Déposer un fichier
+        create_pyramid: Créer le flux
+        publish: Publier 
+        share: Diffuser
+    update_compare:
+        old_version: "Ancienne version"
+        new_version: "Nouvelle version"
+        cancel: "Annuler et revenir au tableau de bord"
+    sample_check:
+        help: "Vérifiez que les tuiles vectorielles de votre échantillon ont été générées de manière satisfaisante et valider la génération sur toutes vos données ou reprenez le paramétrage."
+
+about:
+    title: "Mentions légales"
+
+accessibility:
+    title: "Accessibilité"
+    footer_link: "Accessibilité : non conforme"
+
+cgu:
+    title: "Conditions générales d'utilisation"
+
+cookies:
+    title: "Gestion des cookies"
+    visite: "En vue d’adapter le site %app_url% aux demandes de ses visiteurs, l’IGN mesure le nombre de visites, le nombre de pages vues ainsi que l'activité des visiteurs sur le site et leur fréquence de retour."
+    piwik: "PIWIK, l'outil de statistiques utilisé par l’IGN, génère un cookie avec un identifiant unique, dont la durée de conservation est limitée à 13 mois. L’outil utilisé collecte également votre adresse IP, afin de déterminer la ville depuis laquelle vous vous connectez. Celle-ci est immédiatement anonymisée après utilisation. L’IGN ne peut donc en aucun cas remonter par ce biais à une personne physique."
+    condition: "Les données recueillies ne sont pas cédées à des tiers ni utilisées à d'autres fins."
+
+doc:
+    title: "Aide en ligne"
+
+contact:
+    title: "Nous écrire"
+    about: "<p>Vous n'avez pas trouvé la réponse à votre question dans <a href='%URL%'>l'aide en ligne</a> ? Vous souhaitez la configuration d'un espace de travail pour vos besoins ? Contactez-nous !</p>"
+    personal_data: "Les informations recueillies à partir de ce formulaire sont nécessaires à la gestion de votre demande par les services de l'IGN concernés."
+    personal_data_link: "En savoir plus sur la gestion des données à caractère personnel"
+    form:
+        userEmail: "Votre email"
+        message: "Décrivez votre demande en quelques lignes"
+        submit: "Envoyer"
+    email_support:
+        heading: "Un utilisateur a utilisé le formulaire de contact du Guichet de diffusion des services Géoplateforme."
+        user_email: "Adresse mail de l'utilisateur"
+        date: "Date d'envoi"
+        message: "Corps du message"
+    email_acknowledgement:
+        heading: "Votre demande a été envoyée à l'IGN et une réponse vous sera apportée dans les meilleurs délais."
+        date: "Date d'envoi"
+        message: "Rappel de votre demande"
+    thanks:
+        fail: "L'envoi de votre demande à échoué. Veuillez <a href='javascript:history.back()'>revenir au formulaire, vérifier votre saisie et recommencer</a>."
+        success: "Votre demande a été envoyée."
+        continue: "Poursuivre la navigation"
+
+mailer:
+    hello: "Bonjour"
+    signature: "Cordialement,<br />L'équipe du <a href='%href%' >Guichet de diffusion des services Géoplateforme IGN</a>"
+    login_info: "Votre nom d'utilisateur est : %login%"

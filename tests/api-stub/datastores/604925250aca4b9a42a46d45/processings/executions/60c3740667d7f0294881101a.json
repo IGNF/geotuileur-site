@@ -1,0 +1,33 @@
+{
+    "_id": "60c3740667d7f0294881101a",
+    "processing": {
+        "_id": "6049259702974d30e9ddbd9f",
+        "name": "Pays du monde"
+    },
+    "parameters": {},
+    "creation": "2021-06-11T14:32:38.182Z",
+    "status": "FAILURE",
+    "launch": "2021-06-11T14:32:38.254Z",
+    "start": "2021-06-11T14:32:39.738Z",
+    "finish": "2021-06-11T14:32:42.039Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "60c36c3267d7f012fa810d24",
+                "name": "test upload from bo plage",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "CLOSED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "605cdd9bdd43a0651911b6c0",
+            "name": "Pays du monde",
+            "status": "GENERATED",
+            "srs": "EPSG:4326"
+        }
+    }
+}

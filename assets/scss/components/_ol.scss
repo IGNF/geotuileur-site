@@ -1,0 +1,6 @@
+// Patchs sur les éléments ol et gpplugin pour compenser certains ajouts du Design System
+
+// Alignement horizontal de la recherche de lieu, annule un margin-bottom: 1rem sur les label dans la charte
+label.GPshowAdvancedToolPicto {
+    margin-bottom: 0;
+}

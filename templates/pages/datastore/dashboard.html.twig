@@ -1,0 +1,48 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'datastore.dashboard.title'| trans({'%name%': datastore.name}) %}
+
+{% block title %}{{ pageTitle ~ ' - ' ~ parent() }}{% endblock %}
+
+{% set active_page = 'dashboard' %}
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+
+    <span id="datastore-id" data-datastore-id="{{ datastore._id }}"></span>
+
+    <div class="container-content container-content--smaller mb-2">
+        <div class="row justify-content-center text-muted">
+            <p>
+                <i class="icon-user" aria-hidden="true"></i>&nbsp;
+                {{ "datastore.dashboard.number_of_members"|trans({'%count%': community_members_count}) }}
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+            <a href="{{ path('plage_upload_add', {datastoreId: datastore._id}) }}" class="btn btn--plain btn--primary mr-1">
+                <i class="icon-plus" aria-hidden="true"></i>&nbsp;
+                {{ "datastore.dashboard.create_pyramid"|trans }}
+            </a>
+            <a href="{{ path('plage_pyramid_update', {datastoreId: datastore._id}) }}" class="btn btn--plain btn--primary">
+                <i class="icon-repeat" aria-hidden="true"></i>&nbsp;
+                {{ "datastore.dashboard.update_pyramid"|trans }}
+            </a>
+        </div>
+    </div>
+
+    <div class="container-content" id="datastore-dashboard-content" data-datastore-id="{{ datastore._id }}"></div>
+
+    {% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ encore_entry_script_tags('datastore-dashboard') }}
+	{# {{ encore_entry_script_tags('background-tasks') }} #}
+{% endblock %}

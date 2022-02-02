@@ -1,0 +1,16 @@
+{
+    "_id": "6055397b68bcc92e2bdd2329",
+    "name": "Paysdumonde_pqgis_2021_03_20-00_53_31",
+    "description": "Mise \u00e0 jour depuis QGIS",
+    "type": "VECTOR",
+    "srs": "EPSG:4326",
+    "visibility": "PRIVATE",
+    "contact": "maria.ibarra@ign.fr",
+    "status": "CLOSED",
+    "tags": {
+        "key": "depuis",
+        "value": "plug-in QGIS",
+        "storedDataId": "605cdd9bdd43a0651911b6c0"
+    },
+    "size": 367686
+}

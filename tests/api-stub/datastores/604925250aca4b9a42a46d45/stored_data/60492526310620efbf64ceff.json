@@ -1,0 +1,39 @@
+{
+    "type": "ROK4-PYRAMID-RASTER",
+    "tags": {
+        "wmts_url": "https:\/\/wxs.ign.fr\/__KEY__\/geoportail\/wmts",
+        "wmts_layers": "scan1000-bacasable"
+    },
+    "_id": "60492526310620efbf64ceff",
+    "name": "SCAN 1000",
+    "visibility": "PRIVATE",
+    "contact": "maria.ibarra@ign.fr",
+    "status": "GENERATED",
+    "storage": {
+        "type": "FILE",
+        "fast": false
+    },
+    "size": 0,
+    "srs": "EPSG:3857",
+    "type_infos": {
+        "levels": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11"
+        ],
+        "channels_number": 3,
+        "channels_format": "UINT8",
+        "compression": "JPG",
+        "tms": "PM",
+        "nodata_value": "255,255,255"
+    }
+}

@@ -1,0 +1,114 @@
+// TODOMIGRATION et CHARTE 2020. Utiliser bb-modal-*
+
+// S'applique uniquement aux modal bootbox.
+// Sinon les classes modal-* sont également utilisées dans la charte 2020
+// et il ne faut pas interférer avec
+.bootbox.modal {
+    .modal-dialog {
+        margin-top: 1rem;
+    }
+
+    .modal-content {
+        border-radius: 0.5rem;
+    }
+
+    // titres de la couleur principale du site par defaut
+    .modal-title {
+        color: $brand-primary;
+    }
+
+    .modal-header {
+        border-bottom: solid 1px $gray-300;
+        flex-direction: row;
+        .bootbox-close-button {
+            padding: 2rem 1.5rem;
+        }
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        border-top: solid 1px $gray-300;
+        clear: both; // pour terminer proprement les boites si elements float a l'interieur (legendes des couches geoportail dans les guichets)
+    }
+
+    &.modal-warning,
+    &.modal-danger {
+        .modal-title::before {
+            content: url(../../img/modal/warning.gif);
+            margin-right: 5px;
+            vertical-align: -1em;
+        }
+    }
+
+    &.modal-warning {
+        .modal-content {
+            background-color: $faded-warning;
+        }
+        .modal-title {
+            color: $text-warning;
+        }
+        .modal-header {
+            border-bottom-color: $brand-warning;
+        }
+        .modal-footer {
+            border-top-color: $brand-warning;
+        }
+    }
+
+    &.modal-danger {
+        .modal-content {
+            background-color: $faded-danger;
+        }
+        .modal-title {
+            color: $text-danger;
+        }
+        .modal-header {
+            border-bottom-color: $brand-danger;
+        }
+        .modal-footer {
+            border-top-color: $brand-danger;
+        }
+    }
+
+    &.modal-success {
+        .modal-content {
+            background-color: $faded-success;
+        }
+        .modal-title {
+            color: $text-success;
+        }
+        .modal-header {
+            border-bottom-color: $brand-success;
+        }
+        .modal-footer {
+            border-top-color: $brand-success;
+        }
+    }
+
+    &.modal-info {
+        .modal-title::before {
+            content: url(../../img/modal/info.png); // prise sur l'espace loisirs
+            margin-right: 5px;
+            vertical-align: -12px;
+        }
+    }
+
+    &.modal-question {
+        .modal-title::before {
+            content: url(../../img/modal/question.png);
+            margin-right: 5px;
+            vertical-align: -12px;
+        }
+    }
+
+    &.modal-edit {
+        .modal-title::before {
+            content: url(../../img/modal/edit.png);
+            margin-right: 5px;
+            vertical-align: -12px;
+        }
+    }
+}

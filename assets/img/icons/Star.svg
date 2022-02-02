@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="27px" viewBox="0 0 28 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>02.Icons/Star</title>
+    <defs>
+        <path d="M16.2235767,15.0776203 L19.8605986,7.70941408 C20.3274973,6.76352864 21.6763124,6.76352864 22.1432111,7.70941408 L25.7802331,15.0776203 L33.9137291,16.2664526 C34.9572956,16.4189855 35.3732173,17.7017402 34.6177066,18.4376076 L28.7334014,24.1689208 L30.1221089,32.2657917 C30.3004482,33.3056005 29.2089819,34.0984919 28.2752369,33.6074448 L21.0019049,29.7824725 L13.7285729,33.6074448 C12.7948279,34.0984919 11.7033616,33.3056005 11.8817008,32.2657917 L13.2704084,24.1689208 L7.38610319,18.4376076 C6.63059248,17.7017402 7.04651411,16.4189855 8.09008062,16.2664526 L16.2235767,15.0776203 Z" id="path-1"></path>
+    </defs>
+    <g id="Deposer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tunnel-DonnéeKO" transform="translate(-800.000000, -1235.000000)">
+            <g id="02.Icons/Star" transform="translate(793.000000, 1228.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Shape" fill="#EFC931" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

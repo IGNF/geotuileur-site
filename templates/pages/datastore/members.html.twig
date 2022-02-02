@@ -1,0 +1,38 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'datastore.members.title'| trans({'%name%': datastore.name}) %}
+
+{% block title %}{{ pageTitle ~ ' - ' ~ parent() }}{% endblock %}
+
+{% set active_page = 'members' %}
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+{% apply spaceless %}
+    <div class="container-content container-content--narrow">
+        <div class="wysiwyg">
+            <ul>
+                {# Liste complète sans pagination, on ne s'attend pas à avoir des communautés
+                   aux membres trop nombreux a priori #}
+                {% for member in members %}
+                    <li>
+                        <strong>{{ member.user.first_name ~ " " ~ member.user.last_name }}</strong>
+                        {{" "~ member.user.email ~""}}
+                        {% if app.user.email == member.user.email %}
+                            <em class="text-success">{{ 'datastore.members.you'| trans }}</em>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

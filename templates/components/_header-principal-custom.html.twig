@@ -1,0 +1,48 @@
+{% trans_default_domain "PlageWebClient" %}
+
+<div>
+
+    <div class="d-inline-block">
+        <a class="btn btn-icon--header" href="{{ path('plage_doc') }}" title="Aide en ligne">
+            <span class="icon-question"></span>
+        </a>
+    </div>
+
+
+    <div class="d-inline-block dropdown">
+        <button class="dropdown-toggle btn btn-icon--header"
+            id="dropdownUserMenu"
+            data-toggle="dropdown"
+            aria-expanded="false">
+            {% if app.user %}
+                <span class="icons-logged-user"></span>
+            {% else %}
+                <span class="icon-simple-user"></span>
+            {% endif %}
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownUserMenu">
+            {% if app.user %}
+                <div class="dropdown-header">
+                    <strong>{{ app.user.username }}</strong><br/>
+                    <span>{{ app.user.email }}</span>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a href="{{ path('plage_users_me') }}" class="dropdown-item" role="button">
+                    Mes informations
+                </a>
+                <a href="{{ path('plage_datastore_index') }}" class="dropdown-item" role="button">
+                    Mes espaces de travail
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ path('plage_security_logout') }}" class="dropdown-item" role="button">
+                    {{ 'nav.logout'| trans }}
+                </a>
+            {% else %}
+                <a href="{{ path('plage_security_login') }}" class="dropdown-item" role="button">
+                    {{ 'nav.login'| trans }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{# error page #}
+{% extends "base.html.twig" %}
+{% trans_default_domain "PlageWebClient" %}
+
+{% block title %}{{ 'error.code' | trans({'%code%': status_code }) ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block body %}
+{% apply spaceless %}
+    <div class="container-content">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-danger text-center">
+                    <i class="icons-alert icons-x10"></i>
+                </h2>
+            </div>
+            <div class="col-md-6">
+                <h1>{{ 'error.code' | trans({'%code%': status_code }) }} - {{ 'error.403' | trans }}</h1>
+            </div>
+        </div>
+    </div>
+{% endapply %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "bundles/Mailer/base.html.twig" %}
+{% trans_default_domain "PlageWebClient" %}
+
+{% block body %}
+    <div>
+        <p>{{ 'contact.email_support.heading'|trans }}</p>
+        <hr>
+        <p>
+            <strong>{{ 'contact.email_support.user_email'|trans }} : </strong>
+            {{ userEmail }}
+        </p>
+
+        <p><strong>{{ 'contact.email_support.date'|trans }} : </strong>{{ sendDate|date('d-m-Y H:m', "Europe/Paris") }}</p>
+
+        <p>
+            <strong>{{ 'contact.email_support.message'|trans }} : </strong><br />{{ message|raw|nl2br }}
+        </p>
+    </div>
+{% endblock %}
+    

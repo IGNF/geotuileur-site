@@ -1,0 +1,33 @@
+{
+    "_id": "60c36ccf138f85357087348f",
+    "processing": {
+        "_id": "6049250002974d0101ddbd93",
+        "name": "Int\u00e9gration d'un SQL en base"
+    },
+    "parameters": {},
+    "creation": "2021-06-11T14:01:51.390Z",
+    "status": "SUCCESS",
+    "launch": "2021-06-11T14:01:51.464Z",
+    "start": "2021-06-11T14:01:56.353Z",
+    "finish": "2021-06-11T14:01:58.370Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "60c36c3267d7f012fa810d24",
+                "name": "test upload from bo plage",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "CLOSED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "605cdd9bdd43a0651911b6c0",
+            "name": "Pays du monde",
+            "status": "GENERATED",
+            "srs": "EPSG:4326"
+        }
+    }
+}

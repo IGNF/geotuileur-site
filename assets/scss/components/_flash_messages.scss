@@ -1,0 +1,17 @@
+#flash-messages {
+    overflow-y: auto;
+    z-index: 999;
+
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    margin: auto;
+    max-width: 500px;
+
+    padding: 6px;
+}
+
+.alert {
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+    word-wrap: break-word;
+}

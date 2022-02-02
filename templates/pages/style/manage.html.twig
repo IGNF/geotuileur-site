@@ -1,0 +1,70 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+{% set pageTitle = "" %}
+
+{% block title %} {{ 'pyramid.style.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+	<div class="container-content">
+        {% set _pyramid = pyramid|json_encode()|raw %}
+        {% set _styles = styles|json_encode()|raw %}
+        <div class="style">
+            {# La carte #}
+            <div id="map-target" data-datastoreid={{ datastore._id }} data-pyramid="{{ _pyramid }}" data-styles="{{ _styles }}" data-defstyle="{{ defaultStyle }}"></div>
+
+            {# gestion des styles #}
+            <div class="p-1" id="styles">
+                <h3>{{ 'pyramid.style.title'|trans }}</h3>
+                <p class="help-block">
+                    <i class="icon-question text-primary"></i>&nbsp;
+                    {{ 'pyramid.style.create_help'|trans({'%create_url%': path('plage_doc')~'#/style' }) | raw }}
+                </p>
+                <div class="mt-1 text-center" id="block-import">
+                    <label class="btn btn-sm btn--ghost btn--primary w-100" for="style-file">
+                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;{{ 'pyramid.style.import'|trans }}                    
+                    </label>
+                    <input type="file" id="style-file" accept=".json">
+                </div>
+                <div id="styles-wrapper"></div>
+            </div>
+                   
+            {# Les outils #}
+            <div id="tools">
+                <a class="btn"
+                    href="{{ path('plage_pyramid_share', {datastoreId: datastore._id, pyramidId: pyramid._id})}}">
+                    <i class="icons-share-white"></i><br/>
+                    <span>{{ 'pyramid.share.title' | trans }}</span>
+                </a>
+                <div class="btn active">
+                    <i class="icons-style-white"></i><br/>
+                    <span>{{ 'pyramid.style.title' | trans }}</span>
+                </div>
+            </div>   
+        </div>
+	</div>
+    {# template de la boite de dialogue #}
+    <template id="template-dlg-style">
+        <label>{{'pyramid.style.name'|trans }}</label>
+        <input class="form-control" type="text" id="style-name">
+        <p class="style-error" style="display: none;"></p>
+    </template>
+
+	{% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+	{{ encore_entry_script_tags('pyramid-style') }}
+{% endblock %}

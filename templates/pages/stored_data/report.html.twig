@@ -1,0 +1,238 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+
+{# Ce template gère 3 types de rapport :
+    - progress_report : rapport d'avancement
+    - integration_report : rapport d'intégration des données en base
+    - generation_report : rapport de génération d'une pyramide de tuiles vectorielles
+#}
+{% set report_type = null %}
+{% if stored_data.status == 'GENERATING' %}
+    {% set report_type = 'progress_report' %}
+{% elseif stored_data.status == 'UNSTABLE' %}
+    {% if stored_data.type == 'VECTOR-DB' %}
+        {% set report_type = 'integration_report_failure' %}
+    {% elseif stored_data.type == 'ROK4-PYRAMID-VECTOR' %}
+        {% set report_type = 'generation_report_failure' %}
+    {% endif %}
+{% else %}
+    {% if stored_data.type == 'VECTOR-DB' %}
+        {% set report_type = 'integration_report' %}
+    {% elseif stored_data.type == 'ROK4-PYRAMID-VECTOR' %}
+        {% set report_type = 'generation_report' %}
+    {% endif %}
+{% endif %}
+
+{% if report_type == 'progress_report' %}
+    {% set pageTitle = 'stored_data.report.progress_title'| trans({'%stored_data_name%': stored_data.name}) %}
+    {% set pageHelp = 'stored_data.report.progress_help' | trans %}
+{% elseif report_type == 'integration_report' %}
+    {% set pageTitle = 'stored_data.report.integration_title'| trans({'%stored_data_name%': stored_data.name}) %}
+    {% set pageHelp = 'stored_data.report.integration_help' | trans %}
+{% elseif report_type == 'integration_report_failure' %}
+    {% set pageTitle = 'stored_data.report.integration_title'| trans({'%stored_data_name%': stored_data.name}) %}
+    {% set pageHelp = 'stored_data.report.integration_failure_help' | trans %}
+{% elseif report_type == 'generation_report' %}
+    {% set pageTitle = 'stored_data.report.generation_title'| trans({'%stored_data_name%': stored_data.name}) %}
+    {% set pageHelp = 'stored_data.report.generation_help' | trans %}
+{% elseif report_type == 'generation_report_failure' %}
+    {% set pageTitle = 'stored_data.report.generation_title'| trans({'%stored_data_name%': stored_data.name}) %}
+    {% set pageHelp = 'stored_data.report.generation_failure_help' | trans %}
+{% endif %}
+
+{% block title %} {{ pageTitle ~ ' - ' ~ parent() }} {% endblock %}
+
+{% set checkTypes = constant('App\\Constants\\UploadCheckTypes::TYPES_LIST') %}
+
+{% set context = {datastore_id: datastore._id, stored_data_id: stored_data._id} %}
+
+{# Macro pour chacune des étapes du rapport #}
+{% macro check_or_process_details(type, execution, context) %}
+    <strong>{{ 'stored_data.report.execution_id' | trans }}</strong>&nbsp;{{ execution._id }}<br/>
+    {% if type == 'processing' %}
+        <strong>{{ 'stored_data.report.output_data_id' | trans }}</strong>&nbsp;{{ execution.output.stored_data._id }}&nbsp;
+        {% if execution.output.stored_data._id != context.stored_data_id %}
+            <a class="btn btn-sm btn--ghost btn--secondary"
+               href="{{ path('plage_stored_data_report', {datastoreId: context.datastore_id, storedDataId: execution.output.stored_data._id }) }}">
+                {{ 'stored_data.report.link_to_report' | trans }}
+            </a>
+        {% endif %}
+        <br/>
+    {% endif %}
+    <strong>{{ 'stored_data.report.log' | trans }}</strong>
+    {% if execution.logs|length > 0 %}
+        <pre><code>{{ execution.logs|join|replace({'§USER§ ': ''}) }}</code></pre>
+    {% else %}
+        {% if type == 'check' %}
+            <pre><code>{{ 'stored_data.report.no_log_check' | trans }}</code></pre>
+        {% elseif type == 'processing' %}
+            <pre><code>{{ 'stored_data.report.no_log_processing' | trans }}</code></pre>
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro upload_details(upload) %}
+    <ul class="list-unstyled">
+        <li>
+            <strong>{{ 'stored_data.report.upload_name' | trans }}</strong>&nbsp;{{ upload.name }}</li>
+        <li>
+        <li>
+            <strong>{{ 'stored_data.report.upload_id' | trans }}</strong>&nbsp;{{ upload._id }}
+        </li>
+            <strong>{{ 'stored_data.report.upload_srs' | trans }}</strong>
+            {% if "proj_name" in upload|keys and upload.proj_name %}
+                {{ upload.proj_name }} ({{ upload.srs }})
+            {% else %}
+                {{ upload.srs }}
+            {% endif %}
+        </li>
+        {% if upload.size is defined %}
+            <li>
+                <strong>{{ 'stored_data.report.upload_size' | trans }}</strong>&nbsp;{{ (upload.size / 1049000)|round(2, 'common') }}&nbsp;MB ({{ upload.size }}&nbsp;octets)
+            </li>
+        {% endif %}
+        <li>
+            <strong>{{ 'stored_data.report.upload_file_tree' | trans }}</strong>
+            {{ include('components/_file_tree.html.twig', {tree: upload.file_tree}) }}
+        </li>
+    </ul>
+{% endmacro %}
+
+{% macro step(status, title, date, type, details, context) %}
+    <div class="alert {% if status == 'SUCCESS' %} alert-success {% elseif status == 'FAILURE' %} alert-danger {% elseif status == 'PROGRESS' or status == 'WAITING' %} alert-info {% endif %}">
+        <p>
+            <strong>
+                <i class="{% if status == 'SUCCESS' %} icon-like {% elseif status == 'FAILURE' %} icon-close {% elseif status == 'PROGRESS' or status == 'WAITING' %} icon-timer {% endif %}"></i>
+                &nbsp;{{ title }}
+            </strong>
+            {% if date %}
+                <span class="float-right">
+                    {{ date|date("Y-m-d H:i:s")|format_datetime(locale='fr') }}
+                </span>
+            {% endif %}
+        </p>
+        <details {% if status == 'FAILURE' %} open {% endif %}>
+            <summary>{{ 'stored_data.report.details' | trans }}</summary>
+            <div class="bg-light text-dark p-1">
+                {% if type == 'check' or type == 'processing' %}
+                    {{ _self.check_or_process_details(type, details, context) }}
+                {% elseif type == 'upload' %}
+                    {{ _self.upload_details(details) }}
+                {% endif %}
+            </div>
+        </details>
+    </div>
+{% endmacro %}
+
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+	<div class="container-content">
+        <p>{{ pageHelp }}</p>
+
+        {# Livraison #}
+        {{ _self.step('SUCCESS', 'stored_data.report.step_upload' | trans , null, 'upload', input_upload, context) }}      
+
+        {# Vérifications #}
+        {% for checkTypeName in checkTypes %}
+            {% if input_upload.checks[checkTypeName] %}
+                {% for checkExecution in input_upload.checks[checkTypeName] %}
+                    {{ _self.step(checkExecution.status, checkExecution.check.name, checkExecution.finish, 'check', checkExecution, context) }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {# Intégration en base #}
+        {% set date = null %}
+        {% if proc_int_exec.finish is defined%}
+            {% set date = proc_int_exec.finish %}
+        {% elseif proc_int_exec.launch is defined%}
+            {% set date = proc_int_exec.launch %}
+        {% elseif proc_int_exec.creation is defined %}
+            {% set date = proc_int_exec.creation %}
+        {% endif %}
+        {{ _self.step(proc_int_exec.status, proc_int_exec.processing.name, date, 'processing', proc_int_exec, context) }}
+            
+        {# Génération de la pyramide de tuiles vectorielles #}
+        {% if proc_pyr_creat_exec is defined and proc_pyr_creat_exec is not null %}
+            {% set date = null %}
+            {% if proc_pyr_creat_exec.finish is defined %}
+                {% set date = proc_pyr_creat_exec.finish%}
+            {% elseif proc_pyr_creat_exec.launch is defined %}
+                {% set date = proc_pyr_creat_exec.launch %}
+            {% elseif proc_pyr_creat_exec.creation is defined %}
+                {% set date = proc_pyr_creat_exec.creation %}
+            {% endif %}
+            {{ _self.step(proc_pyr_creat_exec.status, proc_pyr_creat_exec.processing.name, date, 'processing', proc_pyr_creat_exec, context) }}
+        {% endif %}
+
+        {# Détails sur la donnée #}
+        <div class="wysiwyg">
+            <h2>{{ 'stored_data.report.data_details' | trans }}</h2>
+            <ul class="list-unstyled">
+                {% if stored_data.size is defined %}
+                    <li>
+                        <strong>{{ 'stored_data.report.upload_size' | trans }}</strong>&nbsp;{{ (stored_data.size / 1049000)|round(2, 'common') }}&nbsp;MB ({{ stored_data.size }}&nbsp;octets)
+                    </li>
+                {% endif %}
+                {% if stored_data.type_infos.levels is defined %}
+                    <li><strong>{{ 'stored_data.report.tile_levels' | trans }}</strong>&nbsp; {{ stored_data.type_infos.levels | join(', ') }} </li>
+                {% endif %}
+            </ul>
+
+            {% if stored_data.type_infos.relations is defined %}
+                <h3>{{ 'stored_data.report.data_structure' | trans }}</h3>
+                {% for relation in stored_data.type_infos.relations %}
+                    {% if relation.type == "TABLE" %}
+                    <table class="table table-stripped table-bordered table-sm">
+                        <thead>
+                            <tr><th colspan="2">{{ 'stored_data.report.table_name' | trans({'%name%': relation.name }) }}</th></tr>
+                            <tr><th>{{ 'stored_data.report.attribute_name' | trans }}</th><th>{{ 'stored_data.report.attribute_type' | trans }}</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for attribute_name, attribute_type in relation.attributes %}
+                                <tr>
+                                    <td>{{ attribute_name }}</td>
+                                    <td>{{ attribute_type }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if stored_data.extent is defined %}
+                <h3>{{ 'stored_data.report.extent' | trans }}</h3>
+                <div id="extent-map" data-extent="{{ stored_data.extent | json_encode }}"></div>
+            {% endif %}
+        </div>
+
+        {# Encourage la suppression en cas d'échec #}
+        {% if report_type == 'generation_report_failure' %}
+            <div class="wysiwyg">
+                <p>{{ 'stored_data.report.delete_advise' | trans }}</p>
+            </div>
+        {% endif %}
+
+        <div class="wysiwyg">
+            <p class="text-center">
+                <a href="{{ path('plage_datastore_view', { datastoreId: datastore._id }) }}">
+                    <i class="icon-arrow-left"></i>&nbsp;{{ 'stored_data.report.back' | trans }}
+                </a>
+            </p>
+        </div>
+    </div>
+	{% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags("report") }}
+{% endblock %}

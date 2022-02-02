@@ -1,0 +1,38 @@
+{
+    "_id": "604925000aca4bd07fa46d40",
+    "name": "Cr\u00e9ation d'une pyramide raster vide",
+    "description": "Cr\u00e9ation d'une pyramide raster dans le r\u00e9f\u00e9rentiel pour en avoir les informations",
+    "parameters": [
+        {
+            "name": "tms",
+            "mandatory": true
+        },
+        {
+            "name": "channels_number",
+            "mandatory": false,
+            "default_value": "3"
+        },
+        {
+            "name": "channels_format",
+            "mandatory": false,
+            "default_value": "UINT8"
+        },
+        {
+            "name": "levels",
+            "mandatory": false
+        },
+        {
+            "name": "nodata_value",
+            "mandatory": false,
+            "default_value": "255,255,255"
+        },
+        {
+            "name": "compression",
+            "mandatory": true
+        }
+    ],
+    "output_type": {
+        "stored_data": "ROK4-PYRAMID-RASTER"
+    },
+    "required_checks": []
+}

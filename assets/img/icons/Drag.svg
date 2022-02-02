@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Tools/Zoom/Drag</title>
+    <g id="Tools/Zoom/Drag" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#307CCD" cx="30" cy="30" r="30"></circle>
+        <polygon id="Path-9" fill="#FFFFFF" points="38 26 38 34 44 30"></polygon>
+        <polygon id="Path-9" fill="#FFFFFF" transform="translate(19.000000, 30.000000) scale(-1, 1) translate(-19.000000, -30.000000) " points="16 26 16 34 22 30"></polygon>
+    </g>
+</svg>

@@ -1,0 +1,11 @@
+// Titre principal placé dans le header
+.header-principal--right {
+    h1 {
+        flex-basis: 0;
+        flex-grow: 1;
+        font-size: 2rem;
+        margin: 0;
+        padding-left: 1rem;
+        text-align: left;
+    }
+}

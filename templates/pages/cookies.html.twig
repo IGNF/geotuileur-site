@@ -1,0 +1,24 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'cookies.title'| trans %}
+
+{% block title %} {{ 'cookies.title'| trans ~ " - " ~ parent() }} {% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+    <div class="container-content container-content--smaller">
+        <div class="wysiwyg">
+            <p>{{ 'cookies.visite'|trans({'%app_url%': app_url}) }}</p>
+            <p>{{ 'cookies.piwik'|trans }}</p>
+            <p>{{ 'cookies.condition'|trans }}</p>
+            <iframe style="border: 0; height: 200px; width: 600px;" src="https://piwik.ign.fr/piwik/public.php?module=CoreAdminHome&action=optOut&language={{ app.request.getLocale() }}"></iframe>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'contact.title'| trans %}
+
+{% block title %} {{ 'contact.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+        <div class="container-content container-content--smaller">
+            <div class="wysiwyg">
+            {% if error %}
+                <p class="alert alert-warning">
+                    <i class="icons-alert"></i>
+                    {{ 'contact.thanks.fail'|trans|raw }}
+                </p>
+                {% if failures is defined %}
+                    {{ failures }}
+                {% endif %}
+            {% else %}
+                <p class="alert alert-success">
+                    <span class="icon-mail"></span>
+                    {{ 'contact.thanks.success'|trans }}<br>
+                    <a href="{{ path('plage_home')}}">{{ 'contact.thanks.continue'|trans }}</a>.
+                </p>
+            {% endif %}
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}

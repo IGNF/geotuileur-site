@@ -1,0 +1,16 @@
+{% extends "bundles/Mailer/base.html.twig" %}
+{% trans_default_domain "PlageWebClient" %}
+
+{% block body %}
+    <div>
+        <p>{{ 'contact.email_acknowledgement.heading'|trans }}</p>
+        <hr />
+
+        <p><strong>{{ 'contact.email_acknowledgement.date'|trans }} : </strong>{{ sendDate|date('d-m-Y H:m', "Europe/Paris") }}</p>
+
+        <p>
+            <strong>{{ 'contact.email_acknowledgement.message'|trans }} : </strong><br />{{ message|raw|nl2br }}
+        </p>
+    </div>
+{% endblock %}
+        

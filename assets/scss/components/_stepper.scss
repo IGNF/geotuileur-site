@@ -1,0 +1,54 @@
+ul.stepper {
+    position: relative;
+    list-style-type: none;
+    display: flex;
+    align-items: stretch;
+    width: 80%;
+}
+.step {
+    flex-basis: 5em; // ensure all elements start at same width
+    flex-grow: 1; // and grow the same speed
+    text-align: center;
+    margin: 1rem 0;
+}
+.step-id {
+    display: flex;
+}
+.step-id-box {
+    border: 0.1rem solid #dde1e6;
+    display: inline-block;
+    margin: 1em 0.5em;
+    padding: 1rem 2rem;
+}
+.step .step-id::before {
+    content: "";
+    border-top: solid 1px #dde1e6;
+    height: 0.0625rem;
+    margin-top: 2.5em;
+    flex: 1;
+}
+.step .step-id::after {
+    content: "";
+    border-top: solid 1px #dde1e6;
+    height: 0.0625rem;
+    margin-top: 2.5em;
+    flex: 1;
+}
+.step:first-child .step-id::before,
+.step:last-child .step-id::after {
+    border-color: #fff;
+}
+
+.step.active {
+    color: #fff;
+}
+
+.step.active .step-id-box {
+    background-color: #3993f3;
+    font-weight: bolder;
+}
+
+.step.active .step-label {
+    color: #3993f3;
+    font-weight: bolder;
+}

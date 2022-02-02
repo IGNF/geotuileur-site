@@ -1,0 +1,55 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'about.title'| trans %}
+
+{% block title %}{{ 'about.title'| trans ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+
+    <div class="container-content container-content--smaller">
+        <div class="wysiwyg">
+
+            <h3>Editeur</h3>
+
+            <p>Le site {{ app_url }} est édité par l’Institut national de l’information géographique et forestière (IGN), 73 avenue de Paris, 94165 SAINT-MANDE CEDEX, France.</p>
+
+            <p>{{ 'site.footer.phone'|trans }}</p>
+
+            <p>Directeur de la publication : Sébastien Soriano, Directeur général de l'IGN.</p>
+        
+            <h3>Hébergeur</h3>
+
+            <p>Le site {{ app_url }} est hébergé par Cegedim S.A., 137 rue d'Aguesseau, 92641 Boulogne-Billancourt Cedex, France.</p>
+
+            <h3>Traitement des données à caractère personnel</h3>
+
+            <p>Les informations issues des formulaires d’inscription au site sont utilisées exclusivement pour la gestion des permissions d’accès aux différents contenus et fonctionnalités du site {{ app_url }}.</p>
+
+            <p>Le destinataire des données est l’IGN.</p>
+
+            <p>Conformément à la loi « Informatique et libertés » du 6 janvier 1978, vous bénéficiez d’un droit d’accès et de rectification des informations qui vous concernent, que vous pouvez exercer en vous adressant à l’IGN aux coordonnées accessibles via le lien « Nous écrire » en bas de page.</p>
+
+            <p><a class="external-link" target="_blank" href="https://www.ign.fr/institut/donnees-caractere-personnel" rel="noopener" title="En savoir plus sur les données à caractère personnel">En savoir plus sur les données à caractère personnel</a></p>
+
+            <h3>Droit de propriété intellectuelle</h3>
+
+            <p>Les illustrations, le contenu éditorial, les divers éléments de la charte graphique ainsi que les données cartographiques issues de la consultation en ligne figurant sur le site espacecollaboratif.ign.fr sont des éléments dont l’IGN détient la propriété ou le droit d’exploitation.</p>
+
+            <p>L’utilisation des documents ou éléments du site est soumise à l’accord préalable de notre établissement.</p>
+        
+            <h3>Liens hypertextes proposés sur {{ app_url }}</h3>
+
+            <p>Les liens insérés dans les pages du site {{ app_url }} vers des sites tiers sont proposés à titre d’information ; le contenu des sites vers lesquels ces liens conduisent n’engage pas la responsabilité de l’éditeur.</p>
+        </div>
+    </div>
+
+
+    {% endapply %}
+{% endblock %}

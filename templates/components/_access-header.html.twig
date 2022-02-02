@@ -1,0 +1,47 @@
+{# page de reglage des parametres d accessibilite #}
+{% trans_default_domain "PlageWebClient" %}
+<div id="modalAccess" class="modal modal--full fade" tabindex="-1" aria-labbeledby="modalAccessLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="modal-title">{{ 'site.accessibility.title'|trans }}</h1>
+                <button type="button" class="btn-close" data-dismiss="modal">
+                    <span class="icon-close" aria-hidden="true"></span>
+                    <span class="sr-only">Fermer le menu</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-content container-content--smaller">
+                    <div class="o-access-config">
+                        <div class="form-group form-group-custom-control">
+                            <fieldset id="contrast-id">
+                                <legend>{{ 'site.accessibility.contrast.title'|trans }}</legend>
+                                <div class="custom-control custom-radio">
+                                    <input id="default-c" value="default-c" name="contrast" checked="checked" type="radio" class="custom-control-input">
+                                    <label class="custom-control-label" for="default-c"><span class="sr-only">{{ 'site.accessibility.contrast.title'|trans }}</span> {{ 'site.accessibility.contrast.default'|trans }}</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="high-c" value="high-c" name="contrast" type="radio" class="custom-control-input">
+                                    <label class="custom-control-label" for="high-c"><span class="sr-only">{{ 'site.accessibility.contrast.title'|trans }}</span> {{ 'site.accessibility.contrast.reinforced'|trans }}</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group form-group-custom-control">
+                            <fieldset id="line-space-id">
+                                <legend>{{ 'site.accessibility.linespacing.title'|trans }}</legend>
+                                <div class="custom-control custom-radio">
+                                    <input id="default-line-space" value="default-line-space" name="line-space" checked="checked" type="radio" class="custom-control-input">
+                                    <label class="custom-control-label" for="default-line-space"><span class="sr-only">{{ 'site.accessibility.linespacing.title'|trans }}</span> {{ 'site.accessibility.linespacing.default'|trans }}</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="dys-line-space" value="dys-line-space" name="line-space" type="radio" class="custom-control-input">
+                                    <label class="custom-control-label" for="dys-line-space"><span class="sr-only">{{ 'site.accessibility.linespacing.title'|trans }}</span> {{ 'site.accessibility.linespacing.increased'|trans }}</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

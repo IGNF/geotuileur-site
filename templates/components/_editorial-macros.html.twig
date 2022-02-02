@@ -1,0 +1,18 @@
+{# Ajoute un paragraphe avec une image flottante à gauche ou à droite #}
+{% macro paragraph_with_image(imageUrl, imageCaption, imageAltText, title, content, position) %}
+<div class="paragraph container-content container-content--smaller container-content--fake-col paragraph--type--image-texte paragraph--view-mode--default">
+    <div class="clearfix">
+        <div class="m-media m-media-float float-{{ position }}">
+            <figure class="figure">
+                <img src="{{ imageUrl }}" alt="{{ imageAltText }}">
+                <figcaption class="figure-caption text-right">{{ imageCaption }}</figcaption>
+            </figure>
+        </div>
+
+        <div class="wysiwyg">
+            <h2>{{ title }}</h2>
+            <p>{{ content }}</p>
+        </div>
+    </div>
+</div>
+{% endmacro %}

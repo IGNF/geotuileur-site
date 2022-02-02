@@ -1,0 +1,194 @@
+{# Pied de page commun à tout le site #}
+{% trans_default_domain "PlageWebClient" %}
+
+{# Bloc Newsletter et réseaux sociaux #}
+<div class="region subfooter bg-gradient-primary text-white region-subfooter">
+    <div class="container-content">
+        <div class="row">
+            <div id="block-portalnewsletterblock" class="block col-md-6 block-ign-common block-block-portal-newsletter">
+                <h2 class="subfooter__title">{{ "site.subfooter.newsletter.title"|trans }}</h2>
+                <p class="subfooter__desc lead">{{ "site.subfooter.newsletter.description"|trans }}</p>
+                <div>
+                    <iframe title="{{ "site.subfooter.newsletter.title"|trans }}"
+                            src="https://app.mailjet.com/widget/iframe/1ZEE/LJB" {# URL newsletter Géoplateforme #}
+                            scrolling="no"
+                            height="90px">
+                    </iframe>
+                </div>
+            </div>
+            <div id="block-portalsocialnetworksblock" data-url="{{ asset('data/followers.json') }}" class="block col-md-6 block-ign-common block-block-portal-socialnetworks">
+                <h2 class="subfooter__title">{{ "site.subfooter.social_networks.title"|trans }}</h2>
+                <p class="subfooter__desc lead">{{ "site.subfooter.social_networks.description"|trans }}</p>
+                <div class="m-social">
+                    <ul class="m-social__list">
+                        <li class="m-social__item">
+                            <a class="m-social__link external-link" href="https://www.facebook.com/ignfr" target="_blank" title="Facebook IGN">
+                                <span class="m-social__icon icon-facebook" aria-hidden="true"></span>
+                                <p class="m-social__text">
+                                    <span class="sr-only">Facebook IGN : </span>
+                                    <span class="m-social__nb" id="facebook-followers">61K</span>
+                                    {{ "site.subfooter.social_networks.followers"|trans }}
+                                </p>
+                                <span class="icon-external-link" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li class="m-social__item">
+                            <a class="m-social__link external-link" href="https://twitter.com/IGNFrance" target="_blank" title="Twitter IGN">
+                                <span class="m-social__icon icon-twitter" aria-hidden="true"></span>
+                                <p class="m-social__text">
+                                    <span class="sr-only">Twitter IGN : </span>
+                                    <span class="m-social__nb" id="twitter-followers">11K</span>
+                                    {{ "site.subfooter.social_networks.followers"|trans }}
+                                </p>
+                                <span class="icon-external-link" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li class="m-social__item">
+                            <a class="m-social__link external-link" href="https://fr.linkedin.com/company/ignfrance" target="_blank" title="LinkedIn IGN">
+                                <span class="m-social__icon icon-linkedin" aria-hidden="true"></span>
+                                <p class="m-social__text">
+                                    <span class="sr-only">LinkedIn IGN : </span>
+                                    <span class="m-social__nb" id="linkedin-followers">16K</span>
+                                    {{ "site.subfooter.social_networks.followers"|trans }}
+                                </p>
+                                <span class="icon-external-link" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li class="m-social__item">
+                            <a class="m-social__link external-link" href="https://www.instagram.com/ign_france/?hl=fr" target="_blank" title="Instagram IGN">
+                                <span class="m-social__icon icon-instagram" aria-hidden="true"></span>
+                                <p class="m-social__text">
+                                    <span class="sr-only">Instagram IGN : </span>
+                                    <span class="m-social__nb" id="instagram-followers">9K</span>
+                                    {{ "site.subfooter.social_networks.followers"|trans }}
+                                </p>
+                                <span class="icon-external-link" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Bloc adresses et accès rapide #}
+<div class="footer">
+    <div class="container-content">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <h2 class="footer-title">{{ "site.footer.contact_us"|trans }}</h2>
+                <p class="footer-address">
+                    Institut national de l’information géographique et forestière<br>
+                    73 avenue de Paris<br>
+                    94165 SAINT-MANDÉ Cedex<br>
+                    {{ "site.footer.phone"|trans }}
+                </p>
+        
+                <ul class="footer-list">
+                    <li class="footer-list-item">
+                        <a target="_blank" href="http://www.ign.fr/institut/toutes-nos-adresses">
+                            {{ "site.footer.all_addresses"|trans }}
+                        </a>
+                    </li>
+                    <li class="footer-list-item">
+                        <a href="{{ path('plage_contact') }}">
+                            {{ "contact.title"|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <h2 class="footer-title"> {{ "site.footer.portals"|trans }}</h2>         
+                <ul class="footer-list">
+                    <li class="footer-list-item footer-list-item--hasIcon">
+                        <a target="_blank" href="http://www.ign.fr/particuliers">
+                            <span class="footer-list-item__icon icon-user" aria-hidden="true"></span>Portail particuliers
+                        </a>
+                    </li>
+                    <li class="footer-list-item footer-list-item--hasIcon">
+                        <a target="_blank" href="http://www.ign.fr/professionnels">
+                            <span class="footer-list-item__icon icon-pro" aria-hidden="true"></span>Portail professionnels
+                        </a>
+                    </li>
+                    <li class="footer-list-item footer-list-item--hasIcon">
+                        <a target="_blank" href="http://www.ign.fr/carto">
+                            <span class="footer-list-item__icon icon-map" aria-hidden="true"></span>Portail carto
+                        </a>
+                    </li>
+                    <li class="footer-list-item footer-list-item--hasIcon">
+                        <a target="_blank" href="http://www.ign.fr/portail">
+                            <span class="footer-list-item__icon icon-ecosystem" aria-hidden="true"></span>Portail IGN
+                        </a>
+                    </li>
+                    <li class="footer-list-item footer-list-item--hasIcon">
+                        <a target="_blank" href="http://www.ign.fr/institut">
+                            <span class="footer-list-item__icon icon-institut" aria-hidden="true"></span>Institut
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <h2 class="footer-title">Besoin d’aide ?</h2>         
+                <ul class="footer-list">
+                    <li class="footer-list-item">
+                        <a href="{{ path('plage_doc') }}">Consulter notre aide en ligne</a>
+                    </li>
+                    <li class="footer-list-item">
+                        <a href="{{ path('plage_contact') }}">Contactez-nous</a>
+                    </li>
+                    {# <li class="footer-list-item">
+                        <a href="#" class="disabled">Visionner notre démo</a>
+                    </li> #}
+                </ul>
+            </div>
+            <div class="col-md-6 col-lg-3">       
+                <ul class="footer-list">
+                    <li class="footer-list-item">
+                        <a href="https://www.ign.fr/geoplateforme/la-geoplateforme-en-bref" target="_blank">À propos</a>
+                    </li>
+                    <li class="footer-list-item">
+                        <a href="https://github.com/IGNF/geotuileur-site" target="_blank">Code source</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <div class="region region-post-footer">
+        <footer id="block-portalpostfooterblock" class="footer-contentinfo block block-ign-common block-block-portal-postfooter" role="contentinfo">
+            <p class="footer-copyright">&copy; IGN - {{ date()|date('Y') }}</p>
+
+            <ul class="footer-list footer-list--inline">
+                {# Accessibilité #}
+                <li class="footer-list-item">
+                    <a href="{{ path('plage_accessibility') }}">{{ "accessibility.footer_link"|trans }}</a>
+                </li>
+                {# Mentions légales #}
+                <li class="footer-list-item">
+                    <a href="{{ path('plage_about') }}">{{ "about.title"|trans }}</a>
+                </li>
+                {# Conditions générales d'utilisation #}
+                <li class="footer-list-item">
+                    <a href="{{ path('plage_cgu') }}">{{ "cgu.title"|trans }}</a>
+                </li>
+                {# Données à caractère personnel #}
+                <li class="footer-list-item">
+                    <a target="_blank" href="https://www.ign.fr/institut/donnees-caractere-personnel">{{ "site.footer.personal_data"|trans }}</a>
+                </li>
+                {# Cookies #}
+                <li class="footer-list-item">
+                    <a href="{{ path('plage_cookies') }}">{{ "cookies.title"|trans }}</a>
+                </li>
+            </ul>
+
+        </footer>
+    </div>
+
+        
+    </div>
+</div>
+
+<div class="footer-logo">
+    <div class="container-content">
+        <img src="{{ asset('build/img/logo-republique-francaise.svg') }}" alt="République Française - Liberté Egalité Fraternité">
+    </div>
+</div>

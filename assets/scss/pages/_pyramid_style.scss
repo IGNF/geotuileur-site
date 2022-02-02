@@ -1,0 +1,56 @@
+.style {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: .8em;
+
+    #map-target {
+        flex-grow: 1; // map fills remaining space
+        max-height: 800px; // avoid map oversizing when resizing the window
+    }
+
+    #styles {
+        display: flex;
+        flex-direction: column;
+        width: 34rem;
+
+        #block-import {
+            img {
+                width: 24px;
+                height: 24px;
+            }
+            #style-file {
+                display: none;
+            }
+        }
+    }
+
+    .help-block {
+        background-color: $gray-200;
+        margin: 0 1rem;
+        padding: 1rem;
+        i {
+            color: $mainColor;
+        }
+    }
+}
+
+#styles-wrapper {
+    .style-item {
+        display: flex;
+        margin: 0.5em 0 0.5em 0;
+
+        .input-wrapper {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+
+    }
+    .style-item.active {
+        background-color: $brand-light;
+    }
+}
+
+.style-error {
+    color: $text-danger;
+}

@@ -1,0 +1,9 @@
+{% trans_default_domain "PlageWebClient" %}
+
+<div id="file-tree" class="container-content p-0" data-tree="{{ tree|json_encode }}">
+    
+</div>
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('file-tree') }}
+{% endblock %}

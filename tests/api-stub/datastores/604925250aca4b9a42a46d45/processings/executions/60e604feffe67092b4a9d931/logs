@@ -1,0 +1,22 @@
+2021/07/07 19:48:15       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2021/07/07 19:48:15       INFO §USER§ Signal transmis avec succès.
+2021/07/07 19:48:15       INFO §USER§ Récupération des informations sur l'exécution (PROCESSING) d'ID '60e604feffe67092b4a9d931'.
+2021/07/07 19:48:15       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2021/07/07 19:48:16       INFO §USER§ Récupération des informations sur la sortie de l'exécution d'ID '60e604feffe67092b4a9d931'.
+2021/07/07 19:48:16       INFO §USER§ Les informations sur la donnée en sortie de l'exécution ont été récupérées et stockées.
+2021/07/07 19:48:16       INFO §USER§ Validation des paramètres d'exécution.
+2021/07/07 19:48:16       INFO §USER§ Les paramètres d'exécution sont corrects.
+2021/07/07 19:48:17       INFO §USER§ Préparation de la donnée livrée.
+2021/07/07 19:48:17       INFO §USER§ Conversion des fichiers en SQL géoportail.
+2021/07/07 19:48:17       INFO §USER§ Conversion de villes.delete.all en SQL (DELETE FROM villes)
+2021/07/07 19:48:17       INFO §USER§ Conversion de pays.delete.all en SQL (DELETE FROM pays)
+2021/07/07 19:48:17       INFO §USER§ Conversion de villes.insert.csv en SQL (INSERT INTO villes)
+2021/07/07 19:48:17       INFO §USER§ Conversion de pays.insert.csv en SQL (INSERT INTO pays)
+2021/07/07 19:48:18       INFO §USER§ Préparation des sommes de hachage md5 pour la livraison sur le géoportail.
+2021/07/07 19:48:19       INFO §USER§ Livraison déclarée avec succès.
+2021/07/07 19:53:11      DEBUG {"_class":"hudson.model.FreeStyleBuild","actions":[{"_class":"hudson.model.ParametersAction","parameters":[{"_class":"hudson.model.StringParameterValue","name":"PROCESS_ID","value":"324972"}]},{"_class":"hudson.model.CauseAction","causes":[{"_class":"hudson.model.Cause$UserIdCause","shortDescription":"Started by user Thales","userId":"thales","userName":"Thales"}]},{},{"_class":"hudson.plugins.disk_usage.BuildDiskUsageAction"},{}],"artifacts":[],"building":false,"description":null,"displayName":"#20409","duration":1215,"estimatedDuration":1163,"executor":null,"fullDisplayName":"Verification_standard #20409","id":"20409","keepLog":false,"number":20409,"queueId":5732,"result":"SUCCESS","timestamp":1625687586523,"url":"http://entrepot-nginx.int.ignipp.local.oshimae.rie.agri/job/Verification_standard/20409/","builtOn":"slave_p11a","changeSet":{"_class":"hudson.scm.EmptyChangeLogSet","items":[],"kind":null},"culprits":[]}
+2021/07/07 19:54:11      DEBUG {"_class":"hudson.model.FreeStyleBuild","actions":[{"_class":"hudson.model.ParametersAction","parameters":[{"_class":"hudson.model.StringParameterValue","name":"PROCESS_ID","value":"324972"}]},{"_class":"hudson.model.CauseAction","causes":[{"_class":"hudson.model.Cause$UserIdCause","shortDescription":"Started by user Thales","userId":"thales","userName":"Thales"}]},{},{"_class":"hudson.plugins.disk_usage.BuildDiskUsageAction"},{}],"artifacts":[],"building":false,"description":null,"displayName":"#3376","duration":310,"estimatedDuration":310,"executor":null,"fullDisplayName":"Verification_vecteur #3376","id":"3376","keepLog":false,"number":3376,"queueId":5733,"result":"SUCCESS","timestamp":1625687633424,"url":"http://entrepot-nginx.int.ignipp.local.oshimae.rie.agri/job/Verification_vecteur/3376/","builtOn":"publication","changeSet":{"_class":"hudson.scm.EmptyChangeLogSet","items":[],"kind":null},"culprits":[]}
+2021/07/07 19:56:25       INFO §USER§ Suivi de la génération PLAGE_BACASABLE-DONNEES-MONDE_UPDATE sur OSHIMAE
+2021/07/07 19:56:29       INFO §USER§ Suppression de la livraison Entrepôt V1 demandée avec succès.
+2021/07/07 19:56:29       INFO §USER§ Envoi du signal de succès de l'exécution à l'API.
+2021/07/07 19:56:29       INFO §USER§ Signal transmis avec succès.

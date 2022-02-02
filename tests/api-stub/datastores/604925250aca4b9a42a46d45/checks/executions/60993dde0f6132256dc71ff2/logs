@@ -1,0 +1,7 @@
+2021/05/10 14:06:32       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2021/05/10 14:06:32       INFO §USER§ Signal transmis avec succès.
+2021/05/10 14:06:33       INFO §USER§ Récupération des informations sur l'exécution (CHECK) d'ID '60993dde0f6132256dc71ff2'.
+2021/05/10 14:06:34       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2021/05/10 14:06:35       INFO §USER§ Vérification des fichiers SQL d'une livraison
+2021/05/10 14:06:36       INFO §USER§ Envoi du signal d'échec de l'exécution à l'API.
+2021/05/10 14:06:36       INFO §USER§ Signal transmis avec succès.

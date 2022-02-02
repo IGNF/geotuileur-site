@@ -1,0 +1,28 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% macro steps(current_step_num) %}
+    {% set steps = {
+        1 : 'pyramid.steps.upload_data'|trans,
+        2 : 'pyramid.steps.create_pyramid'|trans,
+        3 : 'pyramid.steps.publish'|trans,
+        4 : 'pyramid.steps.share'|trans
+    } %}
+
+    <header class="o-page-title">
+        <div class="o-page-title__inner">
+            <div class="container-content container-content--smaller">
+                <div class="row justify-content-center">
+                    {# @author slafay #}
+                    <ul class="stepper">
+                        {% for i, step_title in steps %}
+                            <li class="step {% if i == current_step_num %} active {% endif %}">
+                                <div class="step-id"><span class="step-id-box text-gray-500 font-weight-bolder {% if i == current_step_num %} text-white {% endif %}">{{ i }}</span></div>
+                                <span class="step-label text-gray-600">{{ step_title }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>    
+{% endmacro %}

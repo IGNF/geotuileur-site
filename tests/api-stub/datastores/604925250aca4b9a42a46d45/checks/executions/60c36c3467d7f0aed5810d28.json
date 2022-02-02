@@ -1,0 +1,17 @@
+{
+    "_id": "60c36c3467d7f0aed5810d28",
+    "status": "SUCCESS",
+    "creation": "2021-06-11T13:59:16.369Z",
+    "upload": {
+        "_id": "60c36c3267d7f012fa810d24",
+        "name": "test upload from bo plage",
+        "type": "VECTOR",
+        "visibility": "PRIVATE"
+    },
+    "check": {
+        "_id": "604924f00aca4b5e43a46d39",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2021-06-11T13:59:17.742Z",
+    "finish": "2021-06-11T13:59:21.408Z"
+}

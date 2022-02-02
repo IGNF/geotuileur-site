@@ -1,0 +1,33 @@
+#tools {
+    display: flex;
+    flex-direction: column; // vertical toolbar
+    justify-content: flex-start;
+    background-color: $gray-800;
+
+    a.btn, div.btn {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: normal;
+        margin: 0;
+        max-width: 6rem;
+        padding: 1rem 0;
+        text-align: center;
+        i {
+            border-radius: 2.2rem;
+            display: inline-block;
+            height: 4.4rem;
+            padding: 1rem;
+            width: 4.4rem;
+            &:hover {
+                background-color: $brand-dark;
+            }
+        }
+        &.active i {
+            background-color: $brand-primary;
+        }
+    }
+
+    div.btn {
+        cursor: auto; // Suppresion du cursor pointer de btn
+    }
+}

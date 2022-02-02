@@ -1,0 +1,28 @@
+{% block flashMessages %}
+    <div id="flash-messages">
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+            <div class="alert alert-warning">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('flash-messages') }}
+{% endblock %}

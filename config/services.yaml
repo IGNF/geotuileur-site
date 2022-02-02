@@ -1,0 +1,90 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    public_path: "%env(resolve:ENCORE_PUBLIC_PATH)%"
+
+    iam_url: "%env(resolve:IAM_URL)%"
+    iam_client_id: "%env(resolve:IAM_CLIENT_ID)%"
+    iam_client_secret: "%env(resolve:IAM_CLIENT_SECRET)%"
+
+    api_plage_url: "%env(resolve:API_PLAGE_URL)%"
+    api_plage_annexe_url: "%env(resolve:API_PLAGE_ANNEXE_URL)%"
+
+    http_proxy: "%env(resolve:HTTP_PROXY)%"
+
+    oneup_uploader_gallery_path: "%kernel.root_dir%/../var/data/uploaded_files"
+
+    support_contact_mail: "%env(resolve:SUPPORT_CONTACT_EMAIL)%"
+    mailer_sender_address: "%env(resolve:MAILER_SENDER_ADDRESS)%"
+
+    api_plage_storages:
+        storage_postgresql: "%env(resolve:API_PLAGE_STORAGE_POSTGRESQL)%"
+        storage_filesystem: "%env(resolve:API_PLAGE_STORAGE_FILESYSTEM)%"
+        storage_s3: "%env(resolve:API_PLAGE_STORAGE_S3)%"
+
+    api_plage_endpoint: "%env(resolve:API_PLAGE_ENDPOINT_TMS)%"
+
+    api_plage_checks:
+        check_standard: "%env(resolve:API_PLAGE_CHECK_STANDARD)%"
+        check_vector: "%env(resolve:API_PLAGE_CHECK_VECTOR)%"
+
+    api_plage_processings:
+        int_vect_files_db: "%env(resolve:API_PLAGE_PROC_INT_VECT_FILES_DB)%"
+        create_vect_pyr: "%env(resolve:API_PLAGE_PROC_CREATE_VECT_PYR)%"
+
+    service_account:
+        username: "%env(resolve:SERVICE_ACCOUNT)%"
+        password: "%env(resolve:SERVICE_ACCOUNT_PASSWORD)%"
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: "../src/"
+        exclude:
+            - "../src/DependencyInjection/"
+            - "../src/Entity/"
+            - "../src/Kernel.php"
+            - "../src/Tests/"
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: "../src/Controller/"
+        tags: ["controller.service_arguments"]
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    app.upload_listener:
+        class: App\Listener\UploadListener
+        #arguments: ["@service_container"]
+        tags:
+            - {
+                  name: kernel.event_listener,
+                  event: oneup_uploader.post_upload.gallery,
+                  method: onUpload,
+              }
+
+    # Commande de mise à jour followers et megamenu
+    App\Command\UpdateEditorialContentCommand:
+        tags:
+            - {
+                  name: "console.command",
+                  command: "plage:update_editorial_content",
+              }
+        bind:
+            $proxy: "%http_proxy%"
+
+    app.logout_success_listener:
+        class: App\Listener\LogoutListener
+
+imports:
+    - { resource: parameters.yaml }

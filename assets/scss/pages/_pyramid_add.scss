@@ -1,0 +1,28 @@
+div.toggle.hidden, button.toggle.hidden {
+    display: none;
+}
+
+span.table-valid {
+    display: none;
+}
+
+.tippecanoe {
+    .o-teaser {
+        cursor: pointer;
+    }
+    
+    .o-teaser__img img.half {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        + img.half {
+            left: auto;
+            right: 0;
+        }
+    }
+
+    .o-teasers__item.active .o-teaser {
+        border: 1px solid $mainColor;
+    }
+}

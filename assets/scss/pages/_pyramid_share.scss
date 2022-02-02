@@ -1,0 +1,118 @@
+.share {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: .8em;
+
+    #map-target {
+        flex-grow: 1; // map fills remaining space
+        max-height: 800px; // avoid map oversizing when resizing the window
+    }
+
+    #links {
+        width: 34rem; // fixed width for sharing links
+
+        h3 {
+            padding: 0 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+    }
+
+    .help-block {
+        background-color: $gray-200;
+        margin: 0 1rem;
+        padding: 1rem;
+        i {
+            color: $mainColor;
+        }
+    }
+    .block-link {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .block-url {
+        position: relative;
+        input {
+            color: $mainColor;
+            padding-right: 4em; 
+        }
+        textarea {
+            font-size: .8em;
+            padding-right: 4em; 
+            resize: none;
+        }
+
+        textarea + .copy-link, select + .copy-link {
+            right: 1.2em; // laisse la place à un scroll
+        }
+    }
+
+    .tool-icon {
+        font-size: 1.5em; 
+        color: white;  
+    }
+
+    .copy-link {
+        i {
+            background-color: $brand-primary;
+            border-radius: 1.1em;
+            display:inline-block;
+            padding: .2em 0;
+            width: 2.2em;
+            height: 2.2em;
+            &:hover {
+                background-color: $brand-dark;
+            }
+        }
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 0.5em;
+        right: 0.2em;
+    }
+}
+
+// div pouvant être couverte par l'avertissement
+.coverable {
+    position: relative;
+}
+
+// Warning popover
+.warning-personalize {
+    background-color: $univers-accent-primary;
+    bottom: 0;
+    left: 0;
+    color: white;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    p {
+        font-weight: bold;
+    }
+    // Pen logo on the left of the text, vertically aligned
+    .warning-logo {
+        bottom: 0;
+        display: flex;
+        left: 1.5em;
+        position: absolute;
+        top: 0;
+        .icons-style-white {
+            margin: auto 0;
+            scale: 1.5;
+        }
+    }
+
+    .title {
+        min-height: 1em;
+        span.close-warning:hover {
+            cursor: pointer;
+        }
+    }
+}

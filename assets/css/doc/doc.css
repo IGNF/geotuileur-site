@@ -1,0 +1,16 @@
+:root {
+    --theme-color: #3993f3;
+}
+
+/* overrides default vue.css ellipsis for menu items */
+.sidebar ul li a {
+    text-overflow: unset;
+    white-space: normal;
+}
+
+/* highlights active page the same way as active chapters in a page */
+.sidebar ul li p.active>a {
+    border-right: 2px solid;
+    color: var(--theme-color,#42b983);
+    font-weight: 600;
+}

@@ -1,0 +1,92 @@
+// Custom icons (not included in Design System
+[class*="icons-"]:before {
+    display: inline-flex;
+}
+
+.icons-x10:before {
+    scale: 10;
+}
+
+// Transforme en bleu primary au survol
+// Formule trouvée grâce à : https://codepen.io/sosuke/pen/Pjoqqp (target color : #3993F3)
+.btn-icon--header:hover [class*="icons-"]:before {
+    filter: brightness(0) invert(47%) sepia(62%) saturate(832%) hue-rotate(178deg) brightness(99%) contrast(93%);
+}
+
+// Icons for postgresql databases depending on status
+.icons-data:before {
+    content: url("../../img/dashboard/db.svg");
+}
+.icons-data-generated:before {
+    content: url("../../img/dashboard/db-generated.svg");
+}
+.icons-data-unstable:before {
+    content: url("../../img/dashboard/db-unstable.svg");
+}
+
+// Icons for tiles depending on status
+.icons-tiles:before {
+    content: url("../../img/dashboard/tiles.svg");
+}
+.icons-tiles-generated:before {
+    content: url("../../img/dashboard/tiles-generated.svg");
+}
+.icons-tiles-unstable:before {
+    content: url("../../img/dashboard/tiles-unstable.svg");
+}
+
+// Icons for processing data
+.icons-generating:before {
+    content: url("../../img/dashboard/generating.svg");
+}
+
+// Icon for upload, checks and integration success
+.icons-upload-success:before {
+    content: url("../../img/icons/Done.svg");
+}
+
+// Icon for upload, checks or integration failure
+.icons-upload-failure:before {
+    content: url("../../img/icons/KO.svg");
+}
+
+// Icons for deleting data
+.icons-trash:before {
+    content: url("../../img/icons/Supprimer.svg");
+}
+
+// Icons for alerts
+.icons-alert:before {
+    content: url("../../img/icons/Description.svg");
+}
+
+// Icons for logged-users
+.icons-logged-user:before {
+    content: url("../../img/icons/User.svg");
+    scale: 1.3; // same size as icon-simple-user when used in header
+}
+
+// Icon for copying url and code
+.icons-link-white:before {
+    content: url("../../img/icons/Link.svg");
+    filter: brightness(0) invert(100%);
+}
+
+// Icons for sharing and editing styles
+.icons-share-white:before {
+    content: url("../../img/icons/Diffuser.svg");
+    filter: brightness(0) invert(100%);
+}
+
+.icons-style-white:before {
+    content: url("../../img/icons/Personnaliser.svg");
+    filter: brightness(0) invert(100%);
+}
+
+.icons-info::before {
+    content: url("../../img/icons/Description.svg");
+}
+
+.icons-close::before {
+    content: url("../../img/icons/Close.svg");
+}

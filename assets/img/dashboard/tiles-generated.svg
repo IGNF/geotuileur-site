@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg37"
+   sodipodi:docname="tiles-generated.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview39"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     width="48px"
+     lock-margins="true"
+     scale-x="1"
+     inkscape:zoom="16.916667"
+     inkscape:cx="16.935961"
+     inkscape:cy="20.068966"
+     inkscape:window-width="1600"
+     inkscape:window-height="1201"
+     inkscape:window-x="2391"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="02.Icons/Tuile-ok">
+    <inkscape:grid
+       type="xygrid"
+       id="grid121" />
+  </sodipodi:namedview>
+  <title
+     id="title25">02.Icons/Tuile-ok</title>
+  <defs
+     id="defs28">
+    <path
+       d="m 16.493718,18.006282 c -0.341708,-0.341709 -0.895728,-0.341709 -1.237436,0 -0.341709,0.341708 -0.341709,0.895728 0,1.237436 l 1.75,1.75 c 0.341708,0.341709 0.895728,0.341709 1.237436,0 l 3.5,-3.5 c 0.341709,-0.341708 0.341709,-0.895728 0,-1.237436 -0.341708,-0.341709 -0.895728,-0.341709 -1.237436,0 L 17.625,19.137563 Z"
+       id="path-1" />
+  </defs>
+  <g
+     id="02.Icons/Tuile-ok"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd">
+    <mask
+       id="mask-2"
+       fill="#ffffff">
+      <use
+         xlink:href="#path-1"
+         id="use32"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
+    </mask>
+    <path
+       d="m 15.086557,27.725007 c 0.202082,-0.404164 0.693542,-0.567984 1.097706,-0.365902 v 0 l 7.815916,3.907958 7.815916,-3.907958 c 0.404165,-0.202082 0.895624,-0.03826 1.097707,0.365902 0.202082,0.404164 0.03826,0.895624 -0.365903,1.097706 v 0 l -8.181818,4.090909 c -0.23034,0.115171 -0.501463,0.115171 -0.731804,0 v 0 l -8.181818,-4.090909 c -0.404164,-0.202082 -0.567984,-0.693542 -0.365902,-1.097706 z m 0,-4.090909 c 0.202082,-0.404164 0.693542,-0.567984 1.097706,-0.365902 v 0 l 7.815916,3.907958 7.815916,-3.907958 c 0.404165,-0.202082 0.895624,-0.03826 1.097707,0.365902 0.202082,0.404164 0.03826,0.895624 -0.365903,1.097706 v 0 l -8.181818,4.090909 c -0.23034,0.115171 -0.501463,0.115171 -0.731804,0 v 0 l -8.181818,-4.090909 c -0.404164,-0.202082 -0.567984,-0.693542 -0.365902,-1.097706 z m 9.279524,-8.54772 8.181818,4.090909 c 0.60304,0.30152 0.60304,1.162088 0,1.463608 l -8.181818,4.090909 c -0.23034,0.11517 -0.501463,0.11517 -0.731804,0 l -8.181818,-4.090909 c -0.60304,-0.30152 -0.60304,-1.162088 0,-1.463608 l 8.181818,-4.090909 c 0.230341,-0.115171 0.501464,-0.115171 0.731804,0 z m -0.365902,1.646559 -6.352308,3.176154 6.352308,3.176154 6.352308,-3.176154 z"
+       id="Combined-Shape"
+       fill="#091625" />
+    <rect
+       id="Rectangle"
+       fill="#ffffff"
+       x="25"
+       y="25"
+       width="11"
+       height="11"
+       rx="5.5" />
+    <use
+       id="Shape"
+       fill="#3993f3"
+       xlink:href="#path-1"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%"
+       transform="translate(12,12)" />
+  </g>
+  <metadata
+     id="metadata297">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>02.Icons/Tuile-ok</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

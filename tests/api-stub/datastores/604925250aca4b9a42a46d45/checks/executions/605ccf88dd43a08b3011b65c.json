@@ -1,0 +1,17 @@
+{
+    "_id": "605ccf88dd43a08b3011b65c",
+    "status": "SUCCESS",
+    "creation": "2021-03-25T17:59:36.640Z",
+    "upload": {
+        "_id": "605ccf8868bcc9e112dd2437",
+        "name": "Paysdumonde_pqgis_2021_03_25-18_59_36",
+        "type": "VECTOR",
+        "visibility": "PRIVATE"
+    },
+    "check": {
+        "_id": "604924f00aca4b5e43a46d39",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2021-03-25T18:00:26.527Z",
+    "finish": "2021-03-25T18:00:30.552Z"
+}

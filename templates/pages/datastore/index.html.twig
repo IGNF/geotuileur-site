@@ -1,0 +1,62 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'datastore.index.title'| trans %}
+{% set bodyclass = 'datastore-index' %}
+{% block title %}{{ pageTitle ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+        <div class="container-content">
+            <div class="o-mea">
+                <div class="mea-container">
+                    {% for datastore in datastores %}
+                        <div class="mea-item">
+                            <a href="{{ path('plage_datastore_view', { datastoreId: datastore._id }) }}">
+                                <img class="mea-img" src="{{ asset('build/img/datastore/Workspace@2x.png') }}"/>
+                                <h3>{{ 'datastore.index.access' | trans({'%name%': datastore.name}) }}</h3>
+                                <p>
+                                    <span class="btn btn--plain btn--accent">{{ 'datastore.index.access_action' | trans }}</span>
+                                </p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    {% set target = '' %}
+                    {% if datastoreBAS._id != -1 %}
+                        {% set target = path('plage_datastore_view', { datastoreId: datastoreBAS._id }) %}
+                    {% elseif serviceAccount is not empty %}
+                        {% set target = path('plage_datastore_create_sandbox') %}
+                    {% endif %}
+                    {% if target is not empty %}
+                        <div class="mea-item">
+                            <a href="{{ target }}">
+                                <img class="mea-img" src="{{ asset('build/img/datastore/bac-a-sable@2x.png') }}"/>
+                                <h3>{{ 'datastore.index.access_test' | trans }}</h3>
+                                <p>
+                                    <span class="btn btn--plain btn--accent">{{ 'datastore.index.access_test_action' | trans }}</span>
+                                </p>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {# Bloc demande d'ajout #}
+        <div class="container-content container-content--smaller">
+            <div class="request-datastore-container">
+                <p>
+                    <a href="{{ path('plage_contact') }}">
+                        <i class="icon-plus"></i>&nbsp;
+                        {{ 'datastore.index.contact' | trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}

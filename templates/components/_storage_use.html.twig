@@ -1,0 +1,23 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{# Draw a progress bar to show the storage use and display the percentage value #}
+{% macro progress_bar(use, quota, round = 1, height = '20px') %}
+    {% set progress = (use / quota * 100)|round(round,'common') %}
+    {% set class = 'progress-bar' %}
+    {% if progress >= 75 %}
+        {% set class = class ~ ' ' ~ 'bg-danger' %}
+    {% else %}
+        {% set class = class ~ ' ' ~ 'bg-success' %}
+    {% endif %}
+
+    <div class="progress" style="height: {{ height }}">
+        <div class="{{ class }}"
+             role="progressbar"
+             style="width: {{ progress }}%"
+             aria-valuenow="{{ use }}"
+             aria-valuemin="0"
+             aria-valuemax="{{ quota }}">
+            {{ progress }}%
+        </div>
+    </div>
+{% endmacro %}

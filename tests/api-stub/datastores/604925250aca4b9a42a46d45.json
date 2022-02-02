@@ -1,0 +1,41 @@
+{
+    "storages": {
+        "file": {
+            "standard": {
+                "use": 0,
+                "quota": 1000000000
+            },
+            "fast": {
+                "use": 0,
+                "quota": 0
+            }
+        },
+        "database": {
+            "standard": {
+                "use": 98304,
+                "quota": 1000000000
+            },
+            "fast": {
+                "use": 0,
+                "quota": 0
+            }
+        },
+        "uploads": {
+            "use": 4405406,
+            "quota": 1000000000
+        },
+        "annexes": {
+            "use": 0,
+            "quota": 1000000000
+        }
+    },
+    "active": true,
+    "_id": "604925250aca4b9a42a46d45",
+    "community": {
+        "public": false,
+        "_id": "604925250aca4b19c8a46d43",
+        "contact": "maria.ibarra@ign.fr"
+    },
+    "name": "Bac \u00e0 sable",
+    "technical_name": "bacasable"
+}

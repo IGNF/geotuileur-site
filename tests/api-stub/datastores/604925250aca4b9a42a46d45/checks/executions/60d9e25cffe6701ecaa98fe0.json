@@ -1,0 +1,17 @@
+{
+    "_id": "60d9e25cffe6701ecaa98fe0",
+    "status": "SUCCESS",
+    "creation": "2021-06-28T14:53:16.753Z",
+    "upload": {
+        "_id": "60d9e25bffe67044faa98fdd",
+        "name": "Paysdumonde_bo_plage_2021_06_28_14_53_06",
+        "type": "VECTOR",
+        "visibility": "PRIVATE"
+    },
+    "check": {
+        "_id": "604924f00aca4b5e43a46d39",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2021-06-28T14:53:17.733Z",
+    "finish": "2021-06-28T14:53:20.695Z"
+}

@@ -1,0 +1,24 @@
+<header class="o-page-title {% if titleBackground is defined %}o-page-title--bg{% endif %}">
+    <div class="o-page-title__inner">
+        <div class="container-content container-content--smaller">
+            <h1>{{ pageTitle }}</h1>
+            {% if titleLeadContent is defined %}
+                <p class="lead">{{ titleLeadContent }}</p>
+            {% endif %}
+            {% if titleBtn is defined %}
+                <div class="btn btn-active-effect">
+                    <a href="{{ titleBtn.target }}"
+                        target="_self"
+                        class="btn btn-active-effect btn-width--lg btn--plain btn--accent">
+                        {{ titleBtn.text }}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        {% if titleBackground is defined %}
+            <div class="m-media-background">
+                <img src="{{ titleBackground }}" alt=""/>
+            </div>
+        {% endif %}
+    </div>
+</header>

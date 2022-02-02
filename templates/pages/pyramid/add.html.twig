@@ -1,0 +1,185 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set hasBreadcrumb = 0 %}
+{% set step_num = 2 %}
+
+{% block title %} {{ 'pyramid.form_add.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
+
+{% set pageTitle = 'pyramid.form_add.heading'| trans %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("pyramid-add") }}
+{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_workspace_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+    <div class="container-content">
+
+        <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
+        {{ form_start(form, {'attr': {'id': 'form_pyramid_add'}}) }}
+
+        {# Name, zooms #}        
+        <div class="generate-panel container-content--smaller" id="part-1">
+            <h2 class="text-center">{{ 'pyramid.form_add.heading'| trans }}</h2>
+             <div class="form-group">
+                <div class="float-target-parent">
+                    {{ form_label(form.pyramid_name) }}
+                    {{ form_widget(form.pyramid_name) }}
+                </div>
+                {{ form_errors(form.pyramid_name) }}
+                <p class="description">
+                    <i class="icon-question"></i>&nbsp;
+                    {{ 'pyramid.form_add.name_help'| trans }}
+                </p>
+            </div>
+            
+            <label>{{ 'pyramid.form_add.min_and_max_zoom' | trans }}</label>
+            <div class="form-group mb-0" id="main-zoom-levels" data-toplevelmin={{ topLevelMin }} data-bottomlevelmax={{ bottomLevelMax }}></div>
+            <p class="description">
+                <i class="icon-question"></i>&nbsp;
+                {{ 'pyramid.form_add.zoom_levels_help'| trans({'%url%': path('plage_doc')~'#/generate?id=name-and-zoom-levels' }) | raw }}
+            </p>
+            <p class="wysiwyg clearfix">
+                <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-2">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>
+            </p>
+        </div>
+
+        {% set numTables = form.composition.children|length %}
+        {% set num = 0 %}
+
+        {# Composition #}
+        <div class="generate-panel hidden container-content--smaller" id="part-2" data-numtables={{ numTables }}>
+            <h2 class="text-center">{{ 'pyramid.form_add.compose_heading'| trans }}</h2>
+            {{ form_label(form.composition) }}
+            {% for table in form.composition.children %}
+                <div id={{ "accordion-map" ~ num }} class="mb-1">
+                    <div class="card" id="card-map">
+                        <h3 class="card-title o-accordion__title mb-0">
+                            <a class="o-accordion__header" role="tab" data-toggle="collapse" 
+                                data-parent={{ "#accordion-map" ~ num }} 
+                                href={{ "#collapse-map"~ num }}>
+                                {{ table.vars.name }}
+                                {% if numTables > 1 %}
+                                    <span class="table-valid" id={{ "table-valid" ~ num }}>
+                                        <i class="icon-check-circle text-success"></i>
+                                        <span class="font-weight-light small" id={{ "table-infos" ~ num }}></span>
+                                    </span>
+                                {% endif %}
+                            </a>
+                        </h3>
+                        <div id={{ "collapse-map"~ num }} class="o-accordion__panel card-collapse collapse" data-num={{ num }}>
+                            <div class="card-body">
+                                {% if numTables > 1 %}
+                                    <label>{{ 'pyramid.form_add.min_and_max_zoom'|trans }}</label>
+                                    <div class="form-group zoom-levels" id={{ "zoom-levels" ~  num }} data-table={{ table.vars.name }} data-num={{ num }}></div>
+                                {% endif %}
+                                {% set attributes = table.children.attributes.children %}
+                                {% set columns = attributes|keys %}
+                                {% if columns is not empty %}
+                                    <p class="font-weight-bold mb-0">{{ 'pyramid.form_add.attributes'|trans }}</p>
+                                    <p class="description"><i class="icon-question"></i>&nbsp;{{ 'pyramid.form_add.attributes_help' | trans({ '%url%': path('plage_doc')~'#/generate?id=composition' }) | raw }}</p>
+                                    {% for index, columnName in columns %}
+                                        {% if index is even %}
+                                        <div class="row">
+                                            <div class="col-md-6">{{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}</div>
+                                            {% if index == columns|length - 1 %}</div>{% endif %}
+                                        {% else %}
+                                            <div class="col-md-6">{{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}</div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if numTables > 1 %}
+                                        <p class="text-center mb-0 mt-2">
+                                            <button class="btn btn-width--lg btn--plain btn--primary next-table" data-num={{ num }}>{{ 'pyramid.form_add.next_table'| trans }}</button>
+                                        </p>
+                                    {% endif %}    
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% set num = num + 1 %}
+            {% endfor %}
+            <p class="wysiwyg clearfix">
+                <a class="float-left switch-panel" href="#part-1"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</i></a>
+                <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-3">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>
+            </p>
+        </div>
+
+        {# Tippecanoe parameters #}
+        <div class="generate-panel hidden" id="part-3">
+            <h2 class="text-center">{{ 'pyramid.form_add.generalize_heading'| trans }}</h2>
+            <div class="wysiwyg">
+                <p>{{ 'pyramid.form_add.generalize_lead'| trans({'%url%': path('plage_doc')~'#/generate?id=generalisation' }) | raw }}</p>
+            </div>
+            {% set _tippecanoes = tippecanoes|json_encode()|raw %}
+            <div class="form-group">
+                {{ form_label(form.tippecanoe) }}
+                <div class="tippecanoe view-content o-teasers__grid o-teasers--3by3" id="tippecanoe-wrapper" data-tippecanoes="{{ _tippecanoes }}"></div>
+            </div>
+            <p class="wysiwyg clearfix">
+                <a class="float-left switch-panel" href="#part-2"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</a>
+                <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-4">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>
+            </p>
+        </div>
+
+        {# Echantillon #}
+        <div class="generate-panel hidden container-content--smaller" id="part-4">
+            <h2 class="text-center">{{ 'pyramid.form_add.sample_heading'| trans }}</h2>
+            <p>{{ 'pyramid.form_add.explain_generate_sample'|trans({'%URL%': path('plage_doc')~"#/generate?id=echantillon"})|raw }}</p>
+            
+            {{ form_widget(form.sample) }}
+            <button class="btn btn--primary btn--ghost" id="define-bbox" style="display: none;">
+                {{ 'pyramid.form_add.create_sample'|trans }}
+            </button>
+
+            <p class="wysiwyg clearfix">
+                <a class="float-left switch-panel" href="#part-3"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</a>
+                {# End form with submit button #}
+                {{ form_widget(form.submit) }}
+            </p>
+        </div>
+
+        {{ form_end(form) }}
+
+        <div class="wysiwyg">
+            <p class="text-center">
+                <a href="{{ path('plage_datastore_view', { datastoreId: datastoreId }) }}">
+                    Annuler et revenir au tableau de bord
+                </a>     
+            </p>                   
+        </div> 
+    </div>
+
+    {# Pour la selection de la bbox de l'echantillon #}
+    <div id="modal-sample" class="bootbox modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mx-auto">{{ 'pyramid.form_add.bbox_title'|trans }}</h3>
+                </div>
+                <div class="modal-body">
+                    <div id="sample-map"></div>
+                    <p>{{ 'pyramid.form_add.center_zone'|trans }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="sample-cancel" class="btn btn--ghost btn--gray">{{ 'cancel'|trans }}</button>
+                    <button id="sample-ok" class="btn btn--plain btn--primary">{{ 'valid'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('pyramid-add') }}
+{% endblock %}

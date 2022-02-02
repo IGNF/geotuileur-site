@@ -1,0 +1,37 @@
+.btn {
+    margin: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+}
+
+.btn--primary,
+.btn--primary:hover {
+    color: $brand-primary;
+    border-color: $brand-primary;
+}
+
+.btn--secondary,
+.btn--secondary:hover {
+    color: $brand-secondary;
+    border-color: $brand-secondary;
+}
+
+.btn--warning,
+.btn--warning:hover {
+    color: $brand-warning;
+    border-color: $brand-warning;
+}
+
+.btn--danger,
+.btn--danger:hover {
+    color: $brand-danger;
+    border-color: $brand-danger;
+}
+
+.btn--gray,
+.btn--gray:hover {
+    color: $gray-600;
+    border-color: $gray-600;
+}

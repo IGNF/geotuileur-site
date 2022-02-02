@@ -1,0 +1,48 @@
+{# Charte graphique 2020 pour les formulaires #}
+
+{#
+    Surcharge bootstrap_4_layout.html.twig
+    Voir : https://github.com/symfony/symfony/blob/4.4/src/Symfony/Bridge/Twig/Resources/views/Form/bootstrap_4_layout.html.twig
+#}
+
+{% use "bootstrap_4_layout.html.twig" %}
+
+{# Insertion des erreurs après l'input plutôt que dans le label #}
+{# Attention les erreurs ne sont plus montrées par défaut dans les form_row #}
+{% block form_label_errors %} {# rien #} {% endblock form_label_errors %}
+
+{# Léger changement cosmétique sur les classes #}
+{% block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <div class="{% if form is not rootform %}invalid-feedback{% else %}alert alert-danger{% endif %}">
+            {%- for error in errors -%}
+                <span class="d-block">
+                    <span class="form-error-message">{{ error.message }}</span>
+                </span>
+            {%- endfor -%}
+        </div>
+    {%- endif %}
+{%- endblock form_errors %}
+
+{# Bouton submit : ajoute les classes btn--plain btn--primary (si pas explicitement ajoutée dans le FormType) #}
+{% block submit_widget -%}
+    {%- set attr = attr|merge({class: (attr.class|default('btn--plain btn--primary'))|trim}) -%}
+    {{- parent() -}}
+{%- endblock submit_widget %}
+
+{# placement de l'erreur en dehors du label, sous le champ #}
+{% block form_row -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <{{ element|default('div') }}{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_errors(form) -}} {# ajout #}
+        {{- form_help(form) -}}
+    </{{ element|default('div') }}>
+{%- endblock form_row %}

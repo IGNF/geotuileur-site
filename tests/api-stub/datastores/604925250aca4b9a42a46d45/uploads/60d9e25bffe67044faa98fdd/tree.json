@@ -1,0 +1,129 @@
+[
+    {
+        "name": "data",
+        "children": [
+            {
+                "name": "suivi_covid.cpg",
+                "size": 5,
+                "extension": ".cpg",
+                "type": "file"
+            },
+            {
+                "name": "suivi_covid.dbf",
+                "size": 1154,
+                "extension": ".dbf",
+                "type": "file"
+            },
+            {
+                "name": "suivi_covid.prj",
+                "size": 143,
+                "extension": ".prj",
+                "type": "file"
+            },
+            {
+                "name": "suivi_covid.shp",
+                "size": 36676,
+                "extension": ".shp",
+                "type": "file"
+            },
+            {
+                "name": "suivi_covid.shx",
+                "size": 132,
+                "extension": ".shx",
+                "type": "file"
+            },
+            {
+                "name": "suivi_deconfinement.cpg",
+                "size": 5,
+                "extension": ".cpg",
+                "type": "file"
+            },
+            {
+                "name": "suivi_deconfinement.dbf",
+                "size": 5938,
+                "extension": ".dbf",
+                "type": "file"
+            },
+            {
+                "name": "suivi_deconfinement.prj",
+                "size": 143,
+                "extension": ".prj",
+                "type": "file"
+            },
+            {
+                "name": "suivi_deconfinement.shp",
+                "size": 6660,
+                "extension": ".shp",
+                "type": "file"
+            },
+            {
+                "name": "suivi_deconfinement.shx",
+                "size": 132,
+                "extension": ".shx",
+                "type": "file"
+            }
+        ],
+        "size": 50988,
+        "type": "directory"
+    },
+    {
+        "name": "suivi_covid.cpg.md5",
+        "size": 53,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_covid.dbf.md5",
+        "size": 53,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_covid.prj.md5",
+        "size": 53,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_covid.shp.md5",
+        "size": 53,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_covid.shx.md5",
+        "size": 53,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_deconfinement.cpg.md5",
+        "size": 61,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_deconfinement.dbf.md5",
+        "size": 61,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_deconfinement.prj.md5",
+        "size": 61,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_deconfinement.shp.md5",
+        "size": 61,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "suivi_deconfinement.shx.md5",
+        "size": 61,
+        "extension": ".md5",
+        "type": "file"
+    }
+]

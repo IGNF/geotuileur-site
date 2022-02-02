@@ -1,0 +1,46 @@
+[
+    {
+        "name": "annexes",
+        "children": [],
+        "size": 0,
+        "type": "directory"
+    },
+    {
+        "name": "data",
+        "children": [
+            {
+                "name": "pays.delete.all",
+                "size": 0,
+                "extension": ".all",
+                "type": "file"
+            },
+            {
+                "name": "pays.insert.csv",
+                "size": 343110,
+                "extension": ".csv",
+                "type": "file"
+            }
+        ],
+        "size": 343110,
+        "type": "directory"
+    },
+    {
+        "name": "metadata",
+        "children": [
+            {
+                "name": "INSPIRE",
+                "children": [],
+                "size": 0,
+                "type": "directory"
+            },
+            {
+                "name": "ISOAP",
+                "children": [],
+                "size": 0,
+                "type": "directory"
+            }
+        ],
+        "size": 0,
+        "type": "directory"
+    }
+]

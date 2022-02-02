@@ -1,0 +1,34 @@
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0;
+    margin: 1rem 0 1.5rem;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: $brand-primary;
+    border-color: $brand-primary;
+}
+
+.active .page-link {
+    font-weight: bold;
+}
+.page-link {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-width: 4.5rem;
+    height: 4.5rem;
+    padding: 0.5rem 0.75rem;
+    margin-left: 0;
+    line-height: 1.25;
+    color: $brand-primary;
+    background-color: #fff;
+}

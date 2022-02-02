@@ -1,0 +1,44 @@
+.datastore-index {
+    .mea-container {
+        margin-bottom: 3rem;
+    }
+    .mea-item {
+        background-color: $gray-100;
+        padding: 5rem 2.3rem 5.5rem;
+        a {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            p:last-of-type { // align action button at the bottom of the mea-item
+                margin-bottom: 0;
+                margin-top: auto;
+            }
+        }
+    }
+}
+
+.request-datastore-container {
+    a {
+        border: dotted;
+        border-color: $brand-secondary;
+        color: $gray-900;
+        display: block;
+        font-weight: bold;
+        padding: 3rem;
+        text-align: center;
+
+        i {
+            color: $brand-secondary;
+            padding-right: 2rem;
+        }
+
+        &:hover {
+            border-color: $brand-primary;
+            i {
+                color: $brand-primary;
+            }
+        }
+    }
+}

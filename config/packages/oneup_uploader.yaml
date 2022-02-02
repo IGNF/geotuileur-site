@@ -1,0 +1,7 @@
+# Read the documentation: https://github.com/1up-lab/OneupUploaderBundle/blob/master/Resources/doc/index.md
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: blueimp
+            storage:
+                directory: "%oneup_uploader_gallery_path%"
