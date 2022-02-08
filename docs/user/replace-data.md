@@ -2,9 +2,9 @@
 
 !> Le Géotuileur vous permet de mettre à jour un flux de données en remplaçant l'intégralité de son contenu.
 
-Cette partie met en évidence le principe de mise à jour d’un flux (ajout de nouvelles données, mise à jour des données d’une base, etc...). Pour cela, il faut se rendre sur le tableau de bord de votre espace de travail, et cliquer sur “Mettre à jour un flux” :
+Cette partie met en évidence le principe de mise à jour d’un flux (ajout de nouvelles données, mise à jour des données d’une base, etc...). Pour cela, il faut se rendre sur le tableau de bord de votre espace de travail, et cliquer sur **Mettre à jour un flux**.
 
-![](./img/replace-data/actualiser_flux.jpg)
+![Mettre à jour un flux](./img/replace-data/mettre-a-jour.png)
 
 Choisissez dans la liste déroulante de vos flux, lequel vous souhaitez mettre à jour et laissez vous guider.
 

@@ -3,7 +3,7 @@
 A partir du tableau de bord de votre espace de travail, commencez le dépôt de
 fichier en cliquant sur **Créer un nouveau flux**.
 
-![](./img/upload/mon_espace_de_travail.jpg)
+![Créer un nouveau flux](./img/upload/start.png)
 
 ## Préparer un fichier de données
 
@@ -31,7 +31,7 @@ Quel que soit le format de votre fichier, il est recommandé de le compresser da
 
 ## Téléversez le fichier de données :id=upload
 
-![](./img/upload/depot_donnees.jpg)
+![Téléverser un fichier](./img/upload/upload-file.png)
 
 Modifiez le nom de votre nouvelle donnée si celui-ci ne vous convient pas. Ce
 nom n'est pas celui que verront les utilisateurs de votre flux mais un
@@ -47,7 +47,7 @@ machine et les transformer dans un format compatible avec le Géotuileur pour po
 
 Le Géotuileur détecte automatiquement la projection de vos données. Mais il peut arriver que cette détection soit erronnée. Vérifiez soigneusement la projection avant de passer à l'étape suivante.
 
-![](./img/upload/projections.jpg)
+![Vérifier la projection](./img/upload/projection.png)
 
 ?> En cartographie, une projection est l'ensemble des techniques permettant de représenter la surface de la Terre dans
 son ensemble ou en partie sur la surface plane d’une carte. D’un point de vue

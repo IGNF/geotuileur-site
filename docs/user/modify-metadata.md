@@ -7,9 +7,8 @@ votre flux.
 Choisissez **Modifier les informations de publication**
 
 Vous pouvez modifier toutes les informations de votre flux (titre, description,
-mots clés...), y compris son nom technique.
+mots clés...) de la même façon que [lors de la première publication du flux](publish.md).
 
-Mais attention, changer ce nom technique modifie l'URL de votre flux. Si vous
+!> Vous pouvez même modifier le nom technique de votre flux. Mais attention, changer ce nom technique modifie l'URL de votre flux. Si vous
 l'avez déjà partagé, vos utilisateurs n'y auront plus accès.
 
-![](./img/workspace/mes_flux.jpg)

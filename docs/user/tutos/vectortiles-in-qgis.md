@@ -1,12 +1,12 @@
 # Utiliser un flux de tuiles vectorielles dans QGIS
 
-Pour exploiter une URL dans le logiciel QGIS il faut se rendre dans le menu **Couche**, puis sur **Ajouter une couche** et **Ajouter une couche de tuile vectorielle**.
+Pour exploiter une URL dans le logiciel QGIS il faut se rendre dans le menu **Couche**, puis sur **Ajouter une couche** et **Ajouter une couche de tuiles vectorielles**.
 
-![](../img/tutos/vectortiles-in-qgis/ajouter_tuile_vectorielle.jpg)
+![Ajouter une couche de tuiles vectorielles](../img/tutos/vectortiles-in-qgis/ajouter_tuile_vectorielle.jpg)
 
 Ensuite, cliquez sur **Nouveau** et **Créer une connexion générique**.
 
-![](../img/tutos/vectortiles-in-qgis/creer_connexion.jpg)
+![Créer une connexion](../img/tutos/vectortiles-in-qgis/creer_connexion.jpg)
 
 Remplissez les champs indiqués :
 

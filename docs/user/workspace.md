@@ -33,7 +33,7 @@ Le tableau de bord de votre espace de travail permet en un seul coup d'oeil de v
 2. En cours
 3. Mes flux
 
-![](./img/workspace/mes_flux.jpg)
+
 
 ### Actions à terminer
 
@@ -50,17 +50,23 @@ pas encore disponibles sous forme de flux. Il peut s'agir :
 
 * de pyramides de tuiles vectorielles dont la génération à échoué : vous pouvez alors prendre connaissance du rapport avant de supprimer les données (recommandé pour ne pas remplir votre espace de travail inutilement)
 
+![Actions à terminer](./img/workspace/a-terminer.png)
+
 ### En cours
 
 Vous trouverez dans cette partie la liste des traitements qui sont en cours lorsque ceux-ci sont long. C'est notamment le cas de la génération des tuiles vectorielles. Sur des données volumineuses ou sur une grande étendue géographique, le traitement peut prendre plusieurs dizaines de minutes.
 
 La seule interaction possible avec ces éléments est d'en voir l'avancement.
 
+![En cours](./img/workspace/en-cours.png)
+
 ### Mes flux
 
 Cette liste détaille tous les flux qui ont été publiés à partir de cet espace de travail. Ces flux sont disponibles publiquement et sont accompagnés de métadonnées et optionnellement de styles.
 
 Vous pouvez dans cette liste les consulter pour les partager (action principale), en modifier les métadonnées et les styles, les dépublier voire les supprimer totalement ou entamer un processus de mise à jour.
+
+![Mes flux](./img/workspace/mes-flux.png)
 
 ## La liste des membres
 

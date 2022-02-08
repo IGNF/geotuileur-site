@@ -13,8 +13,6 @@ Modifiez le nom de votre pyramide de tuiles si le nom proposé par défaut ne vo
 convien pas. Comme pour l'étape de dépôt des données, c'est un nom technique qui
 vous permettra de retrouver votre travail en cours.
 
-![](./img/generate/configuration_service_tuilage.jpg)
-
 Choisissez ensuite sur quelle plage d'échelles vos données vont être visibles.
 Deux vignettes cartographiques permettent de vous rendre compte de la plus
 petite échelle (niveau de zoom minimum) et de la plus grande échelle (niveau de
@@ -27,7 +25,7 @@ directement liés aux nombres de tuiles qu'elle va contenir. Il est donc
 important de trouver un compromis et de ne pas demander la génération de tuiles
 à une échelle inutilement précise.
 
-![](./img/generate/niveaux_zoom.jpg)
+![Nommez et choisissez les niveaux de zoom](./img/generate/nom-zooms.png)
 
 Il faut bien comprendre que les niveaux de zoom dépendent de l’usage et de
 l’étendue de la zone. Par exemple, si l’échelle de travail est départementale,
@@ -44,11 +42,12 @@ Notez que plus vous conservez d'attributs, plus le poids de vos tuiles sera éle
 
 C'est pour ces deux raisons qu'il n'est pas proposé de cocher tous les attributs pour vous inciter à choisir avec soin.
 
-![](./img/generate/attributs_table.jpg)
+![Cochez les attributs](./img/generate/choisir-attributs.png)
 
 !> Attention, il n'est pas possible de renommer vos tables et vos attributs. Les noms visibles sont ceux présents dans les fichiers que vous avez téléversés.
 Si vous voulez modifier ces noms vous devrez recharger un nouveau fichier de données. Mais les noms ne peuvent toutefois contenir que des caractères alphanumériques, des tirets ou des underscores mais pas d'espaces.
 
+Si vos donnez comportent plusieurs tables, c'est également à ce niveau que vous pouvez choisir table par table, à quels niveaux de la pyramide elles doivent être utilisées. Par exemple privilégiez des données précises à grande échelle et des données imprécises ou déjà généralisées à petite échelle.
 
 ## Choisissez une option de généralisation :id=generalisation
 
@@ -67,13 +66,11 @@ Ceci peut être réalisé par des opérations de **sélection**, **schématisati
 * **Schématisation conceptuelle** : on change le mode de représation graphique (par exemple une surface devient un point, une surface devient une ligne-réseau en hydrographie, un groupe de point devient une surface)
 * **Harmonisation** : on maintien les relations entre les classes d'objets.
 
-![](./img/generate/generalisation.jpg)
-
 En pratique, vos données seront généralisées à certaines échelles (certains niveaux de zoom) surtout pour conserver des poids de tuiles raisonnables, maintenir la lisibilité de vos données et améliorer les performances d'affichage.
 
 Choisissez l'option qui vous semble le mieux convenir à vos données, notamment à leur type géométrique ou au nombre des attributs que vous souhaitez conserver.
 
-!> La généralisation automatique ne peut pas réaliser certaines opérations. Par exemple elle ne peut pas transformer un ensemble de bâtiments à grande échelle en une seule surface tâche urbaine à petite échelle. Pour obtenir un flux de tuiles vectorielles le plus performant possible, il est recommandé de généraliser vos données en amont et de les répartir dans différentes tables que vous répartirez sur les différentes plages d'échelles.
+!> La généralisation automatique ne peut pas réaliser certaines opérations. Par exemple elle ne peut pas transformer un ensemble de bâtiments à grande échelle en une seule surface en forme de _tâche urbaine_ à petite échelle. Pour obtenir un flux de tuiles vectorielles le plus performant possible, il est recommandé de généraliser vos données en amont et de les répartir dans différentes tables que vous répartirez sur les différentes plages d'échelles de votre pyramide.
 
 ## Générez un échantillon :id=echantillon
 
@@ -86,7 +83,7 @@ Vous aurez ensuite la possibilité de visualiser votre échantillon et :
 * s'il vous convient : de **lancer la génération des tuiles sur toutes vos données**
 * s'il ne vous convient pas : de **reprendre la configuration de votre flux**
 
-![](./img/generate/echantillon_flux.jpg)
+![Placez votre échantillon](./img/generate/echantillon.png)
 
 Vous ne pouvez pas choisir la taille de l'échantillon, cette taille est
 contrainte par la plus grande échelle (le niveau de zoom maximum) que vous avez
