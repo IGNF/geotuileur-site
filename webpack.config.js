@@ -48,11 +48,6 @@ Encore
     .addEntry("report", "./assets/js/pages/report.js")
     .addEntry("viewer", "./assets/js/pages/viewer.js")
     .addEntry("doc", "./assets/js/pages/doc.js")
-    .addEntry(
-        "data-visualisation",
-        "./assets/js/components/data-visualisation/index.js"
-    )
-    .addEntry("code-examples", "./assets/js/components/code-examples.js")
 
     .copyFiles([
         {
