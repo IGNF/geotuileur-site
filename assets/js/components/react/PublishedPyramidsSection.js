@@ -7,7 +7,11 @@ const PublishedPyramidsSection = ({ datastoreId, storedDataList }) => {
             <div className="row">
                 <div className="col">
                     <div className="row">
-                        <h2>Mes flux publiés <small className="ml-2"><span>{storedDataList?.length}</span> flux</small></h2>
+                        <h2>Mes flux publiés
+                            { storedDataList?.length > 0 ?
+                            <small className="ml-2"><span>{storedDataList?.length}</span> flux</small>
+                            : "" }
+                        </h2>
                     </div>
 
                     {
