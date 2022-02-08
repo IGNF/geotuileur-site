@@ -48,9 +48,12 @@ error:
     404: "Petite erreur d'orientation..."
     404_desc: "Si vous avez suivi un lien quelque part sur l'une de nos pages, merci de nous le <a href='%url_contact%' target='_self'>signaler</a> pour que nous puissions corriger cette erreur.<br>Sinon, essayez de revenir à la <a href='%url_home%' target='_self'>page d'accueil</a> et de naviguer à partir de là."
     500: "Le serveur a rencontré une erreur interne."
-    403: "Vous n'êtes pas autorisé à afficher cette ressource ou exécuter cette action."
-    400: "La requête est mal formulée."
-    default: "Le serveur a retourné une erreur : %status_code% %status_text%"
+    403: "Accès interdit"
+    403_desc: "Vous n'êtes pas autorisé à afficher cette ressource ou à exécuter cette action. Vous n'avez pas accès à l'espace de travail concerné ou la donnée se trouve dans un état qui ne permet pas l'opération que vous demandez."
+    400: "La requête est mal formulée"
+    400_desc: "Le Géotuileur ou son API n'ont pas compris l'opération que vous tentez d'effectuer."
+    default: "Une erreur est survenue"
+    default_desc: "Le serveur a retourné une erreur : %status_code% %status_text%"
 
 # pages
 home:

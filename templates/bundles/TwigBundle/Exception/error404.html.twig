@@ -8,6 +8,10 @@
 
 {% block title %}{{ 'error.code' | trans({'%code%': status_code }) ~ ' - ' ~ parent() }}{% endblock %}
 
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
 {% block body %}
 {% apply spaceless %}
     <div class="region region-content">
@@ -24,7 +28,7 @@
                 <div class="clearfix">
                     <div class="m-media m-media-float float-left">
                         <figure class="figure">
-                            <img src="{{ asset('build/img/erreur404pro_1000x450.png') }}" alt="Rose des vents" width="4168" height="1876">
+                            <img src="{{ asset('build/img/erreur404carto_1000x450.png') }}" alt="Rose des vents"/>
                             <figcaption class="figure-caption text-right"> </figcaption>
                         </figure>
                     </div>
