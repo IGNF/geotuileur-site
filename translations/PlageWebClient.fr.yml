@@ -438,11 +438,11 @@ contact:
         date: "Date d'envoi"
         message: "Rappel de votre demande"
     thanks:
-        fail: "L'envoi de votre demande à échoué. Veuillez <a href='javascript:history.back()'>revenir au formulaire, vérifier votre saisie et recommencer</a>."
+        fail: "L'envoi de votre demande a échoué. Veuillez <a href='javascript:history.back()'>revenir au formulaire, vérifier votre saisie et recommencer</a>."
         success: "Votre demande a été envoyée."
         continue: "Poursuivre la navigation"
 
 mailer:
     hello: "Bonjour"
-    signature: "Cordialement,<br />L'équipe du <a href='%href%' >Guichet de diffusion des services Géoplateforme IGN</a>"
+    signature: "Cordialement,<br />L'équipe du <a href='%href%' >Géotuileur</a>"
     login_info: "Votre nom d'utilisateur est : %login%"

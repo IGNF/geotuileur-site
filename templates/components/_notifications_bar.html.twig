@@ -1,30 +1,14 @@
 {% block notificationsBar %}
     {# notification de saturation d'espace de stockage #}
-    {% set low_storage = 0 %}
-    {% set storages = [] %}
-
-    {% if datastore is defined %}
-        {% set storages = datastore.storages.data %}
-        
-        {% set storages = storages|merge([datastore.storages.uploads, datastore.storages.annexes, datastore.endpoints[0]]) %}
-    {% endif %}
-
-    {% for storage in storages %}
-        {% set usage = (storage.use / storage.quota) * 100 %}
-        {% if usage >= 90 %}
-            {% set low_storage = 1 %}
-        {% endif %}
-    {% endfor %}
-
-    {% if low_storage == 1 %}
-        <div class="notifications-bar bg-gray-300 py-2 px-3">
+    {% if hasLowStorage == 1 %}
+        <div class="notifications-bar">
             <div class="d-flex justify-content-between">
                 <div class="d-flex">
-                    <i class="icons-info text-danger mr-2"></i>
+                    <i class="icons-alert mx-2"></i>
                     Attention votre espace de stockage arrive à saturation,&nbsp;
-                    <a href="{{ path('plage_datastore_manage_storage', {datastoreId: datastore._id}) }}" class="text-danger fw-bold">libérez de l'espace sur votre espace</a>
+                    <a href="{{ path('plage_datastore_manage_storage', {datastoreId: datastore._id}) }}" class="text-danger fw-bold">libérez de l'espace dans votre espace de travail</a>
                 </div>
-                <button class="notifications-bar-close-btn "><i class="icons-close"></i></button>
+                <button class="notifications-bar-close-btn mx-2"><i class="icon-close"></i></button>
             </div>            
         </div>
     {% endif %}

@@ -15,7 +15,7 @@
         <div class="container-content container-content--smaller">
             <div class="wysiwyg">
             {% if error %}
-                <p class="alert alert-warning">
+                <p>
                     <i class="icons-alert"></i>
                     {{ 'contact.thanks.fail'|trans|raw }}
                 </p>
@@ -23,10 +23,10 @@
                     {{ failures }}
                 {% endif %}
             {% else %}
-                <p class="alert alert-success">
+                <p>
                     <span class="icon-mail"></span>
                     {{ 'contact.thanks.success'|trans }}<br>
-                    <a href="{{ path('plage_home')}}">{{ 'contact.thanks.continue'|trans }}</a>.
+                    <a href="{{ path('plage_home')}}">{{ 'contact.thanks.continue'|trans }}</a>
                 </p>
             {% endif %}
             </div>

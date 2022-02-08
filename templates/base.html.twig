@@ -9,6 +9,19 @@
 {# pas de breadcrumb par défaut, surcharger à 1 pour les pages où le breadcrumb serait nécessaire #}
 {% set hasBreadcrumb = (hasBreadcrumb|default(0)) %}
 
+{% set hasLowStorage = 0 %}
+{% set storages = [] %}
+{% if datastore is defined %}
+    {% set storages = datastore.storages.data %}
+    {% set storages = storages|merge([datastore.storages.uploads, datastore.storages.annexes, datastore.endpoints[0]]) %}
+{% endif %}
+{% for storage in storages %}
+    {% set usage = (storage.use / storage.quota) * 100 %}
+    {% if usage >= 90 %}
+        {% set hasLowStorage = 1 %}
+    {% endif %}
+{% endfor %}
+
 <!DOCTYPE html>
 <html lang="{{ app.request.getLocale() }}">
     <head>
@@ -35,7 +48,7 @@
             <li><a href="#main">{{ "site.go_to_content"|trans }}</a></li>
         </ul>
 
-        <div class="body-wrapper {% if hasNavLeft %} layout-navLeft{% else %} layout-default{% endif %}{% if sidebarLeft %} layout-sidebarLeft{% endif %}{% if sidebarRight %} layout-sidebarRight{% endif %}{% if bodyclass %} {{ bodyclass }}{% endif %}">
+        <div class="body-wrapper {% if hasNavLeft %} layout-navLeft{% else %} layout-default{% endif %}{% if sidebarLeft %} layout-sidebarLeft{% endif %}{% if sidebarRight %} layout-sidebarRight{% endif %}{% if hasLowStorage %} with-notifications-bar{% endif %}{% if bodyclass %} {{ bodyclass }}{% endif %}">
 
             {# TODO fixer en haut de la page #}
             {% include "components/_notifications_bar.html.twig" %}
@@ -49,34 +62,6 @@
                             <span class="header-principal__name">{{ app_title }}</span>
                         </a>
                     </div>
-                    {#<div class="header-principal__nav">
-                        <nav class="navbar navbar--mobile navbar-light" role="navigation" aria-label="Menu principal mobile" tabindex="-1" id="menuPrincipalMobileTarget">
-                            <button class="navbar-toggler btn--plain btn--primary" type="button" data-target="#menuPrincipalMobile" aria-controls="menuPrincipalMobile" aria-expanded="false">
-                                <span class="navbar-toggler--icon icon-burger" aria-hidden="true"></span>
-                                <span class="navbar-toggler--text">{{ "site.menu"|trans }}</span>
-                            </button>
-
-                            <div class="navbar-collapse" id="menuPrincipalMobile">
-                                <button class="navbar-toggler-close btn-close" type="button" data-target="#menuPrincipalMobile" aria-controls="menuPrincipalMobile" aria-expanded="false">
-                                    <span class="icon-close" aria-hidden="true"></span>
-                                    <span class="sr-only">{{ "site.close_menu"|trans }}</span>
-                                </button>
-                                {{ knp_menu_render('ign_collaboratif_top_menu', { 'activeClass': 'is-active' }) }}
-                            </div>
-                        </nav>
-
-                        {% if hasNavLeft %}
-                        <nav class="navbar navbar--desktop navbar-light" role="navigation" aria-label="Menu principal" tabindex="-1" id="menuLeftDesktopTarget">
-                            <button class="navbar-toggler btn--plain btn--primary" type="button" data-target="#menuLeftDesktop" aria-controls="menuLeftDesktop" aria-expanded="false">
-                                <span class="navbar-toggler--icon icon-burger" aria-hidden="false"></span>
-                                <span class="navbar-toggler--text">{{ "site.menu"|trans }}</span>
-                            </button>
-                            <div class="navbar-collapse" id="menuLeftDesktop">
-                                {{ knp_menu_render('ign_collaboratif_top_menu', { 'style': 'tabs', 'currentClass': 'is-active' }) }}
-                            </div>
-                        </nav>
-                        {% endif %}
-                    </div> #}
                 </div>
 
                 <div class="header-principal--right">

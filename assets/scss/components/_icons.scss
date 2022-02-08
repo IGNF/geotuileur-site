@@ -59,6 +59,7 @@
 // Icons for alerts
 .icons-alert:before {
     content: url("../../img/icons/Description.svg");
+    vertical-align: middle;
 }
 
 // Icons for logged-users
@@ -82,10 +83,6 @@
 .icons-style-white:before {
     content: url("../../img/icons/Personnaliser.svg");
     filter: brightness(0) invert(100%);
-}
-
-.icons-info::before {
-    content: url("../../img/icons/Description.svg");
 }
 
 .icons-close::before {

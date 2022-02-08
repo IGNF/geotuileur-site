@@ -1,0 +1,17 @@
+.with-notifications-bar {
+    margin-top: 14.1rem;
+    
+    .header-principal {
+        top: 7rem;
+    }
+    .notifications-bar {
+        background-color: $gray-300;
+        height: 7rem;
+        left: 0;
+        line-height: 7rem;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1030;
+    }
+}
