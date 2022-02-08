@@ -3,6 +3,7 @@
 namespace App\Components\Workflow;
 
 use App\Constants\WorkflowStepStatuses;
+use Psr\Log\LoggerInterface;
 
 class WorkflowRunner
 {
@@ -10,7 +11,7 @@ class WorkflowRunner
     private const FUNC_SUFFIX_CHECK_SUCCESS = 'CheckSuccess';
     private const FUNC_SUFFIX_ACTION_AFTER_SUCCESS = 'ActionAfterSuccess';
 
-    public static function runWorkflow($args = [], $workflow)
+    public static function runWorkflow($args = [], $workflow, LoggerInterface $logger)
     {
         if ($workflow->currentStep == count($workflow->steps)) {
             return $workflow->progress;
@@ -23,10 +24,26 @@ class WorkflowRunner
                 $function = [$workflow, $workflow->steps[$currentStep]];
 
                 try {
+                    $logger->debug('{class} : Attempting to execute [{function}]', [
+                        'class' => self::class,
+                        'function' => $workflow->steps[$currentStep],
+                    ]);
+
                     call_user_func_array($function, [$args]);
                     $workflow->progress[$currentStep] = WorkflowStepStatuses::IN_PROGRESS;
+
+                    $logger->debug('{class} : Executed successfully [{function}]', [
+                        'class' => self::class,
+                        'function' => $workflow->steps[$currentStep],
+                    ]);
                 } catch (\Throwable $th) {
                     $workflow->progress[$currentStep] = WorkflowStepStatuses::FAILURE;
+
+                    $logger->debug('{class} : Failed to execute [{function}]', [
+                        'class' => self::class,
+                        'function' => $workflow->steps[$currentStep],
+                        'error' => $th,
+                    ]);
                 }
 
                 break;

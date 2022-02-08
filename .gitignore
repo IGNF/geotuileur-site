@@ -32,3 +32,6 @@ tools
 ### Sonar
 /.scannerwork
 ###
+
+/public/data/**
+/templates/components/megamenu.html

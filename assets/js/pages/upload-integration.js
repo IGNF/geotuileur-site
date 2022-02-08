@@ -99,6 +99,8 @@ function mountStoredDataComponent() {
         .then(response => {
             let upload = response.data
 
+            if (upload?.tags?.vectordb_id == undefined) return;
+
             url = Routing.generate("plage_stored_data_get", {
                 datastoreId: datastoreId,
                 storedDataId: upload?.tags?.vectordb_id
@@ -109,6 +111,8 @@ function mountStoredDataComponent() {
                 .then(response => {
                     let vectordb = response.data
                     if (vectordb?.tags?.pyramid_id) {
+
+                        if (vectordb?.tags?.pyramid_id == undefined) return;
 
                         url = Routing.generate("plage_stored_data_get", {
                             datastoreId: datastoreId,

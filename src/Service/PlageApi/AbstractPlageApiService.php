@@ -9,7 +9,7 @@ use App\Service\PlageApiService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\NativeHttpClient;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -59,7 +59,8 @@ abstract class AbstractPlageApiService
             $this->userProvider = $keycloakUserProvider;
             $this->parameters = $parameters;
 
-            $this->apiClient = HttpClient::createForBaseUri($this->parameters->get('api_plage_url'), [
+            $this->apiClient = new NativeHttpClient([
+                'base_uri' => $this->parameters->get('api_plage_url'),
                 'proxy' => $parameters->get('http_proxy'),
                 'verify_peer' => false,
                 'verify_host' => false,

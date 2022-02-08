@@ -17,9 +17,12 @@ class IntegrationWorkflow extends AbstractWorkflow
         'INTEGRATION_PROCESSING' => 'integrationProcessing',
     ];
 
-    public function __construct()
+    public function __construct($steps = null)
     {
-        parent::__construct($this::WORKFLOW_INTEGRATION);
+        if (!$steps) {
+            $steps = $this::WORKFLOW_INTEGRATION;
+        }
+        parent::__construct($steps);
     }
 
     public function sendFilesApi($args = [])
@@ -34,7 +37,10 @@ class IntegrationWorkflow extends AbstractWorkflow
             $plageApi->upload->open($datastoreId, $upload['_id']);
         }
 
+        // augmenter temporairement la limite de mémoire
+        ini_set('memory_limit', '512M');
         $plageApi->upload->addFile($datastoreId, $upload['_id'], $upload['tags']['file_data']);
+        ini_restore('memory_limit');
     }
 
     public function sendFilesApiCheckFinished($args = [])

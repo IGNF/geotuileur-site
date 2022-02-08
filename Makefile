@@ -50,8 +50,8 @@ down: ## Take down docker containers
 
 .PHONY: bash
 bash: ## Enter with bash into the php docker container
-	docker exec -it web-client_backend_1 bash
+	docker exec -it geotuileur-site_backend_1 bash
 
 .PHONY: d
 d: ## Run any command in the php docker container
-	docker exec -it web-client_backend_1 $(c)
+	docker exec -it geotuileur-site_backend_1 $(c)

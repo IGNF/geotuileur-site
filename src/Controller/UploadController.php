@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Components\Workflow\AbstractWorkflow;
 use App\Components\Workflow\IntegrationWorkflow;
 use App\Components\Workflow\WorkflowRunner;
 use App\Constants\UploadTypes;
@@ -9,6 +10,7 @@ use App\Exception\AppException;
 use App\Exception\PlageApiException;
 use App\Form\UploadType;
 use App\Service\PlageApiService;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -133,7 +135,7 @@ class UploadController extends AbstractController
     /**
      * @Route("/{uploadId}/integration/progress", name="integration_progress", methods={"POST"}, options={"expose"=true})
      */
-    public function integrationProgress($datastoreId, $uploadId)
+    public function integrationProgress($datastoreId, $uploadId, LoggerInterface $logger)
     {
         $upload = $this->plageApi->upload->get($datastoreId, $uploadId);
         $workflowIntProgress = json_decode($upload['tags']['workflow_integration_progress'], true);
@@ -141,7 +143,7 @@ class UploadController extends AbstractController
 
         $workflowClassName = $upload['tags']['workflow_class_name'];
 
-        /** @var IntegrationWorkflow */
+        /** @var AbstractWorkflow */
         $integrationWorkflow = new $workflowClassName();
 
         if ($workflowIntStep == count($integrationWorkflow->steps)) {
@@ -156,7 +158,7 @@ class UploadController extends AbstractController
             'upload' => $upload,
             'plageApi' => $this->plageApi,
             'params' => $this->params,
-        ], $integrationWorkflow);
+        ], $integrationWorkflow, $logger);
 
         $this->plageApi->upload->addTags($datastoreId, $uploadId, [
             'workflow_integration_step' => $integrationWorkflow->currentStep,

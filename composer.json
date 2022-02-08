@@ -61,7 +61,10 @@
             "*": "dist"
         },
         "sort-packages": true,
-        "secure-http": false
+        "secure-http": false,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
