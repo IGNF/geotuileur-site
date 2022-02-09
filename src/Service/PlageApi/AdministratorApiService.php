@@ -23,7 +23,7 @@ class AdministratorApiService {
     /** @var array */
     protected $me;
 
-    /** @var string */
+    /** @var array */
     protected $token = null;
 
     public function __construct(
