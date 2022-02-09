@@ -27,7 +27,6 @@ function postUploadIntegrationProgress() {
     axios
         .post(url)
         .then((response) => {
-            console.log(response.data);
 
             var allSuccess = true;
             var atLeastOneFailure = false;

@@ -20,9 +20,6 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 abstract class AbstractPlageApiService
 {
     public const CHECK_TYPES = ['asked', 'in_progress', 'passed', 'failed'];
-    public const API_STUB_PATH_ROOT = __DIR__.'/../../../tests/api-stub/';
-
-    protected $apiStubUpdateMode = false;
 
     /** @var PlageApiService */
     protected $plageApi;
@@ -50,24 +47,19 @@ abstract class AbstractPlageApiService
     {
         $this->logger = $logger;
         $this->fs = new Filesystem();
+        $this->userProvider = $keycloakUserProvider;
+        $this->parameters = $parameters;
 
-        if ('test' != $_ENV['APP_ENV']) {
-            if ($tokenStorage->getToken()->getUser() instanceof User) {
-                $this->user = $tokenStorage->getToken()->getUser();
-            }
-
-            $this->userProvider = $keycloakUserProvider;
-            $this->parameters = $parameters;
-
-            $this->apiClient = new NativeHttpClient([
-                'base_uri' => $this->parameters->get('api_plage_url'),
-                'proxy' => $parameters->get('http_proxy'),
-                'verify_peer' => false,
-                'verify_host' => false,
-            ]);
-        } elseif (array_key_exists('API_STUB_UPDATE_MODE', $_ENV) && '1' == $_ENV['API_STUB_UPDATE_MODE']) {
-            $this->apiStubUpdateMode = true;
+        if ($tokenStorage->getToken()->getUser() instanceof User) {
+            $this->user = $tokenStorage->getToken()->getUser();
         }
+
+        $this->apiClient = new NativeHttpClient([
+            'base_uri' => $this->parameters->get('api_plage_url'),
+            'proxy' => $this->parameters->get('http_proxy'),
+            'verify_peer' => false,
+            'verify_host' => false,
+        ]);
     }
 
     public function setPlageApi(PlageApiService $plageApi)
@@ -203,19 +195,11 @@ abstract class AbstractPlageApiService
      */
     protected function request($method, $url, $body = [], $query = [], $headers = [], $fileUpload = false, $expectJson = true, $includeHeaders = false)
     {
-        if ('test' == $_ENV['APP_ENV']) { // only GET requests, otherwise does nothing
-            return 'GET' == strtoupper($method) ? $this->fakeRequest($url, $expectJson) : [];
-        }
-
         $options = $this->prepareOptions($body, $query, $headers, $fileUpload);
 
         $response = $this->apiClient->request($method, $url, $options);
 
         $this->logger->debug(self::class, [$method, $url, $body, $response->getContent(false)]);
-
-        if ('test' != $_ENV['APP_ENV'] && $this->apiStubUpdateMode && 'GET' == strtoupper($method)) {
-            $this->updateApiStub($url, $response->getContent(false), $expectJson);
-        }
 
         return $this->handleResponse($response, $expectJson, $includeHeaders);
     }
@@ -259,21 +243,6 @@ abstract class AbstractPlageApiService
             $errorResponse = $response->toArray(false);
             throw new PlageApiException(in_array('error_description', array_keys($errorResponse)) ? $errorResponse['error_description'] : 'Plage API Error', $statusCode, $errorResponse);
         }
-    }
-
-    protected function fakeRequest($path, $expectJson)
-    {
-        $path .= $expectJson ? '.json' : '';
-        $content = file_get_contents(self::API_STUB_PATH_ROOT.$path);
-
-        return $expectJson ? json_decode($content, true) : $content;
-    }
-
-    protected function updateApiStub($path, $content, $expectJson)
-    {
-        $path .= $expectJson ? '.json' : '';
-        $content = $expectJson && $content ? json_encode(json_decode($content), JSON_PRETTY_PRINT) : $content;
-        $this->fs->dumpFile(self::API_STUB_PATH_ROOT.$path, $content);
     }
 
     /**

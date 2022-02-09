@@ -120,7 +120,7 @@ import ScaleLine from 'ol/control/ScaleLine';
                 self._layerSwitcher.addLayer(layer, { title: l.Title, description: l.Abstract });
             }
             self._trigger('initialized')
-        }).catch(error => { console.log(error)});
+        }).catch(error => { console.error(error)});
     },
 
     /**

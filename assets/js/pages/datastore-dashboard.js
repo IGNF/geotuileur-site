@@ -33,7 +33,6 @@ const DatastoreDashboard = ({ datastoreId }) => {
         axios.
             get(url)
             .then(response => {
-                console.log(response.data);
                 setActionsRequired(response?.data?.actions_required)
                 setInProgress(response?.data?.in_progress)
                 setPublishedPyramids(response?.data?.published_pyramids)
@@ -83,7 +82,5 @@ const DatastoreDashboard = ({ datastoreId }) => {
 
 $(function () {
     let datastoreId = $('#datastore-id').data('datastore-id');
-    console.log("Dashboard of datastore: " + datastoreId);
-
     ReactDOM.render(<DatastoreDashboard datastoreId={datastoreId} />, document.getElementById('datastore-dashboard-content'))
 })

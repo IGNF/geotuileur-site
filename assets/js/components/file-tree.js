@@ -24,7 +24,7 @@ function displayTree(tree) {
             html += "</div>";
             html += "</div>";
         } else {
-            console.log(item);
+            console.warn(item);
         }
     });
 
