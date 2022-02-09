@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class UpdateEditorialContentCommand extends Command
 {
-    protected static $defaultName = 'plage:update_editorial_content';
+    protected static $defaultName = 'geotuileur:update-editorial-content';
 
     private $kernel;
 

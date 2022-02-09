@@ -26,7 +26,6 @@ abstract class AbstractPlageApiService
 
     /** @var User */
     protected $user;
-    protected $datastores;
 
     /** @var HttpClientInterface */
     protected $apiClient;

@@ -12,7 +12,7 @@ use Symfony\Component\Finder\Finder;
 
 class PlageUploadsCleanupCommand extends Command
 {
-    protected static $defaultName = 'plage:uploads:cleanup';
+    protected static $defaultName = 'geotuileur:uploads:cleanup';
     protected static $defaultDescription = 'Supprime les fichiers de livraison (les fichiers téléversés restés sur le serveur) plus';
 
     private $directory;
