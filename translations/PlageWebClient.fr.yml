@@ -102,7 +102,7 @@ datastore:
 
     storage:
         title: "Gérer l'espace de %name%"
-        description: "Cette page vous permet de voir en un seul coup d'oeil \
+        description: "Cette page vous permet de voir en un seul coup d'œil \
             le volume de vos données et votre situation par rapport aux différents \
             quotas qui vous sont alloués."
         POSTGRESQL_storage: "Données intégrées en base"
@@ -322,7 +322,8 @@ pyramid:
         title: "Créer le flux"
         heading: "Paramétrez votre flux"
         generalize_heading: "Choisissez les options de généralisation"
-        generalize_lead: "Le processus de généralisation permet de simplifier et d'adapter vos données à l'échelle de la visualisation pour améliorer la lisibilité de votre carte. <a href='%url%' target='_blank'>En savoir plus</a>"
+        generalize_lead: "Le processus de généralisation permet de simplifier et d'adapter vos données à l'échelle de la visualisation pour améliorer la lisibilité de votre carte. <a href='%url%' target='_blank'>En savoir plus</a><br/> \
+            "
         name: "Nommez votre flux"
         name_placeholder: "Saisissez le nom de votre flux"
         name_help: "Il s'agit du nom technique du flux qui apparaitra dans votre espace de travail, il ne sera pas publié en ligne. Si vous le renommez, choisissez un nom explicite."
@@ -348,7 +349,7 @@ pyramid:
             simplify_forms: "Simplification de données hétérogènes"
             simplify_forms_explain: "Toutes les formes sont simplifiées."
             keep_nodes: "Simplification de réseau"
-            keep_nodes_explain: "Toutes les formes sont simplifiées et les noeuds du réseau sont conservés."
+            keep_nodes_explain: "Toutes les formes sont simplifiées et les nœuds du réseau sont conservés."
             delete_smallest: "Simplification de données linéaires autres"
             delete_smallest_explain: "Les petits objets sont supprimés."
             keep_cover: "Schématisation de données surfaciques"
