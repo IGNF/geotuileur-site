@@ -39,7 +39,7 @@ Ce plan liste les routes visibles de l'utilisateur (c'est-à-dire les pages rée
                 - `/delete` : Supprime une livraison
 
         - `/stored_data`
-            - `/report` : rapport complet sur la création de cette donnée avec étapes intermédiaires (cette route est valide pour toutes les `stored_data`, aussi bien pour les bases de données vecteur que pour les pyramides de tuiles vectorielles même si elle n'est pas toujours proposée dans l'interface)
+            - `{storedDataId}/report` : rapport complet sur la création de cette donnée avec étapes intermédiaires (cette route est valide pour toutes les `stored_data`, aussi bien pour les bases de données vecteur que pour les pyramides de tuiles vectorielles même si elle n'est pas toujours proposée dans l'interface)
 
         - `/pyramid`
             - `/add?vectordbId=#` : Créer une pyramide de tuiles vectorielles à partir d'une stored_data VECTOR-DB

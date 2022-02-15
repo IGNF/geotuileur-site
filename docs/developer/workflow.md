@@ -6,6 +6,11 @@ Pour plus d'information sur les concepts de l'API, se référer à la [documenta
 
 ## 1. Déposer un fichier
 
+```mermaid
+flowchart LR
+A[fichier] --> B[upload] -->|checks & processing : Intégration en base| C[stored_data VECTOR-DB]
+```
+
 Le formulaire de dépôt de fichier va créer une livraison (`upload`). L'utilisateur ne doit renseigner qu'un nom (prérempli à partir du nom du fichier), le fichier à téléverser et la projection (à laquelle il doit veiller particulièrement car elle n'est pas toujours parfaitement lue dans le fichier de données). Le Géotuileur n'envoie à l'API que des livraisons de type `VECTOR`.
 
 L'API va déclencher automatiquement 2 vérifications (`check`) successives sur la livraison :
@@ -21,6 +26,11 @@ La donnée stockée en sortie porte comme étiquettes (`tag`) : l'identifiant de
 
 ## 2. Créer le flux
 
+```mermaid
+flowchart LR
+A[stored_data VECTOR-DB] -->|processing : Génération de pyramide vecteur| B[stored_data ROK4-PYRAMID-VECTOR]
+```
+
 A partir d'une donnée stockée (`stored_data`) de type base de données (`VECTOR-DB`), le formulaire de création du flux va lancer le traitement (`processing`) de création d'une pyramide de tuiles vectorielles.
 
 Il est demandé plusieurs informations à l'utilisateur permettant de paramétrer la composition de la pyramide (quels niveaux de zoom, quel contenu attributaire, quelles [options de généralisation](./generalization.md)).
@@ -34,16 +44,26 @@ En sortie du traitement, on obtient une donnée stockée (`stored_data`) de type
 
 La base de données en entrée de ce traitement est supprimée automatiquement.
 
+### Cas de l'échantillon
+
 L'exécution de ce traitement peut être assez longue. Et comme son paramétrage peut s'avérer compliqué, le Géotuileur offre la possibilité de générer un échantillon. Dans ce cas le traitement sera lancé avec comme paramètre supplémentaire une étendue limitée. L'utilisateur peut choisir la position de cette emprise mais pas sa taille qui est contrainte par l'interface à une zone de 10x10 tuiles au niveau de zoom maximum choisit. Un échantillon est donc toujours une donnée stockée (`stored_data`) de type pyramide (`ROK4-PYRAMID-VECTOR`) avec une étiquette (`tag`) supplémentaire `is_sample` qui va lui permettre d'être identifiable dans les actions à terminer du tableau de bord.
+
+```mermaid
+flowchart LR
+A[stored_data ROK4-PYRAMID-VECTOR is_sample] -->|publication temporaire| B[Flux]
+B --> C{Valider ?}
+C -->|Oui| D[Lance la génération sur l'emprise complète]
+C -->|Non| E[Reprendre le paramétrage]
+```
 
 ### Valider un échantillon (étape facultative)
 
 Quand une donnée stockée est taguée `is_sample`, elle est identifiée comme telle sur le tableau de bord et il est proposé de la valider.
 
-Elle est alors temporairement publiée pour être visualisable sur une carte. A partir de cette carte, l'utilisateur se voit proposer de :
+Elle est alors **temporairement publiée** pour être visualisable sur une carte. A partir de cette carte, l'utilisateur se voit proposer de :
 
-* valider cet échantillon : la publication temporaire est supprimée et le traitement de génération de la pyramide est relancé avec le même paramétrage mais sans l'étendue limitée.
-* ne pas valider cet échantillon et reprendre le paramétrage : la publication temporaire est supprimée et l'utilisateur est redirigée vers le formulaire de paramétrage dans les conditions de départ de la phase 2.
+* **valider cet échantillon** : la publication temporaire est supprimée et le traitement de génération de la pyramide est relancé avec le même paramétrage mais sans l'étendue limitée.
+* **ne pas valider cet échantillon et reprendre le paramétrage** : la publication temporaire est supprimée et l'utilisateur est redirigée vers le formulaire de paramétrage dans les conditions de départ de la phase 2.
 
 ## 3. Publier
 
@@ -98,7 +118,7 @@ Un flux publié et personnalisé dans le tableau de bord est donc une `stored_da
 
 ## Mise à jour d'un flux publié
 
-Grâce aux étiquettes portées par la données stockée, la mise à jour est en mesure de réexécuter successivement les traitements d'intégration des données en base puis de génération de la pyramide avec le même paramétrage que lors de la première création. L'utilisateur doit donc fournir des données dans le même format, le même schéma et la même projection. Le Géotuileur ne vérifie pas ce prérequi et l'utilisateur ne pourra se rendre compte d'un écart qu'en cas d'échec d'un traitement.
+Grâce aux étiquettes (`tag`) portées par la données stockée (`stored_data`), la mise à jour est en mesure de réexécuter successivement les traitements (`processing`) d'intégration des données en base puis de génération de la pyramide avec le même paramétrage que lors de la première création. L'utilisateur doit donc fournir des données dans le même format, le même schéma et la même projection. Le Géotuileur ne vérifie pas ce prérequis et l'utilisateur ne pourra se rendre compte d'un écart qu'en cas d'échec d'une des vérifications ou d'un des traitement.
 
 Une mise à jour entraine la création d'une nouvelle donnée stocké, identifiée comme étant une mise à jour par un `tag` adéquat.
 
