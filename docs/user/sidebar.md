@@ -5,9 +5,10 @@
 
 - [Déposer un fichier](upload.md)
 - [Créer le flux](generate.md)
-- [Publier](publish.md) 
-- [Gérer les styles](style.md)
+- [Publier](publish.md)
 - [Diffuser](broadcast.md)
+- [Gérer les styles](style.md)
+
 
 
 - Mettre à jour :

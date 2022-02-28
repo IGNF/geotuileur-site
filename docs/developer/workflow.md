@@ -37,7 +37,7 @@ Il est demandé plusieurs informations à l'utilisateur permettant de paramétre
 
 En sortie du traitement, on obtient une donnée stockée (`stored_data`) de type pyramide de tuiles vectorielles (`ROK4-PYRAMID-VECTOR`). Elle se voit associer les étiquettes suivantes, toujours pour permettre la génération de rapports complets et de mettre à jour les données avec les mêmes paramètres :
 
-* `uplpoad_id` : identifiant de la livraison
+* `upload_id` : identifiant de la livraison
 * `proc_int_id` : identifiant de l'exécution du processus d'intégration en base de données
 * `vectordb_id` : identifiant de la base de données
 * `proc_pyr_create_id` : identifiant de l'exécution du traitement de génération de la pyramide
@@ -106,7 +106,7 @@ Un des styles est identifié comme style par défaut dans le tag `default_style`
 
 Un flux publié et personnalisé dans le tableau de bord est donc une `stored_data` de type `ROK4-PYRAMID-VECTOR` qui possède tous les `tag` suivants :
 
-* `uplpoad_id` : identifiant de la livraison
+* `upload_id` : identifiant de la livraison
 * `proc_int_id` : identifiant de l'exécution du processus d'intégration en base de données
 * `vectordb_id` : identifiant de la base de données
 * `proc_pyr_create_id` : identifiant de l'exécution du traitement de génération de la pyramide

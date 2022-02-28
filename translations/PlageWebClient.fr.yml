@@ -271,7 +271,7 @@ pyramid:
         browse_files: "ou sélectionnez un fichier"
         file_formats: 'Formats de fichiers autorisés : archive zip contenant un Geopackage (recommandé) ou un CSV. Pour tout savoir sur les formats de fichiers autorisés et comment bien préparer votre donnée avant de la déposer, consultez <a href="%help_url%" target="_blank">l''aide en ligne</a>'
         name_help: "Il s'agit d'un nom technique qui n'est pas visible par votre utilisateur final. Il apparaitra uniquement dans votre espace de travail. Choisissez un nom explicite."
-        srs_help: 'Nous avons essayé de détecter automatiquement la projection de vos données, mais nous nous sommes peut-être trompés. Modifiez ce choix si besoin. Qu''est-ce qu''une projection ? <a href="%help_url%" target="_blank">Consultez la documentation</a>'
+        srs_help: 'Nous avons essayé de détecter automatiquement la projection de vos données, mais nous nous sommes peut-être trompés. Modifiez ce choix si besoin. Qu''est-ce qu''une projection ? Consultez <a href="%help_url%" target="_blank">l''aide en ligne</a>'
         cancel: "Annuler et revenir au tableau de bord"
         int_workflow_steps:
             SEND_FILES_API: Chargement des fichiers
@@ -304,7 +304,7 @@ pyramid:
             à présent, ou le personnaliser avant de la diffuser.
     style:
         title: Gérer les styles
-        create_help: Comment créer un style? <a href="%create_url%" target="_blank">Voir la documentation</a>
+        create_help: Comment créer un style? Consultez <a href="%create_url%" target="_blank">l''aide en ligne</a>
         import: "Importer un style"
         name: "Donnez un nom *"
         name_not_empty: "Le nom est obligatoire"
