@@ -47,7 +47,7 @@ Concrètement les opérations de généralisation se traduisent par les principa
 * `-aD` ou `--coalesce-densest-as-needed` : regroupe les éléments les plus représentés (densité dans la tuile) pour rester sous la limite des 500k/tuile
 * `-ac` ou `--coalesce` : regroupe les éléments de mêmes attributs
 * `-S` ou `--simplification` : simplifie les formes (ligne ou polygone) selon un facteur
-* `-pn` ou `--no-simplification-of-shared-nodes` : conserve les noeuds partagés entre plusieurs objets d'un réseau
+* `-pn` ou `--no-simplification-of-shared-nodes` : conserve les nœuds partagés entre plusieurs objets d'un réseau
 
 L'ensemble des paramètres disponibles est consultable dans la [documentation de référence de Tippecanoe](https://github.com/mapbox/tippecanoe/blob/master/README.md).
 
@@ -73,7 +73,7 @@ Certains paramètres sont plus efficaces si les données ont peut d'attributs. I
 | Nom | Combinaison de paramètres Tippecanoe | Explication détaillée |
 | --- | --- | --- |
 | Simplification de formes hétérogènes | `-S10` |  |
-| Simplification de réseau | `-pn -S15` | On simplifie en conservant les noeuds du réseau |
+| Simplification de réseau | `-pn -S15` | On simplifie en conservant les nœuds du réseau |
 | Simplification de données linéaires | `-an -S15` | On simplifie en supprimant les petits objets |
 | Schématisation de données surfaciques | `-aL -D8 -S15` | On schématise en conservant la couverture de la zone |
 | Sélection de données surfaciques | `-ac -aD -an -S15` | On sélectionne les données les plus représentatives en supprimant les plus petites. Ce paramètre est plus pertinent si on choisit de conserver moins de 3 attributs |

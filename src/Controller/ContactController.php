@@ -88,14 +88,14 @@ class ContactController extends AbstractController
             $now = new \DateTime();
 
             // sending mail to support address
-            $mailerService->sendMail($supportAddress, 'Demande de contact', 'bundles/Mailer/contact.html.twig', [
+            $mailerService->sendMail($supportAddress, '[Geotuileur] Demande de contact', 'bundles/Mailer/contact.html.twig', [
                 'userEmail' => $userEmail,
                 'sendDate' => $now,
                 'message' => $message,
             ]);
 
             // sending acknowledgement mail to user
-            $mailerService->sendMail($userEmail, 'Accusé de réception de votre demande', 'bundles/Mailer/contact_acknowledgement.html.twig', [
+            $mailerService->sendMail($userEmail, '[Geotuileur] Accusé de réception de votre demande', 'bundles/Mailer/contact_acknowledgement.html.twig', [
                 'message' => $message,
                 'sendDate' => $now,
             ]);
