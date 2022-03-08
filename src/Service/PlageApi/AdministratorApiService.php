@@ -104,7 +104,7 @@ class AdministratorApiService {
      * @param string $datastoreId
      */
     public function activateDatastore($datastoreId) {
-        $options = $this->prepareOptions(['active', 'true']);
+        $options = $this->prepareOptions(['active' => true]);
         
         $response = $this->apiClient->request('PATCH', "administrator/datastores/$datastoreId", $options);
         return $this->handleResponse($response);

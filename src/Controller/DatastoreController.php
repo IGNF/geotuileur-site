@@ -79,6 +79,9 @@ class DatastoreController extends AbstractController
         $this->adminApiService->activateDatastore($datastore['_id']);
 
         // C'est ici que ça se passe si on veut ajouter d'autres choses dans le datastore, par exemple une donnée partagée.
+
+        // Affiche le tableau de bord du nouveau datastore
+        return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastore['_id']]);
     }
 
     /**
