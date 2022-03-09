@@ -18,6 +18,10 @@
     window.$docsify = {
       // Utilise _sidebar.md comme table des matières
       loadSidebar: 'sidebar.md',
+      // Evite de charger des sidebar de tous les sous-dossiers alors qu'il n'y en a pas
+      alias: {
+        '/.*/sidebar.md': '/sidebar.md'
+      },
       // Utilise _404.md comme page d'erreur pour les fichiers inexistants
       notFoundPage: '404.md',
       maxLevel: 4,
