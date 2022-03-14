@@ -52,6 +52,8 @@ error:
     403_desc: "Vous n'êtes pas autorisé à afficher cette ressource ou à exécuter cette action. Vous n'avez pas accès à l'espace de travail concerné ou la donnée se trouve dans un état qui ne permet pas l'opération que vous demandez."
     400: "La requête est mal formulée"
     400_desc: "Le Géotuileur ou son API n'ont pas compris l'opération que vous tentez d'effectuer."
+    401: "Authentification échouée"
+    401_desc: "Réessayez de <a href='%url_login%' target='_self'>vous connecter</a> ou revenez à la <a href='%url_home%' target='_self'>page d'accueil</a>."
     default: "Une erreur est survenue"
     default_desc: "Le serveur a retourné une erreur : %status_code% %status_text%"
 
@@ -65,7 +67,6 @@ home:
 
 login:
     title: "Identifiez-vous"
-
 
 user:
     me:
@@ -322,7 +323,8 @@ pyramid:
         title: "Créer le flux"
         heading: "Paramétrez votre flux"
         generalize_heading: "Choisissez les options de généralisation"
-        generalize_lead: "Le processus de généralisation permet de simplifier et d'adapter vos données à l'échelle de la visualisation pour améliorer la lisibilité de votre carte. <a href='%url%' target='_blank'>En savoir plus</a><br/> \
+        generalize_lead:
+            "Le processus de généralisation permet de simplifier et d'adapter vos données à l'échelle de la visualisation pour améliorer la lisibilité de votre carte. <a href='%url%' target='_blank'>En savoir plus</a><br/> \
             "
         name: "Nommez votre flux"
         name_placeholder: "Saisissez le nom de votre flux"
@@ -375,7 +377,7 @@ pyramid:
         submit: "Valider"
     form_publish:
         heading: "Décrivez et publiez votre flux"
-        lead: "Apportez un maximum d’informations à vos utilisateurs en décrivant votre flux le plus précisément possible. <a href=\"%help_url%\" target=\"_blank\">consultez l'aide en ligne</a>"
+        lead: 'Apportez un maximum d’informations à vos utilisateurs en décrivant votre flux le plus précisément possible. <a href="%help_url%" target="_blank">consultez l''aide en ligne</a>'
         name: "Donnez un nom à votre flux"
         name_help: "Il s'agit d'un nom technique qui sera visible de vos utilisateurs dans l'adresse de votre flux. Il doit être composé uniquement de lettres, chiffres, tirets (-), underscores (_), ou points (.). Exemple : ma_couche. Ce nom ne doit pas déjà être utilisé par un autre flux."
         title: "Donnez un titre à votre flux"
@@ -384,7 +386,7 @@ pyramid:
         description: "Description"
         description_help: "Cette description complète le titre pour expliciter davantage le contenu de votre flux pour vos utilisateurs. Exemple : Affichage des lacs, réservoirs, rivières et cours d'eaux en France"
         legal_notices: "Mentions légales, source des données"
-        legal_notices_help: "Informez les utilisateurs de votre flux des mentions à faire figurer sur les cartes lorsqu'ils utilisent votre flux. Exemple : \"source IGN BDTOPO®\". Ce texte sera affiché au bas des cartes sous forme de lien cliquable pointant vers l'URL indiquée."
+        legal_notices_help: 'Informez les utilisateurs de votre flux des mentions à faire figurer sur les cartes lorsqu''ils utilisent votre flux. Exemple : "source IGN BDTOPO®". Ce texte sera affiché au bas des cartes sous forme de lien cliquable pointant vers l''URL indiquée.'
         attribution_url: "URL d'attribution"
         choose_keywords: "Choisissez vos mots clés"
         keywords_help: "Utilisez l'auto-complétion ou saisissez librement des mots clés en appuyant sur Entrée après chaque mot clé. L'auto complétion est proposée à partir d'un catalogue de termes communs aux spécifications INSPIRE. Les mots clés participent à décrire votre flux et peuvent aider à le trouver si vous le référencez dans un catalogue."
@@ -392,7 +394,7 @@ pyramid:
     steps:
         upload_data: Déposer un fichier
         create_pyramid: Créer le flux
-        publish: Publier 
+        publish: Publier
         share: Diffuser
     update_compare:
         old_version: "Ancienne version"

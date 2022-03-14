@@ -1,0 +1,43 @@
+{# error page #}
+{% extends "base.html.twig" %}
+{% trans_default_domain "PlageWebClient" %}
+
+{% set hasNavLeft = 0 %}
+{% set sidebarLeft = 0 %}
+{% set hasBreadcrumb = 0 %}
+
+{% block title %}{{ 'error.code' | trans({'%code%': status_code }) ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+{% apply spaceless %}
+    <div class="region region-content">
+        <article role="article" class="node node--type-page node--view-mode-full">
+            <header class="o-page-title">
+                <div class="o-page-title__inner">
+                    <div class="container-content container-content--smaller">
+                        <h1><span class="field field--name-title field--type-string field--label-hidden">401</span></h1>
+                    </div>
+                </div>
+            </header>
+
+            <div class="paragraph container-content container-content--smaller paragraph--type--image-texte paragraph--view-mode--default">
+                <div class="clearfix">
+                    <div class="m-media m-media-float float-left">
+                        <i class="icon-close icons-x10 text-danger"></i>
+                    </div>
+
+                    <div class="wysiwyg">
+                        <h2>{{ 'error.401' | trans }}</h2>
+                        <p>{{ exception.message }}</p>
+                        <p>{{ 'error.401_desc' | trans({'%url_login%': path('plage_security_login'), '%url_home%': path('plage_home')})|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+{% endapply %}
+{% endblock %}

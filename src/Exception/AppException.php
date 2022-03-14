@@ -2,17 +2,18 @@
 
 namespace App\Exception;
 
-use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
-class AppException extends Exception
+class AppException extends HttpException
 {
     private $details;
 
-    public function __construct($message, $code = -1, $details = [], Throwable $previous = null)
+    public function __construct($message, $statusCode = -1, $details = [], Throwable $previous = null)
     {
         $this->details = $details;
-        parent::__construct($message, $code, $previous);
+        $this->code = $statusCode;
+        parent::__construct($statusCode, $message, $previous);
     }
 
     public function __toString()

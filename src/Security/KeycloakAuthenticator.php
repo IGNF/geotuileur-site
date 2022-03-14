@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Exception\AppException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
@@ -53,15 +52,14 @@ class KeycloakAuthenticator extends AbstractGuardAuthenticator
      *
      * @return User
      *
-     * @throws InvalidCsrfTokenException
      * @throws CustomUserMessageAuthenticationException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
             return $userProvider->getUser($credentials);
-        } catch (AuthenticationException $th) {
-            throw new CustomUserMessageAuthenticationException('Authentification echouée, pseudo ou mot de passe incorrect.', [], Response::HTTP_UNAUTHORIZED, $th);
+        } catch (AppException $ex) {
+            throw new CustomUserMessageAuthenticationException($ex->getMessage(), $ex->getDetails(), $ex->getCode(), $ex);
         }
     }
 
@@ -88,15 +86,21 @@ class KeycloakAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        $data = [
-            // you may want to customize or obfuscate the message first
-            'message' => strtr($exception->getMessageKey(), $exception->getMessageData()),
+        /** @var AppException */
+        $ex = $exception->getPrevious(); // get the original AppException
+        $details = $ex->getDetails();
 
-            // or to translate this message
-            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
-        ];
+        if (array_key_exists('error', $details) && array_key_exists('error_description', $details)) {
+            if ('invalid_grant' == $details['error'] && 'Code not valid' == $details['error_description']) {
+                throw new AppException("Authentification échouée en raison d'une erreur interne", Response::HTTP_UNAUTHORIZED, $details, $ex);
+            }
 
-        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
+            if ('invalid_grant' == $details['error'] && 'Invalid user credentials' == $details['error_description']) {
+                throw new AppException("Authentification échouée : nom d'utilisateur et/ou mot de passe sont incorrects", Response::HTTP_UNAUTHORIZED, $details, $ex);
+            }
+        }
+
+        throw $ex;
     }
 
     public function supportsRememberMe(): bool
