@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Exception\AppException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpClient\HttpClient;
@@ -17,7 +18,6 @@ class KeycloakUserProvider implements UserProviderInterface
 {
     private $urlBase;
     private $clientId;
-    private $clientSecret;
 
     private $client;
     private $urlGenerator;
@@ -27,7 +27,6 @@ class KeycloakUserProvider implements UserProviderInterface
     {
         $this->urlBase = $parameters->get('iam_url');
         $this->clientId = $parameters->get('iam_client_id');
-        $this->clientSecret = $parameters->get('iam_client_secret');
 
         $this->client = HttpClient::createForBaseUri($this->urlBase, [
             'proxy' => $parameters->get('http_proxy'),
@@ -55,7 +54,6 @@ class KeycloakUserProvider implements UserProviderInterface
             'grant_type' => 'authorization_code',
             'code' => $code,
             'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
             'redirect_uri' => $redirectUri,
         ];
 
@@ -68,10 +66,11 @@ class KeycloakUserProvider implements UserProviderInterface
             ],
         ]);
 
-        $this->logger->debug(self::class.': getAccessToken', ['POST', $url, $body, $response->getContent(false)]);
+        $this->logger->info(self::class.': getAccessToken', ['POST', $url, $body, $response->getContent(false)]);
 
         if (Response::HTTP_OK !== $response->getStatusCode()) {
-            throw new AuthenticationException();
+            $responseData = json_decode($response->getContent(false), true);
+            throw new AppException('Authentication failed', Response::HTTP_INTERNAL_SERVER_ERROR, $responseData);
         }
 
         return \json_decode($response->getContent(), true);
@@ -90,7 +89,7 @@ class KeycloakUserProvider implements UserProviderInterface
             ],
         ]);
 
-        $this->logger->debug(self::class.': getUserInfo', ['POST', $url, $body, $response->getContent(false)]);
+        $this->logger->info(self::class.': getUserInfo', ['POST', $url, $body, $response->getContent(false)]);
 
         if (Response::HTTP_OK !== $response->getStatusCode()) {
             throw new AuthenticationException();
@@ -119,7 +118,7 @@ class KeycloakUserProvider implements UserProviderInterface
             ],
         ]);
 
-        $this->logger->debug(self::class.': refreshToken', ['POST', $url, $body, $response->getContent(false)]);
+        $this->logger->info(self::class.': refreshToken', ['POST', $url, $body, $response->getContent(false)]);
 
         if (Response::HTTP_OK == $response->getStatusCode()) {
             return \json_decode($response->getContent(), true);
