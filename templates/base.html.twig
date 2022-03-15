@@ -42,13 +42,14 @@
     </head>
 
     <body class="{{ bodyclass }}">
-        {% include "components/_flash_messages.html.twig" %}
 
         <ul class="nav-skip">
             <li><a href="#main">{{ "site.go_to_content"|trans }}</a></li>
         </ul>
 
         <div class="body-wrapper {% if hasNavLeft %} layout-navLeft{% else %} layout-default{% endif %}{% if sidebarLeft %} layout-sidebarLeft{% endif %}{% if sidebarRight %} layout-sidebarRight{% endif %}{% if hasLowStorage %} with-notifications-bar{% endif %}{% if bodyclass %} {{ bodyclass }}{% endif %}">
+
+            {% include "components/_flash_messages.html.twig" %}
 
             {% include "components/_notifications_bar.html.twig" %}
 

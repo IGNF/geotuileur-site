@@ -1,3 +1,6 @@
+const $ = require("jquery");
+global.$ = $;
+
 $(function () {
     $('.notifications-bar-close-btn').each(function () {
         $(this).on('click', function () {
