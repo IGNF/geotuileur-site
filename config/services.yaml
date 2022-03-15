@@ -78,7 +78,7 @@ services:
         tags:
             - {
                   name: "console.command",
-                  command: "plage:update_editorial_content",
+                  command: "geotuileur:update-editorial-content",
               }
         bind:
             $proxy: "%http_proxy%"
