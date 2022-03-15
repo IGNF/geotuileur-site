@@ -5,6 +5,7 @@ namespace App\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +31,8 @@ class PlageGetThemesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $io = new SymfonyStyle($input, $output);
+
         try {
             $keywords = [
                 'Sans thème' => [],
@@ -43,20 +46,20 @@ class PlageGetThemesCommand extends Command
 
             $statusCode = $response->getStatusCode();
             if (Response::HTTP_OK != $statusCode) {
-                throw new \Exception("L'accès à l'url d'INSPIRE s'est mal passé.");
+                throw new \Exception("L'accès à l'url d'INSPIRE s'est mal passé.", 1);
             }
 
             $content = $response->toArray();
             if (!isset($content['register'])) {
-                throw new \Exception("La clef register n'existe pas.");
+                throw new \Exception("La clef register n'existe pas.", 2);
             }
             if (!isset($content['register']['containeditems'])) {
-                throw new \Exception("La clef containeditems n'existe pas dans register.");
+                throw new \Exception("La clef containeditems n'existe pas dans register.", 3);
             }
 
             foreach ($content['register']['containeditems'] as $item) {
                 if (!isset($item['featureconcept'])) {
-                    throw new \Exception("La clef featureconcept n'existe pas dans register/containeditems.");
+                    throw new \Exception("La clef featureconcept n'existe pas dans register/containeditems.", 4);
                 }
                 $featureConcept = $item['featureconcept'];
 
@@ -103,10 +106,10 @@ class PlageGetThemesCommand extends Command
 
             $filepath = dirname(__FILE__).'/../../data/thematic-inspire.json';
             file_put_contents($filepath, json_encode($keywords, JSON_UNESCAPED_UNICODE));
-
-            return 1;
         } catch (\Exception $e) {
-            $output->writeln($e->getMessage());
+            $io->error($e->getMessage());
+
+            return $e->getCode();
         }
 
         return 0;
