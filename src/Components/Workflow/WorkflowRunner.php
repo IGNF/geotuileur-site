@@ -24,7 +24,7 @@ class WorkflowRunner
                 $function = [$workflow, $workflow->steps[$currentStep]];
 
                 try {
-                    $logger->debug('{class} : Attempting to execute [{function}]', [
+                    $logger->info('{class} : Attempting to execute [{function}]', [
                         'class' => self::class,
                         'function' => $workflow->steps[$currentStep],
                     ]);
@@ -32,14 +32,14 @@ class WorkflowRunner
                     call_user_func_array($function, [$args]);
                     $workflow->progress[$currentStep] = WorkflowStepStatuses::IN_PROGRESS;
 
-                    $logger->debug('{class} : Executed successfully [{function}]', [
+                    $logger->info('{class} : Executed successfully [{function}]', [
                         'class' => self::class,
                         'function' => $workflow->steps[$currentStep],
                     ]);
                 } catch (\Throwable $th) {
                     $workflow->progress[$currentStep] = WorkflowStepStatuses::FAILURE;
 
-                    $logger->debug('{class} : Failed to execute [{function}]', [
+                    $logger->info('{class} : Failed to execute [{function}]', [
                         'class' => self::class,
                         'function' => $workflow->steps[$currentStep],
                         'error' => $th,
