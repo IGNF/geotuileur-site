@@ -75,6 +75,8 @@ class AdministratorApiService {
         $processings = $this->params->get('api_plage_processings');
         
         $storages = ['data' => []];
+
+        /** @var array */
         $apiStorages = $this->params->get('api_plage_storages');
         foreach($apiStorages as $key => $id) {
             $storages['data'][] = ['quota' => $quota, 'storage' => $id];

@@ -41,7 +41,7 @@ class UploadApiService extends AbstractPlageApiService
     public function getFileTree($datastoreId, $uploadId)
     {
         $upload = $this->get($datastoreId, $uploadId);
-        if (UploadStatuses::DELETED == $upload['status']) {
+        if (UploadStatuses::DELETED == $upload['status'] || UploadStatuses::OPEN == $upload['status']) {
             if (array_key_exists('file_tree', $upload['tags'])) {
                 return json_decode($upload['tags']['file_tree'], true);
             }
@@ -267,8 +267,8 @@ class UploadApiService extends AbstractPlageApiService
         try {
             $fileTree = $this->getFileTree($datastoreId, $uploadId);
             $this->addTags($datastoreId, $uploadId, [
-            'file_tree' => json_encode($fileTree),
-        ]);
+                'file_tree' => json_encode($fileTree),
+            ]);
         } catch (PlageApiException $ex) {
             // ne rien faire, tant pis si la récupération de l'arborescence a échoué
         }

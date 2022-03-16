@@ -111,7 +111,7 @@ class PyramidController extends AbstractController
                 // Les niveaux de zoom
                 $levels = json_decode($formData['levels'], true);
                 $mainLevels = $levels['main'];
-                
+
                 $composition = [];
                 foreach ($formData['composition'] as $tableName => $tableCompo) {
                     $tableLevel = $mainLevels;
@@ -145,8 +145,10 @@ class PyramidController extends AbstractController
                     $parameters['bbox'] = $bbox;
                 }
 
+                /** @var array */
+                $apiPlageProcessings = $this->params->get('api_plage_processings');
                 $requestBody = [
-                    'processing' => $this->params->get('api_plage_processings')['create_vect_pyr'],
+                    'processing' => $apiPlageProcessings['create_vect_pyr'],
                     'inputs' => ['stored_data' => [$vectordbId]],
                     'output' => ['stored_data' => ['name' => $vectordb['name']]],
                     'parameters' => $parameters,
@@ -256,8 +258,8 @@ class PyramidController extends AbstractController
                     ],
                     'attribution' => [
                         'title' => $formData['legal_notices'],
-                        'url' => $formData['attribution_url']
-                    ]
+                        'url' => $formData['attribution_url'],
+                    ],
                 ];
 
                 if ($keywords = json_decode($formData['keywords'], true)) {
@@ -305,7 +307,7 @@ class PyramidController extends AbstractController
      * @Route("/{pyramidId}/update-publish", name="update_publish", methods={"GET","POST"}, options={"expose"=true})
      */
     public function updatePublish($datastoreId, $pyramidId, Request $request)
-    {     
+    {
         // Get TMS URL for preview only
         $datastore = $this->plageApi->datastore->get($datastoreId);
         $tmsUrl = $this->getTMSEndpoint($datastore);
@@ -315,7 +317,8 @@ class PyramidController extends AbstractController
             'stored_data' => $pyramidId,
         ]);
         if (0 == count($offerings)) {
-            $this->addFlash('error', "Pas de publication pour ce flux");
+            $this->addFlash('error', 'Pas de publication pour ce flux');
+
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
@@ -328,7 +331,7 @@ class PyramidController extends AbstractController
         $name = $configuration['name'];
         $urlPreview = "$tmsUrl/1.0.0/$name/{z}/{x}/{y}.pbf";
         $typeInfos = $configuration['type_infos'];
-       
+
         $data = [
             'name' => $configuration['name'],
             'address_preview' => $urlPreview,
@@ -339,7 +342,7 @@ class PyramidController extends AbstractController
         // Les mots cles
         $keywords = null;
         if (isset($typeInfos['keywords'])) {
-            $keywords = array_map(function($keyword) {
+            $keywords = array_map(function ($keyword) {
                 return ['value' => $keyword];
             }, $typeInfos['keywords']);
             $keywords = json_encode($keywords);
@@ -384,8 +387,8 @@ class PyramidController extends AbstractController
                     ],
                     'attribution' => [
                         'title' => $formData['legal_notices'],
-                        'url' => $formData['attribution_url']
-                    ]
+                        'url' => $formData['attribution_url'],
+                    ],
                 ];
 
                 if ($keywords = json_decode($formData['keywords'], true)) {
@@ -423,7 +426,7 @@ class PyramidController extends AbstractController
             'datastore' => $datastore,
             'form' => $form->createView(),
             'tms_url' => $tmsUrl,
-            'keywords' => $keywords
+            'keywords' => $keywords,
         ]);
     }
 
@@ -555,7 +558,7 @@ class PyramidController extends AbstractController
             // Suppression des annexes
             $styles = $this->plageApi->storedData->getStyles($datastoreId, $pyramidId);
             $ids = array_keys($styles['styles']);
-            foreach($ids as $annexeId) {
+            foreach ($ids as $annexeId) {
                 $this->plageApi->annexe->remove($datastoreId, $annexeId);
             }
 

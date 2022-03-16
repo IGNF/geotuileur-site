@@ -103,8 +103,10 @@ class IntegrationWorkflow extends AbstractWorkflow
         /** @var ParameterBagInterface */
         $params = $args['params'];
 
+        /** @var array */
+        $apiPlageProcessings = $params->get('api_plage_processings');
         $procExecBody = [
-            'processing' => $params->get('api_plage_processings')['int_vect_files_db'],
+            'processing' => $apiPlageProcessings['int_vect_files_db'],
             'inputs' => [
                 'upload' => [$upload['_id']],
             ],

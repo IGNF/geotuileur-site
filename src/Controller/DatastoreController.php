@@ -41,6 +41,7 @@ class DatastoreController extends AbstractController
      */
     public function index(): Response
     {
+        /** @var array */
         $serviceAccount = $this->params->get('service_account');
 
         $myDatastores = array_values($this->plageApi->user->getMyDatastores());
