@@ -198,9 +198,9 @@ abstract class AbstractPlageApiService
 
         $response = $this->apiClient->request($method, $url, $options);
 
-        $this->logger->debug(self::class, [$method, $url, $body, $response->getContent(false)]);
+        $this->logger->debug(self::class, [$method, $url, $body, $query, $response->getContent(false)]);
 
-        return $this->handleResponse($response, $expectJson, $includeHeaders);
+        return $this->handleResponse($method, $url, $body, $query, $response, $expectJson, $includeHeaders);
     }
 
     /**
@@ -214,7 +214,7 @@ abstract class AbstractPlageApiService
      *
      * @throws PlageApiException
      */
-    protected function handleResponse(ResponseInterface $response, $expectJson, $includeHeaders)
+    protected function handleResponse($method, $url, $body, $query, ResponseInterface $response, $expectJson, $includeHeaders)
     {
         $content = null;
 
@@ -240,6 +240,8 @@ abstract class AbstractPlageApiService
             }
         } else {
             $errorResponse = $response->toArray(false);
+            $this->logger->warning(self::class, [$method, $url, $body, $query, $errorResponse]);
+
             throw new PlageApiException(in_array('error_description', array_keys($errorResponse)) ? $errorResponse['error_description'] : 'Plage API Error', $statusCode, $errorResponse);
         }
     }
