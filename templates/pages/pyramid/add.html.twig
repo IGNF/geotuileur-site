@@ -95,7 +95,7 @@
                                         </div>
                                         {% endif %}
                                     {% endfor %}
-                                    {% if numTables > 1 %}
+                                    {% if numTables > 1 and num < (numTables - 1) %}
                                         <p class="text-center mb-0 mt-2">
                                             <button class="btn btn-width--lg btn--plain btn--primary next-table" data-num={{ num }}>{{ 'pyramid.form_add.next_table'| trans }}</button>
                                         </p>
