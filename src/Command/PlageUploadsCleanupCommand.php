@@ -36,6 +36,13 @@ class PlageUploadsCleanupCommand extends Command
 
         $fs = new Filesystem();
         $finder = new Finder();
+
+        if (!$fs->exists($this->directory)) {
+            $io->note("Il n'y a aucun fichier à supprimer, le répertoire [$this->directory] n'existe pas encore");
+
+            return 0;
+        }
+
         $finder->date('since 2 days ago')->in($this->directory); // files and directories
 
         $filesArray = iterator_to_array($finder, true);
