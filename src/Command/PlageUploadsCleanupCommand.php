@@ -33,6 +33,8 @@ class PlageUploadsCleanupCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $date = new \DateTime();
+        $io->note("Date d'exécution : ".$date->format('Y-m-d H:i:s'));
 
         $fs = new Filesystem();
         $finder = new Finder();

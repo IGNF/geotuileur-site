@@ -6,6 +6,7 @@ use DOMDocument;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -40,6 +41,10 @@ class UpdateEditorialContentCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+        $date = new \DateTime();
+        $io->note("Date d'exécution : ".$date->format('Y-m-d H:i:s'));
+
         $this->output = $output;
 
         $followersUrl = 'https://www.ign.fr/publications-de-l-ign/followers.json';
