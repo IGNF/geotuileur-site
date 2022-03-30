@@ -42,13 +42,13 @@
 }
 
 // Icon for upload, checks and integration success
-.icons-upload-success:before {
-    content: url("../../img/icons/Done.svg");
+.icons-upload-success-2x:before {
+    content: url("../../img/icons/Done@2x.png");
 }
 
 // Icon for upload, checks or integration failure
-.icons-upload-failure:before {
-    content: url("../../img/icons/KO.svg");
+.icons-upload-failure-2x:before {
+    content: url("../../img/icons/KO@2x.png");
 }
 
 // Icons for deleting data
@@ -59,6 +59,7 @@
 // Icons for alerts
 .icons-alert:before {
     content: url("../../img/icons/Description.svg");
+    margin-bottom: -8px;
     vertical-align: middle;
 }
 

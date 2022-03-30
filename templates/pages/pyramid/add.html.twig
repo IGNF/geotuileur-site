@@ -22,12 +22,12 @@
     {% apply spaceless %}
     <div class="container-content">
 
-        <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
         {{ form_start(form, {'attr': {'id': 'form_pyramid_add'}}) }}
 
         {# Name, zooms #}        
         <div class="generate-panel container-content--smaller" id="part-1">
             <h2 class="text-center">{{ 'pyramid.form_add.heading'| trans }}</h2>
+            <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
              <div class="form-group">
                 <div class="float-target-parent">
                     {{ form_label(form.pyramid_name) }}
@@ -40,9 +40,9 @@
                 </p>
             </div>
             
-            <label>{{ 'pyramid.form_add.min_and_max_zoom' | trans }}</label>
+            <label class="control-label required">{{ 'pyramid.form_add.min_and_max_zoom' | trans }}</label>
             <div class="form-group mb-0" id="main-zoom-levels" data-toplevelmin={{ topLevelMin }} data-bottomlevelmax={{ bottomLevelMax }}></div>
-            <p class="description">
+            <p class="description wysiwyg">
                 <i class="icon-question"></i>&nbsp;
                 {{ 'pyramid.form_add.zoom_levels_help'| trans({'%url%': path('plage_doc')~'#/generate?id=name-and-zoom-levels' }) | raw }}
             </p>
@@ -57,6 +57,7 @@
         {# Composition #}
         <div class="generate-panel hidden container-content--smaller" id="part-2" data-numtables={{ numTables }}>
             <h2 class="text-center">{{ 'pyramid.form_add.compose_heading'| trans }}</h2>
+            <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
             {{ form_label(form.composition) }}
             {% for table in form.composition.children %}
                 <div id={{ "accordion-map" ~ num }} class="mb-1">
@@ -108,7 +109,7 @@
                 {% set num = num + 1 %}
             {% endfor %}
             <p class="wysiwyg clearfix">
-                <a class="float-left switch-panel" href="#part-1"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</i></a>
+                <a class="float-left switch-panel btn btn--ghost btn--primary" href="#part-1"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</i></a>
                 <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-3">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>
             </p>
         </div>
@@ -125,7 +126,7 @@
                 <div class="tippecanoe view-content o-teasers__grid o-teasers--3by3" id="tippecanoe-wrapper" data-tippecanoes="{{ _tippecanoes }}"></div>
             </div>
             <p class="wysiwyg clearfix">
-                <a class="float-left switch-panel" href="#part-2"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</a>
+                <a class="float-left switch-panel btn btn--ghost btn--primary" href="#part-2"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</a>
                 <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-4">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>
             </p>
         </div>
@@ -133,7 +134,7 @@
         {# Echantillon #}
         <div class="generate-panel hidden container-content--smaller" id="part-4">
             <h2 class="text-center">{{ 'pyramid.form_add.sample_heading'| trans }}</h2>
-            <p>{{ 'pyramid.form_add.explain_generate_sample'|trans({'%URL%': path('plage_doc')~"#/generate?id=echantillon"})|raw }}</p>
+            <p class="mt-2 wysiwyg">{{ 'pyramid.form_add.explain_generate_sample'|trans({'%URL%': path('plage_doc')~"#/generate?id=echantillon"})|raw }}</p>
             
             {{ form_widget(form.sample) }}
             <button class="btn btn--primary btn--ghost" id="define-bbox" style="display: none;">
@@ -141,7 +142,7 @@
             </button>
 
             <p class="wysiwyg clearfix">
-                <a class="float-left switch-panel" href="#part-3"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</a>
+                <a class="float-left switch-panel btn btn--ghost btn--primary" href="#part-3"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</a>
                 {# End form with submit button #}
                 {{ form_widget(form.submit) }}
             </p>
@@ -163,15 +164,15 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="mx-auto">{{ 'pyramid.form_add.bbox_title'|trans }}</h3>
+                    <h3 class="mx-auto my-1">{{ 'pyramid.form_add.bbox_title'|trans }}</h3>
                 </div>
                 <div class="modal-body">
                     <div id="sample-map"></div>
-                    <p>{{ 'pyramid.form_add.center_zone'|trans }}</p>
+                    <p class="description mb-0"><span class="icon-question"></span>&nbsp;{{ 'pyramid.form_add.center_zone'|trans }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button id="sample-cancel" class="btn btn--ghost btn--gray">{{ 'cancel'|trans }}</button>
-                    <button id="sample-ok" class="btn btn--plain btn--primary">{{ 'valid'|trans }}</button>
+                    <button id="sample-cancel" class="btn btn--ghost btn--gray btn-sm">{{ 'cancel'|trans }}</button>
+                    <button id="sample-ok" class="btn btn--plain btn--primary btn-sm">{{ 'valid'|trans }}</button>
                 </div>
             </div>
         </div>

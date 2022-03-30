@@ -141,10 +141,10 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
     dropdownMenu =
         storedData?.status !== 'GENERATING' ? (
             <>
-                <button type="button" className="btn btn-secondary" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" className="btn btn--plain btn--white" data-toggle="dropdown" aria-expanded="false">
                     <i className="fas fa-ellipsis-h"></i>
                 </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                     {
                         isPyramidPublished ? (
                             <>
@@ -297,7 +297,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                             {storedData?.last_event?.date_text}
                         </div>
 
-                        <div className="col-md-1 my-auto text-gray-600">
+                        <div className="col-md-1 my-auto text-gray-600 text-nowrap">
                             {statusBadge}
                         </div>
 
@@ -305,7 +305,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                             {actionPossibleMain}
                         </div>
 
-                        <div className="col-md-1 my-auto align-self-end align-items-end btn-group dropleft">
+                        <div className="col-md-1 my-auto align-self-end align-items-end btn-group">
                             {dropdownMenu}
                         </div>
                     </>

@@ -44,11 +44,11 @@ function postUploadIntegrationProgress() {
                         break;
 
                     case "success":
-                        icon = '<i class="icon-check"></i>';
+                        icon = '<i class="icon-check text-success"></i>';
                         break;
 
                     case "failure":
-                        icon = '<i class="icon-close"></i>';
+                        icon = '<i class="icon-close text-danger"></i>';
                         atLeastOneFailure = true;
                         break;
 
@@ -71,13 +71,13 @@ function postUploadIntegrationProgress() {
             }
 
             if (allSuccess) {
-                let h2 = `<h2><i class="icon-layers"></i><br>Votre donnée est prête</h2>`
+                let h2 = `<h2><i class="icons-upload-success-2x"></i><br>Votre donnée est prête</h2>`
 
                 $(`#upload_${uploadId}_status_heading`).empty().append(h2)
             }
 
             if (atLeastOneFailure) {
-                let h2 = `<h2><i class="icon-layers"></i><br>Intégration de votre donnée a échoué</h2>`
+                let h2 = `<h2><i class="icons-upload-failure-2x"></i><br>L'intégration de votre donnée a échoué</h2>`
 
                 $(`#upload_${uploadId}_status_heading`).empty().append(h2)
             }

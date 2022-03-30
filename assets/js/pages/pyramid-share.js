@@ -18,7 +18,6 @@ function generateViewerRoute(streamUrl, styleUrl) {
 function showDialog() {
     let $div = $('<div>', { class: 'text-center' });
     $div.append(Translator.trans('pyramid.share.flow_is_published'));
-    $('<p>').text(Translator.trans('pyramid.share.flow_is_published_explain')).appendTo($div);
     
     bootbox.alert({
         className: 'text-center',

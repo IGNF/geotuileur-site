@@ -55,7 +55,7 @@ class GeneratePyramidType extends AbstractType
                 'translation_domain' => 'PlageWebClient',
                 'label' => 'pyramid.form_add.submit',
                 'attr' => [
-                    'class' => 'form-control mt-3 btn btn--plain btn--primary',
+                    'class' => 'float-right btn btn--plain btn--primary',
                 ],
             ])
         ;

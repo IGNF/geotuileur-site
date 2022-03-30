@@ -20,6 +20,8 @@
             <div class="col-md-8 offset-md-2">
                 <h2 class="text-center mb-2">{{ 'pyramid.upload_data.drop_file_title' | trans }}</h2>
 
+                <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
+
                 {{ form_start(form, {'attr': {'id': 'upload-form'}}) }}
                 {{ form_errors(form) }}
                 <div class="d-flex justify-content-center flex-column align-items-center drop-zone" id="dropzone">
@@ -33,7 +35,7 @@
                     {{ form_widget(form.file,{'attr' : {'data-url': oneup_uploader_endpoint('gallery')}}) }}
                 </div>
 
-                <p class="description">
+                <p class="description wysiwyg">
                     <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.file_formats'| trans({'%help_url%': path('plage_doc') ~ '#/upload' }) | raw }}
                 </p>
 
@@ -41,20 +43,24 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="progress-upload" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="form-group hidden-part">
-                    <div class="float-target-parent">
-                        {{ form_label(form.pyramid_name) }}
-                        {{ form_widget(form.pyramid_name) }}
-                    </div>
-                    <p class="description">
-                        <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.name_help' | trans }}
-                    </p>
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        <div class="float-target-parent">
+                            {{ form_label(form.pyramid_name) }}
+                            {{ form_widget(form.pyramid_name) }}
+                        </div>
+                        <p class="description wysiwyg mb-0">
+                            <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.name_help' | trans }}
+                        </p>
+                    </fieldset>
                 </div>
                 <div class="form-group hidden-part">
-                    {{ form_label(form.srs) }}
-                    {{ form_widget(form.srs) }}
-                    <p class="description">
-                        <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.srs_help' | trans({'%help_url%': path('plage_doc') ~ '#/upload?id=projection'}) | raw }}
-                    </p>
+                    <fieldset class="p-1 py-2 mb-2 bg-gray-200">
+                        {{ form_label(form.srs) }}
+                        {{ form_widget(form.srs) }}
+                        <p class="description wysiwyg mb-0">
+                            <i class="icon-question"></i>&nbsp;{{ 'pyramid.upload_data.srs_help' | trans({'%help_url%': path('plage_doc') ~ '#/upload?id=projection'}) | raw }}
+                        </p>
+                    </fieldset>
                 </div>
                 <div class="hidden-part text-center mt-2">
                     {{ form_label(form.submit) }}

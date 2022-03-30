@@ -3,7 +3,10 @@
 .tagify__dropdown {
     margin-top: -7em;
 }
+.tagify.form-control {
+    overflow-y: auto;
+}
 .tagify {
-    --tag-bg: #7eb9f7 !important;
-    --tag-hover: #3993f3 !important;
+    --tag-bg: #e1eefd !important;
+    --tag-hover: #7eb9f7 !important;
 }

@@ -29,6 +29,8 @@ Si vous préférez le format CSV, quelques contraintes supplémentaires sont à 
 
 Quel que soit le format de votre fichier, il est recommandé de le compresser dans une archive `.zip` pour réduire son poids et faciliter son transfert sur le Géotuileur.
 
+!\> Vous pouvez placer plusieurs fichiers dans votre archive, mais ils doivent impérativement contenir des données dans le même système de projection.
+
 ## Déposez votre fichier de données :id=upload
 
 ![Téléverser un fichier](./img/upload/upload-file.png)

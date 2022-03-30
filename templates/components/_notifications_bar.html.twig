@@ -2,12 +2,12 @@
     {# notification de saturation d'espace de stockage #}
     {% if hasLowStorage == 1 %}
         <div class="notifications-bar">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex">
-                    <i class="icons-alert mx-2"></i>
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0 wysiwyg">
+                    <span class="icons-alert ml-2"></span>
                     Attention votre espace de stockage arrive à saturation,&nbsp;
                     <a href="{{ path('plage_datastore_manage_storage', {datastoreId: datastore._id}) }}" class="text-danger fw-bold">libérez de l'espace dans votre espace de travail</a>
-                </div>
+                </p>
                 <button class="notifications-bar-close-btn mx-2"><i class="icon-close"></i></button>
             </div>            
         </div>

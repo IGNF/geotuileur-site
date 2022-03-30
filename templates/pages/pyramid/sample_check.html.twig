@@ -3,9 +3,10 @@
 {% extends 'base.html.twig' %}
 
 {% set hasBreadcrumb = 0 %}
+{% set pageTitle = pyramid.name %}
 
 {% block title %}
-	{{ 'pyramid.update_compare.title'| trans ~ ' - ' ~ parent() }}
+	{{ 'pyramid.sample_check.title'| trans ~ ' - ' ~ parent() }}
 {% endblock %}
 
 {% block customheaderNav %}
@@ -16,27 +17,28 @@
 	{% apply spaceless %}
 	<div class="container-content">
         {% set _pyramid = pyramid|json_encode()|raw %}
-        
-        <div class="row p-2">
+        <p class="text-center">
+            <span class="badge-echantillon">Echantillon</span>
+        </p>
+        <div class="wysiwyg">
+            <p>
+                {{ 'pyramid.sample_check.help' | trans }}
+            </p> 
+        </div>
+
+        <div class="row">
             <div class="col-lg">
                 <div class="row mb-2">
-                    <div class="col d-flex align-items-center">
-                        <h6 class="m-0">{{ pyramid.name }}</h6>
-                    </div>
                     <div class="col d-flex justify-content-end">
-                        <a href="{{ path('plage_pyramid_sample_validate', { datastoreId: datastore._id, pyramidId: pyramid._id, validate: "yes" }) }}" class="btn btn--plain btn--primary btn-sm">Générer sur l'emprise complète des données</a>
                         <a href="{{ path('plage_pyramid_sample_validate', { datastoreId: datastore._id, pyramidId: pyramid._id, validate: "no" }) }}" class="btn btn--ghost btn--primary btn-sm">Revenir au paramétrage</a>
+                        <a href="{{ path('plage_pyramid_sample_validate', { datastoreId: datastore._id, pyramidId: pyramid._id, validate: "yes" }) }}" class="btn btn--plain btn--primary btn-sm">Générer sur l'emprise complète des données</a>
                     </div>
                 </div>
                 <div id="map-target" class="map" data-pyramid="{{ _pyramid }}"></div>
             </div>
         </div>
 
-        <div class="wysiwyg">
-            <p class="text-center">
-                {{ 'pyramid.sample_check.help' | trans }}
-            </p>                   
-
+        <div class="wysiwyg">                 
             <p class="text-center">
                 <a href="{{ path('plage_datastore_view', { datastoreId: datastore._id }) }}">
                     Annuler et revenir au tableau de bord

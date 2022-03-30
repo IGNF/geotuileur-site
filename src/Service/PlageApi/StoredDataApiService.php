@@ -63,7 +63,7 @@ class StoredDataApiService extends AbstractPlageApiService
         }
 
         if (array_key_exists('last_event', $storedData)) {
-            $storedData['last_event']['date_text'] = (new \DateTime($storedData['last_event']['date'], new \DateTimeZone('Europe/Paris')))->format('d/m/y H:i:s'); // d F Y
+            $storedData['last_event']['date_text'] = (new \DateTime($storedData['last_event']['date'], new \DateTimeZone('Europe/Paris')))->format('d/m/y H\hi'); // d F Y
         }
 
         return $storedData;

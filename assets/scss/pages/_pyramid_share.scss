@@ -46,8 +46,11 @@
             resize: none;
         }
 
-        textarea + .copy-link, select + .copy-link {
+        textarea + .copy-link {
             right: 1.2em; // laisse la place à un scroll
+        }
+        select + .copy-link {
+            right: 1.8em; // laisse à l'écart du dérouleur
         }
     }
 

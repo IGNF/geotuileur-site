@@ -27,13 +27,13 @@
             {# gestion des styles #}
             <div class="p-1" id="styles">
                 <h3>{{ 'pyramid.style.title'|trans }}</h3>
-                <p class="help-block">
+                <p class="help-block wysiwyg">
                     <i class="icon-question text-primary"></i>&nbsp;
                     {{ 'pyramid.style.create_help'|trans({'%create_url%': path('plage_doc')~'#/style' }) | raw }}
                 </p>
                 <div class="mt-1 text-center" id="block-import">
                     <label class="btn btn-sm btn--ghost btn--primary w-100" for="style-file">
-                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;{{ 'pyramid.style.import'|trans }}                    
+                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import'|trans }}                    
                     </label>
                     <input type="file" id="style-file" accept=".json">
                 </div>

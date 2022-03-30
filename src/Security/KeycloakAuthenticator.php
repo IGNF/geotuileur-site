@@ -92,11 +92,11 @@ class KeycloakAuthenticator extends AbstractGuardAuthenticator
 
         if (array_key_exists('error', $details) && array_key_exists('error_description', $details)) {
             if ('invalid_grant' == $details['error'] && 'Code not valid' == $details['error_description']) {
-                throw new AppException("Authentification échouée en raison d'une erreur interne", Response::HTTP_UNAUTHORIZED, $details, $ex);
+                throw new AppException("Votre authentification a échoué en raison d'une erreur interne", Response::HTTP_UNAUTHORIZED, $details, $ex);
             }
 
             if ('invalid_grant' == $details['error'] && 'Invalid user credentials' == $details['error_description']) {
-                throw new AppException("Authentification échouée : nom d'utilisateur et/ou mot de passe sont incorrects", Response::HTTP_UNAUTHORIZED, $details, $ex);
+                throw new AppException("Votre authentification a échoué : nom d'utilisateur et/ou mot de passe sont incorrects", Response::HTTP_UNAUTHORIZED, $details, $ex);
             }
         }
 

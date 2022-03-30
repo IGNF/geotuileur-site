@@ -32,7 +32,7 @@ class UploadListener
             $srids = $this->getSrids($file);    // seulement les gpkg et archives gpkg
             $unicity = array_unique($srids);
             if (! empty($unicity) && count($unicity) != 1) {
-                throw new \Exception("Ce fichier contient des données dans des systèmes de projections différents");
+                throw new \Exception("Ce fichier contient des données dans des systèmes de projection différents");
             }
 
             // Verification des srid (le srid doit être unique pour toutes couches gpkg et zip avec gpkg)

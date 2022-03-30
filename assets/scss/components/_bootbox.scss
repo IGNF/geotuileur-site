@@ -18,7 +18,6 @@
     }
 
     .modal-header {
-        border-bottom: solid 1px $gray-300;
         flex-direction: row;
         .bootbox-close-button {
             padding: 2rem 1.5rem;
@@ -30,8 +29,8 @@
     }
 
     .modal-footer {
-        border-top: solid 1px $gray-300;
         clear: both; // pour terminer proprement les boites si elements float a l'interieur (legendes des couches geoportail dans les guichets)
+        padding: 1rem;
     }
 
     &.modal-warning,

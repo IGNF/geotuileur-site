@@ -43,63 +43,61 @@
 
     <div class="container-content container-content--smaller">
 
-        <div class="wysiwyg">
-            <div class="text-center" id="upload_{{ upload._id }}_status_heading">
-                {% if integration_finished == 1 %}
-                    {% if integration_success == 1 %}
-                        <h2>
-                            <i class="icons-data-ready"></i><br>
-                            Votre donnée est prête
-                        </h2>
-                    {% else %}
-                        <h2>
-                            <i class="icon-layers"></i><br>
-                            L'intégration de vos données a échoué
-                        </h2>
-                    {% endif %}
+        <div class="text-center" id="upload_{{ upload._id }}_status_heading">
+            {% if integration_finished == 1 %}
+                {% if integration_success == 1 %}
+                    <h2>
+                        <i class="icons-upload-success-2x"></i><br>
+                        Votre donnée est prête
+                    </h2>
                 {% else %}
                     <h2>
-                        <i class="fas fa-spinner fa-spin"></i><br>
-                        Vérification et intégration des données en cours
+                        <i class="icons-upload-failure-2x"></i><br>
+                        L'intégration de vos données a échoué
                     </h2>
                 {% endif %}
-            </div>
-
-            {% for step_name in workflow_steps|keys %}
-                {% set step_status = 'waiting' %}
-                {% if step_name in upload.tags.workflow_integration_progress|keys %}
-                    {% set step_status = upload.tags.workflow_integration_progress[step_name] %}
-                {% endif %}
-
-                <div class="row mx-5">
-                    <div class="col-6 offset-2">
-                        <strong>{{ "pyramid.upload_data.int_workflow_steps.#{step_name}"| trans }}</strong>
-                    </div>
-
-                    <div class="col-2 text-right" id="{{ step_name }}_status">
-                        {% if step_status == 'waiting' %}
-                            <i class="icon-clock"></i>
-                        {% elseif step_status == 'in_progress' %}
-                            <i class="icon-timer"></i>
-                        {% elseif step_status == 'success' %}
-                            <i class="icon-check"></i>
-                        {% elseif step_status == 'failure' %}
-                            <i class="icon-close"></i>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endfor %}
-
-            <div id="stored-data-target" class="my-2"></div>
-
-            <p class="text-center">
-                <a href="{{ path('plage_datastore_view', { datastoreId: datastoreId }) }}"
-                    class="btn btn--ghost btn--gray {{ integration_finished == 0 ? 'invisible' }}"
-                    id="btn-return">
-                    Revenir au tableau de bord
-                </a>
-            </p>
+            {% else %}
+                <h2>
+                    <i class="fas fa-spinner fa-spin"></i><br>
+                    Vérification et intégration des données en cours
+                </h2>
+            {% endif %}
         </div>
+
+        {% for step_name in workflow_steps|keys %}
+            {% set step_status = 'waiting' %}
+            {% if step_name in upload.tags.workflow_integration_progress|keys %}
+                {% set step_status = upload.tags.workflow_integration_progress[step_name] %}
+            {% endif %}
+
+            <div class="row mx-5">
+                <div class="col-6 offset-2">
+                    <strong>{{ "pyramid.upload_data.int_workflow_steps.#{step_name}"| trans }}</strong>
+                </div>
+
+                <div class="col-2 text-right" id="{{ step_name }}_status">
+                    {% if step_status == 'waiting' %}
+                        <i class="icon-clock"></i>
+                    {% elseif step_status == 'in_progress' %}
+                        <i class="icon-timer"></i>
+                    {% elseif step_status == 'success' %}
+                        <i class="icon-check"></i>
+                    {% elseif step_status == 'failure' %}
+                        <i class="icon-close"></i>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div id="stored-data-target" class="my-2"></div>
+
+        <p class="text-center">
+            <a href="{{ path('plage_datastore_view', { datastoreId: datastoreId }) }}"
+                class="btn btn--ghost btn--gray {{ integration_finished == 0 ? 'invisible' }}"
+                id="btn-return">
+                Revenir au tableau de bord
+            </a>
+        </p>
     </div>
 
     {% endapply %}
