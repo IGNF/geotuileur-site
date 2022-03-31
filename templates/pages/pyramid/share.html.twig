@@ -91,7 +91,7 @@
                                 class="form-control text-truncate-ellipsis" 
                                 id="tile-url" 
                                 type="text" 
-                                value={{ pyramid.tags.tms_url }}
+                                value={{ pyramid.tags.tms_url~"/{z}/{x}/{y}.pbf" }}
                                 readonly="readonly"
                             >
                             <button class="btn link copy-link" data-src="tile-url" title="{{ 'pyramid.share.copy_url'| trans }}">
