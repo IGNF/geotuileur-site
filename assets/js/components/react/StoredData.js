@@ -141,7 +141,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
     dropdownMenu =
         storedData?.status !== 'GENERATING' ? (
             <>
-                <button type="button" className="btn btn--plain btn--white" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" className="btn btn-sm btn--plain btn--white" data-toggle="dropdown" aria-expanded="false">
                     <i className="fas fa-ellipsis-h"></i>
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
