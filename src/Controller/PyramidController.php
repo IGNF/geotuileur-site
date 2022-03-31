@@ -94,7 +94,19 @@ class PyramidController extends AbstractController
         // Types de generalisation
         $tippecanoes = $this->getGeneralizations();
 
+        // Suppression des tables sans colonne geometrique
         $typeInfos = $vectordb['type_infos'];
+        if (isset($typeInfos['relations'])) {
+            $relations = [];
+            foreach($typeInfos['relations'] as $table) {
+                // Recherche de la colonne geometrique
+                if ($this->hasGeometricColumns($table)) {
+                    $relations[] = $table;   
+                }
+            }
+            $typeInfos['relations'] = $relations;
+        }
+
         $streamName = 'Tuiles '.$vectordb['name'];
         $form = $this->createForm(GeneratePyramidType::class, null, [
             'datastoreId' => $datastoreId,
@@ -1068,5 +1080,21 @@ class PyramidController extends AbstractController
         $endpoint = $arrayElement['endpoint'];
 
         return 'WMTS-TMS' == $endpoint['type'];
+    }
+
+    /**
+     * Retourne vrai si la table contient des colonnes geometriques
+     *
+     * @param array $table
+     * @return boolean
+     */
+    private function hasGeometricColumns($table)
+    {
+        if (! isset($table['attributes'])) return false;
+        
+        $filtered =  array_filter($table['attributes'], function($type, $name) {
+            return preg_match('/^geometry/', $type);
+        }, ARRAY_FILTER_USE_BOTH);
+        return (1 == count($filtered));  
     }
 }

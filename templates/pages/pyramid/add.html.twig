@@ -86,16 +86,22 @@
                                 {% if columns is not empty %}
                                     <p class="font-weight-bold mb-0">{{ 'pyramid.form_add.attributes'|trans }}</p>
                                     <p class="description"><i class="icon-question"></i>&nbsp;{{ 'pyramid.form_add.attributes_help' | trans({ '%url%': path('plage_doc')~'#/generate?id=composition' }) | raw }}</p>
-                                    {% for index, columnName in columns %}
-                                        {% if index is even %}
-                                        <div class="row">
-                                            <div class="col-md-6">{{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}</div>
-                                            {% if index == columns|length - 1 %}</div>{% endif %}
-                                        {% else %}
-                                            <div class="col-md-6">{{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}</div>
+                                    {% set mid = columns|length // 2 %}
+                                    {% if columns|length is odd %}
+                                        {% set mid = mid + 1 %}
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% for index, columnName in columns|slice(0, mid) %}
+                                                {{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}
+                                            {% endfor %}
                                         </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                        <div  class="col-md-6">
+                                            {% for index, columnName in columns|slice(mid, columns|length) %}
+                                                {{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
                                     {% if numTables > 1 and num < (numTables - 1) %}
                                         <p class="text-center mb-0 mt-2">
                                             <button class="btn btn-width--lg btn--plain btn--primary next-table" data-num={{ num }}>{{ 'pyramid.form_add.next_table'| trans }}</button>

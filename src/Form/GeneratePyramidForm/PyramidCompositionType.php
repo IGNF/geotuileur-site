@@ -21,6 +21,7 @@ class PyramidCompositionType extends AbstractType
         }
 
         foreach ($tables as $table) {
+            ksort($table['attributes']);
             $builder
                 ->add($table['name'], PyramidCompositionTableType::class, [
                     'table_infos' => $table,
