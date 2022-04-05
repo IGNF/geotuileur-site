@@ -27,7 +27,8 @@ $(function () {
         }
         // Fix: url in datastore endpoints does not contain version and trailing slash (?!)
         let value = `${tmsUrl}/1.0.0/${nice}/{z}/{x}/{y}.pbf`;
-        $('#publish_pyramid_address_preview').val(value);
+        $('#publish_pyramid_address_preview').val(value)
+            .parent().addClass('focused');
     });
 
     // Uniquement dans le cas de la modification d'une publication

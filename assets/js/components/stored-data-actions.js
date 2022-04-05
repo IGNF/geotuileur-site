@@ -50,7 +50,7 @@ export class RemoveAction extends StoredDataAction {
         let status = storedData.status;
         let pyramidIsPublished = storedData?.tags?.published;
 
-        this.title = `Vous être sur le point de supprimer ${storedData.name}`;
+        this.title = `Vous êtes sur le point de supprimer ${storedData.name}`;
 
         this.message = `<p>Cette donnée sera définitivement supprimée. Cela va libérer ${bytes} de votre espace de travail.<br/>`
         if (pyramidIsPublished) {
