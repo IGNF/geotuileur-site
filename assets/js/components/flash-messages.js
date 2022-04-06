@@ -4,10 +4,11 @@ global.$ = $;
 const flashDiv = $("#flash-messages");
 
 $(function () {
-    let flashChildren = flashDiv.children();
-    for (let i = 0; i < flashChildren.length; i++) {
-        setClearTimer(flashChildren[i]);
-    }
+    $('.flash-message-close-btn').each(function () {
+        $(this).on('click', function () {
+            $(this).closest('.flash-message').remove();
+        });
+    });
 });
 
 function flashClearAll() {
@@ -18,38 +19,40 @@ function flashClear(flash) {
     flash.remove();
 }
 
-function setClearTimer(flash) {
-    setTimeout(flashClear, 10000, flash);
-}
-
 function flashAdd(message, type) {
-    let divClass = "alert";
+    let divClass = "alert flash-message";
 
     switch (type) {
         case "error":
-            divClass += " alert-danger";
+            divClass += " flash-message-danger";
             break;
 
         case "warning":
-            divClass += " alert-warning";
+            divClass += " flash-message-warning";
             break;
 
         case "notice":
-            divClass += " alert-info";
+            divClass += " flash-message-info";
             break;
 
         case "success":
-            divClass += " alert-success";
+            divClass += " flash-message-success";
             break;
 
         default:
-            divClass += " alert-danger";
+            divClass += " flash-message-danger";
             break;
     }
 
+    const btnClose = $('<button class="flash-message-close-btn mx-2"><i class="icon-close"></i></button>')
+
     let flash = $("<div></div>").text(message).addClass(divClass);
+    flash.append(btnClose);
     flashDiv.append(flash);
-    setClearTimer(flash);
+
+    btnClose.on('click', function () {
+        $(this).closest('.flash-message').remove();
+    })
 }
 
 module.exports = {

@@ -1,23 +1,28 @@
 {% block flashMessages %}
     <div id="flash-messages">
         {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="alert alert-danger">
+            {# TODO classes alert à enlever #}
+            <div class="alert alert-danger flash-message flash-message-danger">
                 {{ flashMessage }}
+                <button class="flash-message-close-btn mx-2"><i class="icon-close"></i></button>
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('warning') %}
-            <div class="alert alert-warning">
+            <div class="alert alert-warning flash-message flash-message-warning">
                 {{ flashMessage }}
+                <button class="flash-message-close-btn mx-2"><i class="icon-close"></i></button>
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="alert alert-info">
+            <div class="alert alert-info flash-message flash-message-info">
                 {{ flashMessage }}
+                <button class="flash-message-close-btn mx-2"><i class="icon-close"></i></button>
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
+            <div class="alert alert-success flash-message flash-message-success">
                 {{ flashMessage }}
+                <button class="flash-message-close-btn mx-2"><i class="icon-close"></i></button>
             </div>
         {% endfor %}
     </div>
