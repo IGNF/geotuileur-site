@@ -56,7 +56,7 @@ class UploadListener
     {
         $maxFiles   = 10000;
         $maxSize    = 1000000000; // 1 GB
-        $maxRatio   = 10;
+        $maxRatio   = 20; // initialement on avait testé 10% mais c'était trop restrictif (https://github.com/IGNF/geotuileur-site/issues/47)
         $readLength = 1024;
 
         $filename = $file->getFilename();
