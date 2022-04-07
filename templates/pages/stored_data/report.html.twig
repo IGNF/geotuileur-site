@@ -102,10 +102,10 @@
 {% endmacro %}
 
 {% macro step(status, title, date, type, details, context) %}
-    <div class="alert {% if status == 'SUCCESS' %} alert-success {% elseif status == 'FAILURE' %} alert-danger {% elseif status == 'PROGRESS' or status == 'WAITING' %} alert-warning {% endif %}">
+    <div class="report-step">
         <p>
             <strong>
-                <i class="{% if status == 'SUCCESS' %} icon-like {% elseif status == 'FAILURE' %} icon-close {% elseif status == 'PROGRESS' or status == 'WAITING' %} icon-timer {% endif %}"></i>
+                <i class="{% if status == 'SUCCESS' %} icon-like text-success {% elseif status == 'FAILURE' %} icon-close text-danger {% elseif status == 'PROGRESS' or status == 'WAITING' %} icon-timer text-warning{% endif %}"></i>
                 &nbsp;{{ title }}
             </strong>
             {% if date %}

@@ -11,20 +11,14 @@ $(function () {
     });
 });
 
-function flashClearAll() {
-    flashDiv.empty();
-}
-
-function flashClear(flash) {
-    flash.remove();
-}
-
 function flashAdd(message, type) {
-    let divClass = "alert flash-message";
+    let divClass = "flash-message";
+    let iconClass = "icons-status"; 
 
     switch (type) {
         case "error":
             divClass += " flash-message-danger";
+            iconClass = "icons-alert";
             break;
 
         case "warning":
@@ -37,16 +31,22 @@ function flashAdd(message, type) {
 
         case "success":
             divClass += " flash-message-success";
+            iconClass = "icon-check-circle"
             break;
 
         default:
             divClass += " flash-message-danger";
+            iconClass = "icons-alert";
             break;
     }
 
-    const btnClose = $('<button class="flash-message-close-btn mx-2"><i class="icon-close"></i></button>')
+    const btnClose = $('<button class="flash-message-close-btn" role="button" title="Fermer" aria-label="Fermer"><i class="icon-close"></i></button>')
 
-    let flash = $("<div></div>").text(message).addClass(divClass);
+    let flash = $('<div role="alert"></div>').addClass(divClass);
+    let icon = $('<span></span>').addClass("flash-message-icon").addClass(iconClass);
+    flash.append(icon);
+    let content = $("<div></div>").addClass("flash-message-content").text(message)
+    flash.append(content);
     flash.append(btnClose);
     flashDiv.append(flash);
 

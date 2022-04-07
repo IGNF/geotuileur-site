@@ -85,7 +85,7 @@
                                 {% set columns = attributes|keys %}
                                 {% if columns is not empty %}
                                     <p class="font-weight-bold mb-0">{{ 'pyramid.form_add.attributes'|trans }}</p>
-                                    <p class="description"><i class="icon-question"></i>&nbsp;{{ 'pyramid.form_add.attributes_help' | trans({ '%url%': path('plage_doc')~'#/generate?id=composition' }) | raw }}</p>
+                                    <p class="description wysiwyg"><i class="icon-question"></i>&nbsp;{{ 'pyramid.form_add.attributes_help' | trans({ '%url%': path('plage_doc')~'#/generate?id=composition' }) | raw }}</p>
                                     {% set mid = columns|length // 2 %}
                                     {% if columns|length is odd %}
                                         {% set mid = mid + 1 %}

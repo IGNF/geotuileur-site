@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Form\Exception\InvalidArgumentException;
 
 /**
  * @Route("/datastores/{datastoreId}/pyramid", name="plage_pyramid_")
@@ -108,90 +109,100 @@ class PyramidController extends AbstractController
         }
 
         $streamName = 'Tuiles '.$vectordb['name'];
-        $form = $this->createForm(GeneratePyramidType::class, null, [
-            'datastoreId' => $datastoreId,
-            'type_infos' => $typeInfos,
-            'stream_name' => $streamName,
-            'proc_creat_pyramid_sample' => $procCreatPyramidSample ?? null,
-        ]);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $formData = $form->getData();
+        try {
+            $form = $this->createForm(GeneratePyramidType::class, null, [
+                'datastoreId' => $datastoreId,
+                'type_infos' => $typeInfos,
+                'stream_name' => $streamName,
+                'proc_creat_pyramid_sample' => $procCreatPyramidSample ?? null,
+            ]);
 
-                // Les niveaux de zoom
-                $levels = json_decode($formData['levels'], true);
-                $mainLevels = $levels['main'];
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                try {
+                    $formData = $form->getData();
 
-                $composition = [];
-                foreach ($formData['composition'] as $tableName => $tableCompo) {
-                    $tableLevel = $mainLevels;
-                    if (isset($levels[$tableName])) {
-                        $tableLevel = $levels[$tableName];
-                    }
+                    // Les niveaux de zoom
+                    $levels = json_decode($formData['levels'], true);
+                    $mainLevels = $levels['main'];
 
-                    $attributes = [];
-                    foreach ($tableCompo['attributes'] as $attrName => $include) {
-                        if ($include) {
-                            $attributes[] = $attrName;
+                    $composition = [];
+                    foreach ($formData['composition'] as $tableName => $tableCompo) {
+                        $tableLevel = $mainLevels;
+                        if (isset($levels[$tableName])) {
+                            $tableLevel = $levels[$tableName];
                         }
+
+                        $attributes = [];
+                        foreach ($tableCompo['attributes'] as $attrName => $include) {
+                            if ($include) {
+                                $attributes[] = $attrName;
+                            }
+                        }
+
+                        $composition[] = [
+                            'table' => $tableName,
+                            'bottom_level' => strval($tableLevel['bottomLevel']),
+                            'top_level' => strval($tableLevel['topLevel']),
+                            'attributes' => implode(',', $attributes),
+                        ];
                     }
 
-                    $composition[] = [
-                        'table' => $tableName,
-                        'bottom_level' => strval($tableLevel['bottomLevel']),
-                        'top_level' => strval($tableLevel['topLevel']),
-                        'attributes' => implode(',', $attributes),
+                    $parameters = [
+                        'tms' => 'PM',
+                        'bottom_level' => strval($mainLevels['bottomLevel']),
+                        'top_level' => strval($mainLevels['topLevel']),
+                        'composition' => $composition,
                     ];
+                    if ($formData['sample']) {
+                        $bbox = json_decode($formData['bbox']);
+                        $parameters['bbox'] = $bbox;
+                    }
+
+                    /** @var array */
+                    $apiPlageProcessings = $this->params->get('api_plage_processings');
+                    $requestBody = [
+                        'processing' => $apiPlageProcessings['create_vect_pyr'],
+                        'inputs' => ['stored_data' => [$vectordbId]],
+                        'output' => ['stored_data' => ['name' => $vectordb['name']]],
+                        'parameters' => $parameters,
+                    ];
+
+                    $processingExecution = $this->plageApi->processing->addExecution($datastoreId, $requestBody);
+                    $pyramidId = $processingExecution['output']['stored_data']['_id'];
+
+                    $this->plageApi->storedData->addTags($datastoreId, $vectordbId, [
+                        'pyramid_id' => $pyramidId,
+                    ]);
+
+                    $pyramidTags = [
+                        'upload_id' => $vectordb['tags']['upload_id'],
+                        'proc_int_id' => $vectordb['tags']['proc_int_id'],
+                        'vectordb_id' => $vectordbId,
+                        'proc_pyr_creat_id' => $processingExecution['_id'],
+                    ];
+
+                    if ($formData['sample']) {
+                        $pyramidTags['is_sample'] = true;
+                    }
+
+                    $this->plageApi->storedData->addTags($datastoreId, $pyramidId, $pyramidTags);
+
+                    $this->plageApi->processing->launchExecution($datastoreId, $processingExecution['_id']);
+
+                    return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
+                } catch (PlageApiException $ex) {
+                    $this->addFlash('error', $ex->getMessage());
                 }
-
-                $parameters = [
-                    'tms' => 'PM',
-                    'bottom_level' => strval($mainLevels['bottomLevel']),
-                    'top_level' => strval($mainLevels['topLevel']),
-                    'composition' => $composition,
-                ];
-                if ($formData['sample']) {
-                    $bbox = json_decode($formData['bbox']);
-                    $parameters['bbox'] = $bbox;
-                }
-
-                /** @var array */
-                $apiPlageProcessings = $this->params->get('api_plage_processings');
-                $requestBody = [
-                    'processing' => $apiPlageProcessings['create_vect_pyr'],
-                    'inputs' => ['stored_data' => [$vectordbId]],
-                    'output' => ['stored_data' => ['name' => $vectordb['name']]],
-                    'parameters' => $parameters,
-                ];
-
-                $processingExecution = $this->plageApi->processing->addExecution($datastoreId, $requestBody);
-                $pyramidId = $processingExecution['output']['stored_data']['_id'];
-
-                $this->plageApi->storedData->addTags($datastoreId, $vectordbId, [
-                    'pyramid_id' => $pyramidId,
-                ]);
-
-                $pyramidTags = [
-                    'upload_id' => $vectordb['tags']['upload_id'],
-                    'proc_int_id' => $vectordb['tags']['proc_int_id'],
-                    'vectordb_id' => $vectordbId,
-                    'proc_pyr_creat_id' => $processingExecution['_id'],
-                ];
-
-                if ($formData['sample']) {
-                    $pyramidTags['is_sample'] = true;
-                }
-
-                $this->plageApi->storedData->addTags($datastoreId, $pyramidId, $pyramidTags);
-
-                $this->plageApi->processing->launchExecution($datastoreId, $processingExecution['_id']);
-
-                return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
-            } catch (PlageApiException $ex) {
-                $this->addFlash('error', $ex->getMessage());
             }
+        } catch(InvalidArgumentException $ex) {
+            $this->addFlash(
+                'error',
+                $this->translator->trans('pyramid.form_add.invalid_argument_message', [], 'PlageWebClient')
+            );
+
+            return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
         return $this->render('pages/pyramid/add.html.twig', [

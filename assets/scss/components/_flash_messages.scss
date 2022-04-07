@@ -11,7 +11,37 @@
     padding: 6px;
 }
 
-.alert {
+.flash-message {
+    background-color: white;
+    display: flex;
+    border: solid 1px $gray-300;
     box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+    margin-bottom: .5em;
+    padding: .5em 1em;
     word-wrap: break-word;
+
+    .flash-message-icon {
+        align-self: stretch;
+        color: $gray-600;
+        font-size: 1.5em;
+        margin-right: .5em;
+    }
+
+    .flash-message-close-btn {
+        align-self: flex-start;
+        color: $gray-600;
+    }
+}
+
+.flash-message-danger .flash-message-icon {
+    color: $brand-danger;
+    filter: invert(50%) sepia(96%) saturate(2934%) hue-rotate(332deg) brightness(97%) contrast(96%);
+}
+
+.flash-message-success .flash-message-icon {
+    color: $brand-success;
+}
+
+.flash-message-warning .flash-message-icon {
+    color: $brand-warning;
 }

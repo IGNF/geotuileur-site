@@ -94,7 +94,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
     // Si l'extent n'existe pas dans storedData => Avertissement et on empeche d'aller sur la page
     function handleAdd(e) {
         if (!('extent' in storedData)) {
-            flash.flashAdd("La donnée stockée n'a pas d'emprise", 'danger');
+            flash.flashAdd("L'étendue géographique des données n'a pas pu être déterminée. Il n'est pas possible de générer une pyramide de tuiles vectorielles à partir de ces données.", 'danger');
             e.preventDefault();
         }
     }
@@ -141,8 +141,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
     dropdownMenu =
         storedData?.status !== 'GENERATING' ? (
             <>
-                <button type="button" className="btn btn-sm btn--plain btn--white" data-toggle="dropdown" aria-expanded="false">
-                    <i className="fas fa-ellipsis-h"></i>
+                <button type="button" className="btn btn-sm btn--plain btn--white icons-more-menu" data-toggle="dropdown" aria-expanded="false">
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                     {
@@ -178,7 +177,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
         if (isPyramidPublished) {
             statusBadge = <><i className="icon-check-circle text-primary"></i>&nbsp;Publié</>
         } else {
-            statusBadge = <><i className="fas fa-circle text-success"></i>&nbsp;Prêt</>
+            statusBadge = <><span className="icons-status text-success"></span>&nbsp;Prêt</>
         }
 
         if (storedData?.type == 'VECTOR-DB') {
@@ -198,7 +197,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                     pyramidId: storedDataId,
                 });
 
-                statusBadge = <><i className="fas fa-circle text-success"></i>&nbsp;Prêt</>
+                statusBadge = <><span className="icons-status text-success"></span>&nbsp;Prêt</>
                 actionPossibleMain = <a href={url} className="btn btn--plain btn--primary btn-sm w-100">Visualiser</a>
             }
             else if (isPyramidPublished) {
@@ -208,7 +207,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                         pyramidId: storedDataId,
                     });
 
-                    statusBadge = <><i className="fas fa-circle text-success"></i>&nbsp;Prêt</>
+                    statusBadge = <><span className="icons-status text-success"></span>&nbsp;Prêt</>
                     actionPossibleMain = <a href={url} className="btn btn--plain btn--primary btn-sm w-100">Visualiser</a>
                 } else {
                     url = Routing.generate("plage_pyramid_share", {
@@ -240,7 +239,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
         }
 
     } else if (storedData?.status == 'GENERATING') {
-        statusBadge = <><i className="fas fa-circle text-warning"></i>&nbsp;En cours</>
+        statusBadge = <><span className="icons-status text-warning"></span>&nbsp;En cours</>
 
         if (storedData?.type == 'VECTOR-DB') {
             let url = Routing.generate("plage_upload_integration", {
@@ -259,7 +258,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
         }
 
     } else if (storedData?.status == 'UNSTABLE') {
-        statusBadge = <><i className="fas fa-circle text-danger"></i>&nbsp;Echec</>
+        statusBadge = <><span className="icons-status text-danger"></span>&nbsp;Echec</>
 
         let url = Routing.generate("plage_stored_data_report", {
             datastoreId: datastoreId,

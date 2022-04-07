@@ -7,6 +7,8 @@ Vous pouvez enchainer cette étape directement après le chargement de vos donn�
 ou la réaliser plus tard en retrouvant vos données dans la liste des **actions à
 terminer** dans votre tableau de bord.
 
+!> Il peut arriver que le formulaire ne se charge pas et un message d'erreur explicite vous informe de la raison. Il peut s'agir de noms de champs comportant des caractères spéciaux ou d'un jeu de données dont l'emprise n'a pas pu être calculée. Dans ce cas il vous faudra modifier votre fichier avant de le redéposer.
+
 ## Paramétrez votre flux :id=name-and-zoom-levels
 
 Modifiez le nom de votre pyramide de tuiles si le nom proposé par défaut ne vous
@@ -69,6 +71,8 @@ Ceci peut être réalisé par des opérations de **sélection**, **schématisati
 En pratique, vos données seront généralisées à certaines échelles (certains niveaux de zoom) surtout pour conserver des poids de tuiles raisonnables, maintenir la lisibilité de vos données et améliorer les performances d'affichage.
 
 Choisissez l'option qui correspond à vos données, notamment à leur type géométrique ou au nombre des attributs que vous souhaitez conserver.
+
+Par défaut c'est la première option **Simplification de données hétérogènes** qui est séléctionnée.
 
 !> La généralisation automatique ne peut pas réaliser certaines opérations. Par exemple, elle ne peut pas transformer un ensemble de bâtiments à grande échelle en une seule surface en forme de _tâche urbaine_ à petite échelle. Pour obtenir un flux de tuiles vectorielles le plus performant possible, il est recommandé de généraliser vos données en amont et de les répartir dans différentes tables que vous répartirez sur les différentes plages d'échelles de votre pyramide.
 

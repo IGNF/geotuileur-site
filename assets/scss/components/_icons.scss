@@ -89,3 +89,13 @@
 .icons-close::before {
     content: url("../../img/icons/Close.svg");
 }
+
+.icons-more-menu::before {
+    content: '\2026'; // ellipsis
+    transform: scale(2) translateY(-18%);
+}
+
+.icons-status::before {
+    content: '	\25CF'; // circle
+    transform: scale(2) translate(-20%, -5%);
+}

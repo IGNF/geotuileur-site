@@ -319,6 +319,7 @@ pyramid:
     form_add:
         title: "Créer le flux"
         heading: "Paramétrez votre flux"
+        invalid_argument_message: "Le formulaire de génération n'a pas pu être construit. Vérifiez qu'aucun nom de table ou de champ dans vos données ne contient d'espace ou de caractères spéciaux."
         generalize_heading: "Choisissez une option de généralisation"
         generalize_lead:
             "Le processus de généralisation permet de simplifier et d'adapter vos données à l'échelle de la visualisation pour améliorer la lisibilité de votre carte. <a href='%url%' target='_blank'>En savoir plus</a><br/> \
