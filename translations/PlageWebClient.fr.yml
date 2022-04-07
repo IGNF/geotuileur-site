@@ -378,7 +378,7 @@ pyramid:
         name: "Nommez votre flux"
         name_help: "Il s'agit d'un nom technique qui sera visible de vos utilisateurs dans l'adresse de votre flux. Il doit être composé uniquement de lettres, chiffres, tirets (-), underscores (_), ou points (.). Exemple : ma_couche. Ce nom ne doit pas déjà être utilisé par un autre flux."
         title: "Donnez un titre descriptif à votre flux"
-        title_help: "Ce titre est le nom de votre flux, il apparaitra dans les gestionnaires de couche des SIG ou de vos applications web."
+        title_help: "Ce titre est le nom de votre flux, il apparaitra dans les gestionnaires de couches des SIG ou de vos applications web."
         address_preview: "Aperçu de l'adresse finale"
         description: "Ajoutez un résumé informatif"
         description_help: "Cette description complète le titre pour expliciter davantage le contenu de votre flux pour vos utilisateurs. Exemple : Affichage des lacs, réservoirs, rivières et cours d'eaux en France"

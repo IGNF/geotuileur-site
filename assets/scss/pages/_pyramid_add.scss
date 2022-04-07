@@ -8,6 +8,7 @@ span.table-valid {
 
 .tippecanoe {
     .o-teaser {
+        border: .5em solid white;
         cursor: pointer;
     }
     
@@ -23,6 +24,6 @@ span.table-valid {
     }
 
     .o-teasers__item.active .o-teaser {
-        border: 1px solid $mainColor;
+        border-color: $mainColor;
     }
 }
