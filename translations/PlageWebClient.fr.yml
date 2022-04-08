@@ -433,6 +433,7 @@ contact:
         submit: "Envoyer"
     email_support:
         heading: "Un utilisateur a utilisé le formulaire de contact du Géotuileur."
+        user_id: "Identifiant unique de l'utilisateur"
         user_email: "Adresse mail de l'utilisateur"
         date: "Date d'envoi"
         message: "Corps du message"

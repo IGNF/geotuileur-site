@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Security\User;
 use App\Service\MailerService;
+use App\Service\PlageApiService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -12,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,6 +21,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ContactController extends AbstractController
 {
+    /** @var PlageApiService */
+    private $plageApi;
+
+    public function __construct(PlageApiService $plageApi)
+    {
+        $this->plageApi = $plageApi;
+    }
 
     /**
      * @Route("/contact-us", name="contact", methods={"GET","POST"})
@@ -87,12 +94,20 @@ class ContactController extends AbstractController
             $userEmail = $form->get('userEmail')->getData();
             $now = new \DateTime();
 
-            // sending mail to support address
-            $mailerService->sendMail($supportAddress, '[Geotuileur] Demande de contact', 'bundles/Mailer/contact.html.twig', [
+            $userApi = null;
+            $supportMailParams = [
                 'userEmail' => $userEmail,
                 'sendDate' => $now,
                 'message' => $message,
-            ]);
+            ];
+
+            if ($user instanceof User) {
+                $userApi = $this->plageApi->user->getMe();
+                $supportMailParams['userId'] = $userApi['_id'];
+            }
+
+            // sending mail to support address
+            $mailerService->sendMail($supportAddress, '[Geotuileur] Demande de contact', 'bundles/Mailer/contact.html.twig', $supportMailParams);
 
             // sending acknowledgement mail to user
             $mailerService->sendMail($userEmail, '[Geotuileur] Accusé de réception de votre demande', 'bundles/Mailer/contact_acknowledgement.html.twig', [
