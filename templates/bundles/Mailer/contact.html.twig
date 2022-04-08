@@ -10,7 +10,7 @@
             {{ userEmail }}
         </p>
 
-        <p><strong>{{ 'contact.email_support.date'|trans }} : </strong>{{ sendDate|date('d-m-Y H:m', "Europe/Paris") }}</p>
+        <p><strong>{{ 'contact.email_support.date'|trans }} : </strong>{{ sendDate|date('d-m-Y H:i', "Europe/Paris") }}</p>
 
         <p>
             <strong>{{ 'contact.email_support.message'|trans }} : </strong><br />{{ message|raw|nl2br }}
