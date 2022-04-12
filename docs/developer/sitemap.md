@@ -9,8 +9,8 @@ Ce plan liste les routes visibles de l'utilisateur (c'est-à-dire les pages rée
 - `/accessibilite` : Accessibilité, état de conformité au RGAA
 - `/cgu` : Conditions générales d'utilisation
 - `/gestion-des-cookies` : Gestion des cookies
-- `/contact-us` : Formulaire de contact
-    - `/thanks` : Page de réussite suite à l'utilisation du formulaire de contact
+- `/nous-ecrire` : Formulaire de contact
+    - `/merci` : Page de réussite suite à l'utilisation du formulaire de contact
 - `/doc` : Aide en ligne (expose le contenu du dossier `/docs/user` avec docsify. [Voir le principe](./docsify.md))
 - `/viewer` : Visualiseur cartographique pour partager les flux de tuiles vectorielles
 

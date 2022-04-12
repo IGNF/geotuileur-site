@@ -57,7 +57,7 @@ mathématique, la projection est l’équation de correspondance entre la surfac
 la Terre et le plan. Pour plus d’informations, se référer
 [ici](pdf/projections_cartographiques.pdf ':target=_blank :ignore').
 
-Si la projection de vos données ne figure pas dans le menu déroulant, vous pouvez reprojeter vos données à l'aide d'un logiciel SIG avant de les déposer à nouveau. Vous pouvez également nous signaler une projection que vous souhaiteriez ajouter au menu via le [formulaire de contact](../../contact-us ':ignore').
+Si la projection de vos données ne figure pas dans le menu déroulant, vous pouvez reprojeter vos données à l'aide d'un logiciel SIG avant de les déposer à nouveau. Vous pouvez également nous signaler une projection que vous souhaiteriez ajouter au menu via le [formulaire de contact](../../nous-ecrire ':ignore').
 
 **Vous pouvez maintenant passer à l'étape suivante**
 

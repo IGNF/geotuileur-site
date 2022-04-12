@@ -33,6 +33,6 @@ security:
         - { path: ^/datastores, roles: ROLE_USER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/contact-us, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/contact-us/thanks, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/nous-ecrire, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/nous-ecrire/merci, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/viewer, roles: IS_AUTHENTICATED_ANONYMOUSLY }

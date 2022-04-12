@@ -8,7 +8,7 @@ Un **espace de travail** est un espace privé qui peut être accessible par plus
 * les fichiers de styles, qui, associés à vos tuiles vectorielles, permettent d'en offrir un rendu cartographique.
   
 
-Chacun de ces espaces de stockage dispose d'un quota que vous ne pouvez pas dépasser. S'il s'avère insuffisant pour votre usage, n'hésitez pas à le signaler via le [formulaire de contact](../../contact-us ':ignore').
+Chacun de ces espaces de stockage dispose d'un quota que vous ne pouvez pas dépasser. S'il s'avère insuffisant pour votre usage, n'hésitez pas à le signaler via le [formulaire de contact](../../nous-ecrire ':ignore').
 
 Le nombre de flux que vous pouvez publier dans un espace de travail est également limité par un quota.
 
@@ -16,7 +16,7 @@ Pour un espace de test, ces quotas sont très limités : moins de 100Mo par espa
 
 ## Demander un nouvel espace de travail
 
-Si vous souhaitez un espace de travail, vous devez en faire la demande en utilisant le [formulaire de contact](../../contact-us ':ignore') du site.
+Si vous souhaitez un espace de travail, vous devez en faire la demande en utilisant le [formulaire de contact](../../nous-ecrire ':ignore') du site.
 
 Précisez dans la mesure du possible :
 
@@ -71,7 +71,7 @@ Vous pouvez les consulter pour les partager (action principale), en modifier les
 
 ## La liste des membres
 
-Le Géotuileur vous permet de consulter la liste des utilisateurs ayant accès à votre espace de travail. Pour ajouter ou supprimer des utilisateurs, vous devrez en faire la demande en utilisant le [formulaire de contact](../../contact-us ':ignore').
+Le Géotuileur vous permet de consulter la liste des utilisateurs ayant accès à votre espace de travail. Pour ajouter ou supprimer des utilisateurs, vous devrez en faire la demande en utilisant le [formulaire de contact](../../nous-ecrire ':ignore').
 
 ## Gérer mon espace
 

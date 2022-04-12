@@ -30,7 +30,7 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("/contact-us", name="contact", methods={"GET","POST"})
+     * @Route("/nous-ecrire", name="contact", methods={"GET","POST"})
      */
     public function contact(Request $request, MailerService $mailerService, LoggerInterface $mailerLogger)
     {
@@ -129,7 +129,7 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("/contact-us/thanks", name="contact_thanks", methods={"GET"})
+     * @Route("/nous-ecrire/merci", name="contact_thanks", methods={"GET"})
      */
     public function contactThanks(Request $request)
     {

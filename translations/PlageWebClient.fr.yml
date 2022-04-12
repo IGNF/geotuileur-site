@@ -70,14 +70,14 @@ login:
 
 user:
     me:
-        title: "Mes informations"
-        heading: "Mes informations"
-        breadcrumb: "Mes informations"
+        title: "Mon compte"
+        heading: "Mon compte"
+        breadcrumb: "Mon compte"
         first_name: "Prénom"
         last_name: "Nom"
         email: "Email"
         creation: "Date d'inscription"
-        id: "Identifiant"
+        id: "Identifiant technique"
         member: "Vous avez accès aux espaces de travail :"
 
 datastore:
