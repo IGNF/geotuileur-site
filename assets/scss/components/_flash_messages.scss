@@ -27,6 +27,10 @@
         margin-right: .5em;
     }
 
+    .flash-message-content {
+        flex-grow: 1;
+    }
+
     .flash-message-close-btn {
         align-self: flex-start;
         color: $gray-600;

@@ -142,7 +142,7 @@ export default class MapViewer extends Map {
     }
 
     /**
-     * Ajout du flux
+     * Ajout du flux de tuiles vectorielles
      */
     addTileLayer() {
         if (this._tmsLayer) { return; }
@@ -200,7 +200,7 @@ export default class MapViewer extends Map {
                 this.addControl(control);
             }).catch(error => {
                 console.error(error);
-                flash.flashAdd(`l'ajout du flux ${this._streamUrl} s'est mal passé.`, "danger");
+                flash.flashAdd(`L'ajout du flux ${this._streamUrl} s'est mal passé.`, "danger");
             });
     }
 
@@ -262,38 +262,60 @@ export default class MapViewer extends Map {
     }
 
     /**
-     * Applique un style a la couche
-     * @param {Object} mapboxStyle 
-     */
-    /*applyStyleToLayer(mapboxStyle) {
-        mapboxApplyStyle(
-            this._tmsLayer,
-            mapboxStyle //,
-            //Object.keys(mapboxStyle.sources)[0]
-        );    
-    }*/
-
-    /**
-     * 
+     * Récupère les métadonnées du serveur de tuiles vectorielles
+     * Interroge successivement l'URL du flux passé en paramètre
+     * puis suivie de /metadata.json
      * @param {string} url 
      * @returns 
      */
     async getMetadatas(url) {
-        let response = await fetch(url);
+        let response;
+        try {
+            response = await fetch(url);
+        } catch(error) {
+            // Si bloqué par CORS policy
+            flash.flashAdd(`Impossible d'accéder au flux ${url}. Existe-t-il ?`);
+            throw Error(error);
+        }
 
         if (!response.ok) {
-            throw Error(this.formatError(response));
+            // Si réponse autre que 200
+            flash.flashAdd(`Impossible d'accéder au flux ${url}. Existe-t-il ?`);
+            throw Error(`${response.status}: ${response.statusText}`);
         }
 
         const capabilities = await response.text();
-        let infos = this.getInfosFromCapabilities(capabilities);
-
-        response = await fetch(`${url}/metadata.json`);
-        if (!response.ok) {
-            throw Error(this.formatError(response));
+        let infos;
+        try {
+            infos = this.getInfosFromCapabilities(capabilities);
+        } catch(error) {
+            flash.flashAdd(`Impossible de lire ${url}. Ce n'est pas un fichier XML valide.`);
+            throw Error(error);
         }
 
-        let metadatas = await response.json();
+        try {
+            response = await fetch(`${url}/metadata.json`);
+        } catch(error) {
+            // Si bloqué par CORS policy
+            flash.flashAdd(`Impossible d'accéder aux métadonnées ${url}/metadata.json`);
+            throw Error(error);
+        }
+
+        if (!response.ok) {
+            // Si réponse autre que 200
+            flash.flashAdd(`Impossible d'accéder aux métadonnées ${url}/metadata.json`);
+            throw Error(`${response.status}: ${response.statusText}`);
+        }
+
+        let metadatas;
+
+        try {
+            metadatas = await response.json();
+        } catch(error) {
+            flash.flashAdd(`Impossible de lire ${url}/metadata.json. Ce n'est pas un fichier de métadonnées valide.`);
+            throw Error(error);
+        }
+
         $.extend(metadatas, infos, { url: `${url}/{z}/{x}/{y}.pbf`});
 
         // Transformation de l'extent et du centre
@@ -323,7 +345,7 @@ export default class MapViewer extends Map {
         let tileNode = document.firstElementChild;
         result.title = tileNode.getElementsByTagName("Title")[0].textContent;
 
-        // Mots cles et attribution
+        // Mots clés et attribution
         let keywordNodes = tileNode.getElementsByTagName('KeywordList');
         for (let k=0; k < keywordNodes.length; ++k) {
             result.keywords.push(keywordNodes[k].textContent);
@@ -336,7 +358,7 @@ export default class MapViewer extends Map {
             result.attribution = {
                 title: attributionNode.getElementsByTagName("Title")[0].textContent
             };
-            let urlNode = attributionNode.getElementsByTagName("Url");   // TODO Url ?
+            let urlNode = attributionNode.getElementsByTagName("Url");   // L'URL semble absente des réponses de ROK4
             if (urlNode.length) {
                 result.attribution['url'] = urlNode[0].textContent;
             }
@@ -363,7 +385,4 @@ export default class MapViewer extends Map {
         } else return this._metadatas.attribution.title;
     }
 
-    formatError(response) {
-        return `${response.status} : ${response.statusText}`;
-    }
 }
