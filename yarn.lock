@@ -3220,29 +3220,29 @@ gensync@^1.0.0-beta.2:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
 
-geoportal-access-lib@3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/geoportal-access-lib/-/geoportal-access-lib-3.0.5.tgz#2cde6e6ea689765c25f455fe1109d678a3b5ab2d"
-  integrity sha512-ruj6iXD7XStS1YuwSoTUYyQEsdP5BMLTiz7kS7hLwiB0g42SF4+ALH3aLHpthQOpXcNJb5XsCfS7P8K1BKZOZg==
+geoportal-access-lib@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/geoportal-access-lib/-/geoportal-access-lib-3.1.0.tgz#8b53fab5865e73917dc16b43dc1ec8889d45235d"
+  integrity sha512-2G24zh3wkfF43++KbCCfG1x4t3QseaiV1x75urlKRhVgFHXTzC8D9MWnaPUeVVyBbgskhr9rV/ZzFFwGPdTBrQ==
   dependencies:
     es6-promise "^4.2.4"
     node-fetch "^2.6.1"
     xmldom "^0.1.27"
 
-geoportal-extensions-openlayers@^3.0.18:
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/geoportal-extensions-openlayers/-/geoportal-extensions-openlayers-3.2.7.tgz#509f541cae96b288418c18d144a1619ab72e9a0f"
-  integrity sha512-ZTu3mEaHeVTtzm1bPisz+r/j/a5uJwaXCmKl1kDjAtf32u/Z9mmEALYEXXCs6Vwm44q67gi6fJWYCur4pe0N4Q==
+geoportal-extensions-openlayers@^3.2.11:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/geoportal-extensions-openlayers/-/geoportal-extensions-openlayers-3.2.11.tgz#5c2a87a6275806febbaa996c84abd8c389736aa7"
+  integrity sha512-WvStCSD2dLhn1UmI8fZ1dvOT0r4HKvzvoje7GfDck5jJBBrslgU/n13WfyQOABiG8fLFLFiEHPk8sPAH+jb0Yg==
   dependencies:
     "@mapbox/mapbox-gl-style-spec" "13.20.1"
     eventbusjs "0.2.0"
-    geoportal-access-lib "3.0.5"
+    geoportal-access-lib "3.1.0"
     loglevel "1.6.6"
     node-fetch "^2.6.1"
     ol "6.9.0"
     ol-mapbox-style "6.7.0"
-    proj4 "2.7.2"
-    sortablejs "1.8.4"
+    proj4 "2.7.5"
+    sortablejs "1.14.0"
     xmldom "^0.1.27"
 
 geotiff@^1.0.8:
@@ -3568,7 +3568,7 @@ icss-utils@^5.0.0, icss-utils@^5.1.0:
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"
   integrity sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==
 
-ieee754@^1.1.12, ieee754@^1.1.6:
+ieee754@^1.1.12:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
@@ -4553,15 +4553,6 @@ ol@6.9.0:
     pbf "3.2.1"
     rbush "^3.0.1"
 
-ol@^5.3.0:
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-5.3.3.tgz#ad39b7b485fdbae4b3e1535a0a07cc5d88b0b9b5"
-  integrity sha512-7eU4x8YMduNcED1D5wI+AMWDRe7/1HmGfsbV+kFFROI9RNABU/6n4osj6Q3trZbxxKnK2DSRIjIRGwRHT/Z+Ww==
-  dependencies:
-    pbf "3.1.0"
-    pixelworks "1.1.0"
-    rbush "2.0.2"
-
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -4748,14 +4739,6 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-pbf@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/pbf/-/pbf-3.1.0.tgz#f70004badcb281761eabb1e76c92f179f08189e9"
-  integrity sha512-/hYJmIsTmh7fMkHAWWXJ5b8IKLWdjdlAFb3IHkRBn1XUhIYBChVGfVwmHEAV3UfXTxsP/AKfYTXTS/dCPxJd5w==
-  dependencies:
-    ieee754 "^1.1.6"
-    resolve-protobuf-schema "^2.0.0"
-
 pbf@3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/pbf/-/pbf-3.2.1.tgz#b4c1b9e72af966cd82c6531691115cc0409ffe2a"
@@ -4805,11 +4788,6 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
-
-pixelworks@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pixelworks/-/pixelworks-1.1.0.tgz#1f095ad48dca8bf8a1c8258e0092031a44f22ca5"
-  integrity sha1-Hwla1I3Ki/ihyCWOAJIDGkTyLKU=
 
 pkg-dir@^3.0.0:
   version "3.0.0"
@@ -5128,15 +5106,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-proj4@2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/proj4/-/proj4-2.7.2.tgz#faa42e5965aa275af5438ba2da8c59d1cc501137"
-  integrity sha512-x/EboBmIq48a9FED0Z9zWCXkd8VIpXHLsyEXljGtsnzeztC41bFjPjJ0S//wBbNLDnDYRe0e6c3FSSiqMCebDA==
-  dependencies:
-    mgrs "1.0.0"
-    wkt-parser "^1.2.4"
-
-proj4@^2.7.4:
+proj4@2.7.5, proj4@^2.7.4:
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/proj4/-/proj4-2.7.5.tgz#46c3ef841a9df57470d791f221160a9d68951945"
   integrity sha512-5ecXUXbHAfvdhfBQpU7EhUfPCQGUCPmVup/4gnZA3bJY3JcK/xxzm4QQDz1xiXokN6ux65VDczlCtBtKrTSpAQ==
@@ -5226,11 +5196,6 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
-quickselect@^1.0.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/quickselect/-/quickselect-1.1.1.tgz#852e412ce418f237ad5b660d70cffac647ae94c2"
-  integrity sha512-qN0Gqdw4c4KGPsBOQafj6yj/PA6c/L63f6CaZ/DCF/xF4Esu3jVmKLUDYxghFx8Kb/O7y9tI7x2RjTSXwdK1iQ==
-
 quickselect@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/quickselect/-/quickselect-2.0.0.tgz#f19680a486a5eefb581303e023e98faaf25dd018"
@@ -5257,13 +5222,6 @@ raw-body@2.4.2:
     http-errors "1.8.1"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
-
-rbush@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/rbush/-/rbush-2.0.2.tgz#bb6005c2731b7ba1d5a9a035772927d16a614605"
-  integrity sha512-XBOuALcTm+O/H8G90b6pzu6nX6v2zCKiFG4BJho8a+bY6AER6t8uQUZdi5bomQc0AprCWhEGa7ncAbbRap0bRA==
-  dependencies:
-    quickselect "^1.0.1"
 
 rbush@^3.0.1:
   version "3.0.1"
@@ -5497,7 +5455,7 @@ resolve-from@^5.0.0:
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
   integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
-resolve-protobuf-schema@^2.0.0, resolve-protobuf-schema@^2.1.0:
+resolve-protobuf-schema@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/resolve-protobuf-schema/-/resolve-protobuf-schema-2.1.0.tgz#9ca9a9e69cf192bbdaf1006ec1973948aa4a3758"
   integrity sha512-kI5ffTiZWmJaS/huM8wZfEMer1eRd7oJQhDuxeCLe3t7N7mX3z94CN0xPxBQxFYQTSNz9T0i+v6inKqSdK8xrQ==
@@ -5854,10 +5812,10 @@ sort-object@^0.3.2:
     sort-asc "^0.1.0"
     sort-desc "^0.1.1"
 
-sortablejs@1.8.4:
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.8.4.tgz#1bbfeafa96d399b83f28e25d8e49d4fbfd867f30"
-  integrity sha512-Brqnzelu1AhFuc0Fn3N/qFex1tlIiuQIUsfu2J8luJ4cRgXYkWrByxa+y5mWEBlj8A0YoABukflIJwvHyrwJ6Q==
+sortablejs@1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.14.0.tgz#6d2e17ccbdb25f464734df621d4f35d4ab35b3d8"
+  integrity sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -6656,7 +6614,7 @@ wildcard@^2.0.0:
   resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.0.tgz#a77d20e5200c6faaac979e4b3aadc7b3dd7f8fec"
   integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
 
-wkt-parser@^1.2.4, wkt-parser@^1.3.1:
+wkt-parser@^1.3.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/wkt-parser/-/wkt-parser-1.3.2.tgz#deeff04a21edc5b170a60da418e9ed1d1ab0e219"
   integrity sha512-A26BOOo7sHAagyxG7iuRhnKMO7Q3mEOiOT4oGUmohtN/Li5wameeU4S6f8vWw6NADTVKljBs8bzA8JPQgSEMVQ==

@@ -10,7 +10,7 @@ import TileLayer from 'ol/layer/Tile';
 import VectorTileLayer from 'ol/layer/VectorTile';
 import WMTS from 'ol/source/WMTS';
 import VectorTileSource from 'ol/source/VectorTile';
-import { defaults as defaultControls } from 'ol/control/util';
+import { defaults as defaultControls } from 'ol/control';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import SearchEngine from 'geoportal-extensions-openlayers/src/OpenLayers/Controls/SearchEngine';
 import LayerSwitcher from 'geoportal-extensions-openlayers/src/OpenLayers/Controls/LayerSwitcher';
