@@ -3,7 +3,7 @@ name: Demander ou proposer de la documentation
 about: Posez une question sur une étape à éclaircir, suggérez des modifications de
   la documentation
 title: ''
-labels: documentation
+labels: ':scroll: documentation'
 assignees: ''
 
 ---
