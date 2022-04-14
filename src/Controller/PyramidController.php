@@ -286,6 +286,10 @@ class PyramidController extends AbstractController
                 ];
 
                 if ($keywords = json_decode($formData['keywords'], true)) {
+                    foreach ($keywords as &$keyword) {
+                        $keyword = Utils::convertCharsToHtmlEntities($keyword);
+                    }
+
                     $requestBody['type_infos']['keywords'] = $keywords;
                 }
 
@@ -366,7 +370,7 @@ class PyramidController extends AbstractController
         $keywords = null;
         if (isset($typeInfos['keywords'])) {
             $keywords = array_map(function ($keyword) {
-                return ['value' => $keyword];
+                return ['value' => Utils::convertHtmlEntitiesToChars($keyword)];
             }, $typeInfos['keywords']);
             $keywords = json_encode($keywords);
         }
@@ -415,6 +419,10 @@ class PyramidController extends AbstractController
                 ];
 
                 if ($keywords = json_decode($formData['keywords'], true)) {
+                    foreach ($keywords as &$keyword) {
+                        $keyword = Utils::convertCharsToHtmlEntities($keyword);
+                    }
+
                     $requestBody['type_infos']['keywords'] = $keywords;
                 }
 
