@@ -84,7 +84,7 @@ $(function() {
         }
         if (navigator.clipboard) {
             navigator.clipboard.writeText(content);
-            flash.flashAdd(Translator.trans('pyramid.share.url_copied'), 'notice');
+            flash.flashAdd(Translator.trans('pyramid.share.url_copied'), 'success');
         }
     });
 
