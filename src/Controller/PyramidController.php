@@ -15,12 +15,12 @@ use App\Service\PlageApiService;
 use App\Utils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Form\Exception\InvalidArgumentException;
 
 /**
  * @Route("/datastores/{datastoreId}/pyramid", name="plage_pyramid_")
@@ -99,10 +99,10 @@ class PyramidController extends AbstractController
         $typeInfos = $vectordb['type_infos'];
         if (isset($typeInfos['relations'])) {
             $relations = [];
-            foreach($typeInfos['relations'] as $table) {
+            foreach ($typeInfos['relations'] as $table) {
                 // Recherche de la colonne geometrique
                 if ($this->hasGeometricColumns($table)) {
-                    $relations[] = $table;   
+                    $relations[] = $table;
                 }
             }
             $typeInfos['relations'] = $relations;
@@ -196,7 +196,7 @@ class PyramidController extends AbstractController
                     $this->addFlash('error', $ex->getMessage());
                 }
             }
-        } catch(InvalidArgumentException $ex) {
+        } catch (InvalidArgumentException $ex) {
             $this->addFlash(
                 'error',
                 $this->translator->trans('pyramid.form_add.invalid_argument_message', [], 'PlageWebClient')
@@ -269,8 +269,8 @@ class PyramidController extends AbstractController
                     'name' => $formData['name'],
                     'layer_name' => $formData['name'],
                     'type_infos' => [
-                        'title' => $formData['title'],
-                        'abstract' => $formData['description'],
+                        'title' => Utils::convertCharsToHtmlEntities($formData['title']),
+                        'abstract' => Utils::convertCharsToHtmlEntities($formData['description']),
                         'used_data' => [
                             [
                                 'stored_data' => $pyramidId,
@@ -280,7 +280,7 @@ class PyramidController extends AbstractController
                         ],
                     ],
                     'attribution' => [
-                        'title' => $formData['legal_notices'],
+                        'title' => Utils::convertCharsToHtmlEntities($formData['legal_notices']),
                         'url' => $formData['attribution_url'],
                     ],
                 ];
@@ -358,8 +358,8 @@ class PyramidController extends AbstractController
         $data = [
             'name' => $configuration['name'],
             'address_preview' => $urlPreview,
-            'title' => $typeInfos['title'],
-            'description' => $typeInfos['abstract'],
+            'title' => Utils::convertHtmlEntitiesToChars($typeInfos['title']),
+            'description' => Utils::convertHtmlEntitiesToChars($typeInfos['abstract']),
         ];
 
         // Les mots cles
@@ -373,7 +373,7 @@ class PyramidController extends AbstractController
 
         // Les mentions legales
         if (isset($configuration['attribution'])) {
-            $data['legal_notices'] = $configuration['attribution']['title'];
+            $data['legal_notices'] = Utils::convertHtmlEntitiesToChars($configuration['attribution']['title']);
             $data['attribution_url'] = $configuration['attribution']['url'];
         }
 
@@ -398,8 +398,8 @@ class PyramidController extends AbstractController
                     'name' => $formData['name'],
                     'layer_name' => $formData['name'],
                     'type_infos' => [
-                        'title' => $formData['title'],
-                        'abstract' => $formData['description'],
+                        'title' => Utils::convertCharsToHtmlEntities($formData['title']),
+                        'abstract' => Utils::convertCharsToHtmlEntities($formData['description']),
                         'used_data' => [
                             [
                                 'stored_data' => $pyramidId,
@@ -409,7 +409,7 @@ class PyramidController extends AbstractController
                         ],
                     ],
                     'attribution' => [
-                        'title' => $formData['legal_notices'],
+                        'title' => Utils::convertCharsToHtmlEntities($formData['legal_notices']),
                         'url' => $formData['attribution_url'],
                     ],
                 ];
@@ -1094,18 +1094,22 @@ class PyramidController extends AbstractController
     }
 
     /**
-     * Retourne vrai si la table contient des colonnes geometriques
+     * Retourne vrai si la table contient des colonnes geometriques.
      *
      * @param array $table
-     * @return boolean
+     *
+     * @return bool
      */
     private function hasGeometricColumns($table)
     {
-        if (! isset($table['attributes'])) return false;
-        
-        $filtered =  array_filter($table['attributes'], function($type, $name) {
+        if (!isset($table['attributes'])) {
+            return false;
+        }
+
+        $filtered = array_filter($table['attributes'], function ($type, $name) {
             return preg_match('/^geometry/', $type);
         }, ARRAY_FILTER_USE_BOTH);
-        return (1 == count($filtered));  
+
+        return 1 == count($filtered);
     }
 }
