@@ -2,7 +2,7 @@
 name: Signaler une anomalie
 about: Aidez nous à améliorer le validateur en complétant ce rapport d'anomalie.
 title: ''
-labels: :bug: bug
+labels: ':bug: bug'
 assignees: ''
 
 ---
