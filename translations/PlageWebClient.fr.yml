@@ -100,6 +100,7 @@ datastore:
             update_published: "Modifier les informations de publication"
             unpublish: "Dépublier"
             remove: "Supprimer"
+        back_to_index: "Revenir à la liste de mes espaces de travail"
 
     storage:
         title: "Gérer l'espace de %name%"

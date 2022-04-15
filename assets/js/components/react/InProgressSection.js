@@ -9,7 +9,7 @@ const InProgressSection = ({ datastoreId, storedDataList }) => {
                     <div className="row">
                         <div className="col">
                             <div className="row">
-                                <h2>En cours <small className="ml-2"><span>{storedDataList?.length}</span> action{storedDataList?.length > 0 ? 's' : ''}</small></h2>
+                                <h2 className="mt-2">En cours <small className="ml-2"><span>{storedDataList?.length}</span> action{storedDataList?.length > 0 ? 's' : ''}</small></h2>
                             </div>
 
                             {

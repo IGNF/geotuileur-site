@@ -38,6 +38,14 @@
 
     <div class="container-content" id="datastore-dashboard-content" data-datastore-id="{{ datastore._id }}"></div>
 
+    <div class="container-content mt-2">
+        <p class="text-center wysiwyg">
+            <a href="{{ path('plage_datastore_index') }}">
+                <span class="icon-arrow-left"></span>&nbsp;{{ "datastore.dashboard.back_to_index"|trans }}
+            </a>
+        </p>
+    </div>
+
     {% endapply %}
 {% endblock %}
 
