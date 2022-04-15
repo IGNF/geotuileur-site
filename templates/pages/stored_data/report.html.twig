@@ -210,7 +210,7 @@
 
             {% if stored_data.extent is defined %}
                 <h3>{{ 'stored_data.report.extent' | trans }}</h3>
-                <div id="extent-map" data-extent="{{ stored_data.extent | json_encode }}"></div>
+                <div id="extent-map" class="map" data-extent="{{ stored_data.extent | json_encode }}"></div>
             {% endif %}
         </div>
 

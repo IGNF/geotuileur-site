@@ -36,6 +36,7 @@
 
 .ui-map-zoom-levels {
     display: flex;
+    min-height: 300px;
     .ui-top-zoom-level, .ui-bottom-zoom-level {
         border: 1px solid $gray-400;
         flex: 0 1 50%;
