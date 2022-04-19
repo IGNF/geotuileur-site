@@ -183,12 +183,16 @@ $.widget("custom.zoomrange", {
                 matrixSet: 'EPSG:3857'
             });
 
-            let layer = new TileLayer({
+            let layer1 = new TileLayer({
                 opacity: 1,
                 source: new WMTS(wmtsOptions)
             })
-            self._map1.addLayer(layer);
-            self._map2.addLayer(layer);
+            let layer2 = new TileLayer({
+                opacity: 1,
+                source: new WMTS(wmtsOptions)
+            })
+            self._map1.addLayer(layer1);
+            self._map2.addLayer(layer2);
         }).catch(error => { });
     },
 
