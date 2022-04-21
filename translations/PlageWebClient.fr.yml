@@ -99,6 +99,7 @@ datastore:
             personalize: "Gérer les styles"
             update_published: "Modifier les informations de publication"
             unpublish: "Dépublier"
+            report: "Voir le rapport"
             remove: "Supprimer"
         back_to_index: "Revenir à la liste de mes espaces de travail"
 

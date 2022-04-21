@@ -160,12 +160,24 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                                 {
                                     isPyramidInitial || isPyramidUpdate || isPyramidSample ? ('') : (<a className="dropdown-item" href="#" onClick={(e) => handleAction('unpublish', e)}>{Translator.trans('datastore.dashboard.menus.unpublish')}</a>)
                                 }
-
-                                {isPyramidInitial || isPyramidUpdate || isPyramidSample ? ('') : (<div className="dropdown-divider"></div>)}
                             </>
                         ) : ('')
                     }
-                    {isPyramidInitial ? ('') : (<a className="dropdown-item text-danger" href="#" onClick={(e) => handleAction('remove', e)}>{Translator.trans('datastore.dashboard.menus.remove')}</a>)}
+                    {
+                        // On peut toujours voir le rapport
+                        (<a className="dropdown-item"href={Routing.generate("plage_stored_data_report", { datastoreId: datastoreId, storedDataId: storedData?._id })}>{Translator.trans('datastore.dashboard.menus.report')}</a>)
+                    }
+                    {
+                        // On peut tout supprimer sauf si une pyramide sert toujours de base à une mise à jour
+                        isPyramidInitial ? (
+                            ''
+                        ) : (
+                            <>
+                                <div className="dropdown-divider"></div>
+                                <a className="dropdown-item text-danger" href="#" onClick={(e) => handleAction('remove', e)}>{Translator.trans('datastore.dashboard.menus.remove')}</a>
+                            </>
+                        )
+                    }
                 </div>
             </>
         ) : (
