@@ -31,12 +31,14 @@ $.widget( "custom.samplewidget", $.custom.mapwidget, {
         this._onMoveEndBind = this._onMoveEnd.bind(this);
 
         // La couche est chargee
-        this.element.bind('samplewidgetinitialized', function() {
-            // calcul de l'emprise pour 10 tuiles a ce niveau de zoom (this.options.zoom)
-            self._initialize();
+        this.element.bind('samplewidgetinitialized', () => {
+            let layer = this._map.getLayers().item(0);
 
-            self._map.on("moveend", self._onMoveEndBind);
-            self._map.on('postcompose', self._drawExtentBind);  
+            // calcul de l'emprise pour 10 tuiles a ce niveau de zoom (this.options.zoom)
+            this._initialize();
+
+            this._map.on("moveend", self._onMoveEndBind);
+            layer.on('postrender', self._drawExtentBind);  
         });
     },
 
@@ -70,8 +72,7 @@ $.widget( "custom.samplewidget", $.custom.mapwidget, {
      * @param {*} event 
      */
     _drawExtent: function(event) {
-        let dxy = this._size / this._map.getView().getResolutionForZoom(this.options.zoom);
-    
+        let dxy = this._size / this._map.getView().getResolutionForZoom(this.options.zoom);    
         let dxy2 = dxy / 2;
     
         let ctx = event.context;
