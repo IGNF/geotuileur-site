@@ -1,5 +1,4 @@
 const flash = require("../components/flash-messages");
-const jsZip = require("jszip");
 
 import React from 'react';
 import ReactDOM from 'react-dom';

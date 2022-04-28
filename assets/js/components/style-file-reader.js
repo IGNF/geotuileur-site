@@ -1,7 +1,6 @@
 import SldParser from 'geostyler-sld-parser';
 import QGISStyleParser from 'geostyler-qgis-parser';
 import MapboxStyleParser from 'geostyler-mapbox-parser';
-const utils = require("../utils");
 
 const parseError = Translator.trans('pyramid.style.parse_failed');
 
