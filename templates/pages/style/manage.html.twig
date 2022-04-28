@@ -35,7 +35,7 @@
                     <label class="btn btn-sm btn--ghost btn--primary w-100" for="style-file">
                         <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import'|trans }}                    
                     </label>
-                    <input type="file" id="style-file" accept=".json">
+                    <input type="file" id="style-file" accept=".sld, .qml, .json">
                 </div>
                 <div id="styles-wrapper"></div>
             </div>
@@ -54,13 +54,13 @@
             </div>   
         </div>
 	</div>
+
     {# template de la boite de dialogue #}
     <template id="template-dlg-style">
         <label>{{'pyramid.style.name'|trans }}</label>
         <input class="form-control" type="text" id="style-name">
         <p class="style-error" style="display: none;"></p>
     </template>
-
 	{% endapply %}
 {% endblock %}
 

@@ -317,7 +317,7 @@ pyramid:
         change_default_failed: "La mise à jour du style par défaut s'est mal passée côté serveur."
         change_default_wait_msg: "Mise à jour du style par défaut en cours ..."
         download_failed: "Le téléchargement du style s'est mal passé."
-
+        parse_failed: "L'analyse du fichier a échoué."
     form_add:
         title: "Créer le flux"
         heading: "Paramétrez votre flux"

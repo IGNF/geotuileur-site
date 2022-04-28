@@ -7,6 +7,7 @@ use App\Exception\PlageApiException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,6 +76,54 @@ class StyleController extends AbstractController
             $path = "/datastores/$datastoreId/$pyramidId/styles/$filename";
             
             // Ajout de l'annexe
+            $annexe = $this->plageApi->annexe->add($datastoreId, $file, $path);
+
+            // Mise a jour des tags de $pyramid
+            $id = $annexe['_id'];
+            $tagStyles['styles'][$id] = $name;
+            $tags = [
+                'default_style' => $id,
+                'styles' => json_encode($tagStyles['styles'])
+            ];
+        
+            $this->plageApi->storedData->addTags($datastoreId, $pyramidId, $tags);
+
+            $url = $this->params->get('api_plage_annexe_url') . $annexe['paths'][0];
+            return new JsonResponse(['id' => $id, 'name' => $name, 'url' => $url]);
+        } catch(PlageApiException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());   
+        }
+    }
+
+    /**
+     * AJAX Request
+     * Ajout d'un style
+     *
+     * @Route("/styles/add-mapbox",
+     *      name="add_ajax_mapbox",
+     *      options={"expose"=true},
+     *      condition="request.isXmlHttpRequest()",
+     *      methods={"POST"}
+     * )
+     * Response JSON
+     */
+    public function ajaxAddMapbox($datastoreId, $pyramidId, Request $request) 
+    {
+        try {
+            $tagStyles = $this->plageApi->storedData->getTagStyles($datastoreId, $pyramidId);
+            
+            $name = $request->request->get('name');
+            $style = $request->request->get('style');
+
+            $id = uniqid();
+            $filename = "mapbox-$id.json"; 
+
+            $filepath = join([$this->params->get('oneup_uploader_gallery_path'), DIRECTORY_SEPARATOR, $filename]);
+            file_put_contents($filepath, $style);
+            $file = new UploadedFile($filepath, $filename, 'application/json', null, true);
+               
+            // Ajout de l'annexe
+            $path = "/datastores/$datastoreId/$pyramidId/styles/$filename";
             $annexe = $this->plageApi->annexe->add($datastoreId, $file, $path);
 
             // Mise a jour des tags de $pyramid

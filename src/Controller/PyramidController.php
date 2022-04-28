@@ -56,7 +56,6 @@ class PyramidController extends AbstractController
         // just for precaution, normally these errors "shouldn't" occur
         if (!$vectordbId) {
             $this->addFlash('error', "Aucune donnée en entrée n'a été fournie");
-
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
