@@ -31,11 +31,10 @@
                     <i class="icon-question text-primary"></i>&nbsp;
                     {{ 'pyramid.style.create_help'|trans({'%create_url%': path('plage_doc')~'#/style' }) | raw }}
                 </p>
-                <div class="mt-1 text-center" id="block-import">
-                    <label class="btn btn-sm btn--ghost btn--primary w-100" for="style-file">
-                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import'|trans }}                    
-                    </label>
-                    <input type="file" id="style-file" accept=".sld, .qml, .json">
+                <div class="block-import mt-1 text-center">
+                    <button class="btn btn-sm btn--ghost btn--primary w-100" id="import-styles">
+                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import_style'|trans }}                  
+                    </button> 
                 </div>
                 <div id="styles-wrapper"></div>
             </div>
@@ -56,10 +55,43 @@
 	</div>
 
     {# template de la boite de dialogue #}
-    <template id="template-dlg-style">
-        <label>{{'pyramid.style.name'|trans }}</label>
-        <input class="form-control" type="text" id="style-name">
-        <p class="style-error" style="display: none;"></p>
+    <template id="template-dlg-multiple">
+        <div class="form-multiple">
+            <div class="form-row mb-1">
+                <label>{{'pyramid.style.name'|trans }}</label>
+                <input class="form-control" type="text" id="style-name">
+            </div>
+            <div class="form-group form-group-custom-control mb-0">
+                <fieldset>
+                    <legend>{{ 'pyramid.style.file_type'|trans }}</legend>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"  id="file-type-1" name="file-type" value="json" checked="">
+                        <label class="custom-control-label" for="file-type-1">json</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"  id="file-type-2" name="file-type" value="sld">
+                        <label class="custom-control-label" for="file-type-2">sld</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"  id="file-type-3" name="file-type" value="qml">
+                        <label class="custom-control-label" for="file-type-3">qml</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="block-import text-center" id="json-style">
+                <label class="btn btn-sm btn--ghost btn--primary w-50" for="json-file">
+                    <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import'|trans }}
+                </label>
+                <input type="file" id="json-file" accept=".json">
+            </div>
+            <div class="border px-1" id="sld-style" style="display: none;">
+                <h6 class="mt-1 text-center btn--primary">{{ 'pyramid.style.layers'|trans }}</h6>
+            </div>
+            <div class="border px-1" id="qml-style" style="display: none;">
+                <h6 class="mt-1 text-center btn--primary">{{ 'pyramid.style.layers'|trans }}</h6>
+            </div>
+            <p class="style-error" style="display: none;"></p>
+        </div>
     </template>
 	{% endapply %}
 {% endblock %}

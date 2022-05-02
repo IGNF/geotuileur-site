@@ -13,16 +13,6 @@
         display: flex;
         flex-direction: column;
         width: 34rem;
-
-        #block-import {
-            img {
-                width: 24px;
-                height: 24px;
-            }
-            #style-file {
-                display: none;
-            }
-        }
     }
 
     .help-block {
@@ -32,6 +22,16 @@
         i {
             color: $mainColor;
         }
+    }
+}
+
+.block-import {
+    img {
+        width: 24px;
+        height: 24px;
+    }
+    [id^=style-file], #json-file {
+        display: none;
     }
 }
 

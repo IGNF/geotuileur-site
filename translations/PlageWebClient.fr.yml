@@ -305,7 +305,7 @@ pyramid:
     style:
         title: Gérer les styles
         create_help: Comment créer un style ? Consultez <a href="%create_url%" target="_blank">l''aide en ligne</a>
-        import: "Importer un style"
+        import_style: "Importer un style"
         name: "Donnez un nom *"
         name_not_empty: "Le nom est obligatoire"
         name_exists: "Ce nom existe déjà"
@@ -318,6 +318,9 @@ pyramid:
         change_default_wait_msg: "Mise à jour du style par défaut en cours ..."
         download_failed: "Le téléchargement du style s'est mal passé."
         parse_failed: "L'analyse du fichier a échoué."
+        file_type: "Type de fichier"
+        import: "Importer"
+        layers: "Couches"
     form_add:
         title: "Créer le flux"
         heading: "Paramétrez votre flux"
