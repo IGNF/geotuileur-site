@@ -7,6 +7,8 @@ import StylesList from "../components/react/StylesList";
 
 export class ImportStyles {
 	constructor(pyramidDatas) {
+        this._types = ['json', 'sld', 'qml'];
+
 		this._datastoreId = pyramidDatas.datastoreid;
 		this._pyramid     = pyramidDatas.pyramid;
 
@@ -82,7 +84,7 @@ export class ImportStyles {
         return clone;
     }
 
-    showDialog(callback) {
+    showDialog() {
         let self = this;
 
         let clone = this.buildForm();
@@ -117,7 +119,6 @@ export class ImportStyles {
                             return false;
                         }
 
-                        let type = $form.find('input[name="file-type"]:checked').val();
                         
                         if ('json' === self._fileType) {
                             let files = $('.form-multiple #json-file').prop('files');
@@ -145,16 +146,12 @@ export class ImportStyles {
         });
 
         dlg.init(() => {
-            let self = this;
+            //let self = this;
             let $form = $('.form-multiple');
             
             // Changement de type de fichier
             $form.find('input[name="file-type"]').on('change', (e) => {
-                self._fileType = $(e.currentTarget).val();
-                ['json', 'sld', 'qml'].forEach(type => {
-                    let $div = $(`#${type}-style`);
-                    (self._fileType === type) ? $div.show() : $div.hide();  
-                });
+                this._toggleType($(e.currentTarget).val());
             });
 
             // Changement du fichier json
@@ -162,10 +159,10 @@ export class ImportStyles {
                 let $this = $(e.currentTarget);
 
                 let file = $this.prop('files')[0];
-                let extension = file.name.split('.').pop().toLowerCase();
-                if ('json' !== extension) {
-                    $this.val('');   
-                }
+                if (! this._hasRightExtension(file)) {
+                    $this.val("");
+                    $('#filename-json').text("");    
+                } else $('#filename-json').text(file.name);
             });
 
             // Changement de fichier SLD ou QML
@@ -175,16 +172,11 @@ export class ImportStyles {
                 let layer   = $(`#layer-${num}`).data('layer');
 
                 let file = $this.prop('files')[0];
-                let extension = file.name.split('.').pop().toLowerCase();
-                if (extension !== self._fileType) {
-                    $(`#layer-${num}`).text(`${layer}`);
-                    $(`#layer-${num}`).prop('title', "");
-                    $this.val('');
-                    return;   
-                }
+                let ok = this._hasRightExtension(file);
 
-                $(`#layer-${num}`).text(`* ${layer}`);
-                $(`#layer-${num}`).prop('title', file.name);
+                $(`#filename-${num}`).text(ok ? file.name : "");
+                $(`#layer-${num}`).text(ok ? `* ${layer}` : `${layer}`);
+                if (! ok)   $this.val("");
             });
 
             // Suppression du fichier d'import
@@ -193,13 +185,31 @@ export class ImportStyles {
                 
                 let num     = $this.data('num'); 
                 let layer   = $(`#layer-${num}`).data('layer');
-                $(`#layer-${num}`).text(layer);
-                $(`#layer-${num}`).prop('title', "");
+                $(`#filename-${num}`).text("");
                 $(`#style-file-${num}`).val("");
+                $(`#layer-${num}`).text(layer);
             });
         });
     }
 	
+    _hasRightExtension(file) {
+        let extension = file.name.split('.').pop().toLowerCase();
+        return (extension === this._fileType);
+    }
+
+    _toggleType(type) {
+        this._fileType = type;
+        $(`#${type}-style`).show();
+
+        let others = this._types.filter(t => t !== type);
+        others.forEach(t => {
+            // Suppression des fichiers et des noms de fichiers
+            $(`#${t}-style input[type="file"]`).val("");
+            $(`#${t}-style div[id^="filename-"]`).text("");
+            $(`#${t}-style`).hide();
+        });
+    }
+
 	_setMetadatas(metadatas) {
 		this._metadatas = metadatas;
 		this._styleFileReader = new StyleFileReader(metadatas);
@@ -210,7 +220,10 @@ export class ImportStyles {
             let $main = $(clone).find(`div#${type}-style`);
             let $row = $('<div>', { class: 'row'}).appendTo($main);
 
-            $('<label>', { class: "form-label col-md-6", id: `layer-${this._num}`, text: layer.id, 'data-layer': layer.id }).appendTo($row);
+            let $div = $('<div>', { class: 'col-md-6' }).appendTo($row);
+            $('<label>', { class: "form-label mb-0", id: `layer-${this._num}`, text: layer.id, 'data-layer': layer.id }).appendTo($div);
+            $('<div>', {class: 'ml-2 filename', id: `filename-${this._num}`}).appendTo($div);
+
             let divImport = this._templateImport.replaceAll('NUM', this._num);
             divImport = divImport.replaceAll('TYPE', type);
             divImport = divImport.replaceAll('LAYER', layer.id);
