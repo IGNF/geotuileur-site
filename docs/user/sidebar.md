@@ -18,6 +18,6 @@
 
 - Tutoriels :
 - [Préparer un fichier Geopackage avec QGIS](tutos/gpkg-qgis.md)
-- [Préparer un fichier Geopackage avec Arcgis](tutos/gpkg-arcgis.md)
+- [Préparer un fichier Geopackage avec Arcgis Pro](tutos/gpkg-arcgis.md)
 - [Utiliser un flux de tuiles vectorielles dans QGIS](tutos/vectortiles-in-qgis.md)
 - [Utiliser un flux de tuiles vectorielles sur le Géoportail](tutos/vectortiles-in-geoportail.md)

@@ -1,11 +1,21 @@
-# Préparer un fichier Geopackage avec ArcGIS
+# Préparer un fichier Geopackage avec ArcGIS Pro
 
-Allez dans l'onglet **Partager** puis cliquez sur l'option **Couche** dans le groupe **Paquetage**.
+Ouvrez le volet **Géotraitement** de votre projet ArcGIS en cliquant sur le bouton **Outils** de l'onglet **Analyse**. Dans la zone de recherche,  tapez **"Créer une base de données SQLite"** puis sélectionnez le premier outil. 
 
-![Paquetage](../img/tutos/gpkg-arcgis/arcgis_1.jpg)
+![Emplacement du volet Géotraitement](../img/tutos/gpkg-arcgis/geotraitement.jpg)
 
-Remplissez ensuite les champs dans la fenêtre "Empaqueter les couches" qui s'affiche et indiquer l'emplacement où vous voulez déposer votre paquetage. 
+Renseignez **l'emplacement** ainsi que le **nom de sortie** que vous désirez pour votre fichier. 
 
-![Options d'empaquetage](../img/tutos/gpkg-arcgis/arcgis_2.jpg)
+![Formulaire de création d'une base de données SQLite](../img/tutos/gpkg-arcgis/creation.jpg)
 
-Cliquez ensuite sur **Paquetage**.
+Cliquez ensuite sur **Exécuter**.
+
+Une fois le geopackage crée, il faut exporter les entités de la couche dans celui-ci. Pour cela, faites un **Clic droit** sur la couche souhaitée, puis dans **Données**, sélectionnez **Exporter des entités**. 
+
+![Emplacement de la fonctionnalité d'export](../img/tutos/gpkg-arcgis/export.jpg)
+
+Renseignez le nom en sortie et dans **Emplacement en sortie**, indiquez le geopackage crée précédemment puis cliquez sur **Ok**.
+
+![Formulaire d'export des entités](../img/tutos/gpkg-arcgis/export2.jpg)
+
+Vous pouvez maintenant intégrer votre geopackage zippé dans le Géotuileur. 
