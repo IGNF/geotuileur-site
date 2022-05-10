@@ -24,6 +24,7 @@ Le lien public (avec ou sans précision de positionnement et d'échelle) est int
         sandbox="allow-forms allow-scripts allow-same-origin" src="{url de la carte}">
 </iframe>
 ```
+À noter : Comme pour le lien public, la vue est positionnée par défaut au centre des données et au niveau de zoom maximum. Si vous souhaitez le modifier, il vous suffit d'ajouter une chaine de caractères de la forme `#map={z}/{lat}/{lon}` en fin d'URL pour fixer un zoom et un centrage à l'ouverture. Vous pouvez naviguer sur le lien public et copier-coller le contenu de la barre d'adresse du navigateur pour obtenir cette chaine de caractères.
 
 ## Comment partager les informations techniques du flux ?
 
