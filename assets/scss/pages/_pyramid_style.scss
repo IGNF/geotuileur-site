@@ -6,6 +6,7 @@
 
     #map-target {
         flex-grow: 1; // map fills remaining space
+        min-height: 500px;
         max-height: 800px; // avoid map oversizing when resizing the window
     }
 

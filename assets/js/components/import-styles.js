@@ -16,15 +16,13 @@ export class ImportStyles {
             datastoreId: this._datastoreId, 
             pyramidId: this._pyramid._id
         };
-		this._urls            = $.extend({}, { 
-			add: Routing.generate('plage_style_add_ajax', params),
-			add_mapbox: Routing.generate('plage_style_add_ajax_mapbox', params)
-		});
+		this._url = Routing.generate('plage_style_add_ajax_mapbox', params)
 		
-		this._metadatas = null;
-		this._styleFileReader = null;
-        this._fileType = 'json';
-        this._num = 0;
+		this._metadatas         = null;
+        this._layerNames        = [];
+		this._styleFileReader   = null;
+        this._fileType          = 'json';
+        this._num               = 0;
 
         let importText = Translator.trans('pyramid.style.import');
         this._templateImport = '<div class="block-import col-md-5 text-center">'
@@ -67,6 +65,11 @@ export class ImportStyles {
 			});
 			this._stylesList = ReactDOM.render(re, document.getElementById('styles-wrapper'));
 			this._setMetadatas(event.metadatas);
+
+            // Recuperation du nom des couches
+            this._metadatas.vector_layers.forEach(layer => {
+                this._layerNames.push(layer.id);
+            });
 		});
 
         $('#import-styles').on('click', () => {
@@ -74,8 +77,12 @@ export class ImportStyles {
         });
 	}
 	
+    /**
+     * Construction du formulaire
+     * @returns 
+     */
     buildForm() {
-        this._num = 0;
+        this._reset();
 
         const template = document.getElementById("template-dlg-multiple");
         const clone = template.content.cloneNode(true);
@@ -84,6 +91,10 @@ export class ImportStyles {
         return clone;
     }
 
+    /**
+     * Affichage de la boite de dialogue
+     * @returns 
+     */
     showDialog() {
         let self = this;
 
@@ -104,22 +115,16 @@ export class ImportStyles {
                     callback: () => {
                         let $form = $('.form-multiple');
 
-                        let $error = $form.find('.style-error');
-                        $error.hide();
-
                         let name = $form.find('#style-name').val();
                         if (! name) {
-                            $error.text(Translator.trans('pyramid.style.name_not_empty'));
-                            $error.show();
+                            self._showError(Translator.trans('pyramid.style.name_not_empty'));
                             return false;
                         }
                         if (self._stylesList.styleExists(name)) {
-                            $error.text(Translator.trans('pyramid.style.name_exists'));
-                            $error.show();
+                            self._showError(Translator.trans('pyramid.style.name_exists'));
                             return false;
                         }
 
-                        
                         if ('json' === self._fileType) {
                             let files = $('.form-multiple #json-file').prop('files');
                             if (files.length) {
@@ -155,30 +160,11 @@ export class ImportStyles {
             });
 
             // Changement du fichier json
-            $form.find('input[id=json-file]').on('change', (e) => {
-                let $this = $(e.currentTarget);
-
-                let file = $this.prop('files')[0];
-                if (! this._hasRightExtension(file)) {
-                    $this.val("");
-                    $('#filename-json').text("");    
-                } else $('#filename-json').text(file.name);
-            });
+            $form.find('input[id=json-file]').on('change', (e) => { this._onJsonFileChange(e); });
 
             // Changement de fichier SLD ou QML
-            $form.find('input[id^=style-file]').on('change', (e) => {
-                let $this   = $(e.currentTarget);
-                let num     = $this.data('num');
-                let layer   = $(`#layer-${num}`).data('layer');
-
-                let file = $this.prop('files')[0];
-                let ok = this._hasRightExtension(file);
-
-                $(`#filename-${num}`).text(ok ? file.name : "");
-                $(`#layer-${num}`).text(ok ? `* ${layer}` : `${layer}`);
-                if (! ok)   $this.val("");
-            });
-
+            $form.find('input[id^=style-file]').on('change', (e) => { this._onFileChange(e); });
+           
             // Suppression du fichier d'import
             $form.find('.remove-style').on('click', (e) => {
                 let $this   = $(e.currentTarget);
@@ -191,12 +177,102 @@ export class ImportStyles {
             });
         });
     }
+
+    /**
+     * 
+     */
+    _reset() {
+        this._num = 0;
+        this._fileType = 'json';
+    }
 	
+    /**
+     * Affichage du message d'erreur. Celui-ci disparait apres 5 secondes
+     * @param string message 
+     */
+    _showError(message) {
+        let $error = $('.form-multiple').find('.style-error');
+        $error.text(message);    
+        setTimeout(() => { $error.text("") }, 5000);
+    }
+
+    /**
+     * L'extension du fichier est-elle correcte ?
+     * @param Filefile 
+     * @returns 
+     */
     _hasRightExtension(file) {
         let extension = file.name.split('.').pop().toLowerCase();
         return (extension === this._fileType);
     }
 
+    /**
+     * Le fichier json a change
+     * @param Event e 
+     */
+    async _onJsonFileChange(e) {
+        let $this = $(e.currentTarget);
+
+        let file = $this.prop('files')[0];
+        try {
+            let content = await this._checkFile(file).catch(err => { throw err; });
+            let json = JSON.parse(content);
+
+            const layers = json.layers.filter(layer => this._layerNames.includes(layer["source-layer"]));
+            if (! layers.length) {
+                throw new Error(Translator.trans('pyramid.style.file_not_match'));
+            }
+            $('#filename-json').text(file.name);
+        } catch(err) {
+            $this.val("");
+            $('#filename-json').text("");
+
+            this._showError(err.message);    
+        }
+    }
+
+    /**
+     * Le fichier SLD ou QML a change
+     * @param Event e 
+     */
+     async _onFileChange(e) {
+        let $this   = $(e.currentTarget);
+        
+        let file    = $this.prop('files')[0];
+        let num     = $this.data('num');
+        let layer   = $(`#layer-${num}`).data('layer');
+
+        try {
+            await this._checkFile(file);
+            $(`#filename-${num}`).text(file.name);
+            $(`#layer-${num}`).html(`${layer}&nbsp;<i class="icon-check"></i>`);
+        } catch(err) {
+            $(`#filename-${num}`).text("");
+            $(`#layer-${num}`).html(`${layer}`);
+            $this.val("");
+
+            this._showError(err.message);    
+        }
+    }
+
+    /**
+     * On verifie que le fichier est correct et peut etre analyse (parse)
+     * @param File file 
+     * @returns 
+     */
+    async _checkFile(file) {
+        if (! this._hasRightExtension(file)) {
+            throw new Error(Translator.trans('pyramid.style.type_not_authorized'));  
+        }
+
+        let content = await this._styleFileReader.parseFile(file).catch(err => { throw err; });
+        return content;
+    }
+
+    /**
+     * Changement de type de fichier
+     * @param string type 
+     */
     _toggleType(type) {
         this._fileType = type;
         $(`#${type}-style`).show();
@@ -210,11 +286,20 @@ export class ImportStyles {
         });
     }
 
+    /**
+     * Initialisation
+     * @param Object metadatas 
+     */
 	_setMetadatas(metadatas) {
 		this._metadatas = metadatas;
 		this._styleFileReader = new StyleFileReader(metadatas);
 	}
 	
+    /**
+     * Construction des sous formulaires SLD et QML
+     * @param HTMLElement clone 
+     * @param string type SLD, QML
+     */
 	_build(clone, type) {
         this._metadatas.vector_layers.forEach(layer => {
             let $main = $(clone).find(`div#${type}-style`);
@@ -237,13 +322,22 @@ export class ImportStyles {
         });    
     }
 
-    _ajaxCall(url, data) {
+    /**
+     * Appel ajax pour l'enregistrement du style
+     * @param string name Nom du style
+     * @param string style Style
+     */
+    _ajaxCall(name, style) {
         let self = this;
+        
+        let formData = new FormData();
+        formData.append("name", name);
+        formData.append("style", style);
 
         $.ajax({
-            url: url,
+            url: this._url,
             method: 'POST',
-            data: data,
+            data: formData,
             contentType: false,
             processData: false
         }).done(style => {
@@ -256,24 +350,44 @@ export class ImportStyles {
         })   
     }
     
+    /**
+     * Appel ajax pour l'enregistrement du style JSON
+     * @param string name 
+     * @param File file 
+     */
     _jsonFileCallback(name, file) {
         wait.show(Translator.trans('pyramid.style.add_wait_msg'));
-        
-        let formData = new FormData();
-        formData.append("name", name);
-        formData.append("file", file);
-        this._ajaxCall(this._urls.add, formData);
+
+        this._styleFileReader.readJsonFile(name, file)
+            .then(style => {
+                // filtrage des layers
+                style.layers.filter(layer => {
+                    return this._layerNames.includes(layer["source-layer"]);
+                }).forEach(layer => {
+                    layer.source = this._metadatas.name;
+                });
+                this._ajaxCall(name, JSON.stringify(style));
+            }).catch(err => {
+                wait.hide();
+                flash.flashAdd(err.message);
+            })
     }
 
+    /**
+     * Appel ajax pour l'enregistrement des style SLD et QML
+     * @param Object datas
+     * @param File file 
+     */
     _otherTypesFileCallback(datas) {
+        if (! Object.keys(datas).length) {
+            return;
+        }
+
         wait.show(Translator.trans('pyramid.style.add_wait_msg'));
 
         this._styleFileReader.readFiles(datas.name, datas.styles)
             .then(style => {
-                let formData = new FormData();
-                formData.append("name", datas.name);
-                formData.append("style", style);
-                this._ajaxCall(this._urls.add_mapbox, formData);    
+                this._ajaxCall(datas.name, style);
             }).catch(err => {
                 wait.hide();
                 flash.flashAdd(err.message);
