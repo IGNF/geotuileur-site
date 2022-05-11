@@ -154,6 +154,7 @@ class PyramidController extends AbstractController
                         'bottom_level' => strval($mainLevels['bottomLevel']),
                         'top_level' => strval($mainLevels['topLevel']),
                         'composition' => $composition,
+                        'tippecanoe_options' => $formData['tippecanoe'],
                     ];
                     if ($formData['sample']) {
                         $bbox = json_decode($formData['bbox']);
