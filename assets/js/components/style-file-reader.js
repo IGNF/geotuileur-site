@@ -19,7 +19,7 @@ export class StyleFileReader {
         // Les differents parser
         this._sldParser     = new SldParser();
         this._qgisParser    = new QGISStyleParser();
-        this._mapboxParser  = new MapboxStyleParser();
+        this._mapboxParser  = new MapboxStyleParser({ ignoreConversionErrors: true });
     }
 
     /**
@@ -53,6 +53,12 @@ export class StyleFileReader {
             let fileReader = new FileReader();
             fileReader.onload = async () => {
                 let content = fileReader.result;
+                
+                // Si SLD, recherche de la version
+                if ('sld' === extension) {
+                    parser.sldVersion = this.version(content);
+                }
+
                 let style = await parser.readStyle(content)
                     .catch(err => { return reject(err); });
                 
@@ -84,7 +90,8 @@ export class StyleFileReader {
                     let json = JSON.parse(content);
                     json.name       = name,
                     json.sources    = this._sources;
-
+                    this._uniqueLayerIds(json['layers']);
+                    
                     resolve(json);
                 }).catch(err => { reject(err); });
         });
@@ -166,10 +173,29 @@ export class StyleFileReader {
                         jsStyle.layers = jsStyle.layers.concat(mbStyles[s].layers);  
                     }
 
-                    resolve(JSON.stringify(jsStyle));
+                    this._uniqueLayerIds(jsStyle['layers']);
+                    resolve(jsStyle);
                 }).catch(err => {
                     reject(err);
                 });
         });  
+    }
+
+    /**
+     * Retourne un tableau de layer avec un id unique
+     * @param Array of Object layers 
+     */
+     _uniqueLayerIds(layers) {
+        for (let i=0; i<layers.length-1; ++i) {
+            let num = 1;
+
+            let layerId = layers[i].id;
+            for (let j=i+1; j<layers.length; ++j) {
+                if (layers[j].id === layerId) {
+                    layers[j].id = `${layerId} ${num}`;
+                    num++;
+                }
+            }
+        }
     }
 }

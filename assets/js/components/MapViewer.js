@@ -19,6 +19,9 @@ import GetFeatureInfo from "geoportal-extensions-openlayers/src/OpenLayers/Contr
 import ScaleLine from 'ol/control/ScaleLine';
 import { applyStyle as mapboxApplyStyle } from "ol-mapbox-style";
 
+import MapboxStyleParser from 'geostyler-mapbox-parser';
+import OlStyleParser from 'geostyler-openlayers-parser';
+
 const flash = require("./flash-messages");
 
 /**
@@ -250,13 +253,18 @@ export default class MapViewer extends Map {
             .then(response => {
                 return response.json();
             }).then(mapboxStyle => {
-                mapboxApplyStyle(
-                    this._tmsLayer,
-                    mapboxStyle,
-                    Object.keys(mapboxStyle.sources)[0]
-                );
-                this.dispatchEvent({ type: 'styleapplied', style: mapboxStyle });
-            }).catch(error => {
+                let mbp = new MapboxStyleParser();
+                mbp.readStyle(mapboxStyle).then(gStyle => {
+                    let olp = new OlStyleParser();
+                    olp.writeStyle(gStyle.output).then(olStyle =>{
+                        this._tmsLayer.setStyle(olStyle.output);   
+                    }).catch(() => {
+                        flash.flashAdd("La création du style Openlayers a échoué ", "warning");
+                    });   
+                }).catch(() => {
+                    flash.flashAdd(Translator.trans('pyramid.style.parse_failed'), "warning");   
+                });
+            }).catch(() => {
                 flash.flashAdd(`Le style n'a pas été trouvé. Le style par défaut a été appliqué`, "warning");
             });
     }

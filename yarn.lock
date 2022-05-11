@@ -3482,6 +3482,14 @@ geostyler-mapbox-parser@^2.0.0:
   dependencies:
     geostyler-style "^5.0.0"
 
+geostyler-openlayers-parser@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/geostyler-openlayers-parser/-/geostyler-openlayers-parser-3.0.2.tgz#22e301c6ae7180d4148a804925d803870e20fd7f"
+  integrity sha512-HiEjaobWR/UU/1NoSyobV85OIdoX7gxQaaTVQaFIyo7+8zN+RWRMf99chmY9PSasX8b5khN1LJfVL1ySUKwcsQ==
+  dependencies:
+    geostyler-style "^5.0.2"
+    lodash "^4.17.21"
+
 geostyler-qgis-parser@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/geostyler-qgis-parser/-/geostyler-qgis-parser-1.0.0.tgz#427e53a3f1fc7196eb21fcf74db446dbe8f2013f"

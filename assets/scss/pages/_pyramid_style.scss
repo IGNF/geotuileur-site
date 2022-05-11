@@ -59,4 +59,15 @@
 
 .style-error {
     color: $text-danger;
+    .message-icon {
+        align-self: stretch;
+        color: $gray-600;
+        font-size: 1.2em;
+        margin-right: .5em; 
+        color: $brand-danger;
+        filter: invert(50%) sepia(96%) saturate(2934%) hue-rotate(332deg) brightness(97%) contrast(96%);   
+    }
+    .message-icon:before {
+        margin-bottom: 0;
+    }
 }

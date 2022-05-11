@@ -50,6 +50,9 @@ export class ImportStyles {
 		
 		// La couche TMS a ete ajoutee
 		this._viewer.on('tmslayeradded', (event) => {
+            // Mise a jour de l'entete de la page
+            $('.o-page-title h1').text(event.metadatas.title);
+
 			/**
 			 * STYLES LIST
 			 */
@@ -187,13 +190,19 @@ export class ImportStyles {
     }
 	
     /**
+     * Suppression du message
+     */
+    _clearError() {
+        $('.form-multiple').find('.style-error').html("");   
+    }
+
+    /**
      * Affichage du message d'erreur. Celui-ci disparait apres 5 secondes
      * @param string message 
      */
     _showError(message) {
         let $error = $('.form-multiple').find('.style-error');
-        $error.text(message);    
-        setTimeout(() => { $error.text("") }, 5000);
+        $error.html(`<span class="icons-alert message-icon"></span>${message}`);    
     }
 
     /**
@@ -211,8 +220,9 @@ export class ImportStyles {
      * @param Event e 
      */
     async _onJsonFileChange(e) {
-        let $this = $(e.currentTarget);
+        this._clearError();
 
+        let $this = $(e.currentTarget);
         let file = $this.prop('files')[0];
         try {
             let content = await this._checkFile(file).catch(err => { throw err; });
@@ -236,6 +246,8 @@ export class ImportStyles {
      * @param Event e 
      */
      async _onFileChange(e) {
+        this._clearError();
+
         let $this   = $(e.currentTarget);
         
         let file    = $this.prop('files')[0];
@@ -387,7 +399,7 @@ export class ImportStyles {
 
         this._styleFileReader.readFiles(datas.name, datas.styles)
             .then(style => {
-                this._ajaxCall(datas.name, style);
+                this._ajaxCall(datas.name, JSON.stringify(style));
             }).catch(err => {
                 wait.hide();
                 flash.flashAdd(err.message);
