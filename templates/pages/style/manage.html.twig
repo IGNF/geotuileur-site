@@ -33,7 +33,7 @@
                 </p>
                 <div class="block-import mt-1 text-center">
                     <button class="btn btn-sm btn--ghost btn--primary w-100" id="import-styles">
-                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import_style'|trans }}                  
+                        <span class="icon-load-file"></span> {{ 'pyramid.style.import_style'|trans }}                  
                     </button> 
                 </div>
                 <div id="styles-wrapper"></div>
@@ -57,8 +57,8 @@
     {# template de la boite de dialogue #}
     <template id="template-dlg-multiple">
         <div class="form-multiple">
-            <div class="form-row mb-1">
-                <label>{{'pyramid.style.name'|trans }}</label>
+            <div class="form-group mb-1">
+                <label class="control-label required">{{'pyramid.style.name'|trans }}</label>
                 <input class="form-control" type="text" id="style-name">
             </div>
             <div class="form-group form-group-custom-control mb-0">
@@ -78,18 +78,19 @@
                     </div>
                 </fieldset>
             </div>
-            <div class="block-import text-center" id="json-style">
+            <div class="block-import" id="json-style">
                 <label class="btn btn-sm btn--ghost btn--primary w-50" for="json-file">
-                    <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import'|trans }}
+                    <span class="icon-load-file"></span> {{ 'pyramid.style.import'|trans }}
                 </label>
                 <input type="file" id="json-file" accept=".json">
                 <div class="filename" id="filename-json"></div>
+                <p class="description wysiwyg">{{ 'pyramid.style.json_help'|trans|raw }}</p>
             </div>
             <div class="border px-1" id="sld-style" style="display: none;">
-                <h6 class="mt-1 text-center btn--primary">{{ 'pyramid.style.layers'|trans }}</h6>
+                <p class="description wysiwyg">{{ 'pyramid.style.sld_help'|trans }}</p>
             </div>
             <div class="border px-1" id="qml-style" style="display: none;">
-                <h6 class="mt-1 text-center btn--primary">{{ 'pyramid.style.layers'|trans }}</h6>
+                <p class="description wysiwyg">{{ 'pyramid.style.qml_help'|trans }}</p>
             </div>
             <p class="style-error my-1"></p>
         </div>

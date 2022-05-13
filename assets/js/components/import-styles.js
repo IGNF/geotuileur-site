@@ -25,9 +25,9 @@ export class ImportStyles {
         this._num               = 0;
 
         let importText = Translator.trans('pyramid.style.import');
-        this._templateImport = '<div class="block-import col-md-5 text-center">'
-            + '<label class="btn btn-sm btn--ghost btn--primary w-100" for="style-file-NUM">'
-            + `<img src="/geotuiler/build/img/icons/Deposer.png">&nbsp;&nbsp;${importText}</label>`                  
+        this._templateImport = '<div class="block-import">'
+            + '<label class="btn btn-sm btn--ghost btn--primary" for="style-file-NUM">'
+            + `<span class="icon-load-file"></span>&nbsp;${importText}</label>`                  
             + '<input type="file" id="style-file-NUM" accept=".TYPE" data-layer="LAYER" data-num="NUM"></input>'
             + '</div>';
 			
@@ -103,7 +103,7 @@ export class ImportStyles {
 
         let clone = this.buildForm();
         let dlg = bootbox.dialog({ 
-            title: Translator.trans('pyramid.style.import'),
+            title: Translator.trans('pyramid.style.import_modal_title'),
             message: clone,
             closeButton: false,
             buttons: {
@@ -315,18 +315,18 @@ export class ImportStyles {
 	_build(clone, type) {
         this._metadatas.vector_layers.forEach(layer => {
             let $main = $(clone).find(`div#${type}-style`);
-            let $row = $('<div>', { class: 'row'}).appendTo($main);
+            let $row = $('<div>', { class: 'd-flex flex-row'}).appendTo($main);
 
-            let $div = $('<div>', { class: 'col-md-6' }).appendTo($row);
+            let $div = $('<div>', { class: 'flex-grow-1' }).appendTo($row);
             $('<label>', { class: "form-label mb-0", id: `layer-${this._num}`, text: layer.id, 'data-layer': layer.id }).appendTo($div);
-            $('<div>', {class: 'ml-2 filename', id: `filename-${this._num}`}).appendTo($div);
+            $('<div>', {class: 'filename', id: `filename-${this._num}`}).appendTo($div);
 
             let divImport = this._templateImport.replaceAll('NUM', this._num);
             divImport = divImport.replaceAll('TYPE', type);
             divImport = divImport.replaceAll('LAYER', layer.id);
             $(divImport).appendTo($row);
 
-            let $btnRemove = $('<button>', { class: 'btn btn-sm btn--ghost px-0 remove-style', 'data-num': this._num });
+            let $btnRemove = $('<button>', { class: 'btn btn-sm btn--ghost remove-style', 'data-num': this._num });
             $btnRemove.append($('<i>', { class: 'icons-trash'}));
             $row.append($btnRemove);
  
