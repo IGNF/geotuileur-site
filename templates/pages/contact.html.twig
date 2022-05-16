@@ -36,6 +36,16 @@
             {{ form_errors(form.message) }}
         </div>
 
+        {% if subject is not null %}
+            <p class="description">
+                {% if "add_datastore" == subject %}
+                    Aide add_datastore
+                {% elseif "processing_failed" == subject %}
+                    Aide processing_failed
+                {% endif %}
+            </p>
+        {% endif %}
+
         <p class="wysiwyg">
             {{ "contact.personal_data"|trans }}<br/>
             <a href="https://www.ign.fr/institut/donnees-caractere-personnel" target="_blank">{{ "contact.personal_data_link"|trans }}</a>
