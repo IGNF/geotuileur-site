@@ -1,31 +1,35 @@
-@use 'abstracts/variables';
+@import
+    'abstracts/variables';
 
-@use 'layout/custom_header';
-@use 'layout/fullscreen';
-@use 'layout/with-notifications-bar';
+@import
+    'layout/custom_header',
+    'layout/fullscreen',
+    'layout/with-notifications-bar';
 
-@use 'components/alert';
-@use 'components/badge';
-@use 'components/bootbox';
-@use 'components/buttons';
-@use 'components/card';
-@use 'components/dropzone';
-@use 'components/ellipsis';
-@use 'components/flash_messages';
-@use 'components/forms';
-@use 'components/jquery-ui-zoomrange';
-@use 'components/map';
-@use 'components/ol';
-@use 'components/pagination';
-@use 'components/progress';
-@use 'components/stepper';
-@use 'components/tagify';
-@use 'components/upload_card';
-@use 'components/icons';
-@use 'components/tools';
+@import
+    'components/alert',
+    'components/badge',
+    'components/bootbox',
+    'components/buttons',
+    'components/card',
+    'components/dropzone',
+    'components/ellipsis',
+    'components/flash_messages',
+    'components/forms',
+    'components/jquery-ui-zoomrange',
+    'components/map',
+    'components/ol',
+    'components/pagination',
+    'components/progress',
+    'components/stepper',
+    'components/tagify',
+    'components/upload_card',
+    'components/icons',
+    'components/tools';
 
-@use 'pages/datastores';
-@use 'pages/pyramid_add';
-@use 'pages/pyramid_share';
-@use 'pages/pyramid_style';
-@use 'pages/report';
+@import
+    'pages/datastores',
+    'pages/pyramid_add',
+    'pages/pyramid_share',
+    'pages/pyramid_style',
+    'pages/report';

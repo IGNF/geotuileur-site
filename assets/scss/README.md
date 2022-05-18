@@ -1,15 +1,16 @@
 L'organisation des styles suit le **Pattern 7-1** (7 dossiers, 1 fichier) (Référence : https://sass-guidelin.es/)
 
-Le fichier principal est `main.scss` et il ne doit contenir que des `@use` (NB : [`@import` est découragé par l"équipe de Sass](https://sass-lang.com/documentation/at-rules/import)).
+Le fichier principal est `main.scss` et il ne doit contenir que des `@import`.
 
 Pour la lisibilité de `main.scss` :
 
 * les underscores et l'extension des fichiers `.scss`peut être oubliée,
+* une seule directive `@import` par dossier,
 * une ligne par fichier,
 * une ligne vide après chaque dossier,
 * pas d'import de tout un dossier avec `folder/*` car l'ordre est important en CSS.
 
-Les `@use` doivent être dans cet ordre :
+Les `@imports` doivent être dans cet ordre :
 
 1. `abstracts/` (variables, fonctions, mixins et placeholders sass)
 2. `vendors/` (styles tiers, jquery-ui, bootstrap...)
