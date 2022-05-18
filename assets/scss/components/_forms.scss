@@ -32,3 +32,8 @@ legend.col-form-label.required {
         content: "\00a0*";
     }
 }
+
+// Texte en gris même si .description est en dehors d'un form
+.description {
+    color: $gray-600
+}
