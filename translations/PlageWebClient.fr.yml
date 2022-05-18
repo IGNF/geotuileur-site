@@ -303,10 +303,11 @@ pyramid:
         flow_is_published: "<h4>Félicitations, votre flux de tuiles vectorielles est publié !</h4>"
 
     style:
-        title: Gérer les styles
+        title: Gérez les styles
+        manage: Gérer les styles
         create_help: Comment créer un style ? Consultez <a href="%create_url%" target="_blank">l''aide en ligne</a>
-        import_style: "Importer un style"
-        name: "Donnez un nom à votre style"
+        import_style: "Ajouter un style"
+        name: "Nommez votre style"
         name_not_empty: "Il est obligatoire de donner un nom à votre style"
         name_exists: "Ce nom de style existe déjà"
         type_not_authorized: "Ce type de fichier n'est pas autorisé"
@@ -320,10 +321,10 @@ pyramid:
         load_failed: "Le chargement du fichier a échoué."
         parse_failed: "L'analyse du fichier a échoué."
         file_not_match: "Le fichier de style n'est pas cohérent avec votre flux. Aucun nom de couche ne correspond."
-        file_type: "Format du ou des fichiers de style"
-        import_modal_title: "Importer un nouveau style"
-        import: "Ajouter un fichier"
-        json_help: "Le fichier doit être au format JSON et respecter les <a href='https://docs.mapbox.com/mapbox-gl-js/style-spec/' target='_blank'>spécifications de style Mapbox</a>. Le fichier sera modifié pour n'y conserver que les <em>layers</em> qui correspondent à des couches de votre flux."
+        file_type: "Choisissez un format"
+        import_modal_title: "Ajoutez un nouveau style"
+        import: "Importer un fichier"
+        json_help: "Le fichier doit être au format JSON et respecter les <a class='external-link' href='https://docs.mapbox.com/mapbox-gl-js/style-spec/' target='_blank'>spécifications de style Mapbox <span class='icon-external-link' aria-hidden='true'></span></a>. Le fichier sera modifié pour conserver uniquement les layers qui correspondent à des couches de votre flux."
         sld_help: "Ajoutez un fichier SLD par couche présente dans votre flux."
         qml_help: "Ajoutez un fichier QML par couche présente dans votre flux."
     form_add:

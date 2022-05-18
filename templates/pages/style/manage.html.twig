@@ -48,7 +48,7 @@
                 </a>
                 <div class="btn active">
                     <i class="icons-style-white"></i><br/>
-                    <span>{{ 'pyramid.style.title' | trans }}</span>
+                    <span>{{ 'pyramid.style.manage' | trans }}</span>
                 </div>
             </div>   
         </div>
@@ -56,6 +56,7 @@
 
     {# template de la boite de dialogue #}
     <template id="template-dlg-multiple">
+        <p class="small text-right mb-1">{{ 'mandatory_fields' | trans }}</p>
         <div class="form-multiple">
             <div class="form-group mb-1">
                 <label class="control-label required">{{'pyramid.style.name'|trans }}</label>
@@ -79,18 +80,29 @@
                 </fieldset>
             </div>
             <div class="block-import" id="json-style">
-                <label class="btn btn-sm btn--ghost btn--primary w-50" for="json-file">
-                    <span class="icon-load-file"></span> {{ 'pyramid.style.import'|trans }}
-                </label>
-                <input type="file" id="json-file" accept=".json">
+                <div class="form-group mb-1">
+                    <label class="btn btn-sm btn--ghost btn--primary w-50" for="json-file">
+                        <span class="icon-load-file"></span> {{ 'pyramid.style.import'|trans }}
+                    </label>
+                    <input type="file" id="json-file" accept=".json">
+                </div>
                 <div class="filename" id="filename-json"></div>
-                <p class="description wysiwyg">{{ 'pyramid.style.json_help'|trans|raw }}</p>
+                <p class="description wysiwyg">
+                    <span class="icon-question"></span>
+                    {{ 'pyramid.style.json_help'|trans|raw }}
+                </p>
             </div>
             <div class="border px-1" id="sld-style" style="display: none;">
-                <p class="description wysiwyg">{{ 'pyramid.style.sld_help'|trans }}</p>
+                <p class="description wysiwyg mb-1">
+                    <span class="icon-question"></span>
+                    {{ 'pyramid.style.sld_help'|trans }}
+                </p>
             </div>
             <div class="border px-1" id="qml-style" style="display: none;">
-                <p class="description wysiwyg">{{ 'pyramid.style.qml_help'|trans }}</p>
+                <p class="description wysiwyg mb-1">
+                    <span class="icon-question"></span>
+                    {{ 'pyramid.style.qml_help'|trans }}
+                </p>
             </div>
             <p class="style-error my-1"></p>
         </div>
