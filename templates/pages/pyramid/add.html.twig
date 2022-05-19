@@ -19,6 +19,8 @@
 {% endblock %}
 
 {% block body %}
+    {% include "components/composition_templates.html" %}
+
     {% apply spaceless %}
     <div class="container-content">
 
@@ -55,11 +57,17 @@
         {% set num = 0 %}
 
         {# Composition #}
-        <div class="generate-panel hidden container-content--smaller" id="part-2" data-numtables={{ numTables }}>
+        {# <div class="generate-panel hidden container-content--smaller" id="part-2" data-numtables={{ numTables }}> #}
+        <div class="generate-panel hidden container-content--smaller" 
+            id="part-2" 
+            data-docpath='{{ path('plage_doc') }}'
+            data-typeinfos='{{ type_infos|json_encode()|raw }}'
+            data-pyramidsample='{{ proc_creat_pyramid_sample|json_encode()|raw }}'
+        >
             <h2 class="text-center">{{ 'pyramid.form_add.compose_heading'| trans }}</h2>
             <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
             {{ form_label(form.composition) }}
-            {% for table in form.composition.children %}
+            {# {% for table in form.composition.children %}
                 <div id={{ "accordion-map" ~ num }} class="mb-1">
                     <div class="card" id="card-map">
                         <h3 class="card-title o-accordion__title mb-0">
@@ -113,7 +121,7 @@
                     </div>
                 </div>
                 {% set num = num + 1 %}
-            {% endfor %}
+            {% endfor %} #}
             <p class="wysiwyg clearfix">
                 <a class="float-left switch-panel btn btn--ghost btn--primary" href="#part-1"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</i></a>
                 <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-3">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>

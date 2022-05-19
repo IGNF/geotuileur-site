@@ -35,3 +35,5 @@ tools
 
 /public/data/**
 /templates/components/megamenu.html
+
+/cypress.json

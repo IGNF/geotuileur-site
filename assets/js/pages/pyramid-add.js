@@ -4,13 +4,18 @@ require('../components/jquery-ui-widgets/jquery-ui-zoomrange.js');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { TippeCanoeList } from '../components/react/Tippecanoe';
+import { PyramidComposition } from './pyramid-composition';
+
 const flash = require("../components/flash-messages");
+
+let datas = $('#part-2').data();
 
 let sampleInstance = null;
 let tippeCanoeList = null;
-let $bbox = $('#generate_pyramid_bbox');
-let numTables = $('div#part-2').data('numtables');
+let pyramidComposition = null;
 
+let $bbox = $('#generate_pyramid_bbox'); 
+let numTables = datas.typeinfos.relations.length;
 let first = true;
 
 /**
@@ -61,6 +66,12 @@ function getLevels() {
 };
 
 $(function () {
+    /**
+     * TABLES ET ATTRIBUTS
+     */
+    pyramidComposition = new PyramidComposition();
+    pyramidComposition.buildForm();
+
     /**
       * GESTION DES ZOOMS
       */

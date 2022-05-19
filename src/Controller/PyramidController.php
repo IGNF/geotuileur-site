@@ -212,6 +212,8 @@ class PyramidController extends AbstractController
             'form' => $form->createView(),
             'topLevelMin' => PyramidZoomLevels::TOP_LEVEL_MIN,
             'bottomLevelMax' => PyramidZoomLevels::BOTTOM_LEVEL_MAX,
+            'type_infos' => $typeInfos,
+            'proc_creat_pyramid_sample' => $procCreatPyramidSample ?? null,
             'tippecanoes' => $tippecanoes,
         ]);
     }
