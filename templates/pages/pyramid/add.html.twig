@@ -67,6 +67,7 @@
             <h2 class="text-center">{{ 'pyramid.form_add.compose_heading'| trans }}</h2>
             <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
             {{ form_label(form.composition) }}
+            <div id="composition"></div>
             {# {% for table in form.composition.children %}
                 <div id={{ "accordion-map" ~ num }} class="mb-1">
                     <div class="card" id="card-map">

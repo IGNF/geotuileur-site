@@ -204,6 +204,9 @@ $(function () {
         let levels = getLevels();
         $('#generate_pyramid_levels').val(JSON.stringify(levels));
 
+        let composition = pyramidComposition.asJsonString();
+        $('#generate_pyramid_composition').val(composition);
+        
         let sample = $('#generate_pyramid_sample').is(':checked');
         let $bbox = $('#generate_pyramid_bbox');
         if (sample && !$bbox.val()) {

@@ -249,6 +249,11 @@ $.widget("custom.zoomrange", {
         this._resetMarks();
     },
 
+    refresh: function() {
+        this._map1.getLayers().getArray()[0].changed();
+        this._map2.getLayers().getArray()[0].changed();
+    },
+
     /**
      * Affichage des cartes
      */

@@ -4,9 +4,9 @@ export class PyramidComposition {
      * Constructeur
      */
     constructor() {
-        this._$part2 = $('#part-2');
+        this._$container = $('#part-2 #composition');
         
-        let datas = this._$part2.data();
+        let datas = $('#part-2').data();
         this._docPath   = datas.docpath;
         this._typeInfos = datas.typeinfos;
         this._numTables = datas.typeinfos.relations.length;
@@ -56,14 +56,14 @@ export class PyramidComposition {
         const template = document.getElementById("template-table-accordeon");
         
         const $accordeon = $(template.content.cloneNode(true));
-        $accordeon.prop('id', id);
-
+        
+        $accordeon.find('.table-composition').prop('id', id);
         $accordeon.find('.o-accordion__panel')
             .prop('id', `collapse-map${num}`)
             .attr('data-num', num);
 
         let $a = $accordeon.find("a");
-        $a.prop('href',`#collapse-map${num}`).data('parent', id);
+        $a.prop('href',`#collapse-map${num}`).attr('data-parent', `#${id}`);
 
         let html = relation.name;
         if (this._numTables > 1) {
@@ -104,7 +104,7 @@ export class PyramidComposition {
         }
 
         // Ajout de l'accordeon
-        this._$part2.append($accordeon);
+        this._$container.append($accordeon);
     }
 
     /**
@@ -112,7 +112,7 @@ export class PyramidComposition {
      * @returns 
      */
     asJsonString() {
-        let composition = [];
+        let composition = {};
         $('.card-body').each(function() {
             let tableName = $(this).data('table');
             composition[tableName] = [];
@@ -123,7 +123,8 @@ export class PyramidComposition {
                 }  
             });
         });
-        return composition;
+        
+        return JSON.stringify(composition);
     }
 
     /**
