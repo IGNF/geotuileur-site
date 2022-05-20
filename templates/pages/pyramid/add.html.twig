@@ -57,72 +57,16 @@
         {% set num = 0 %}
 
         {# Composition #}
-        {# <div class="generate-panel hidden container-content--smaller" id="part-2" data-numtables={{ numTables }}> #}
         <div class="generate-panel hidden container-content--smaller" 
             id="part-2" 
             data-docpath='{{ path('plage_doc') }}'
-            data-typeinfos='{{ type_infos|json_encode()|raw }}'
-            data-pyramidsample='{{ proc_creat_pyramid_sample|json_encode()|raw }}'
+            data-typeinfos='{{ type_infos|json_encode() }}'
+            data-pyramidsample='{{ proc_creat_pyramid_sample|json_encode() }}'
         >
             <h2 class="text-center">{{ 'pyramid.form_add.compose_heading'| trans }}</h2>
             <p class="small text-right">{{ 'mandatory_fields' | trans }}</p>
             {{ form_label(form.composition) }}
             <div id="composition"></div>
-            {# {% for table in form.composition.children %}
-                <div id={{ "accordion-map" ~ num }} class="mb-1">
-                    <div class="card" id="card-map">
-                        <h3 class="card-title o-accordion__title mb-0">
-                            <a class="o-accordion__header" role="tab" data-toggle="collapse" 
-                                data-parent={{ "#accordion-map" ~ num }} 
-                                href={{ "#collapse-map"~ num }}>
-                                {{ table.vars.name }}
-                                {% if numTables > 1 %}
-                                    <span class="table-valid" id={{ "table-valid" ~ num }}>
-                                        <i class="icon-check-circle text-success"></i>
-                                        <span class="font-weight-light small" id={{ "table-infos" ~ num }}></span>
-                                    </span>
-                                {% endif %}
-                            </a>
-                        </h3>
-                        <div id={{ "collapse-map"~ num }} class="o-accordion__panel card-collapse collapse" data-num={{ num }}>
-                            <div class="card-body">
-                                {% if numTables > 1 %}
-                                    <label>{{ 'pyramid.form_add.min_and_max_zoom'|trans }}</label>
-                                    <div class="form-group zoom-levels" id={{ "zoom-levels" ~  num }} data-table={{ table.vars.name }} data-num={{ num }}></div>
-                                {% endif %}
-                                {% set attributes = table.children.attributes.children %}
-                                {% set columns = attributes|keys %}
-                                {% if columns is not empty %}
-                                    <p class="font-weight-bold mb-0">{{ 'pyramid.form_add.attributes'|trans }}</p>
-                                    <p class="description wysiwyg"><i class="icon-question"></i>&nbsp;{{ 'pyramid.form_add.attributes_help' | trans({ '%url%': path('plage_doc')~'#/generate?id=composition' }) | raw }}</p>
-                                    {% set mid = columns|length // 2 %}
-                                    {% if columns|length is odd %}
-                                        {% set mid = mid + 1 %}
-                                    {% endif %}
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            {% for index, columnName in columns|slice(0, mid) %}
-                                                {{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}
-                                            {% endfor %}
-                                        </div>
-                                        <div  class="col-md-6">
-                                            {% for index, columnName in columns|slice(mid, columns|length) %}
-                                                {{ form_widget(attributes[columnName], {'attr': {'class': 'table-field'}}) }}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    {% if numTables > 1 and num < (numTables - 1) %}
-                                        <p class="text-center mb-0 mt-2">
-                                            <button class="btn btn-width--lg btn--plain btn--primary next-table" data-num={{ num }}>{{ 'pyramid.form_add.next_table'| trans }}</button>
-                                        </p>
-                                    {% endif %}    
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% set num = num + 1 %}
-            {% endfor %} #}
             <p class="wysiwyg clearfix">
                 <a class="float-left switch-panel btn btn--ghost btn--primary" href="#part-1"><i class="icon-arrow-left"></i>&nbsp;{{ 'pyramid.form_add.previous_step'|trans }}</i></a>
                 <a class="float-right switch-panel btn btn--plain btn--primary" href="#part-3">{{ 'pyramid.form_add.next_step'|trans }}&nbsp;<i class="icon-arrow-right"></i></a>

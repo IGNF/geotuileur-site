@@ -1,4 +1,4 @@
-import { guid } from "../utils";
+import { guid } from "../../utils";
 export class PyramidComposition {
     /**
      * Constructeur
@@ -10,38 +10,107 @@ export class PyramidComposition {
         this._docPath   = datas.docpath;
         this._typeInfos = datas.typeinfos;
         this._numTables = datas.typeinfos.relations.length;
-        this._procCreatPyramidSample = datas.pyramidsample;
+        this._sampleParameters = datas.pyramidsample ? datas.pyramidsample.parameters : null;
+    }
+
+    /**
+     * Trie des attributs 
+     * @param Object attributes 
+     * @param Array primaryKeys 
+     * @returns 
+     */
+    _convertToArray(attributes, primaryKeys) {
+        // Trie alphabetique
+        const sortedObject = Object.keys(attributes).sort().reduce((r, k) => (r[k] = attributes[k], r), {});
+
+        let array = [];
+        for (const [key, value] of Object.entries(sortedObject)) {
+            if (/^geometry/.test(value) || primaryKeys.includes(key)) continue;
+            array.push({ name: key, type: value });
+        }
+        return array;
+    }
+
+    /**
+     * Recupere les attributs pour une table de l'echantillon de la pyramid
+     * @param string tableName 
+     * @returns 
+     */
+    _getSampleAttributes(tableName) {
+        if (! this._sampleParameters) return [];
+        const filtered = this._sampleParameters.composition.filter(composition => {
+            return composition.table === tableName;   
+        });
+
+        if (filtered.length === 1) {
+            return filtered[0].attributes.split(',');
+        }
     }
 
     /**
      * Construction des attributs
      * 
      * @param JQuery Element $cardBody 
-     * @param Array columnNames Nom des colonnes
+     * @param Object attributes
+     * @param Array primaryKeys
+     * @param Array sampleAttributes
+     * 
      */
-    _buildAttributes($cardBody, columnNames) {
-        let mid = Math.floor(columnNames.length / 2);
-        if (columnNames.length % 2) {   // odd
+    _buildAttributes($cardBody, attributes, primaryKeys, sampleAttributes) {
+        let columns = this._convertToArray(attributes, primaryKeys);
+        
+        let numAttributes = columns.length;
+        
+        let mid = Math.floor(numAttributes / 2);
+        if (numAttributes % 2) {   // odd
             mid += 1;
         }
-
-        // TODO VOIR AVEC LES CHAMPS DE _procCreatPyramidSample
 
         const templateColumn = document.getElementById("template-table-column");
 
         let $row = $('<div>', { class: "row"}).appendTo($cardBody);
-        let ranges = [{ start: 0, end: mid}, {start: mid, end: columnNames.length}];
+        let ranges = [{ start: 0, end: mid}, {start: mid, end: numAttributes}];
         ranges.forEach(range => {
             let $col = $('<div>', { class: "col-md-6"}).appendTo($row);
-            columnNames.slice(range.start, range.end).forEach(columnName => {
+            columns.slice(range.start, range.end).forEach(columnProps => {
                 let uid = guid();
 
                 const $column = $(templateColumn.content.cloneNode(true));
-                $column.find(':checkbox').prop({ id: uid, name: columnName});
-                $column.find('label').prop('for', uid).text(columnName);
+                let $checkbox = $column.find(':checkbox');
+
+                $checkbox.prop({ id: uid, name: columnProps.name });
+                if (sampleAttributes.includes(columnProps.name)) {
+                    $checkbox.prop('checked', true);   
+                }
+                $column.find('label').prop('for', uid).text(columnProps.name);
                 $col.append($column);
             });    
         });
+    }
+
+    /**
+     * Recupere les informations sur une table
+     * @param string table 
+     * @returns 
+     */
+    _getInfos(table) {
+        if (! this._sampleParameters) return null;
+
+        const filtered = this._sampleParameters.composition.filter(composition => {
+            return composition.table === table;   
+        });
+        if (filtered.length === 1) {
+            let attributes = (null === filtered[0].attributes) ? "" : filtered[0].attributes;
+            
+            let num = attributes.split(',').length;
+            let topLevel    = filtered[0]['top_level'];
+            let bottomLevel = filtered[0]['bottom_level']
+
+            let numText = num ? ((num > 1) ? `${num} attributs conservés` : `${nb} attribut conservé`) : 'aucun attribut conservé';
+            return `(${numText}, niveaux ${topLevel} à ${bottomLevel})`;
+        }
+
+        return null;
     }
 
     /**
@@ -65,11 +134,18 @@ export class PyramidComposition {
         let $a = $accordeon.find("a");
         $a.prop('href',`#collapse-map${num}`).attr('data-parent', `#${id}`);
 
-        let html = relation.name;
+        let html = relation.name + '&nbsp;';
         if (this._numTables > 1) {
+            let infos = this._getInfos(relation.name);
+            let $spanInfos = $('<span>', {class: "font-weight-light small", id: `table-infos${num}`});
+            if (infos) {
+                $spanInfos.text(infos);
+            }
+
             let $span = $('<span>', { class: "table-valid", id: `table-valid${num}` })
+                .css('display', infos ? 'inline' : 'none')
                 .append($('<i>', {class: "icon-check-circle text-success"}))
-                .append($('<span>', {class: "font-weight-light small", id: `table-infos${num}`}));
+                .append($spanInfos);
             html += $span.prop('outerHTML');
             $a.append(html);   
         }
@@ -94,7 +170,8 @@ export class PyramidComposition {
         $('<p>', { class: "description wysiwyg" }).html(html).appendTo($cardBody);  
 
         // Ajout des attributs
-        this._buildAttributes($cardBody, columnNames);
+        let sampleAttributes = this._getSampleAttributes(relation.name);
+        this._buildAttributes($cardBody, relation.attributes, relation['primary_key'], sampleAttributes);
 
         // Eventuellement le bouton suivant
         if (this._numTables > 1 && num < (this._numTables - 1)) {
