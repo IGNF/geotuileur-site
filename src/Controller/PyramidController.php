@@ -110,8 +110,8 @@ class PyramidController extends AbstractController
 
         $streamName = 'Tuiles '.$vectordb['name'];
 
-        $topLevelMin    = $procCreatPyramidSample ? $procCreatPyramidSample['parameters']['top_level'] : PyramidZoomLevels::TOP_LEVEL_MIN;
-        $bottomLevelMax = $procCreatPyramidSample ? $procCreatPyramidSample['parameters']['bottom_level'] : PyramidZoomLevels::BOTTOM_LEVEL_MAX;
+        $topLevelMin    = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['top_level'] : PyramidZoomLevels::TOP_LEVEL_MIN;
+        $bottomLevelMax = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['bottom_level'] : PyramidZoomLevels::BOTTOM_LEVEL_MAX;
        
         try {
             $form = $this->createForm(GeneratePyramidType::class, null, [
