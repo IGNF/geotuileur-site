@@ -1,0 +1,625 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {
+        "upload_id": "624efd25985d628358ffde0b",
+        "proc_int_id": "624efd39985d62486bffdf28"
+    },
+    "_id": "624efd39985d626499ffdf24",
+    "name": "Test_bureau_vote zip 2022-04-07",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "GENERATED",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base SUCCESS",
+        "date": "2022-04-07T15:03:27.804Z"
+    },
+    "extent": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    0.824995499925318,
+                    42.8646120225919
+                ],
+                [
+                    0.824995499925318,
+                    42.9603003443171
+                ],
+                [
+                    0.847029480239563,
+                    42.9603003443171
+                ],
+                [
+                    0.847029480239563,
+                    42.9677143846218
+                ],
+                [
+                    0.873915010833149,
+                    42.9677143846218
+                ],
+                [
+                    0.873915010833149,
+                    42.9921029881386
+                ],
+                [
+                    0.962404,
+                    42.9921029881386
+                ],
+                [
+                    0.962404,
+                    43.007247
+                ],
+                [
+                    0.963902397282507,
+                    43.007247
+                ],
+                [
+                    0.963902397282507,
+                    43.0444318675038
+                ],
+                [
+                    0.977952548123406,
+                    43.0444318675038
+                ],
+                [
+                    0.977952548123406,
+                    43.1151639519891
+                ],
+                [
+                    0.977952548123406,
+                    43.1495585800366
+                ],
+                [
+                    0.990128362463814,
+                    43.1495585800366
+                ],
+                [
+                    1.03727991568305,
+                    43.1495585800366
+                ],
+                [
+                    1.03727991568305,
+                    43.1577937725371
+                ],
+                [
+                    1.11125568107651,
+                    43.1577937725371
+                ],
+                [
+                    1.11125568107651,
+                    43.1907729296949
+                ],
+                [
+                    1.2130425652886,
+                    43.1907729296949
+                ],
+                [
+                    1.2130425652886,
+                    43.2234653667255
+                ],
+                [
+                    1.27277070752548,
+                    43.2234653667255
+                ],
+                [
+                    1.31325924155704,
+                    43.2234653667255
+                ],
+                [
+                    1.31325924155704,
+                    43.241531145415
+                ],
+                [
+                    1.2914490840121,
+                    43.241531145415
+                ],
+                [
+                    1.2914490840121,
+                    43.3172054581446
+                ],
+                [
+                    1.32553715862624,
+                    43.3172054581446
+                ],
+                [
+                    1.40354066704596,
+                    43.3172054581446
+                ],
+                [
+                    1.40354066704596,
+                    43.2946521514403
+                ],
+                [
+                    1.47450602772951,
+                    43.2946521514403
+                ],
+                [
+                    1.55810280991173,
+                    43.2946521514403
+                ],
+                [
+                    1.55810280991173,
+                    43.2771628932647
+                ],
+                [
+                    1.58665422537041,
+                    43.2771628932647
+                ],
+                [
+                    1.6303925384819,
+                    43.2771628932647
+                ],
+                [
+                    1.6303925384819,
+                    43.2824657059619
+                ],
+                [
+                    1.71856091767188,
+                    43.2824657059619
+                ],
+                [
+                    1.71856091767188,
+                    43.2546644139694
+                ],
+                [
+                    1.72192181402531,
+                    43.2546644139694
+                ],
+                [
+                    1.72192181402531,
+                    43.2381083201994
+                ],
+                [
+                    1.72650319064151,
+                    43.2381083201994
+                ],
+                [
+                    1.72650319064151,
+                    43.2322413839404
+                ],
+                [
+                    1.73563586089763,
+                    43.2322413839404
+                ],
+                [
+                    1.82243580857181,
+                    43.2322413839404
+                ],
+                [
+                    1.82243580857181,
+                    43.1906816984777
+                ],
+                [
+                    1.84258149575024,
+                    43.1906816984777
+                ],
+                [
+                    1.84258149575024,
+                    43.1615010509226
+                ],
+                [
+                    1.87276484671271,
+                    43.1615010509226
+                ],
+                [
+                    1.88361543837541,
+                    43.1615010509226
+                ],
+                [
+                    1.88361543837541,
+                    43.1489347238563
+                ],
+                [
+                    1.92804350456643,
+                    43.1489347238563
+                ],
+                [
+                    1.92804350456643,
+                    43.139890995625
+                ],
+                [
+                    1.9537663507247,
+                    43.139890995625
+                ],
+                [
+                    1.98059990745941,
+                    43.139890995625
+                ],
+                [
+                    1.98059990745941,
+                    43.1254801849371
+                ],
+                [
+                    1.98696856162649,
+                    43.1254801849371
+                ],
+                [
+                    1.98696856162649,
+                    43.0613495497356
+                ],
+                [
+                    1.99029887052545,
+                    43.0613495497356
+                ],
+                [
+                    1.99029887052545,
+                    43.0494496966918
+                ],
+                [
+                    2.0072777576472,
+                    43.0494496966918
+                ],
+                [
+                    2.0072777576472,
+                    42.9089396654744
+                ],
+                [
+                    1.99305499793512,
+                    42.9089396654744
+                ],
+                [
+                    1.99305499793512,
+                    42.8443036935923
+                ],
+                [
+                    1.99305499793512,
+                    42.8119550527399
+                ],
+                [
+                    1.9329762092936,
+                    42.8119550527399
+                ],
+                [
+                    1.9329762092936,
+                    42.8043058157
+                ],
+                [
+                    1.9329762092936,
+                    42.7980942483236
+                ],
+                [
+                    2.00763443203068,
+                    42.7980942483236
+                ],
+                [
+                    2.00763443203068,
+                    42.767570623622
+                ],
+                [
+                    2.08069152808749,
+                    42.767570623622
+                ],
+                [
+                    2.08069152808749,
+                    42.7573249623919
+                ],
+                [
+                    2.10163755500509,
+                    42.7573249623919
+                ],
+                [
+                    2.17686160227884,
+                    42.7573249623919
+                ],
+                [
+                    2.17686160227884,
+                    42.7276462335456
+                ],
+                [
+                    2.17686160227884,
+                    42.7142200736423
+                ],
+                [
+                    2.17686160227884,
+                    42.6606837674095
+                ],
+                [
+                    2.17686160227884,
+                    42.6515928735708
+                ],
+                [
+                    2.08069152808749,
+                    42.6515928735708
+                ],
+                [
+                    2.08069152808749,
+                    42.6037576242052
+                ],
+                [
+                    2.00763443203068,
+                    42.6037576242052
+                ],
+                [
+                    2.00763443203068,
+                    42.5780496658801
+                ],
+                [
+                    1.91021890778887,
+                    42.5780496658801
+                ],
+                [
+                    1.91021890778887,
+                    42.5704741345685
+                ],
+                [
+                    1.72475989865796,
+                    42.5704741345685
+                ],
+                [
+                    1.57371292840548,
+                    42.5704741345685
+                ],
+                [
+                    1.57371292840548,
+                    42.5780496658801
+                ],
+                [
+                    1.57371292840548,
+                    42.6132624170255
+                ],
+                [
+                    1.5517894137834,
+                    42.6132624170255
+                ],
+                [
+                    1.5434833130153,
+                    42.6132624170255
+                ],
+                [
+                    1.50786847110434,
+                    42.6132624170255
+                ],
+                [
+                    1.50786847110434,
+                    42.6011332087348
+                ],
+                [
+                    1.39058522159183,
+                    42.6011332087348
+                ],
+                [
+                    1.39058522159183,
+                    42.6177167212645
+                ],
+                [
+                    1.35000682864084,
+                    42.6177167212645
+                ],
+                [
+                    1.35000682864084,
+                    42.6296344249505
+                ],
+                [
+                    1.34992587019993,
+                    42.6296344249505
+                ],
+                [
+                    1.34992587019993,
+                    42.6440953148696
+                ],
+                [
+                    1.33321593865793,
+                    42.6440953148696
+                ],
+                [
+                    1.33321593865793,
+                    42.7069266919426
+                ],
+                [
+                    1.23120731050736,
+                    42.7069266919426
+                ],
+                [
+                    1.12794879360963,
+                    42.7069266919426
+                ],
+                [
+                    1.07768126432893,
+                    42.7069266919426
+                ],
+                [
+                    0.988933780846244,
+                    42.7069266919426
+                ],
+                [
+                    0.988933780846244,
+                    42.7536063277294
+                ],
+                [
+                    0.946921765288091,
+                    42.7536063277294
+                ],
+                [
+                    0.946921765288091,
+                    42.7799587047867
+                ],
+                [
+                    0.847029480239563,
+                    42.7799587047867
+                ],
+                [
+                    0.847029480239563,
+                    42.8372982914986
+                ],
+                [
+                    0.824995499925318,
+                    42.8372982914986
+                ],
+                [
+                    0.824995499925318,
+                    42.8646120225919
+                ]
+            ]
+        ]
+    },
+    "size": 45760512,
+    "srs": "EPSG:4326",
+    "type_infos": {
+        "relations": [
+            {
+                "name": "electeurs_1_bv",
+                "type": "TABLE",
+                "attributes": {
+                    "bv_loc": "character varying(254)",
+                    "lon": "double precision",
+                    "qualite": "character varying(254)",
+                    "commune": "character varying(254)",
+                    "id": "bigint",
+                    "bv_app": "double precision",
+                    "cp": "character varying(254)",
+                    "insee_geo": "bigint",
+                    "type_et_li": "character varying(254)",
+                    "com_geo": "character varying(254)",
+                    "loc": "character varying(254)",
+                    "fid": "integer",
+                    "num\ufffdro_de": "character varying(254)",
+                    "lat": "double precision",
+                    "adresse_ge": "character varying(254)",
+                    "cp_geo": "bigint",
+                    "app": "double precision",
+                    "bv_idbv": "bigint",
+                    "geom": "geometry(MultiPoint,4326)",
+                    "id_adr": "character varying(254)",
+                    "pays": "character varying(254)",
+                    "lieu_dit": "character varying(254)"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "electeurs_plusieurs_bv",
+                "type": "TABLE",
+                "attributes": {
+                    "id": "bigint",
+                    "bv_app": "double precision",
+                    "lon": "double precision",
+                    "qualite": "character varying(254)",
+                    "loc": "character varying(254)",
+                    "com_geo": "character varying(254)",
+                    "adresse_ge": "character varying(254)",
+                    "lat": "double precision",
+                    "fid": "integer",
+                    "bv_idbv": "bigint",
+                    "geom": "geometry(MultiPoint,4326)",
+                    "cp_geo": "bigint",
+                    "cp": "character varying(254)",
+                    "bv_loc": "character varying(254)",
+                    "commune": "character varying(254)",
+                    "type_et_li": "character varying(254)",
+                    "insee_geo": "bigint",
+                    "num\ufffdro_de": "character varying(254)",
+                    "id_adr": "character varying(254)",
+                    "lieu_dit": "character varying(254)",
+                    "pays": "character varying(254)",
+                    "app": "double precision"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "bureaux_v7",
+                "type": "TABLE",
+                "attributes": {
+                    "bv_com_geo": "character varying(254)",
+                    "bv_num\ufffdro_": "character varying(254)",
+                    "bv_commune": "character varying(254)",
+                    "bv_adresse": "character varying(254)",
+                    "bv_type_et": "character varying(254)",
+                    "bv_loc": "character varying(254)",
+                    "bv_app": "character varying(254)",
+                    "bv_id_adr": "character varying(254)",
+                    "bv_cp": "character varying(254)",
+                    "bv_lat": "character varying(254)",
+                    "bv_cp_geo": "character varying(254)",
+                    "bv_pays": "character varying(254)",
+                    "bv_id": "character varying(254)",
+                    "bv_lon": "character varying(254)",
+                    "geom": "geometry(MultiPoint,4326)",
+                    "bv_insee_g": "character varying(254)",
+                    "fid": "integer",
+                    "bv_lieu_di": "character varying(254)",
+                    "bv_qualite": "character varying(254)"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "communes_avec_1_seul_bv",
+                "type": "TABLE",
+                "attributes": {
+                    "fid": "integer",
+                    "cl_collter": "character varying(3)",
+                    "id_ch_lieu": "character varying(24)",
+                    "insee_arr": "character varying(5)",
+                    "surface_ha": "bigint",
+                    "geom": "geometry(MultiPolygon,4326)",
+                    "date_maj": "character varying(19)",
+                    "recenseur": "character varying(16)",
+                    "siren_epci": "character varying(32)",
+                    "bv_cp_geo": "bigint",
+                    "insee_dep": "character varying(5)",
+                    "date_rct": "date",
+                    "id": "character varying(24)",
+                    "nom": "character varying(80)",
+                    "insee_reg": "character varying(5)",
+                    "bv_idbv_ma": "bigint",
+                    "code_post": "character varying(5)",
+                    "population": "bigint",
+                    "bureaux_de": "bigint",
+                    "bv_idbv_mi": "bigint",
+                    "date_creat": "character varying(19)",
+                    "date_conf": "date",
+                    "insee_com": "character varying(5)",
+                    "date_app": "date",
+                    "cl_arrond": "character varying(3)",
+                    "bv_idbv_to": "integer",
+                    "capitale": "character varying(3)",
+                    "cl_region": "character varying(3)",
+                    "insee_col": "character varying(5)",
+                    "commune": "character varying(254)",
+                    "bv_com_geo": "character varying(254)",
+                    "code_siren": "character varying(9)",
+                    "cl_depart": "character varying(3)",
+                    "id_aut_adm": "character varying(254)",
+                    "nb_electeu": "bigint"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "toutes_mailles_bv_etendues",
+                "type": "TABLE",
+                "attributes": {
+                    "fme_featur": "character varying(50)",
+                    "code_bv": "character varying(200)",
+                    "geom": "geometry(MultiPolygonZ,4326)",
+                    "id_maille": "character varying(200)",
+                    "fid": "integer"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "test_bureau_vote",
+                "type": "TABLE",
+                "attributes": {
+                    "fid": "integer",
+                    "test": "character varying(220)"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            }
+        ]
+    },
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

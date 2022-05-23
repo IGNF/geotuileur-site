@@ -1,0 +1,21 @@
+[
+    {
+        "name": "bnac.gpkg.md5",
+        "size": 47,
+        "extension": ".md5",
+        "type": "file"
+    },
+    {
+        "name": "data",
+        "children": [
+            {
+                "name": "bnac.gpkg",
+                "size": 168988672,
+                "extension": ".gpkg",
+                "type": "file"
+            }
+        ],
+        "size": 168988672,
+        "type": "directory"
+    }
+]

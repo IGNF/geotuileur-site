@@ -19,22 +19,21 @@ ENV no_proxy=${no_proxy}
 ENV NO_PROXY=${no_proxy}
 
 # Common tools
-RUN apt-get update -qq && \
-    apt-get install -qy \
+RUN apt-get update -qq
+RUN apt-get install -qy \
     git \
     gnupg \
     unzip \
     make \
     php-dev \
     zip \ 
-    gdal-bin && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    gdal-bin
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    apt-get update && apt-get install -y yarn
 
 # PHP Configuration & Extensions
 RUN apt-get update
@@ -55,6 +54,22 @@ RUN apt-get install -y libicu-dev \
 
 RUN apt-get install -y libxslt-dev \
     && docker-php-ext-install xsl
+
+## Needed for pecl to succeed
+RUN pear config-set php_ini /usr/local/etc/php/conf.d/app.ini
+RUN if [ "${http_proxy}" != "" ]; then \
+    pear config-set http_proxy ${http_proxy} \
+    ;fi
+RUN pecl install xdebug-3.1.3 \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+RUN apt-get update -qq && \
+    apt-get install -qy libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+# APT Cache Cleanup
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Apache Configuration
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf

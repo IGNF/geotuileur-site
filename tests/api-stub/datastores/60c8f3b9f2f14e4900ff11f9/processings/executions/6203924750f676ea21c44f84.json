@@ -1,0 +1,33 @@
+{
+    "_id": "6203924750f676ea21c44f84",
+    "processing": {
+        "_id": "615c42ea68207f82abe976c3",
+        "name": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base"
+    },
+    "parameters": {},
+    "creation": "2022-02-09T10:07:03.677Z",
+    "status": "SUCCESS",
+    "launch": "2022-02-09T10:07:03.951Z",
+    "start": "2022-02-09T10:07:04.381Z",
+    "finish": "2022-02-09T10:07:19.245Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "6203921e50f6768123c44daa",
+                "name": "bnac zip 2022-02-09 arnest",
+                "type": "VECTOR",
+                "srs": "EPSG:4326",
+                "status": "DELETED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "6203924750f6766d34c44f80",
+            "name": "bnac zip 2022-02-09 arnest",
+            "status": "GENERATED",
+            "srs": "EPSG:4326"
+        }
+    }
+}

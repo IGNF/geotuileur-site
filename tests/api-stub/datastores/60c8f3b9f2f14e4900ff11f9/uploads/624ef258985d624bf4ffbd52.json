@@ -1,0 +1,29 @@
+{
+    "_id": "624ef258985d624bf4ffbd52",
+    "name": "bureaux-v7 zip 2022-04-07",
+    "description": "bureaux-v7 zip 2022-04-07",
+    "type": "VECTOR",
+    "srs": "EPSG:4326",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-07T14:17:25.330Z"
+    },
+    "tags": {
+        "file_data": "624ef2554c43d.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "624ef268985d628d6effbe50",
+        "proc_int_id": "624ef268985d6262baffbe54",
+        "file_tree": "[{\"name\":\"bureaux-v7.gpkg.md5\",\"size\":53,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"bureaux-v7.gpkg\",\"size\":118784,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":118784,\"type\":\"directory\"}]"
+    },
+    "size": 127029
+}

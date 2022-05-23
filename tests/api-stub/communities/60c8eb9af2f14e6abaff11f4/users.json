@@ -1,0 +1,34 @@
+[
+    {
+        "user": {
+            "_id": "60c8eb8ca7f7c74d2900f90d",
+            "first_name": "Th\u00e9o",
+            "last_name": "Satabin",
+            "email": "theo.satabin@ign.fr"
+        },
+        "rights": {
+            "community_rights": true,
+            "uploads_rights": true,
+            "processings_rights": true,
+            "datastore_rights": true,
+            "stored_data_rights": true,
+            "broadcast_rights": true
+        }
+    },
+    {
+        "user": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif",
+            "email": "sylvain.lafay@ign.fr"
+        },
+        "rights": {
+            "community_rights": true,
+            "uploads_rights": true,
+            "processings_rights": true,
+            "datastore_rights": true,
+            "stored_data_rights": true,
+            "broadcast_rights": true
+        }
+    }
+]

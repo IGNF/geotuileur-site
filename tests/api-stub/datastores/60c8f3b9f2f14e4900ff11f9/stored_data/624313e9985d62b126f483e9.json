@@ -1,0 +1,65 @@
+{
+    "type": "ROK4-PYRAMID-VECTOR",
+    "tags": {
+        "upload_id": "6203921e50f6768123c44daa",
+        "proc_int_id": "6203924750f676ea21c44f84",
+        "vectordb_id": "6203924750f6766d34c44f80",
+        "proc_pyr_creat_id": "624313e9985d62866bf483ed",
+        "is_sample": "true",
+        "tms_url": "https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/sample_3pf8jux600s951h4"
+    },
+    "_id": "624313e9985d62b126f483e9",
+    "name": "bnac zip 2022-02-09 arnest",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "GENERATED",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Cr\u00e9ation d'une pyramide vecteur SUCCESS",
+        "date": "2022-03-29T14:15:01.232Z"
+    },
+    "extent": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    1.7162734588392887e-5,
+                    0.0004362218130222087
+                ],
+                [
+                    2.5058083765224618e-5,
+                    0.0004362218130222087
+                ],
+                [
+                    2.5058083765224618e-5,
+                    0.00044141721702166593
+                ],
+                [
+                    1.7162734588392887e-5,
+                    0.00044141721702166593
+                ],
+                [
+                    1.7162734588392887e-5,
+                    0.0004362218130222087
+                ]
+            ]
+        ]
+    },
+    "size": 26172247,
+    "srs": "EPSG:3857",
+    "type_infos": {
+        "levels": [
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+        ],
+        "tms": "PM"
+    },
+    "storage": {
+        "type": "S3",
+        "tags": []
+    }
+}

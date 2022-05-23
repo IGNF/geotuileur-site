@@ -1,0 +1,7 @@
+{
+    "baseUrl": "http://127.0.0.1:8080",
+    "auth_base_url": "https://xxxxxxxx",
+    "auth_realm": "master",
+    "auth_client_id": "xxxxxx",
+    "chromeWebSecurity": false
+}

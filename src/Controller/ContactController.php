@@ -154,7 +154,7 @@ class ContactController extends AbstractController
      * Recupere les informations a partir des parametres de la requete
      *
      * @param array $datas
-     * @return void
+     * @return mixed
      */
     private function getInformations($datas) {
         if (! count($datas)) {

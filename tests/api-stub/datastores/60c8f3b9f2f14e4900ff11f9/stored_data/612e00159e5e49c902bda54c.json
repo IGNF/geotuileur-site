@@ -1,0 +1,13 @@
+{
+    "type": "ROK4-PYRAMID-VECTOR",
+    "tags": {},
+    "_id": "612e00159e5e49c902bda54c",
+    "name": "limitesadmin_pyramide",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "CREATED",
+    "storage": {
+        "type": "FILESYSTEM",
+        "tags": []
+    }
+}

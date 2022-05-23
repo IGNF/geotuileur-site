@@ -14,11 +14,11 @@ check-todolist: ## List all the "TODO" left in files with line numbers
 .PHONY: check-rules
 check-rules: ## Check code rules in twig and php files using phpmd and phpstan
 	@echo "-- Checking coding rules using Twig Lint Command"
-	php bin/console lint:twig templates/
+	-php bin/console lint:twig templates/
 	@echo "-- Checking coding rules using phpmd (see @SuppressWarning to bypass control)"
-	vendor/bin/phpmd src text $(PHP_MD_RULES)
+	-vendor/bin/phpmd src text $(PHP_MD_RULES)
 	@echo "-- Checking coding rules using phpstan"
-	vendor/bin/phpstan analyse -c phpstan.neon
+	-vendor/bin/phpstan analyse -c phpstan.neon
 
 .PHONY: fix-style
 fix-style: ## Fix code style in all php files according to the standard Symfony practices using php-cs-fixer

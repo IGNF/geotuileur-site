@@ -1,0 +1,28 @@
+{
+    "type": "ROK4-PYRAMID-VECTOR",
+    "tags": {
+        "upload_id": "6182a2b48322b23f00b3a10e",
+        "proc_int_id": "6182a2c48322b21dbab3a210",
+        "vectordb_id": "6182a2c48322b274fcb3a20c",
+        "proc_pyr_creat_id": "619bb352046b5fc20ea769bd"
+    },
+    "_id": "619bb352046b5fbff0a769b9",
+    "name": "bnlc_bnlc_test",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "GENERATING",
+    "last_event": {
+        "title": "Traitement demand\u00e9",
+        "text": "Cr\u00e9ation d'une pyramide vecteur",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2021-11-22T15:12:18.777Z"
+    },
+    "storage": {
+        "type": "FILESYSTEM",
+        "tags": []
+    }
+}

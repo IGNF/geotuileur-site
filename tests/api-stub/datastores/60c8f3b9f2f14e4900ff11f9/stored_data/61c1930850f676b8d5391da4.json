@@ -1,0 +1,206 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {
+        "upload_id": "61c192f750f67618ce3911cb",
+        "proc_int_id": "61c1930850f6768600391daa",
+        "pyramid_id": "61c1934850f676435139548f"
+    },
+    "_id": "61c1930850f676b8d5391da4",
+    "name": "bnlc zip 2021-12-21 sample arnest",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "GENERATED",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base SUCCESS",
+        "date": "2021-12-21T08:40:43.524Z"
+    },
+    "extent": {
+        "type": "MultiPolygon",
+        "coordinates": [
+            [
+                [
+                    [
+                        55.2476396,
+                        -21.2650922
+                    ],
+                    [
+                        55.6192903,
+                        -21.2650922
+                    ],
+                    [
+                        55.6192903,
+                        -20.8981291
+                    ],
+                    [
+                        55.2476396,
+                        -20.8981291
+                    ],
+                    [
+                        55.2476396,
+                        -21.2650922
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        8.703146,
+                        41.59812894
+                    ],
+                    [
+                        9.265822555,
+                        41.59812894
+                    ],
+                    [
+                        9.265822555,
+                        41.913679
+                    ],
+                    [
+                        8.703146,
+                        41.913679
+                    ],
+                    [
+                        8.703146,
+                        41.59812894
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        -1.5824576,
+                        42.4117200977803
+                    ],
+                    [
+                        2.820205908,
+                        42.4117200977803
+                    ],
+                    [
+                        2.820205908,
+                        46.432533
+                    ],
+                    [
+                        -1.5824576,
+                        46.432533
+                    ],
+                    [
+                        -1.5824576,
+                        42.4117200977803
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        -4.720745248,
+                        46.4521
+                    ],
+                    [
+                        2.8204662,
+                        46.4521
+                    ],
+                    [
+                        2.8204662,
+                        50.949222
+                    ],
+                    [
+                        -4.720745248,
+                        50.949222
+                    ],
+                    [
+                        -4.720745248,
+                        46.4521
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        2.822095,
+                        41.92940226
+                    ],
+                    [
+                        9.5477843,
+                        41.92940226
+                    ],
+                    [
+                        9.5477843,
+                        46.42357974
+                    ],
+                    [
+                        2.822095,
+                        46.42357974
+                    ],
+                    [
+                        2.822095,
+                        41.92940226
+                    ]
+                ]
+            ],
+            [
+                [
+                    [
+                        2.8220862,
+                        46.44417676
+                    ],
+                    [
+                        8.18194137,
+                        46.44417676
+                    ],
+                    [
+                        8.18194137,
+                        50.75612911
+                    ],
+                    [
+                        2.8220862,
+                        50.75612911
+                    ],
+                    [
+                        2.8220862,
+                        46.44417676
+                    ]
+                ]
+            ]
+        ]
+    },
+    "size": 3063808,
+    "srs": "EPSG:4326",
+    "type_infos": {
+        "relations": [
+            {
+                "name": "bnlc",
+                "type": "TABLE",
+                "attributes": {
+                    "id_lieu": "character varying",
+                    "nbre_pl": "integer",
+                    "insee": "character varying",
+                    "com_lieu": "character varying",
+                    "type": "character varying",
+                    "nom_lieu": "character varying",
+                    "source": "integer",
+                    "ad_lieu": "character varying",
+                    "comm": "character varying",
+                    "lumiere": "character varying",
+                    "horaires": "character varying",
+                    "proprio": "character varying",
+                    "ylat": "double precision",
+                    "date_maj": "character varying",
+                    "ouvert": "character varying",
+                    "duree": "integer",
+                    "xlong": "double precision",
+                    "fid": "integer",
+                    "geom": "geometry(MultiPoint,4326)",
+                    "nbre_pmr": "integer"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            }
+        ]
+    },
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

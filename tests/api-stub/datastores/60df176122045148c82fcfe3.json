@@ -1,0 +1,47 @@
+{
+    "storages": {
+        "uploads": {
+            "use": 729162107,
+            "quota": 1000000000
+        },
+        "annexes": {
+            "use": 261033,
+            "quota": 1000000000
+        },
+        "data": [
+            {
+                "use": 98304,
+                "quota": 1000000000,
+                "type": "POSTGRESQL"
+            },
+            {
+                "use": 0,
+                "quota": 10000000000,
+                "type": "FILESYSTEM"
+            }
+        ]
+    },
+    "active": true,
+    "_id": "60df176122045148c82fcfe3",
+    "community": {
+        "public": false,
+        "_id": "60df14fc2204517ad02fcf70",
+        "contact": "maria.ibarra@ign.fr"
+    },
+    "endpoints": [
+        {
+            "use": 0,
+            "quota": 100,
+            "endpoint": {
+                "urls": [
+                    "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms"
+                ],
+                "_id": "60ddd28fe1862a4a3368f7ca",
+                "name": "Serveur de tuiles",
+                "type": "WMTS-TMS"
+            }
+        }
+    ],
+    "name": "Bac \u00e0 sable",
+    "technical_name": "bacasable"
+}

@@ -1,0 +1,16 @@
+{
+    "_id": "624efd2c985d6270cdffde5d",
+    "status": "SUCCESS",
+    "creation": "2022-04-07T15:03:08.135Z",
+    "upload": {
+        "_id": "624efd25985d628358ffde0b",
+        "name": "Test_bureau_vote zip 2022-04-07",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-04-07T15:03:08.676Z",
+    "finish": "2022-04-07T15:03:10.838Z"
+}

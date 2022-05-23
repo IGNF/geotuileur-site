@@ -1,0 +1,48 @@
+{
+    "creation": "2021-07-01T15:10:29.325Z",
+    "_id": "60e40c08ac44dc06c2e4ca02",
+    "administrator": true,
+    "communities_member": [
+        {
+            "rights": {
+                "community_rights": true,
+                "uploads_rights": true,
+                "processings_rights": true,
+                "datastore_rights": true,
+                "stored_data_rights": true,
+                "broadcast_rights": true
+            },
+            "community": {
+                "public": false,
+                "_id": "60df14fc2204517ad02fcf70",
+                "name": "Bac \u00e0 sable",
+                "technical_name": "bacasable",
+                "supervisor": "60c8eb8ca7f7c74d2900f90d",
+                "datastore": "60df176122045148c82fcfe3"
+            }
+        },
+        {
+            "rights": {
+                "community_rights": true,
+                "uploads_rights": true,
+                "processings_rights": true,
+                "datastore_rights": true,
+                "stored_data_rights": true,
+                "broadcast_rights": true
+            },
+            "community": {
+                "public": true,
+                "_id": "60c8eb9af2f14e6abaff11f4",
+                "name": "Communaut\u00e9 G\u00e9otuilerie",
+                "technical_name": "geotuilerie",
+                "supervisor": "60e40c08ac44dc06c2e4ca02",
+                "datastore": "60c8f3b9f2f14e4900ff11f9"
+            }
+        }
+    ],
+    "email": "sylvain.lafay@ign.fr",
+    "first_name": "Espace",
+    "last_call": "2022-05-20T12:57:34.249Z",
+    "last_name": "Collaboratif",
+    "orchestrator": false
+}
