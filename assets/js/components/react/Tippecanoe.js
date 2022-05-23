@@ -14,8 +14,6 @@ export class TippeCanoe extends React.Component {
                 <article className='o-teaser o-teaser--hasImg' onClick={this.props.handler}>
                     <div className='o-teaser__inner'>
                         <div className='o-teaser__img'>
-                            <img src={this.props.data.image_0} className={'half'}/>
-                            <img src={this.props.data.image_1} className={'half'}/>
                             <img src={this.props.data.image}/>
                         </div>
                         <div className='o-teaser__content'>

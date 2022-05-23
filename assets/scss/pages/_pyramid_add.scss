@@ -11,17 +11,6 @@ span.table-valid {
         border: .5em solid white;
         cursor: pointer;
     }
-    
-    .o-teaser__img img.half {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50%;
-        + img.half {
-            left: auto;
-            right: 0;
-        }
-    }
 
     .o-teasers__item.active .o-teaser {
         border-color: $mainColor;

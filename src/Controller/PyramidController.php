@@ -527,8 +527,7 @@ class PyramidController extends AbstractController
                 'value' => '-an –S15',
                 'label' => $this->translator->trans('pyramid.form_add.tippecanoe.delete_smallest', [], 'PlageWebClient'),
                 'explain' => $this->translator->trans('pyramid.form_add.tippecanoe.delete_smallest_explain', [], 'PlageWebClient'),
-                'image_0' => "$path/delete_smallest_before.png",
-                'image_1' => "$path/delete_smallest_after.png",
+                'image' => "$path/delete_smallest_merged.jpg",
             ],
             '--grid-low-zooms –D8 --simplification=15' => [
                 'value' => '-aL –D8 –S15',
