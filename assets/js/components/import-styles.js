@@ -177,6 +177,7 @@ export class ImportStyles {
                 $(`#filename-${num}`).text("");
                 $(`#style-file-${num}`).val("");
                 $(`#layer-${num}`).text(layer);
+                $(`button[data-num=${num}]`).hide();    // On cache le bouton de suppression
             });
         });
     }
@@ -254,15 +255,21 @@ export class ImportStyles {
         let num     = $this.data('num');
         let layer   = $(`#layer-${num}`).data('layer');
 
+        // On cache
+        let $btnRemove = $(`button[data-num=${num}]`);
+
         try {
             await this._checkFile(file);
+
             $(`#filename-${num}`).text(file.name);
             $(`#layer-${num}`).html(`${layer}&nbsp;<i class="icon-check"></i>`);
+            $btnRemove.show();
         } catch(err) {
             $(`#filename-${num}`).text("");
             $(`#layer-${num}`).html(`${layer}`);
             $this.val("");
-
+            $btnRemove.hide();
+            
             this._showError(err.message);    
         }
     }
@@ -326,7 +333,7 @@ export class ImportStyles {
             divImport = divImport.replaceAll('LAYER', layer.id);
             $(divImport).appendTo($row);
 
-            let $btnRemove = $('<button>', { class: 'btn btn-sm btn--ghost remove-style', 'data-num': this._num });
+            let $btnRemove = $('<button>', { class: 'btn btn-sm btn--ghost remove-style', 'data-num': this._num }).css('display', 'none');
             $btnRemove.append($('<i>', { class: 'icons-trash'}));
             $row.append($btnRemove);
  
