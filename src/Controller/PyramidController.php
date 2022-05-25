@@ -109,6 +109,9 @@ class PyramidController extends AbstractController
 
         $streamName = 'Tuiles '.$vectordb['name'];
 
+        $topLevelMin    = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['top_level'] : PyramidZoomLevels::TOP_LEVEL_MIN;
+        $bottomLevelMax = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['bottom_level'] : PyramidZoomLevels::BOTTOM_LEVEL_MAX;
+       
         try {
             $form = $this->createForm(GeneratePyramidType::class, null, [
                 'datastoreId' => $datastoreId,
@@ -126,25 +129,20 @@ class PyramidController extends AbstractController
                     $levels = json_decode($formData['levels'], true);
                     $mainLevels = $levels['main'];
 
+                    $compositionData = json_decode($formData['composition'], true);
+
                     $composition = [];
-                    foreach ($formData['composition'] as $tableName => $tableCompo) {
+                    foreach ($compositionData as $tableName => $columns) {
                         $tableLevel = $mainLevels;
                         if (isset($levels[$tableName])) {
                             $tableLevel = $levels[$tableName];
-                        }
-
-                        $attributes = [];
-                        foreach ($tableCompo['attributes'] as $attrName => $include) {
-                            if ($include) {
-                                $attributes[] = $attrName;
-                            }
                         }
 
                         $composition[] = [
                             'table' => $tableName,
                             'bottom_level' => strval($tableLevel['bottomLevel']),
                             'top_level' => strval($tableLevel['topLevel']),
-                            'attributes' => implode(',', $attributes),
+                            'attributes' => implode(',', $columns),
                         ];
                     }
 
@@ -209,8 +207,10 @@ class PyramidController extends AbstractController
             'datastoreId' => $datastoreId,
             'datastore' => $this->plageApi->datastore->get($datastoreId),
             'form' => $form->createView(),
-            'topLevelMin' => PyramidZoomLevels::TOP_LEVEL_MIN,
-            'bottomLevelMax' => PyramidZoomLevels::BOTTOM_LEVEL_MAX,
+            'topLevelMin' => $topLevelMin,
+            'bottomLevelMax' => $bottomLevelMax,
+            'type_infos' => $typeInfos,
+            'proc_creat_pyramid_sample' => $procCreatPyramidSample ?? null,
             'tippecanoes' => $tippecanoes,
         ]);
     }

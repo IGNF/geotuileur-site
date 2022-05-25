@@ -48,5 +48,7 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "cypress": "^9.6.1"
+    }
 }
