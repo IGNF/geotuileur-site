@@ -56,7 +56,6 @@ class PyramidController extends AbstractController
         // just for precaution, normally these errors "shouldn't" occur
         if (!$vectordbId) {
             $this->addFlash('error', "Aucune donnée en entrée n'a été fournie");
-
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
@@ -528,8 +527,7 @@ class PyramidController extends AbstractController
                 'value' => '-an –S15',
                 'label' => $this->translator->trans('pyramid.form_add.tippecanoe.delete_smallest', [], 'PlageWebClient'),
                 'explain' => $this->translator->trans('pyramid.form_add.tippecanoe.delete_smallest_explain', [], 'PlageWebClient'),
-                'image_0' => "$path/delete_smallest_before.png",
-                'image_1' => "$path/delete_smallest_after.png",
+                'image' => "$path/delete_smallest_merged.jpg",
             ],
             '--grid-low-zooms –D8 --simplification=15' => [
                 'value' => '-aL –D8 –S15',

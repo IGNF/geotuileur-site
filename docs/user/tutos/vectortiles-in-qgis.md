@@ -18,10 +18,10 @@ Remplissez les champs indiqués :
 
 **URL du style** : coller l'URL obtenue après la création de votre flux avec le service Géotuileur
 
-![](../img/tutos/vectortiles-in-qgis/champs_remplis.jpg)
+![Formulaire de connexion à des tuiles vectorielles rempli](../img/tutos/vectortiles-in-qgis/champs_remplis.jpg)
 
 Pour valider vos choix faites **Ok** et cliquez sur **Ajouter**.
 
-![](../img/tutos/vectortiles-in-qgis/couche_ajoutee.jpg)
+![Rendu d'une couche de tuiles vectorielles dans l'interface cartographique de QGIS](../img/tutos/vectortiles-in-qgis/couche_ajoutee.jpg)
 
 Voilà, vous avez ajouté votre couche personnalisée de tuile vectorielle sur votre projet QGIS.

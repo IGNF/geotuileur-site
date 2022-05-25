@@ -6,6 +6,7 @@
 
     #map-target {
         flex-grow: 1; // map fills remaining space
+        min-height: 500px;
         max-height: 800px; // avoid map oversizing when resizing the window
     }
 
@@ -13,16 +14,6 @@
         display: flex;
         flex-direction: column;
         width: 34rem;
-
-        #block-import {
-            img {
-                width: 24px;
-                height: 24px;
-            }
-            #style-file {
-                display: none;
-            }
-        }
     }
 
     .help-block {
@@ -32,6 +23,16 @@
         i {
             color: $mainColor;
         }
+    }
+}
+
+.block-import {
+    img {
+        width: 24px;
+        height: 24px;
+    }
+    [id^=style-file], #json-file {
+        display: none;
     }
 }
 
@@ -51,6 +52,22 @@
     }
 }
 
+.filename {
+    font-size: 1rem;
+    color: $univers-carto-dark;
+}
+
 .style-error {
     color: $text-danger;
+    .message-icon {
+        align-self: stretch;
+        color: $gray-600;
+        font-size: 1.2em;
+        margin-right: .5em; 
+        color: $brand-danger;
+        filter: invert(50%) sepia(96%) saturate(2934%) hue-rotate(332deg) brightness(97%) contrast(96%);   
+    }
+    .message-icon:before {
+        margin-bottom: 0;
+    }
 }

@@ -303,12 +303,13 @@ pyramid:
         flow_is_published: "<h4>Félicitations, votre flux de tuiles vectorielles est publié !</h4>"
 
     style:
-        title: Gérer les styles
+        title: Gérez les styles
+        manage: Gérer les styles
         create_help: Comment créer un style ? Consultez <a href="%create_url%" target="_blank">l''aide en ligne</a>
-        import: "Importer un style"
-        name: "Donnez un nom *"
-        name_not_empty: "Le nom est obligatoire"
-        name_exists: "Ce nom existe déjà"
+        import_style: "Ajouter un style"
+        name: "Nommez votre style"
+        name_not_empty: "Il est obligatoire de donner un nom à votre style"
+        name_exists: "Ce nom de style existe déjà"
         type_not_authorized: "Ce type de fichier n'est pas autorisé"
         add_wait_msg: "Ajout du style en cours ..."
         add_failed: "L'ajout du style s'est mal passé."
@@ -317,7 +318,15 @@ pyramid:
         change_default_failed: "La mise à jour du style par défaut s'est mal passée côté serveur."
         change_default_wait_msg: "Mise à jour du style par défaut en cours ..."
         download_failed: "Le téléchargement du style s'est mal passé."
-
+        load_failed: "Le chargement du fichier a échoué."
+        parse_failed: "L'analyse du fichier a échoué."
+        file_not_match: "Le fichier de style n'est pas cohérent avec votre flux. Aucun nom de couche ne correspond."
+        file_type: "Choisissez un format"
+        import_modal_title: "Ajoutez un nouveau style"
+        import: "Importer un fichier"
+        json_help: "Le fichier doit être au format JSON et respecter les <a class='external-link' href='https://docs.mapbox.com/mapbox-gl-js/style-spec/' target='_blank'>spécifications de style Mapbox <span class='icon-external-link' aria-hidden='true'></span></a>. Le fichier sera modifié pour conserver uniquement les layers qui correspondent à des couches de votre flux."
+        sld_help: "Ajoutez un fichier SLD par couche présente dans votre flux."
+        qml_help: "Ajoutez un fichier QML par couche présente dans votre flux."
     form_add:
         title: "Créer le flux"
         heading: "Paramétrez votre flux"

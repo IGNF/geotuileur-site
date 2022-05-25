@@ -31,11 +31,10 @@
                     <i class="icon-question text-primary"></i>&nbsp;
                     {{ 'pyramid.style.create_help'|trans({'%create_url%': path('plage_doc')~'#/style' }) | raw }}
                 </p>
-                <div class="mt-1 text-center" id="block-import">
-                    <label class="btn btn-sm btn--ghost btn--primary w-100" for="style-file">
-                        <img src="{{ asset('build/img/icons/Deposer.png') }}">&nbsp;&nbsp;{{ 'pyramid.style.import'|trans }}                    
-                    </label>
-                    <input type="file" id="style-file" accept=".json">
+                <div class="block-import mt-1 text-center">
+                    <button class="btn btn-sm btn--ghost btn--primary w-100" id="import-styles">
+                        <span class="icon-load-file"></span> {{ 'pyramid.style.import_style'|trans }}                  
+                    </button> 
                 </div>
                 <div id="styles-wrapper"></div>
             </div>
@@ -49,18 +48,65 @@
                 </a>
                 <div class="btn active">
                     <i class="icons-style-white"></i><br/>
-                    <span>{{ 'pyramid.style.title' | trans }}</span>
+                    <span>{{ 'pyramid.style.manage' | trans }}</span>
                 </div>
             </div>   
         </div>
 	</div>
-    {# template de la boite de dialogue #}
-    <template id="template-dlg-style">
-        <label>{{'pyramid.style.name'|trans }}</label>
-        <input class="form-control" type="text" id="style-name">
-        <p class="style-error" style="display: none;"></p>
-    </template>
 
+    {# template de la boite de dialogue #}
+    <template id="template-dlg-multiple">
+        <p class="small text-right mb-1">{{ 'mandatory_fields' | trans }}</p>
+        <div class="form-multiple">
+            <div class="form-group mb-1">
+                <label class="control-label required">{{'pyramid.style.name'|trans }}</label>
+                <input class="form-control" type="text" id="style-name">
+            </div>
+            <div class="form-group form-group-custom-control mb-0">
+                <fieldset>
+                    <legend>{{ 'pyramid.style.file_type'|trans }}</legend>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"  id="file-type-1" name="file-type" value="json" checked="">
+                        <label class="custom-control-label" for="file-type-1">json</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"  id="file-type-2" name="file-type" value="sld">
+                        <label class="custom-control-label" for="file-type-2">sld</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"  id="file-type-3" name="file-type" value="qml">
+                        <label class="custom-control-label" for="file-type-3">qml</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="block-import" id="json-style">
+                <div class="form-group mb-1">
+                    <label class="btn btn-sm btn--ghost btn--primary w-50" for="json-file">
+                        <span class="icon-load-file"></span> {{ 'pyramid.style.import'|trans }}
+                    </label>
+                    <input type="file" id="json-file" accept=".json">
+                </div>
+                <div class="filename" id="filename-json"></div>
+                <p class="description wysiwyg">
+                    <span class="icon-question"></span>
+                    {{ 'pyramid.style.json_help'|trans|raw }}
+                </p>
+            </div>
+            <div class="border px-1" id="sld-style" style="display: none;">
+                <p class="description wysiwyg mb-1">
+                    <span class="icon-question"></span>
+                    {{ 'pyramid.style.sld_help'|trans }}
+                </p>
+            </div>
+            <div class="border px-1" id="qml-style" style="display: none;">
+                <p class="description wysiwyg mb-1">
+                    <span class="icon-question"></span>
+                    {{ 'pyramid.style.qml_help'|trans }}
+                </p>
+            </div>
+            <p class="style-error my-1"></p>
+        </div>
+    </template>
 	{% endapply %}
 {% endblock %}
 
