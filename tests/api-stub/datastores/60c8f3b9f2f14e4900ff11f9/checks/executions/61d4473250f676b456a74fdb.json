@@ -1,0 +1,16 @@
+{
+    "_id": "61d4473250f676b456a74fdb",
+    "status": "SUCCESS",
+    "creation": "2022-01-04T13:10:10.053Z",
+    "upload": {
+        "_id": "61d4472150f676663ea74f88",
+        "name": "bati-ardennes-l93 gpkg 2022-01-04",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-01-04T13:10:10.658Z",
+    "finish": "2022-01-04T13:10:13.128Z"
+}

@@ -1,0 +1,33 @@
+{
+    "_id": "6182ae0f8322b2890cb3bd8c",
+    "processing": {
+        "_id": "615c42ea68207f82abe976c3",
+        "name": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base"
+    },
+    "parameters": {},
+    "creation": "2021-11-03T15:43:11.960Z",
+    "status": "SUCCESS",
+    "launch": "2021-11-03T15:43:12.636Z",
+    "start": "2021-11-03T15:43:13.125Z",
+    "finish": "2021-11-03T15:43:15.721Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "6182adfa8322b2541cb3bc6f",
+                "name": "bnlc_bnlc_pp",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "DELETED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "6182ae0f8322b22627b3bd88",
+            "name": "bnlc_bnlc_pp",
+            "status": "GENERATED",
+            "srs": "EPSG:2154"
+        }
+    }
+}

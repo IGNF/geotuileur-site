@@ -5,9 +5,9 @@
         "proc_int_id": "62694345985d6210e60c2a09",
         "vectordb_id": "62694345985d6261ae0c2a05",
         "proc_pyr_creat_id": "626943e3985d6259a30c2ecd",
-        "tms_url": "https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/hydro_08",
         "default_style": "6274c3eb51b59e0001b1b441",
-        "styles": "{\"626f937d51b59e0001b1b440\":\"Test\",\"6274c3eb51b59e0001b1b441\":\"style_defaut\",\"6279036e51b59e0001b1b442\":\"test_style\",\"6279316e51b59e0001b1b443\":\"style sans detail\",\"627a3bd651b59e0001b1b44b\":\"plan_d_eau\"}"
+        "styles": "{\"626f937d51b59e0001b1b440\":\"Test\",\"6274c3eb51b59e0001b1b441\":\"style_defaut\",\"6279036e51b59e0001b1b442\":\"test_style\",\"6279316e51b59e0001b1b443\":\"style sans detail\",\"627a3bd651b59e0001b1b44b\":\"plan_d_eau\"}",
+        "tms_url": "https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/hydro_08"
     },
     "_id": "626943e3985d62ee0e0c2ec9",
     "name": "PP_hydro-ardennes-l93",

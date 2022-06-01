@@ -1,0 +1,29 @@
+{
+    "_id": "623b3a4eb0da87ef8bcebba1",
+    "name": "BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15 zip 2022-03-23",
+    "description": "BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15 zip 2022-03-23",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-03-23T15:20:12.316Z"
+    },
+    "tags": {
+        "file_data": "623b3a4725407.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "623b3a82b0da87101acebddd",
+        "proc_int_id": "623b3a82b0da87f52acebde1",
+        "file_tree": "[{\"name\":\"BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15.gpkg.md5\",\"size\":80,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15.gpkg\",\"size\":242388992,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":242388992,\"type\":\"directory\"}]"
+    },
+    "size": 242397264
+}

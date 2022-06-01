@@ -1,0 +1,46 @@
+{
+    "_id": "61d447aa50f67677f7a752ae",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "17",
+        "top_level": "8",
+        "composition": [
+            {
+                "table": "bati_ardennes_l93",
+                "bottom_level": "17",
+                "top_level": "8",
+                "attributes": "hauteur,usage_2,materiaux_de_la_toiture,construction_legere,nature,materiaux_des_murs,etat_de_l_objet,nombre_de_logements,usage_1"
+            }
+        ],
+        "tippecanoe_options": "-al -ap"
+    },
+    "creation": "2022-01-04T13:12:10.137Z",
+    "status": "SUCCESS",
+    "launch": "2022-01-04T13:12:10.309Z",
+    "start": "2022-01-04T13:12:10.809Z",
+    "finish": "2022-01-04T13:18:18.249Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "61d4474150f6769c36a7510a",
+                "name": "bati-ardennes-l93 gpkg 2022-01-04",
+                "status": "DELETED",
+                "srs": "EPSG:2154"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "61d447aa50f676396ea752aa",
+            "name": "bati-ardennes-l93 gpkg 2022-01-04",
+            "status": "GENERATED",
+            "srs": "EPSG:3857"
+        }
+    }
+}

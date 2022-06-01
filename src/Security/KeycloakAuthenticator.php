@@ -56,16 +56,6 @@ class KeycloakAuthenticator extends AbstractGuardAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        // http://gitlab.forge-geoportail.ign.fr/plage/web-client/blob/32366625ce0f82d75f16bf57d2600d1891765f15/src/Security/KeycloakAuthenticator.php#L76
-        // dump($credentials);
-
-        if ('cypress-test' == $credentials['code']) {
-            return new User([
-                'preferred_username' => 'test_user',
-                'email' => 'test@test.com',
-            ]);
-        }
-
         try {
             return $userProvider->getUser($credentials);
         } catch (AppException $ex) {

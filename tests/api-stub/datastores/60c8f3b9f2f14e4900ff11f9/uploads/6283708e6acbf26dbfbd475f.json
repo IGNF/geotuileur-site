@@ -1,0 +1,25 @@
+{
+    "_id": "6283708e6acbf26dbfbd475f",
+    "name": "zone_urba gpkg 2022-05-11 maj",
+    "description": "zone_urba gpkg 2022-05-11 update_complete",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "CLOSED",
+    "last_event": {
+        "title": "V\u00e9rification termin\u00e9e",
+        "text": "V\u00e9rification vecteur SUCCESS",
+        "date": "2022-05-17T09:53:42.721Z"
+    },
+    "tags": {
+        "file_data": "62836f1a3d7dd.gpkg",
+        "workflow_integration_step": "4",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\",\"LAUNCH_PYRAMID_CREAT_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\CompleteUpdateWorkflow",
+        "initial_pyramid_id": "627b60516acbf237c8b985ff",
+        "vectordb_id": "628370b26acbf28b11bd4890",
+        "proc_int_id": "628370b26acbf27a89bd4894"
+    },
+    "size": 6742072
+}

@@ -1,0 +1,19 @@
+{
+    "urls": [
+        "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/zones_urbaines_gpumaj"
+    ],
+    "_id": "628372cb6acbf27afdbd5547",
+    "endpoint": {
+        "_id": "615c428368207f273be9767b",
+        "name": "Service tuil\u00e9 PLAGE"
+    },
+    "configuration": {
+        "_id": "628372ca6acbf2320fbd5536",
+        "name": "zones_urbaines_gpumaj",
+        "status": "PUBLISHED"
+    },
+    "type": "WMTS-TMS",
+    "layer_name": "zones_urbaines_gpumaj",
+    "status": "PUBLISHED",
+    "visibility": "PUBLIC"
+}

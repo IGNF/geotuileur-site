@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Security\User;
 use App\Utils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,10 +21,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="plage_security_login", methods={"GET"})
      */
-    public function login(UrlGeneratorInterface $urlGenerator, Request $request, TokenStorageInterface $tokenStorage)
+    public function login(UrlGeneratorInterface $urlGenerator, Request $request, TokenStorageInterface $tokenStorage, ParameterBagInterface $params)
     {
-        if (str_contains($request->headers->get('user-agent', ''), 'Cypress')) { // TODO cette condition ne suffit pas pour dire que c'est cypress, faudrait essayer avec un header particulier du coup
-            // return $this->redirectToRoute('plage_security_login_check', ['code' => 'cypress-test']);
+        if ('test' == $params->get('app_env')) {
             return $this->testLogin($tokenStorage, $request, $urlGenerator);
         }
 
@@ -68,7 +67,6 @@ class SecurityController extends AbstractController
         }
 
         $response = new RedirectResponse($urlGenerator->generate('plage_datastore_index'));
-        $response->headers->setCookie(Cookie::create('samesite', 'lax'));
 
         return $response;
     }

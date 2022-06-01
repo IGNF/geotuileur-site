@@ -1,0 +1,43 @@
+{
+    "_id": "619bb352046b5fc20ea769bd",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "16",
+        "top_level": "7",
+        "composition": [
+            {
+                "table": "bnlc",
+                "bottom_level": "16",
+                "top_level": "7",
+                "attributes": "nbre_pmr,nbre_pl,horaires"
+            }
+        ],
+        "tippecanoe_options": "-al -ap"
+    },
+    "creation": "2021-11-22T15:12:18.606Z",
+    "status": "WAITING",
+    "launch": "2021-11-22T15:12:18.770Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "6182a2c48322b274fcb3a20c",
+                "name": "bnlc_bnlc_test",
+                "status": "GENERATED",
+                "srs": "EPSG:2154"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "619bb352046b5fbff0a769b9",
+            "name": "bnlc_bnlc_test",
+            "status": "GENERATING"
+        }
+    }
+}

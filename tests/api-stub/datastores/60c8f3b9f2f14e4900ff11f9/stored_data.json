@@ -1,6 +1,32 @@
 [
     {
         "type": "ROK4-PYRAMID-VECTOR",
+        "_id": "628cd08c6acbf223f8c598b3",
+        "name": "bureaux-v7 gpkg 2022-05-24",
+        "visibility": "PRIVATE"
+    },
+    {
+        "type": "ROK4-PYRAMID-VECTOR",
+        "_id": "628cce2e6acbf2ae33c586b9",
+        "name": "bnlc gpkg 2022-04-14",
+        "visibility": "PRIVATE"
+    },
+    {
+        "type": "ROK4-PYRAMID-VECTOR",
+        "_id": "628c88ea6acbf2a4eac4f6b3",
+        "name": "zps5 zip 2022-05-24",
+        "visibility": "PRIVATE",
+        "srs": "EPSG:3857"
+    },
+    {
+        "type": "ROK4-PYRAMID-VECTOR",
+        "_id": "628b83246acbf25913c45ba4",
+        "name": "zps4 zip 2022-05-23",
+        "visibility": "PRIVATE",
+        "srs": "EPSG:3857"
+    },
+    {
+        "type": "ROK4-PYRAMID-VECTOR",
         "_id": "628370bb6acbf259cdbd497f",
         "name": "zone_urba gpkg 2022-05-11 maj",
         "visibility": "PRIVATE",

@@ -38,7 +38,7 @@ const DatastoreDashboard = ({ datastoreId }) => {
                 setPublishedPyramids(response?.data?.published_pyramids)
                 setIsLoading(false);
                 onGoingRequest.current = false;
-            }).catch(error => console.error(error.data))
+            }).catch(error => console.error(error))
     }
 
     useEffect(() => {

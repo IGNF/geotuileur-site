@@ -1,0 +1,16 @@
+{
+    "_id": "628c94a36acbf202f7c56ce8",
+    "status": "SUCCESS",
+    "creation": "2022-05-24T08:17:39.067Z",
+    "upload": {
+        "_id": "628c948e6acbf250f5c56c96",
+        "name": "pp_hydro-ardennes-l93 gpkg 2022-05-24",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-05-24T08:17:39.559Z",
+    "finish": "2022-05-24T08:17:41.926Z"
+}

@@ -2,7 +2,8 @@
     "type": "VECTOR-DB",
     "tags": {
         "upload_id": "62581d57985d62491303225b",
-        "proc_int_id": "62581d68985d6228a603235d"
+        "proc_int_id": "62581d68985d6228a603235d",
+        "pyramid_id": "628cce2e6acbf2ae33c586b9"
     },
     "_id": "62581d68985d625e7c032359",
     "name": "bnlc gpkg 2022-04-14",

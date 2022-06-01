@@ -1,0 +1,29 @@
+{
+    "_id": "6268fe4f985d627cb90bb750",
+    "name": "troncons_de_route_08",
+    "description": "troncons_de_route_08",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-27T08:29:54.911Z"
+    },
+    "tags": {
+        "file_data": "6268fe4305165.gpkg",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "6268fe60985d627f3e0bb84e",
+        "proc_int_id": "6268fe60985d62c7830bb852",
+        "file_tree": "[{\"name\":\"6268fe4305165.gpkg.md5\",\"size\":56,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"6268fe4305165.gpkg\",\"size\":3809280,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":3809280,\"type\":\"directory\"}]"
+    },
+    "size": 3817528
+}

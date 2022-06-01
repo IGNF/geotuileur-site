@@ -1,0 +1,16 @@
+{
+    "_id": "623b3a75b0da870250cebbf4",
+    "status": "SUCCESS",
+    "creation": "2022-03-23T15:19:17.711Z",
+    "upload": {
+        "_id": "623b3a4eb0da87ef8bcebba1",
+        "name": "BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15 zip 2022-03-23",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-03-23T15:19:18.630Z",
+    "finish": "2022-03-23T15:19:21.260Z"
+}

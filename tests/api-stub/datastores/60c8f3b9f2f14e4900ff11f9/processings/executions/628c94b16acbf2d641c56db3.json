@@ -1,0 +1,33 @@
+{
+    "_id": "628c94b16acbf2d641c56db3",
+    "processing": {
+        "_id": "615c42ea68207f82abe976c3",
+        "name": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base"
+    },
+    "parameters": {},
+    "creation": "2022-05-24T08:17:53.822Z",
+    "status": "SUCCESS",
+    "launch": "2022-05-24T08:17:54.149Z",
+    "start": "2022-05-24T08:17:54.593Z",
+    "finish": "2022-05-24T08:18:01.436Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "628c948e6acbf250f5c56c96",
+                "name": "pp_hydro-ardennes-l93 gpkg 2022-05-24",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "DELETED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "628c94b16acbf27945c56daf",
+            "name": "pp_hydro-ardennes-l93 gpkg 2022-05-24",
+            "status": "GENERATED",
+            "srs": "EPSG:2154"
+        }
+    }
+}

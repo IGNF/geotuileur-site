@@ -1,0 +1,9 @@
+2022/05/24 12:33:16       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2022/05/24 12:33:16       INFO §USER§ Signal transmis avec succès.
+2022/05/24 12:33:17       INFO §USER§ Récupération des informations sur l'exécution (PROCESSING) d'ID '628cd08c6acbf20de3c598b7'.
+2022/05/24 12:33:17       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2022/05/24 12:33:17       INFO §USER§ Les informations sur les données stockées en entrée de l'exécution ont été récupérées.
+2022/05/24 12:33:18       INFO §USER§ Récupération des informations sur le TMS 'PM'
+2022/05/24 12:33:18       INFO §USER§ Écriture des fichiers de configuration 4ALAMO
+2022/05/24 12:33:21       INFO §USER§ Envoi du signal d'échec de l'exécution à l'API.
+2022/05/24 12:33:21       INFO §USER§ Signal transmis avec succès.

@@ -1,0 +1,16 @@
+{
+    "_id": "628ccfda6acbf2b2d7c59621",
+    "status": "SUCCESS",
+    "creation": "2022-05-24T12:30:18.272Z",
+    "upload": {
+        "_id": "628ccfd86acbf2f976c59567",
+        "name": "bureaux-v7 gpkg 2022-05-24",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-05-24T12:30:18.991Z",
+    "finish": "2022-05-24T12:30:21.757Z"
+}

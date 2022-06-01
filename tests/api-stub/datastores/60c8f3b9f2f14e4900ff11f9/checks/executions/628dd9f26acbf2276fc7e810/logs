@@ -1,0 +1,16 @@
+2022/05/25 07:25:40       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2022/05/25 07:25:40       INFO §USER§ Signal transmis avec succès.
+2022/05/25 07:25:41       INFO §USER§ Récupération des informations sur l'exécution (CHECK) d'ID '628dd9f26acbf2276fc7e810'.
+2022/05/25 07:25:41       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2022/05/25 07:25:42       INFO §USER§ Vérification des fichiers SQL d'une livraison
+2022/05/25 07:25:42       INFO §USER§ Le dossier des données ne contient pas de fichiers SQL.
+2022/05/25 07:25:43       INFO §USER§ Vérification des GeoJSON
+2022/05/25 07:25:43       INFO §USER§ Le dossier des données ne contient pas de fichier GeoJSON.
+2022/05/25 07:25:44       INFO §USER§ Vérification des DBF
+2022/05/25 07:25:44       INFO §USER§ Le dossier des données ne contient pas de fichiers DBF.
+2022/05/25 07:25:44       INFO §USER§ Vérification des CSV
+2022/05/25 07:25:44       INFO §USER§ Nombre de CSV : 1
+2022/05/25 07:25:44       INFO §USER§ Mise à jour des informations sur la livraison.
+2022/05/25 07:25:45       INFO §USER§ Informations de la livraison mise à jour.
+2022/05/25 07:25:45       INFO §USER§ Envoi du signal de succès de l'exécution à l'API.
+2022/05/25 07:25:45       INFO §USER§ Signal transmis avec succès.

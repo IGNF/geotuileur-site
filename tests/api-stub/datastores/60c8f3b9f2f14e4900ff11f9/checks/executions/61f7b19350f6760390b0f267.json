@@ -1,0 +1,16 @@
+{
+    "_id": "61f7b19350f6760390b0f267",
+    "status": "SUCCESS",
+    "creation": "2022-01-31T09:53:23.310Z",
+    "upload": {
+        "_id": "61f7b17450f6766249b0f215",
+        "name": "bnac zip 2022-01-31 arnest",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-01-31T09:53:24.602Z",
+    "finish": "2022-01-31T09:53:27.072Z"
+}

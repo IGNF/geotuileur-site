@@ -2,7 +2,7 @@
     "storages": {
         "data": [
             {
-                "use": 2254086144,
+                "use": 2317803520,
                 "quota": 10000000000,
                 "type": "POSTGRESQL"
             },
@@ -12,13 +12,13 @@
                 "type": "FILESYSTEM"
             },
             {
-                "use": 458377947,
+                "use": 499352293,
                 "quota": 10000000000,
                 "type": "S3"
             }
         ],
         "uploads": {
-            "use": 1216661825,
+            "use": 1301251017,
             "quota": 10000000000
         },
         "annexes": {
@@ -41,7 +41,7 @@
             "quota": 100,
             "endpoint": {
                 "urls": [
-                    "tms|https://geoservices-test.ccs-ign-plage.ccs.cegedim.cloud/tms"
+                    "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms"
                 ],
                 "_id": "615c428368207f273be9767b",
                 "name": "Service tuil\u00e9 PLAGE",

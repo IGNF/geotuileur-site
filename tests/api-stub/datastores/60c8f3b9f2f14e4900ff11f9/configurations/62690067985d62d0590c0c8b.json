@@ -1,0 +1,37 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "62690067985d62d0590c0c8b",
+    "name": "troncons_de_route_08",
+    "layer_name": "troncons_de_route_08",
+    "type_infos": {
+        "keywords": [
+            "S\u00e9quence de tron\u00e7ons de route"
+        ],
+        "used_data": [
+            {
+                "stored_data": "6268ff6a985d62ec8f0bcf4f",
+                "bottom_level": "18",
+                "top_level": "7"
+            }
+        ],
+        "title": "Extrait tron\u00e7ons de route du 08",
+        "abstract": "Extrait tron\u00e7ons de route du 08"
+    },
+    "attribution": {
+        "title": "IGN BDTOPO\u00ae",
+        "url": "https:\/\/www.ign.fr\/"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-27T08:35:52.079Z"
+    }
+}

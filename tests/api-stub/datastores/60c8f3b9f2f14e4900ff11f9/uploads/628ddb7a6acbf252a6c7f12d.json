@@ -1,0 +1,56 @@
+{
+    "_id": "628ddb7a6acbf252a6c7f12d",
+    "name": "comma_troncons_d51 zip 2022-05-25",
+    "description": "comma_troncons_d51 zip 2022-05-25",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-05-31T12:30:00.990Z"
+    },
+    "tags": {
+        "file_data": "628ddb75ac038.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "628ddb8c6acbf2b682c7f22b",
+        "proc_int_id": "628ddb8c6acbf2f4b5c7f22f",
+        "file_tree": "[{\"name\":\"comma_troncons_d51.csv.md5\",\"size\":60,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"comma_troncons_d51.csv\",\"size\":2015770,\"extension\":\".csv\",\"type\":\"file\"}],\"size\":2015770,\"type\":\"directory\"}]"
+    },
+    "size": 2024022,
+    "extent": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    3.3954165046522844,
+                    48.55407228185584
+                ],
+                [
+                    4.9766724989257405,
+                    48.538300561747924
+                ],
+                [
+                    5.008969839729243,
+                    49.380815202223516
+                ],
+                [
+                    3.4018799684647725,
+                    49.39683200658029
+                ],
+                [
+                    3.3954165046522844,
+                    48.55407228185584
+                ]
+            ]
+        ]
+    }
+}

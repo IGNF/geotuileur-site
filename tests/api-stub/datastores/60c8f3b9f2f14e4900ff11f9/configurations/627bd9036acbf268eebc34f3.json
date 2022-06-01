@@ -1,0 +1,35 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "627bd9036acbf268eebc34f3",
+    "name": "zps3",
+    "layer_name": "zps3",
+    "type_infos": {
+        "keywords": [],
+        "used_data": [
+            {
+                "stored_data": "627bd8516acbf2a10dbc267b",
+                "bottom_level": "15",
+                "top_level": "5"
+            }
+        ],
+        "title": "ZPS 3",
+        "abstract": "ZPS 3"
+    },
+    "attribution": {
+        "title": "OFB",
+        "url": "https:\/\/www.ofb.gouv.fr"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-05-11T15:40:52.058Z"
+    }
+}

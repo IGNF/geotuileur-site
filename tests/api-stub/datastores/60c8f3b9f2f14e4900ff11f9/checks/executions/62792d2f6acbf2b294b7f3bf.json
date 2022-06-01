@@ -1,0 +1,16 @@
+{
+    "_id": "62792d2f6acbf2b294b7f3bf",
+    "status": "SUCCESS",
+    "creation": "2022-05-09T15:03:11.261Z",
+    "upload": {
+        "_id": "62792d2b6acbf29d7cb7f36d",
+        "name": "zps2154 zip 2022-05-09",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-05-09T15:03:12.042Z",
+    "finish": "2022-05-09T15:03:13.997Z"
+}

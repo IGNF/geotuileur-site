@@ -1,0 +1,37 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "6266644e985d621652098048",
+    "name": "bati-008",
+    "layer_name": "bati-008",
+    "type_infos": {
+        "keywords": [
+            "B\u00e2timent"
+        ],
+        "used_data": [
+            {
+                "stored_data": "61d447aa50f676396ea752aa",
+                "bottom_level": "17",
+                "top_level": "8"
+            }
+        ],
+        "title": "B\u00e2ti Ardennes Super",
+        "abstract": "B\u00e2ti BDTOPO du d\u00e9partement des Ardennes"
+    },
+    "attribution": {
+        "title": "IGN BDTOPO",
+        "url": "https:\/\/www.ign.fr"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-25T09:05:18.206Z"
+    }
+}

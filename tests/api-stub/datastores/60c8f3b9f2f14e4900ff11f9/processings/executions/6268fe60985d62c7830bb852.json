@@ -1,0 +1,33 @@
+{
+    "_id": "6268fe60985d62c7830bb852",
+    "processing": {
+        "_id": "615c42ea68207f82abe976c3",
+        "name": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base"
+    },
+    "parameters": {},
+    "creation": "2022-04-27T08:27:12.905Z",
+    "status": "SUCCESS",
+    "launch": "2022-04-27T08:27:13.072Z",
+    "start": "2022-04-27T08:27:13.460Z",
+    "finish": "2022-04-27T08:27:16.367Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "6268fe4f985d627cb90bb750",
+                "name": "troncons_de_route_08",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "DELETED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "6268fe60985d627f3e0bb84e",
+            "name": "troncons_de_route_08",
+            "status": "DELETED",
+            "srs": "EPSG:2154"
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "_id": "628b83246acbf227cec45ba8",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "15",
+        "top_level": "5",
+        "composition": [
+            {
+                "table": "zps",
+                "bottom_level": "15",
+                "top_level": "5",
+                "attributes": "fid,sitecode"
+            }
+        ],
+        "tippecanoe_options": "-ab \u2013S20"
+    },
+    "creation": "2022-05-23T12:50:44.678Z",
+    "status": "SUCCESS",
+    "launch": "2022-05-23T12:50:44.915Z",
+    "start": "2022-05-23T12:50:45.877Z",
+    "finish": "2022-05-23T12:52:15.922Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "628b7f176acbf22e97c45136",
+                "name": "zps4 zip 2022-05-23",
+                "status": "GENERATED",
+                "srs": "EPSG:2154"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "628b83246acbf25913c45ba4",
+            "name": "zps4 zip 2022-05-23",
+            "status": "GENERATED",
+            "srs": "EPSG:3857"
+        }
+    }
+}
