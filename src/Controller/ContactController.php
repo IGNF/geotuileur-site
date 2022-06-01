@@ -31,6 +31,8 @@ class ContactController extends AbstractController
     }
 
     /**
+     * Formulaire de contact
+     * 
      * @Route("/nous-ecrire", name="contact", methods={"GET","POST"})
      */
     public function contact(Request $request, MailerService $mailerService, LoggerInterface $mailerLogger)
@@ -137,6 +139,8 @@ class ContactController extends AbstractController
     }
 
     /**
+     * Page de redirection après contact
+     * 
      * @Route("/nous-ecrire/merci", name="contact_thanks", methods={"GET"})
      */
     public function contactThanks(Request $request)
@@ -151,10 +155,10 @@ class ContactController extends AbstractController
     }
 
     /**
-     * Recupere les informations a partir des parametres de la requete
+     * Récupère les informations a partir des paramètres de la requête
      *
      * @param array $datas
-     * @return void
+     * @return array|null 
      */
     private function getInformations($datas) {
         if (! count($datas)) {
@@ -204,7 +208,7 @@ class ContactController extends AbstractController
     }
 
     /**
-     * Retourne le texte du corps du message de l'email
+     * Retourne un corps de message prérempli pour certains sujets de demande
      *
      * @param array $informations
      * @return string
@@ -219,8 +223,8 @@ class ContactController extends AbstractController
             $text .= "- Mon identifiant utilisateur : " . $informations['user_id'] . ' (' . $informations['username'] . ')';
         } else {
             $text .= "Je souhaiterais un nouvel espace de travail sur le Géotuileur.\n\n";
-            $text .= "- Nom souhaité pour cet espace de travail : {nom}\n";
-            $text .= "- Volume d'espace de stockage souhaité : {X} Go\n";
+            $text .= "- Nom souhaité pour cet espace de travail : ...\n";
+            $text .= "- Volume d'espace de stockage souhaité : ... Go\n";
             $text .= "- Mon identifiant utilisateur : " . $informations['user_id'] . ' (' . $informations['username'] . ")\n\n";
             $text .= "Ajoutez toute autre information qui vous semble pertinente, notamment des informations sur la nature des données que vous souhaitez diffuser.";      
         }
