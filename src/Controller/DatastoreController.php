@@ -88,7 +88,7 @@ class DatastoreController extends AbstractController
     /**
      * Tableau de bord d'un espace de travail.
      *
-     * @Route("/{datastoreId}", name="view", methods={"GET"})
+     * @Route("/{datastoreId}", name="view", methods={"GET"}, options={"expose"=true})
      */
     public function view($datastoreId): Response
     {

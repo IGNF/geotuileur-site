@@ -43,6 +43,10 @@
     {% set pageHelp = 'stored_data.report.generation_failure_help' | trans %}
 {% endif %}
 
+{% if stored_data.status == 'DELETED' %}
+    {% set pageHelp = 'stored_data.report.stored_data_deleted_help' | trans %}
+{% endif %}
+
 {% block title %} {{ pageTitle ~ ' - ' ~ parent() }} {% endblock %}
 
 {% set checkTypes = constant('App\\Constants\\UploadCheckTypes::TYPES_LIST') %}
