@@ -122,7 +122,7 @@ class UploadController extends AbstractController
         if (array_key_exists('vectordb_id', $upload['tags'])) {
             $vectordb = $this->plageApi->storedData->get($datastoreId, $upload['tags']['vectordb_id']);
             if (StoredDataStatuses::DELETED == $vectordb['status']) {
-                $this->addFlash('notice', sprintf('La donnée %s a été supprimée', $vectordb['_id']));
+                $this->addFlash('notice', sprintf('La donnée %s n\'existe plus, elle a été supprimée.', $vectordb['_id']));
 
                 return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
             }
