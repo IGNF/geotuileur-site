@@ -110,6 +110,8 @@ $(function () {
 
     $('[id^=collapse-map]').on('shown.bs.collapse', function () {
         let num = $(this).data('num');
+
+        // Initialisation des cartes pour la selection des niveaux de zoom
         $(`#zoom-levels${num}`).zoomrange('showMaps');
     });
 

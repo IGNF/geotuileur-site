@@ -139,39 +139,6 @@ class UploadApiService extends AbstractPlageApiService
         } catch (\Throwable $th) {
             throw $th;
         }
-
-        // try {
-        //     if ($extension != "zip") {
-        //         $this->uploadFile($datastoreId, $uploadId, $filepath, $filename);
-        //         $this->close($datastoreId, $uploadId);
-        //         return;
-        //     }
-
-        //     // extracting zip file
-        //     $zip = new \ZipArchive();
-        //     if (!$zip->open($filepath)) {
-        //         throw new AppException('Ouverture du fichier ZIP échouée');
-        //     }
-
-        //     $folder = join([$infos['dirname'], DIRECTORY_SEPARATOR, $infos['filename']]);
-        //     if (!$zip->extractTo($folder)) {
-        //         throw new AppException('Décompression du fichier zip échouée');
-        //     }
-        //     $zip->close();
-
-        //     // add files to the upload
-        //     $iterator = new \DirectoryIterator($folder);
-        //     foreach ($iterator as $fileinfo) {
-        //         if (!$fileinfo->isDot()) {
-        //             $this->uploadFile($datastoreId, $uploadId, $fileinfo->getPathname(), $fileinfo->getFilename());
-        //         }
-        //     }
-
-        //     // close the upload
-        //     $this->close($datastoreId, $uploadId);
-        // } catch (\Throwable $th) {
-        //     throw $th;
-        // }
     }
 
     /**
