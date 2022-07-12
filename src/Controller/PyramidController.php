@@ -65,7 +65,12 @@ class PyramidController extends AbstractController
             if (Response::HTTP_NOT_FOUND == $ex->getCode()) {
                 $this->addFlash('error', "La donnée en entrée n'existe pas");
             }
+            return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
+        }
 
+        // Verification de l'existence de l'extent
+        if (! array_key_exists('extent', $vectordb)) {
+            $this->addFlash('error', "L'étendue géographique des données n'a pas pu être déterminée. Il n'est pas possible de générer une pyramide de tuiles vectorielles à partir de ces données.");
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 

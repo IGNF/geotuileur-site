@@ -114,7 +114,7 @@ export class PyramidComposition {
     }
 
     /**
-     * Construction d'un accordeon'
+     * Construction d'un accordeon
      * 
      * @param Object relation 
      * @param integer num 
@@ -148,6 +148,8 @@ export class PyramidComposition {
                 .append($spanInfos);
             html += $span.prop('outerHTML');
             $a.append(html);   
+        } else {
+            $accordeon.find('.o-accordion__header').text(relation.name);
         }
 
         // Les attributs
