@@ -4,6 +4,7 @@ namespace App\Listener;
 
 use Oneup\UploaderBundle\Event\PostUploadEvent;
 use Symfony\Component\Filesystem\Filesystem;
+use ZipArchive;
 
 /**
  * @author pprevautel
@@ -12,6 +13,9 @@ class UploadListener
 {
     public function onUpload(PostUploadEvent $event)
     {
+        $uploadedFile = $event->getRequest()->files->get('upload')['file'];
+        $originalName = $uploadedFile-> getClientOriginalName();
+
         $response = $event->getResponse();
         $file = $event->getFile();
 
@@ -38,7 +42,12 @@ class UploadListener
             // Verification des srid (le srid doit être unique pour toutes couches gpkg et zip avec gpkg)
             $response['status'] = "OK";
             $response['srid'] = (count($unicity) == 1) ? $unicity[0] : "";
-            $response['filename'] = $file->getFilename();
+            
+            // Si c'est un fichier csv, on le zippe pour conserver le nom
+            if ('csv' == $extension) {
+                $response['filename'] = $this->zip($file, $originalName);
+            } else $response['filename'] = $file->getFilename();
+            
         } catch (\Exception $e) {
             $response['status'] = "ERROR";
             $response['error'] = $e->getMessage();
@@ -110,6 +119,44 @@ class UploadListener
         if (count($unicity) != 1) {
             throw new \Exception("L'archive ne doit contenir qu'un seul type de fichier (gpkg ou CSV)");
         }
+    }
+
+    /**
+     * Cree un fichier archive qui va contenir ce fichier $file (csv uniquement)
+     * Le fichier zip est de la forme <basename>.zip
+     *
+     * @param File $file
+     * @param string $originalName
+     * @return void
+     */
+    private function zip($file, $originalName) {
+        $fs = new Filesystem();
+
+        $folder = realpath($file->getPath());
+
+        // On renomme le fichier
+        $filepath = realpath($file->getPathName());
+        $outfile = join(DIRECTORY_SEPARATOR, [$folder, "$originalName"]);
+        $fs->rename($filepath, $outfile, true);
+        
+        // Creation de l'archive
+        $extension = $file->getExtension();
+        $uuid = $file->getBasename(".$extension");
+        $zipFile = join(DIRECTORY_SEPARATOR, [$folder, "$uuid.zip"]);
+
+        $zip = new \ZipArchive();
+        $res = $zip->open($zipFile, ZipArchive::CREATE);
+        if ($res === TRUE) {
+            $zip->addFile($outfile, "$originalName");
+            $zip->close();   
+        }
+
+        $fs->remove($outfile);
+        if ($res === TRUE) {
+            return "$uuid.zip";
+        }
+
+        throw new \Exception("La création de l'archive a échoué.");
     }
 
     /**
