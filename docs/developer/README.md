@@ -18,30 +18,89 @@ Le portail est construit sur le framework PHP Symfony. Il nécessite l'installat
 
 ### Spécificités de l'installation avec Docker
 
-* Lancer les conteneurs docker : `docker-compose up -d --build --remove-orphans` ou `make up`
-* Préfixe pour toutes les autres commandes : `docker exec -it web-client_backend_1 ...`
+-   Lancer les conteneurs docker : `docker-compose up -d --build --remove-orphans` ou `make up`
+-   Préfixe pour toutes les autres commandes : `docker exec -it web-client_backend_1 ...`
+
+## Tests avec Cypress
+
+### Prérequis
+
+Activer l'environnement de test :
+
+```ini
+# .env.local
+APP_ENV=test
+```
+
+```sh
+php bin/console cache:clear
+```
+
+Lancer si première utilisation de cypress :
+
+```sh
+yarn cypress install
+```
+
+> Configuration supplémentaire pour Linux sous WSL2 : https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+
+### Lancement des tests
+
+Ouvrir l'interface de pilotage de cypress :
+
+```sh
+yarn cypress open
+```
+
+Lancer les tests (mode `headless`, sans visuel) :
+
+```sh
+# le mode headless (--headless) est activé par défaut
+yarn cypress run --browser firefox
+```
+
+Lancer les tests (mode `headed`, avec visuel) :
+
+```sh
+yarn cypress run --browser firefox --headed
+```
+
+> Le navigateur sur lequel on souhaite tourner les tests doit être installé sur votre machine.
+>
+> Liste de navigateurs supportés : https://docs.cypress.io/guides/guides/launching-browsers#Browsers
+
+### Divers
+
+Pour le bon fonctionnement de l'intellisense de votre IDE pour cypress, configurer le fichier `jsconfig.json` ainsi :
+
+```json
+"include": ["./node_modules/cypress", "cypress/**/*.js"]
+```
+
+> En savoir plus : https://docs.cypress.io/guides/tooling/IDE-integration#Writing-Tests
 
 ## Documentations diverses
 
-* Plan du site Géotuileur : [sitemap.md](sitemap.md)
+-   Plan du site Géotuileur : [sitemap.md](sitemap.md)
 
-* Processus détaillé de création d'un flux de tuiles vectorielles [workflow.md](workflow.md)
+-   Processus détaillé de création d'un flux de tuiles vectorielles [workflow.md](workflow.md)
 
-* Consignes de rédaction de la documentation utilisateur : [docsify.md](docsify.md)
+-   Consignes de rédaction de la documentation utilisateur : [docsify.md](docsify.md)
 
-* Contenu et actions possibles depuis le tableau de bord d'un espace de travail : [dashboard.md](dashboard.md)
+-   Contenu et actions possibles depuis le tableau de bord d'un espace de travail : [dashboard.md](dashboard.md)
 
-* Documentation détaillée de la généralisation : [generalization.md](generalization.md)
+-   Documentation détaillée de la généralisation : [generalization.md](generalization.md)
 
 ## Commandes utiles
 
 Quelques commandes `make` ont été configurées comme raccourcis pour certaines tâches courantes :
 
-* Voir la liste de commandes `make` disponibles : `make help`
-* Voir le détail des commandes `make` dans le fichier `Makefile` à la racine du projet
-* Compiler les dépendances PHP et JavaScript : `make compile-app` ou `make compile-app-prod` en production
+-   Voir la liste de commandes `make` disponibles : `make help`
+-   Voir le détail des commandes `make` dans le fichier `Makefile` à la racine du projet
+-   Compiler les dépendances PHP et JavaScript : `make compile-app` ou `make compile-app-prod` en production
 
 Si vous modifiez des templates twig, vérifiez leur syntaxe avec :
+
 ```
 php bin/console lint:twig templates/
 ```

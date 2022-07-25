@@ -35,3 +35,9 @@ tools
 
 /public/data/**
 /templates/components/megamenu.html
+
+
+### Cypress
+/cypress/screenshots
+/cypress/videos
+###
