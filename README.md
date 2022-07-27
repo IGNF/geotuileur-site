@@ -24,4 +24,4 @@ La documentation utilisateur se trouvant dans [docs/user](docs/user) constitue l
 
 ## Documentation développeur
 
-Voir la [documentation développeur](docs/developer).
+Voir la [documentation développeur](docs/developer/README.md).

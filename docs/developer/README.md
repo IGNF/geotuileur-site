@@ -36,6 +36,12 @@ APP_ENV=test
 php bin/console cache:clear
 ```
 
+Configurer le `baseUrl` dans [cypress.config.js](../../cypress.config.js) specifique à votre installation :
+
+```js
+baseUrl: "http://localhost:8080",
+```
+
 Lancer si première utilisation de cypress :
 
 ```sh
@@ -69,7 +75,7 @@ yarn cypress run --browser firefox --headed
 >
 > Liste de navigateurs supportés : https://docs.cypress.io/guides/guides/launching-browsers#Browsers
 
-### Divers
+### Astuces
 
 Pour le bon fonctionnement de l'intellisense de votre IDE pour cypress, configurer le fichier `jsconfig.json` ainsi :
 
@@ -78,6 +84,26 @@ Pour le bon fonctionnement de l'intellisense de votre IDE pour cypress, configur
 ```
 
 > En savoir plus : https://docs.cypress.io/guides/tooling/IDE-integration#Writing-Tests
+
+Structure des tests :
+
+```js
+// cypress/e2e/example.cy.js
+
+describe("...", () => {
+    context('...', () => {
+        it('...', () => {
+            ...
+        })
+    })
+})
+```
+
+-   `describe` : une suite de tests
+-   `context` (optionnel) : un ensemble de tests qui sont regroupés par un contexte particulier (par ex. utilisateur connecté ou non)
+-   `it` ou `specify` : un scenario représenté par une suite de tâches et vérification d'un comportement attentu (quelque chose qui se passe quand l'utilisateur effectue une action)
+
+> En savoir plus : https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Test-Structure
 
 ## Documentations diverses
 
