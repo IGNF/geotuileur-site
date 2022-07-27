@@ -6,5 +6,9 @@ module.exports = defineConfig({
             // implement node event listeners here
         },
         baseUrl: "http://localhost:8080",
+        experimentalSessionAndOrigin: true,
     },
+    // taille d'un macbook-15
+    viewportHeight: 900,
+    viewportWidth: 1440
 });
