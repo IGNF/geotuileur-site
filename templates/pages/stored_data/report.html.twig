@@ -43,6 +43,10 @@
     {% set pageHelp = 'stored_data.report.generation_failure_help' | trans %}
 {% endif %}
 
+{% if stored_data.status == 'DELETED' %}
+    {% set pageHelp = 'stored_data.report.stored_data_deleted_help' | trans %}
+{% endif %}
+
 {% block title %} {{ pageTitle ~ ' - ' ~ parent() }} {% endblock %}
 
 {% set checkTypes = constant('App\\Constants\\UploadCheckTypes::TYPES_LIST') %}
@@ -181,12 +185,13 @@
         {% endif %}
 
         {% if hasFailed == true %}
-            <div class="text-center">
-                <a
-                    class="btn btn--ghost btn--primary"
-                    href="{{ path('plage_contact', {'subject': 'processing_failed', 'datastoreId': context.datastore_id, 'storedDataId': context.stored_data_id }) }}"
-                >{{ 'contact.title'|trans }}
-                </a>
+            <div class="wysiwyg">
+                <p>
+                    {{ 'stored_data.report.help_needed'|trans }}
+                    <a href="{{ path('plage_contact', {'subject': 'processing_failed', 'datastoreId': context.datastore_id, 'storedDataId': context.stored_data_id }) }}"
+                    >{{ 'stored_data.report.contact_us'|trans }}
+                    </a>
+                </p>
             </div>
         {% else %}
             <div class="wysiwyg">

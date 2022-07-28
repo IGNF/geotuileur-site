@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Components\Workflow\AbstractWorkflow;
 use App\Components\Workflow\IntegrationWorkflow;
 use App\Components\Workflow\WorkflowRunner;
+use App\Constants\StoredDataStatuses;
 use App\Constants\UploadTypes;
 use App\Exception\AppException;
 use App\Exception\PlageApiException;
@@ -116,6 +117,17 @@ class UploadController extends AbstractController
     public function integration($datastoreId, $uploadId)
     {
         $upload = $this->plageApi->upload->get($datastoreId, $uploadId);
+
+        // rediriger vers le tableau de bord si vectordb est supprimé
+        if (array_key_exists('vectordb_id', $upload['tags'])) {
+            $vectordb = $this->plageApi->storedData->get($datastoreId, $upload['tags']['vectordb_id']);
+            if (StoredDataStatuses::DELETED == $vectordb['status']) {
+                $this->addFlash('notice', sprintf('La donnée %s n\'existe plus, elle a été supprimée.', $vectordb['_id']));
+
+                return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
+            }
+        }
+
         $upload['tags']['workflow_integration_progress'] = json_decode($upload['tags']['workflow_integration_progress'], true);
 
         $workflowClassName = $upload['tags']['workflow_class_name'];

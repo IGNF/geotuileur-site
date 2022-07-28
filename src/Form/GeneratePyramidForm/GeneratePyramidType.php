@@ -37,12 +37,16 @@ class GeneratePyramidType extends AbstractType
             ->add('bbox', HiddenType::class, [
                 'required' => false,
             ])
-            ->add('composition', PyramidCompositionType::class, [
+            ->add('composition', HiddenType::class, [
                 'translation_domain' => 'PlageWebClient',
-                'label' => 'pyramid.form_add.composition',
-                'type_infos' => $options['type_infos'],
-                'composition_sample' => $procCreatPyramidSample ? $procCreatPyramidSample['parameters']['composition'] : null,
+                'label' => 'pyramid.form_add.composition'
             ])
+            // ->add('composition', PyramidCompositionType::class, [
+            //     'translation_domain' => 'PlageWebClient',
+            //     'label' => 'pyramid.form_add.composition',
+            //     'type_infos' => $options['type_infos'],
+            //     'composition_sample' => $procCreatPyramidSample ? $procCreatPyramidSample['parameters']['composition'] : null,
+            // ])
             ->add('tippecanoe', HiddenType::class, [
                 'translation_domain' => 'PlageWebClient',
                 'label' => 'pyramid.form_add.tippecanoe.options',

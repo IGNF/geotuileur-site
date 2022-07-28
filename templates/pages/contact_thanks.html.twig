@@ -26,7 +26,7 @@
                 <p>
                     <span class="icon-mail"></span>
                     {{ 'contact.thanks.success'|trans }}<br>
-                    <a href="{{ path('plage_home')}}">{{ 'contact.thanks.continue'|trans }}</a>
+                    <a href="{% if app.user %} {{ path('plage_datastore_index') }} {% else %} {{ path('plage_home') }} {% endif %}">{{ 'contact.thanks.continue'|trans }}</a>
                 </p>
             {% endif %}
             </div>

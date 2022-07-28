@@ -40,6 +40,8 @@ $.widget("custom.zoomrange", {
     _checkOptions: function () {
         let maxExtent = boundingExtent([[-180,-90],[180,90]]);
 
+        this.options.min = parseInt(this.options.min) || 0;
+        this.options.max = parseInt(this.options.max) || 20;
         this.options.values = [
             parseInt(this.options.topLevel) || 0,
             parseInt(this.options.bottomLevel) || 20 
@@ -247,6 +249,16 @@ $.widget("custom.zoomrange", {
 
         // Mise a jour des marqueurs
         this._resetMarks();
+    },
+
+    /**
+     * Raffraichissement des deux cartes
+     */
+    refresh: function() {
+        if (this._map1 !== undefined) {
+            this._map1.getLayers().getArray()[0].changed();
+            this._map2.getLayers().getArray()[0].changed();
+        }
     },
 
     /**

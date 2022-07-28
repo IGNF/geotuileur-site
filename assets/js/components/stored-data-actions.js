@@ -11,6 +11,10 @@ export class StoredDataAction {
         this.title = null;
         this.message = null;
         this.failMessage = null;
+        this.successMessage = null;
+
+        this.successCallback = null;
+        this.failCallback = null;
 
         this.datastoreId = datastoreId;
         this.storedData = storedData;
@@ -30,9 +34,23 @@ export class StoredDataAction {
             callback: (result => {
                 if (!result) return;
 
-                $.post(_self.url, () => { }).fail(() => {
-                    flash.flashAdd(_self.failMessage, 'danger');
-                });
+                $.post(_self.url, () => { })
+                    .then(() => {
+                        if (_self.successMessage) {
+                            flash.flashAdd(_self.successMessage, 'success');
+                        }
+
+                        if (_self.successCallback) {
+                            _self.successCallback();
+                        }
+                    })
+                    .fail(() => {
+                        flash.flashAdd(_self.failMessage, 'danger');
+
+                        if (_self.failCallback) {
+                            _self.failCallback();
+                        }
+                    });
             })
         });
     }
@@ -58,7 +76,14 @@ export class RemoveAction extends StoredDataAction {
         }
         this.message += `Voulez-vous continuer ?</p>`;
 
+        this.successMessage = `La donnée ${storedData._id} a été supprimée.`;
         this.failMessage = `La suppression de la donnée ${storedData._id} a échoué.`;
+
+        this.successCallback = function () {
+            if (location.pathname.endsWith('/integration')) {
+                location.href = Routing.generate('plage_datastore_view', { datastoreId: this.datastoreId })
+            }
+        }
 
         switch (storedData.status) {
             // Suppression d'une donnee de type base Postgres ou de type pyramide

@@ -39,9 +39,9 @@
         {% if subject is not null %}
             <p class="description">
                 {% if "add_datastore" == subject %}
-                    Aide add_datastore
+                    {{ "contact.add_datastore_help"|trans }}
                 {% elseif "processing_failed" == subject %}
-                    Aide processing_failed
+                    {{ "contact.processing_failed_help"|trans }}
                 {% endif %}
             </p>
         {% endif %}

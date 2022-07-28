@@ -188,6 +188,7 @@ stored_data:
         generation_title: "Rapport de génération de la pyramide de tuiles vectorielles %stored_data_name%"
         generation_help: "Vos tuiles vectorielles ont été générées avec succès à partir de vos données."
         generation_failure_help: "Les tuiles vectorielles n'ont pas pu être générées correctement. Vous trouverez ci-dessous des informations techniques concernant les processus exécutés et les problèmes rencontrés."
+        stored_data_deleted_help: "Cette donnée a été supprimée. Vous ne pouvez plus l'utiliser mais cette page conserve la trace des actions qui l'ont concerné."
         step_upload: "Téléversement du fichier"
         details: "Détails techniques :"
         upload_name: "Nom :"
@@ -208,6 +209,8 @@ stored_data:
         attribute_name: "Attribut"
         attribute_type: "Type"
         extent: "Emprise géographique des données"
+        help_needed: "Besoin d'aide à propos de cette erreur ?"
+        contact_us: "Écrivez nous"
         delete_advise: "La génération de cette donnée a échoué. Il n'est pas possible de continuer à partir d'ici. Après avoir pris connaissance de ce rapport, vous pouvez supprimer cette donnée pour la faire disparaitre des actions à terminer de votre tableau de bord et libérer de l'espace."
         back: "Retour au tableau de bord"
     global:
@@ -438,6 +441,8 @@ contact:
     about: "<p>Vous n'avez pas trouvé la réponse à votre question dans <a href='%URL%'>l'aide en ligne</a> ? Vous souhaitez la configuration d'un espace de travail pour vos besoins ? Contactez-nous !</p>"
     personal_data: "Les informations recueillies à partir de ce formulaire sont nécessaires à la gestion de votre demande par les services de l'IGN concernés."
     personal_data_link: "En savoir plus sur la gestion des données à caractère personnel"
+    add_datastore_help: ""
+    processing_failed_help: "Les informations techniques sur le processus en échec ont été préremplies pour que notre équipe puisse investiguer plus rapidement. Ne les effacez pas."
     form:
         userEmail: "Votre email"
         message: "Décrivez votre demande en quelques lignes"

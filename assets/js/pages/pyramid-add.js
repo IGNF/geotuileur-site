@@ -4,12 +4,19 @@ require('../components/jquery-ui-widgets/jquery-ui-zoomrange.js');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { TippeCanoeList } from '../components/react/Tippecanoe';
+import { PyramidComposition } from '../components/pyramid-add-page/pyramid-composition';
+
 const flash = require("../components/flash-messages");
+
+let datas = $('#part-2').data();
 
 let sampleInstance = null;
 let tippeCanoeList = null;
-let $bbox = $('#generate_pyramid_bbox');
-let numTables = $('div#part-2').data('numtables');
+let pyramidComposition = null;
+
+let $bbox = $('#generate_pyramid_bbox'); 
+let numTables = datas.typeinfos.relations.length;
+let sampleParameters = datas.pyramidsample ? datas.pyramidsample.parameters : null;
 
 let first = true;
 
@@ -62,6 +69,12 @@ function getLevels() {
 
 $(function () {
     /**
+     * TABLES ET ATTRIBUTS
+     */
+    pyramidComposition = new PyramidComposition();
+    pyramidComposition.buildForm();
+
+    /**
       * GESTION DES ZOOMS
       */
     let datas = $('#main-zoom-levels').data();
@@ -81,9 +94,24 @@ $(function () {
     });
 
     // On differe la creation des cartes apres l'ouverture des accordeons
-    $('[id^=zoom-levels]').zoomrange($.extend(options, { defer: true }));
+    if (sampleParameters) {
+        let num = 0;
+        sampleParameters.composition.forEach(composition => {
+            $(`#zoom-levels${num}`).zoomrange({
+                min: composition['top_level'],
+                max: composition['bottom_level'],
+                topLevel: composition['top_level'],
+                bottomLevel: composition['bottom_level'],
+                defer: true  
+            });
+            num++
+        });
+    } else $('[id^=zoom-levels]').zoomrange(options);
+
     $('[id^=collapse-map]').on('shown.bs.collapse', function () {
         let num = $(this).data('num');
+
+        // Initialisation des cartes pour la selection des niveaux de zoom
         $(`#zoom-levels${num}`).zoomrange('showMaps');
     });
 
@@ -96,12 +124,25 @@ $(function () {
         first = !first;
     });
 
+    // Comportement etrange, quand on passe sur une partie ou il y a des cartes
+    // celles-ci doivent etre raffraichies ????
+    ['part-1', 'part-2'].forEach(part => {
+        let id = `#${part}`;
+        $(`a[href="${id}"]`).on('click', (e) => {
+            $(`${id} [id*="zoom-levels"]`).zoomrange('refresh'); 
+        });
+    });
+
     // Bouton table suivante => Affichage de l'icone, on cache le courant et on ouvre le suivant
     $('.next-table').on('click', (e) => {
         e.preventDefault();
 
         let num = $(e.currentTarget).data('num');
+        
+        let infos = getTableInfos(num);
         $(`#table-valid${num}`).show();
+        $(`span#table-infos${num}`).text(infos);
+
         $(`[id=collapse-map${num}]`).collapse('hide');
         if (num + 1 < numTables) {
             // Ce n'est pas la dernière table, on peut déplier la suivante
@@ -192,6 +233,9 @@ $(function () {
     $('#form_pyramid_add').on('submit', function () {
         let levels = getLevels();
         $('#generate_pyramid_levels').val(JSON.stringify(levels));
+
+        let composition = pyramidComposition.asJsonString();
+        $('#generate_pyramid_composition').val(composition);
 
         let sample = $('#generate_pyramid_sample').is(':checked');
         let $bbox = $('#generate_pyramid_bbox');
