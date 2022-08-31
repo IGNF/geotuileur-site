@@ -24,6 +24,8 @@ Si vous préférez le format CSV, quelques contraintes supplémentaires sont à 
 
 -   la virgule `,` est le seul séparateur valide
 
+-   il est impératif que le fichier .csv soit dans une archive `.zip` (voir paragraphe suivant). Une anomalie connue mais non corrigée empêche de passer à l'étape suivante si ce n'est pas le cas.
+
 
 ## Compressez le fichier
 
