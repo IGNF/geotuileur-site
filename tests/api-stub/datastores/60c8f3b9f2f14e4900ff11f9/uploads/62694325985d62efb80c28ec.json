@@ -1,0 +1,29 @@
+{
+    "_id": "62694325985d62efb80c28ec",
+    "name": "PP_hydro-ardennes-l93",
+    "description": "PP_hydro-ardennes-l93",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-27T13:22:00.517Z"
+    },
+    "tags": {
+        "file_data": "6269430b700ba.gpkg",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "62694345985d6261ae0c2a05",
+        "proc_int_id": "62694345985d6210e60c2a09",
+        "file_tree": "[{\"name\":\"6269430b700ba.gpkg.md5\",\"size\":56,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"6269430b700ba.gpkg\",\"size\":29323264,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":29323264,\"type\":\"directory\"}]"
+    },
+    "size": 29331512
+}

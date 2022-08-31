@@ -1,0 +1,25 @@
+{
+    "_id": "61f7b8ad50f6763839b13079",
+    "name": "bnac zip 2022-01-31 arnest maj",
+    "description": "bnac zip 2022-01-31 arnest update_complete",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "CLOSED",
+    "last_event": {
+        "title": "V\u00e9rification termin\u00e9e",
+        "text": "V\u00e9rification vecteur SUCCESS",
+        "date": "2022-01-31T10:24:14.204Z"
+    },
+    "tags": {
+        "file_data": "61f7b8a89c3f1.zip",
+        "workflow_integration_step": "4",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\",\"LAUNCH_PYRAMID_CREAT_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\CompleteUpdateWorkflow",
+        "initial_pyramid_id": "61f7b39350f676b8f2b10fd0",
+        "vectordb_id": "61f7b8da50f6768a1cb1326a",
+        "proc_int_id": "61f7b8da50f67662bcb1326e"
+    },
+    "size": 168996911
+}

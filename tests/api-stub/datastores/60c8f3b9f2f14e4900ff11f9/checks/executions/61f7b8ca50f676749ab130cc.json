@@ -1,0 +1,16 @@
+{
+    "_id": "61f7b8ca50f676749ab130cc",
+    "status": "SUCCESS",
+    "creation": "2022-01-31T10:24:10.961Z",
+    "upload": {
+        "_id": "61f7b8ad50f6763839b13079",
+        "name": "bnac zip 2022-01-31 arnest maj",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-01-31T10:24:11.711Z",
+    "finish": "2022-01-31T10:24:14.201Z"
+}

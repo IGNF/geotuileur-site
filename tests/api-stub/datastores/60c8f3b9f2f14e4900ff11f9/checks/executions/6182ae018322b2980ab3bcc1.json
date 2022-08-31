@@ -1,0 +1,16 @@
+{
+    "_id": "6182ae018322b2980ab3bcc1",
+    "status": "SUCCESS",
+    "creation": "2021-11-03T15:42:57.400Z",
+    "upload": {
+        "_id": "6182adfa8322b2541cb3bc6f",
+        "name": "bnlc_bnlc_pp",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2021-11-03T15:42:57.947Z",
+    "finish": "2021-11-03T15:43:00.214Z"
+}

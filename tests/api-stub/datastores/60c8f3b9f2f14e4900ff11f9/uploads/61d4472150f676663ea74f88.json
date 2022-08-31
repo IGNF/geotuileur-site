@@ -1,0 +1,29 @@
+{
+    "_id": "61d4472150f676663ea74f88",
+    "name": "bati-ardennes-l93 gpkg 2022-01-04",
+    "description": "bati-ardennes-l93 gpkg 2022-01-04",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-01-04T13:10:45.112Z"
+    },
+    "tags": {
+        "file_data": "61d44719851fa.gpkg",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "61d4474150f6769c36a7510a",
+        "proc_int_id": "61d4474150f67631dba7510e",
+        "file_tree": "[{\"name\":\"61d44719851fa.gpkg.md5\",\"size\":56,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"61d44719851fa.gpkg\",\"size\":79319040,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":79319040,\"type\":\"directory\"}]"
+    },
+    "size": 79327288
+}

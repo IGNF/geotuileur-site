@@ -1,0 +1,16 @@
+{
+    "_id": "61cc64cb50f6762c7ba62767",
+    "status": "SUCCESS",
+    "creation": "2021-12-29T13:38:19.128Z",
+    "upload": {
+        "_id": "61cc64b750f6764a87a62714",
+        "name": "bnac zip 2021-12-29",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2021-12-29T13:38:19.996Z",
+    "finish": "2021-12-29T13:38:22.606Z"
+}

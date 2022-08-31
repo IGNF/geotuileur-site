@@ -1,0 +1,17 @@
+{
+    "public": true,
+    "_id": "60c8eb9af2f14e6abaff11f4",
+    "name": "Communaut\u00e9 G\u00e9otuilerie",
+    "technical_name": "geotuilerie",
+    "contact": "moi",
+    "supervisor": {
+        "_id": "60e40c08ac44dc06c2e4ca02",
+        "email": "sylvain.lafay@ign.fr",
+        "first_name": "Espace",
+        "last_name": "Collaboratif"
+    },
+    "datastore": {
+        "active": true,
+        "_id": "60c8f3b9f2f14e4900ff11f9"
+    }
+}

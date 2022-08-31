@@ -1,0 +1,364 @@
+{
+    "_id": "624c2843985d6285caf611de",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "16",
+        "top_level": "8",
+        "composition": [
+            {
+                "table": "troncon_de_route",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "route_numerotee_ou_nommee",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "itineraire_autre",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "troncon_de_voie_ferree",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "equipement_de_transport",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "piste_d_aerodrome",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "aerodrome",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "point_de_repere",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "toponymie_transport",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "batiment",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "cimetiere",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "construction_lineaire",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "construction_ponctuelle",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "construction_surfacique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "reservoir",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "ligne_orographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "cours_d_eau",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "troncon_hydrographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "bassin_versant_topographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "plan_d_eau",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "surface_hydrographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "noeud_hydrographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "detail_hydrographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "detail_orographique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "toponymie_lieux_nommes",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "canalisation",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "ligne_electrique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "erp",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "zone_d_activite_ou_d_interet",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "toponymie_services_et_activites",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "adresse",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "parc_ou_reserve",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "foret_publique",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "toponymie_zones_reglementees",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "zone_de_vegetation",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "commune_associee_ou_deleguee",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "commune",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "voie_ferree_nommee",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "non_communication",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "point_du_reseau",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "transport_par_cable",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "pylone",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "terrain_de_sport",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "toponymie_bati",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "toponymie_hydrographie",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "zone_d_habitation",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "lieu_dit_non_habite",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "poste_de_transformation",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "voie_nommee",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "arrondissement",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "epci",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "collectivite_territoriale",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "departement",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            },
+            {
+                "table": "region",
+                "bottom_level": "16",
+                "top_level": "8",
+                "attributes": ""
+            }
+        ],
+        "tippecanoe_options": "-al -ap"
+    },
+    "creation": "2022-04-05T11:30:11.537Z",
+    "status": "SUCCESS",
+    "launch": "2022-04-05T11:30:12.010Z",
+    "start": "2022-04-05T11:30:12.850Z",
+    "finish": "2022-04-05T12:34:33.140Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "623b3a82b0da87101acebddd",
+                "name": "BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15 zip 2022-03-23",
+                "status": "DELETED",
+                "srs": "EPSG:2154"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "624c2843985d62d54af611da",
+            "name": "BDT_3-0_GPKG_LAMB93_D090-ED2021-03-15 zip 2022-03-23",
+            "status": "GENERATED",
+            "srs": "EPSG:3857"
+        }
+    }
+}

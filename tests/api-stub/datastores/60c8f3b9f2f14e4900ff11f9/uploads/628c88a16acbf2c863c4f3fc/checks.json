@@ -1,0 +1,23 @@
+{
+    "asked": [],
+    "in_progress": [],
+    "passed": [
+        {
+            "_id": "628c88a56acbf20829c4f44e",
+            "status": "SUCCESS",
+            "check": {
+                "_id": "60c8dd80f2f14eb42cff11e2",
+                "name": "V\u00e9rification standard"
+            }
+        },
+        {
+            "_id": "628c88a56acbf285a1c4f44f",
+            "status": "SUCCESS",
+            "check": {
+                "_id": "60c8dd81f2f14e4f8fff11e6",
+                "name": "V\u00e9rification vecteur"
+            }
+        }
+    ],
+    "failed": []
+}

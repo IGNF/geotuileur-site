@@ -1,0 +1,29 @@
+{
+    "_id": "62581d57985d62491303225b",
+    "name": "bnlc gpkg 2022-04-14",
+    "description": "bnlc gpkg 2022-04-14",
+    "type": "VECTOR",
+    "srs": "EPSG:4326",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-14T13:11:16.158Z"
+    },
+    "tags": {
+        "file_data": "62581d55480e1.gpkg",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "62581d68985d625e7c032359",
+        "proc_int_id": "62581d68985d6228a603235d",
+        "file_tree": "[{\"name\":\"62581d55480e1.gpkg.md5\",\"size\":56,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"62581d55480e1.gpkg\",\"size\":1957888,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":1957888,\"type\":\"directory\"}]"
+    },
+    "size": 1966136
+}

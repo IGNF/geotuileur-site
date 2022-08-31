@@ -1,0 +1,18 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {},
+    "_id": "615d9d77af9e674c159943eb",
+    "name": "pyramide_mart",
+    "visibility": "PRIVATE",
+    "contact": "maria.ibarra@ign.fr",
+    "status": "UNSTABLE",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Int\u00e9gration d'un SQL en base FAILURE",
+        "date": "2021-10-06T12:59:03.475Z"
+    },
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

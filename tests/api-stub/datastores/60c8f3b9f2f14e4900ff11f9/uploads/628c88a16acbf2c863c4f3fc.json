@@ -1,0 +1,29 @@
+{
+    "_id": "628c88a16acbf2c863c4f3fc",
+    "name": "zps5 zip 2022-05-24",
+    "description": "zps5 zip 2022-05-24",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-05-24T07:27:19.643Z"
+    },
+    "tags": {
+        "file_data": "628c8894a2219.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "628c88b76acbf22867c4f52d",
+        "proc_int_id": "628c88b76acbf2b0c4c4f531",
+        "file_tree": "[{\"name\":\"data\",\"children\":[{\"name\":\"zps2154.gpkg\",\"size\":14385152,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":14385152,\"type\":\"directory\"},{\"name\":\"zps2154.gpkg.md5\",\"size\":50,\"extension\":\".md5\",\"type\":\"file\"}]"
+    },
+    "size": 14393394
+}

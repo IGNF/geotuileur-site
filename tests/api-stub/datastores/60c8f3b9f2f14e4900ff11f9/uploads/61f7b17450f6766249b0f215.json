@@ -1,0 +1,29 @@
+{
+    "_id": "61f7b17450f6766249b0f215",
+    "name": "bnac zip 2022-01-31 arnest",
+    "description": "bnac zip 2022-01-31 arnest",
+    "type": "VECTOR",
+    "srs": "EPSG:4326",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-01-31T10:01:19.145Z"
+    },
+    "tags": {
+        "file_data": "61f7b16696bc7.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "61f7b1a050f676e6dfb0f406",
+        "proc_int_id": "61f7b1a050f676fd34b0f40a",
+        "file_tree": "[{\"name\":\"bnac.gpkg.md5\",\"size\":47,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"bnac.gpkg\",\"size\":168988672,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":168988672,\"type\":\"directory\"}]"
+    },
+    "size": 168996911
+}

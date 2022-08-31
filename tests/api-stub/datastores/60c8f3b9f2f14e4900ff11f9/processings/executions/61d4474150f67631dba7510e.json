@@ -1,0 +1,33 @@
+{
+    "_id": "61d4474150f67631dba7510e",
+    "processing": {
+        "_id": "615c42ea68207f82abe976c3",
+        "name": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base"
+    },
+    "parameters": {},
+    "creation": "2022-01-04T13:10:25.031Z",
+    "status": "SUCCESS",
+    "launch": "2022-01-04T13:10:25.253Z",
+    "start": "2022-01-04T13:10:25.917Z",
+    "finish": "2022-01-04T13:10:34.882Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "61d4472150f676663ea74f88",
+                "name": "bati-ardennes-l93 gpkg 2022-01-04",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "DELETED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "61d4474150f6769c36a7510a",
+            "name": "bati-ardennes-l93 gpkg 2022-01-04",
+            "status": "DELETED",
+            "srs": "EPSG:2154"
+        }
+    }
+}

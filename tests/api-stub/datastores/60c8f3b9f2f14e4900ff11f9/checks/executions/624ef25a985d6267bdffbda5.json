@@ -1,0 +1,16 @@
+{
+    "_id": "624ef25a985d6267bdffbda5",
+    "status": "SUCCESS",
+    "creation": "2022-04-07T14:16:58.108Z",
+    "upload": {
+        "_id": "624ef258985d624bf4ffbd52",
+        "name": "bureaux-v7 zip 2022-04-07",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-04-07T14:16:58.863Z",
+    "finish": "2022-04-07T14:17:01.568Z"
+}

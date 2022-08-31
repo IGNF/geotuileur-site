@@ -1,0 +1,54 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {
+        "upload_id": "628dd9f06acbf261f8c7e7bd",
+        "proc_int_id": "628dda036acbf256afc7e8da"
+    },
+    "_id": "628dda036acbf26925c7e8d6",
+    "name": "comma_troncons_d51 csv 2022-05-25",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "GENERATED",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base SUCCESS",
+        "date": "2022-05-25T07:25:59.608Z"
+    },
+    "size": 4120576,
+    "srs": "EPSG:2154",
+    "type_infos": {
+        "relations": [
+            {
+                "name": "628dd9c31a185",
+                "type": "TABLE",
+                "attributes": {
+                    "id_troncon": "character varying",
+                    "gestion": "character varying",
+                    "importance": "character varying",
+                    "ogc_fid": "integer",
+                    "wkt": "character varying",
+                    "recette_te": "character varying",
+                    "cat_te": "character varying",
+                    "idsource": "character varying",
+                    "reseau_te": "character varying",
+                    "nom_voie": "character varying",
+                    "numero": "character varying",
+                    "cat_2": "character varying",
+                    "dept": "character varying",
+                    "a_valider": "character varying",
+                    "cl_admin": "character varying",
+                    "largeur": "character varying",
+                    "geom": "geometry(Geometry,2154)",
+                    "source": "character varying"
+                },
+                "primary_key": [
+                    "ogc_fid"
+                ]
+            }
+        ]
+    },
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

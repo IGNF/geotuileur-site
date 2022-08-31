@@ -1,0 +1,28 @@
+{
+    "_id": "6182a2b48322b23f00b3a10e",
+    "name": "bnlc_bnlc_test",
+    "description": "bnlc_bnlc_test",
+    "type": "VECTOR",
+    "srs": "EPSG:2154",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2021-12-22T13:12:29.584Z"
+    },
+    "tags": {
+        "file_data": "6182a2a7d245d.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "vectordb_id": "6182a2c48322b274fcb3a20c",
+        "proc_int_id": "6182a2c48322b21dbab3a210",
+        "file_tree": "[{\"name\":\"bnlc.gpkg.md5\",\"size\":47,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"bnlc.gpkg\",\"size\":1957888,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":1957888,\"type\":\"directory\"}]"
+    },
+    "size": 1966127
+}

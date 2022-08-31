@@ -1,0 +1,16 @@
+{
+    "_id": "6283709e6acbf2d87bbd47b2",
+    "status": "SUCCESS",
+    "creation": "2022-05-17T09:53:34.492Z",
+    "upload": {
+        "_id": "6283708e6acbf26dbfbd475f",
+        "name": "zone_urba gpkg 2022-05-11 maj",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-05-17T09:53:35.892Z",
+    "finish": "2022-05-17T09:53:42.717Z"
+}

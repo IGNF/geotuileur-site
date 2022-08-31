@@ -1,0 +1,29 @@
+{
+    "_id": "624efd25985d628358ffde0b",
+    "name": "Test_bureau_vote zip 2022-04-07",
+    "description": "Test_bureau_vote zip 2022-04-07",
+    "type": "VECTOR",
+    "srs": "EPSG:4326",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "DELETED",
+    "last_event": {
+        "title": "Suppression",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-07T15:03:34.033Z"
+    },
+    "tags": {
+        "file_data": "624efd212bb9c.zip",
+        "workflow_integration_step": "3",
+        "workflow_integration_progress": "{\"SEND_FILES_API\":\"success\",\"UPLOAD_CHECKS\":\"success\",\"INTEGRATION_PROCESSING\":\"success\"}",
+        "workflow_class_name": "App\\Components\\Workflow\\IntegrationWorkflow",
+        "vectordb_id": "624efd39985d626499ffdf24",
+        "proc_int_id": "624efd39985d62486bffdf28",
+        "file_tree": "[{\"name\":\"Test_bureau_vote.gpkg.md5\",\"size\":59,\"extension\":\".md5\",\"type\":\"file\"},{\"name\":\"data\",\"children\":[{\"name\":\"Test_bureau_vote.gpkg\",\"size\":35086336,\"extension\":\".gpkg\",\"type\":\"file\"}],\"size\":35086336,\"type\":\"directory\"}]"
+    },
+    "size": 35094587
+}

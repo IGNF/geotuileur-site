@@ -1,0 +1,19 @@
+{
+    "urls": [
+        "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/test_arnest_chars"
+    ],
+    "_id": "62580c73985d629b6d031996",
+    "endpoint": {
+        "_id": "615c428368207f273be9767b",
+        "name": "Service tuil\u00e9 PLAGE"
+    },
+    "configuration": {
+        "_id": "62580c73985d626795031985",
+        "name": "test_arnest_chars",
+        "status": "PUBLISHED"
+    },
+    "type": "WMTS-TMS",
+    "layer_name": "test_arnest_chars",
+    "status": "PUBLISHED",
+    "visibility": "PUBLIC"
+}

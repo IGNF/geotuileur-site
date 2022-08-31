@@ -1,0 +1,19 @@
+{
+    "urls": [
+        "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/zps3"
+    ],
+    "_id": "627bd9046acbf2231ebc3504",
+    "endpoint": {
+        "_id": "615c428368207f273be9767b",
+        "name": "Service tuil\u00e9 PLAGE"
+    },
+    "configuration": {
+        "_id": "627bd9036acbf268eebc34f3",
+        "name": "zps3",
+        "status": "PUBLISHED"
+    },
+    "type": "WMTS-TMS",
+    "layer_name": "zps3",
+    "status": "PUBLISHED",
+    "visibility": "PUBLIC"
+}

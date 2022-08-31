@@ -1,0 +1,51 @@
+{
+    "_id": "628cce2e6acbf23a23c586bd",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "16",
+        "top_level": "7",
+        "composition": [
+            {
+                "table": "bnlc",
+                "bottom_level": "16",
+                "top_level": "7",
+                "attributes": "dur\ufffde,source,type,xlong"
+            }
+        ],
+        "tippecanoe_options": "-an \u2013S15",
+        "bbox": [
+            2.073962516925444,
+            48.68236966602481,
+            2.128894157550444,
+            48.71862428033498
+        ]
+    },
+    "creation": "2022-05-24T12:23:10.631Z",
+    "status": "FAILURE",
+    "launch": "2022-05-24T12:23:10.828Z",
+    "start": "2022-05-24T12:23:12.303Z",
+    "finish": "2022-05-24T12:23:18.114Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "62581d68985d625e7c032359",
+                "name": "bnlc gpkg 2022-04-14",
+                "status": "GENERATED",
+                "srs": "EPSG:4326"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "628cce2e6acbf2ae33c586b9",
+            "name": "bnlc gpkg 2022-04-14",
+            "status": "UNSTABLE"
+        }
+    }
+}

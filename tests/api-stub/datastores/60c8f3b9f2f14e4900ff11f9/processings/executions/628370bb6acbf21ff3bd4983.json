@@ -1,0 +1,46 @@
+{
+    "_id": "628370bb6acbf21ff3bd4983",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "18",
+        "top_level": "10",
+        "composition": [
+            {
+                "table": "zone_urba",
+                "bottom_level": "18",
+                "top_level": "10",
+                "attributes": "insee,libelle,libelong,typezone"
+            }
+        ],
+        "tippecanoe_options": "-S10"
+    },
+    "creation": "2022-05-17T09:54:03.448Z",
+    "status": "SUCCESS",
+    "launch": "2022-05-17T09:54:03.699Z",
+    "start": "2022-05-17T09:54:04.171Z",
+    "finish": "2022-05-17T09:58:16.359Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "628370b26acbf28b11bd4890",
+                "name": "zone_urba gpkg 2022-05-11 maj",
+                "status": "GENERATED",
+                "srs": "EPSG:2154"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "628370bb6acbf259cdbd497f",
+            "name": "zone_urba gpkg 2022-05-11 maj",
+            "status": "GENERATED",
+            "srs": "EPSG:3857"
+        }
+    }
+}

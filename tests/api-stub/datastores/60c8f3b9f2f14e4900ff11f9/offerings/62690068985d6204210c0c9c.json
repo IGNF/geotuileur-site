@@ -1,0 +1,19 @@
+{
+    "urls": [
+        "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/troncons_de_route_08"
+    ],
+    "_id": "62690068985d6204210c0c9c",
+    "endpoint": {
+        "_id": "615c428368207f273be9767b",
+        "name": "Service tuil\u00e9 PLAGE"
+    },
+    "configuration": {
+        "_id": "62690067985d62d0590c0c8b",
+        "name": "troncons_de_route_08",
+        "status": "PUBLISHED"
+    },
+    "type": "WMTS-TMS",
+    "layer_name": "troncons_de_route_08",
+    "status": "PUBLISHED",
+    "visibility": "PUBLIC"
+}

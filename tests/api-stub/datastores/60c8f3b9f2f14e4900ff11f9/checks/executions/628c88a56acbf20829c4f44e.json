@@ -1,0 +1,16 @@
+{
+    "_id": "628c88a56acbf20829c4f44e",
+    "status": "SUCCESS",
+    "creation": "2022-05-24T07:26:29.623Z",
+    "upload": {
+        "_id": "628c88a16acbf2c863c4f3fc",
+        "name": "zps5 zip 2022-05-24",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-05-24T07:26:30.944Z",
+    "finish": "2022-05-24T07:26:34.965Z"
+}

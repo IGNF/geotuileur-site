@@ -1,0 +1,19 @@
+{
+    "urls": [
+        "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms\/1.0.0\/bdtopo_d90"
+    ],
+    "_id": "6257eee1985d62452d02c203",
+    "endpoint": {
+        "_id": "615c428368207f273be9767b",
+        "name": "Service tuil\u00e9 PLAGE"
+    },
+    "configuration": {
+        "_id": "624d713e985d624870fb2e97",
+        "name": "bdtopo_d90",
+        "status": "PUBLISHED"
+    },
+    "type": "WMTS-TMS",
+    "layer_name": "bdtopo_d90",
+    "status": "PUBLISHED",
+    "visibility": "PRIVATE"
+}

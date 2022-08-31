@@ -1,0 +1,52 @@
+{
+    "storages": {
+        "data": [
+            {
+                "use": 2317803520,
+                "quota": 10000000000,
+                "type": "POSTGRESQL"
+            },
+            {
+                "use": 0,
+                "quota": 10000000000,
+                "type": "FILESYSTEM"
+            },
+            {
+                "use": 499352293,
+                "quota": 10000000000,
+                "type": "S3"
+            }
+        ],
+        "uploads": {
+            "use": 1301251017,
+            "quota": 10000000000
+        },
+        "annexes": {
+            "use": 1334510,
+            "quota": 10000000
+        }
+    },
+    "active": true,
+    "_id": "60c8f3b9f2f14e4900ff11f9",
+    "community": {
+        "public": true,
+        "_id": "60c8eb9af2f14e6abaff11f4",
+        "contact": "moi"
+    },
+    "name": "Communaut\u00e9 G\u00e9otuilerie",
+    "technical_name": "geotuilerie",
+    "endpoints": [
+        {
+            "use": 13,
+            "quota": 100,
+            "endpoint": {
+                "urls": [
+                    "tms|https:\/\/geoservices-test.ccs-ign-plage.ccs.cegedim.cloud\/tms"
+                ],
+                "_id": "615c428368207f273be9767b",
+                "name": "Service tuil\u00e9 PLAGE",
+                "type": "WMTS-TMS"
+            }
+        }
+    ]
+}

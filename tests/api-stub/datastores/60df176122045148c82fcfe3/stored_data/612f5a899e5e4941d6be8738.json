@@ -1,0 +1,13 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {},
+    "_id": "612f5a899e5e4941d6be8738",
+    "name": "pays_du_monde_test",
+    "visibility": "PRIVATE",
+    "contact": "maria.ibarra@ign.fr",
+    "status": "UNSTABLE",
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

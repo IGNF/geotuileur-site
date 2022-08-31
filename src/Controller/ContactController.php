@@ -2,20 +2,20 @@
 
 namespace App\Controller;
 
+use App\Exception\PlageApiException;
 use App\Security\User;
-use Psr\Log\LoggerInterface;
 use App\Service\MailerService;
 use App\Service\PlageApiService;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Form;
-use App\Exception\PlageApiException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("", name="plage_")
@@ -31,8 +31,8 @@ class ContactController extends AbstractController
     }
 
     /**
-     * Formulaire de contact
-     * 
+     * Formulaire de contact.
+     *
      * @Route("/nous-ecrire", name="contact", methods={"GET","POST"})
      */
     public function contact(Request $request, MailerService $mailerService, LoggerInterface $mailerLogger)
@@ -134,13 +134,13 @@ class ContactController extends AbstractController
 
         return $this->render('pages/contact.html.twig', [
             'form' => $form->createView(),
-            'subject' => $informations ? $informations['subject'] : null
+            'subject' => $informations ? $informations['subject'] : null,
         ]);
     }
 
     /**
-     * Page de redirection après contact
-     * 
+     * Page de redirection après contact.
+     *
      * @Route("/nous-ecrire/merci", name="contact_thanks", methods={"GET"})
      */
     public function contactThanks(Request $request)
@@ -155,42 +155,46 @@ class ContactController extends AbstractController
     }
 
     /**
-     * Récupère les informations a partir des paramètres de la requête
+     * Récupère les informations a partir des paramètres de la requête.
      *
      * @param array $datas
-     * @return array|null 
+     *
+     * @return array|null
      */
-    private function getInformations($datas) {
-        if (! count($datas)) {
+    private function getInformations($datas)
+    {
+        if (!count($datas)) {
             return null;
         }
-        if (! isset($datas['subject'])) {
+        if (!isset($datas['subject'])) {
             return null;
         }
-        if ("add_datastore" != $datas['subject'] && "processing_failed" != $datas['subject']) {
+        if ('add_datastore' != $datas['subject'] && 'processing_failed' != $datas['subject']) {
             return null;
         }
 
         try {
             $user = $this->getUser();
             $me = $this->plageApi->user->getMe();
-            
-            if ("add_datastore" == $datas['subject']) {
+
+            if ('add_datastore' == $datas['subject']) {
                 return [
                     'subject' => $datas['subject'],
-                    'user_id' => $me['_id'],   
-                    'username' => $user->getUsername(), 
+                    'user_id' => $me['_id'],
+                    'username' => $user->getUsername(),
                 ];
             }
 
             // Recuperation de l'execution de traitement qui a echoue
-            foreach(['datastoreId', 'storedDataId'] as $param) {
-                if (! isset($datas[$param]))    return null;
+            foreach (['datastoreId', 'storedDataId'] as $param) {
+                if (!isset($datas[$param])) {
+                    return null;
+                }
             }
 
             $datastore = $this->plageApi->datastore->get($datas['datastoreId']);
 
-            $executions = $this->plageApi->processing->getAllExecutions($datas['datastoreId'], ['output_stored_data' => $datas['storedDataId'] ]);
+            $executions = $this->plageApi->processing->getAllExecutions($datas['datastoreId'], ['output_stored_data' => $datas['storedDataId']]);
             $execution = $this->plageApi->processing->getExecution($datas['datastoreId'], $executions[0]['_id']);
             if ('FAILURE' == $execution['status']) {
                 return [
@@ -201,34 +205,37 @@ class ContactController extends AbstractController
                     'processing' => $execution['processing'],
                 ];
             }
+
             return null;
-        } catch(PlageApiException $e) {
+        } catch (PlageApiException $e) {
             return null;
         }
     }
 
     /**
-     * Retourne un corps de message prérempli pour certains sujets de demande
+     * Retourne un corps de message prérempli pour certains sujets de demande.
      *
      * @param array $informations
+     *
      * @return string
      */
-    private function getTextFromInformations($informations) {
+    private function getTextFromInformations($informations)
+    {
         $text = "Bonjour, \n";
         if ('processing_failed' == $informations['subject']) {
             $text .= "J'ai rencontré une erreur dans la création ou la mise à jour d'un flux de tuiles vectorielles\n\n";
-            $text .= '- Etape en échec : ' . $informations['processing']['name'] . "\n";
-            $text .= '- Espace de travail : ' . $informations['datastore']['_id'] . ' (' . $informations['datastore']['name'] .')' . "\n";
-            $text .= "- Identifiant de l'exécution de traitement : " . $informations['processing']['_id']  . "\n";
-            $text .= "- Mon identifiant utilisateur : " . $informations['user_id'] . ' (' . $informations['username'] . ')';
+            $text .= '- Etape en échec : '.$informations['processing']['name']."\n";
+            $text .= '- Espace de travail : '.$informations['datastore']['_id'].' ('.$informations['datastore']['name'].')'."\n";
+            $text .= "- Identifiant de l'exécution de traitement : ".$informations['processing']['_id']."\n";
+            $text .= '- Mon identifiant utilisateur : '.$informations['user_id'].' ('.$informations['username'].')';
         } else {
             $text .= "Je souhaiterais un nouvel espace de travail sur le Géotuileur.\n\n";
             $text .= "- Nom souhaité pour cet espace de travail : ...\n";
             $text .= "- Volume d'espace de stockage souhaité : ... Go\n";
-            $text .= "- Mon identifiant utilisateur : " . $informations['user_id'] . ' (' . $informations['username'] . ")\n\n";
-            $text .= "Ajoutez toute autre information qui vous semble pertinente, notamment des informations sur la nature des données que vous souhaitez diffuser.";      
+            $text .= '- Mon identifiant utilisateur : '.$informations['user_id'].' ('.$informations['username'].")\n\n";
+            $text .= 'Ajoutez toute autre information qui vous semble pertinente, notamment des informations sur la nature des données que vous souhaitez diffuser.';
         }
 
-        return $text; 
+        return $text;
     }
 }

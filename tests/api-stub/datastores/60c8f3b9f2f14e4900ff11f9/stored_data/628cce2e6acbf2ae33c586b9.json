@@ -1,0 +1,24 @@
+{
+    "type": "ROK4-PYRAMID-VECTOR",
+    "tags": {
+        "upload_id": "62581d57985d62491303225b",
+        "proc_int_id": "62581d68985d6228a603235d",
+        "vectordb_id": "62581d68985d625e7c032359",
+        "proc_pyr_creat_id": "628cce2e6acbf23a23c586bd",
+        "is_sample": "true"
+    },
+    "_id": "628cce2e6acbf2ae33c586b9",
+    "name": "bnlc gpkg 2022-04-14",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "UNSTABLE",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Cr\u00e9ation d'une pyramide vecteur FAILURE",
+        "date": "2022-05-24T12:23:18.120Z"
+    },
+    "storage": {
+        "type": "S3",
+        "tags": []
+    }
+}

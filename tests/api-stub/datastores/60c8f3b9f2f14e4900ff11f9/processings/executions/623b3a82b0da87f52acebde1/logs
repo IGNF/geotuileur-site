@@ -1,0 +1,10 @@
+2022/03/23 15:19:31       INFO §USER§ Envoi du signal de début de l'exécution à l'API.
+2022/03/23 15:19:31       INFO §USER§ Signal transmis avec succès.
+2022/03/23 15:19:31       INFO §USER§ Récupération des informations sur l'exécution (PROCESSING) d'ID '623b3a82b0da87f52acebde1'.
+2022/03/23 15:19:31       INFO §USER§ Les informations sur l'exécution et sa cible ont été récupérées.
+2022/03/23 15:19:32       INFO §USER§ Démarrage du traitement d'intégration vecteur
+2022/03/23 15:19:51       INFO §USER§ Fin du traitement
+2022/03/23 15:20:04       INFO §USER§ Mise à jour des informations sur la donnée en sortie
+2022/03/23 15:20:04       INFO §USER§ Informations sur la donnée de sortie mises à jour.
+2022/03/23 15:20:04       INFO §USER§ Envoi du signal de succès de l'exécution à l'API.
+2022/03/23 15:20:05       INFO §USER§ Signal transmis avec succès.

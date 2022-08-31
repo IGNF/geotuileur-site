@@ -1,0 +1,38 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "62580c73985d626795031985",
+    "name": "test_arnest_chars",
+    "layer_name": "test_arnest_chars",
+    "type_infos": {
+        "keywords": [
+            "Activit\u00e9 d'exploration",
+            "&amp; &lt; machin"
+        ],
+        "used_data": [
+            {
+                "stored_data": "61cdb77d50f6768342a64100",
+                "bottom_level": "14",
+                "top_level": "8"
+            }
+        ],
+        "title": "BN &amp; Am\u00e9nagements cyclables &lt; et > 0",
+        "abstract": "Test de caract\u00e8res sp\u00e9ciaux &lt; &amp; &amp; &lt;"
+    },
+    "attribution": {
+        "title": "IGN",
+        "url": "https:\/\/www.ign.fr"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-04-14T11:58:43.722Z"
+    }
+}

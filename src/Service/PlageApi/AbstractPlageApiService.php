@@ -20,6 +20,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 abstract class AbstractPlageApiService
 {
     public const CHECK_TYPES = ['asked', 'in_progress', 'passed', 'failed'];
+    public const API_STUB_PATH_ROOT = __DIR__.'/../../../tests/api-stub/';
 
     /** @var PlageApiService */
     protected $plageApi;
@@ -41,6 +42,8 @@ abstract class AbstractPlageApiService
 
     /** @var Filesystem */
     protected $fs;
+
+    private $updateApiStubMode = false;
 
     public function __construct(ParameterBagInterface $parameters, TokenStorageInterface $tokenStorage, KeycloakUserProvider $keycloakUserProvider, LoggerInterface $logger)
     {
@@ -154,6 +157,10 @@ abstract class AbstractPlageApiService
      */
     protected function requestAll($url, $query = [], $headers = [])
     {
+        if ($this->isTest()) {
+            return $this->request('GET', $url, [], $query, $headers);
+        }
+
         $query['page'] = 1;
         $query['limit'] = 50;
 
@@ -194,11 +201,19 @@ abstract class AbstractPlageApiService
      */
     protected function request($method, $url, $body = [], $query = [], $headers = [], $fileUpload = false, $expectJson = true, $includeHeaders = false)
     {
+        if ($this->isTest()) { // only GET requests, otherwise does nothing
+            return 'GET' == strtoupper($method) ? $this->fakeRequest($url, $expectJson) : [];
+        }
+
         $options = $this->prepareOptions($body, $query, $headers, $fileUpload);
 
         $response = $this->apiClient->request($method, $url, $options);
 
         $this->logger->debug(self::class, [$method, $url, $body, $query, $response->getContent(false)]);
+
+        if ($this->updateApiStubMode && !$this->isTest()) {
+            $this->updateApiStub($url, $response->getContent(false), $expectJson);
+        }
 
         return $this->handleResponse($method, $url, $body, $query, $response, $expectJson, $includeHeaders);
     }
@@ -244,6 +259,26 @@ abstract class AbstractPlageApiService
 
             throw new PlageApiException(in_array('error_description', array_keys($errorResponse)) ? $errorResponse['error_description'] : 'Plage API Error', $statusCode, $errorResponse);
         }
+    }
+
+    protected function fakeRequest($path, $expectJson)
+    {
+        $path .= $expectJson ? '.json' : '';
+
+        try {
+            $content = file_get_contents(self::API_STUB_PATH_ROOT.$path);
+        } catch (\Throwable $th) {
+            return $expectJson ? [] : '';
+        }
+
+        return $expectJson ? json_decode($content, true) : $content;
+    }
+
+    protected function updateApiStub($path, $content, $expectJson)
+    {
+        $path .= $expectJson ? '.json' : '';
+        $content = $expectJson && $content ? json_encode(json_decode($content), JSON_PRETTY_PRINT) : $content;
+        $this->fs->dumpFile(self::API_STUB_PATH_ROOT.$path, $content);
     }
 
     /**
@@ -296,5 +331,10 @@ abstract class AbstractPlageApiService
         }
 
         return $this->user->getAccessToken();
+    }
+
+    protected function isTest()
+    {
+        return 'test_user' == $this->user->getUsername();
     }
 }

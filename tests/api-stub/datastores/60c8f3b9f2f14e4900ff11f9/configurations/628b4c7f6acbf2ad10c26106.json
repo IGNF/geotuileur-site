@@ -1,0 +1,37 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "628b4c7f6acbf2ad10c26106",
+    "name": "hydro_08",
+    "layer_name": "hydro_08",
+    "type_infos": {
+        "keywords": [
+            "Objet hydrographique"
+        ],
+        "used_data": [
+            {
+                "stored_data": "626943e3985d62ee0e0c2ec9",
+                "bottom_level": "16",
+                "top_level": "7"
+            }
+        ],
+        "title": "Hydrographie des Ardennes en Lambert 93",
+        "abstract": "Hydrographie des Ardennes en Lambert 93"
+    },
+    "attribution": {
+        "title": "IGN BDTOPO\u00ae",
+        "url": "https:\/\/www.ign.fr"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-05-23T08:57:35.133Z"
+    }
+}

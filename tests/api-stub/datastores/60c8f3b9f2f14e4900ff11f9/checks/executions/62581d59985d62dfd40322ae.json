@@ -1,0 +1,16 @@
+{
+    "_id": "62581d59985d62dfd40322ae",
+    "status": "SUCCESS",
+    "creation": "2022-04-14T13:10:49.801Z",
+    "upload": {
+        "_id": "62581d57985d62491303225b",
+        "name": "bnlc gpkg 2022-04-14",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-04-14T13:10:50.782Z",
+    "finish": "2022-04-14T13:10:53.508Z"
+}

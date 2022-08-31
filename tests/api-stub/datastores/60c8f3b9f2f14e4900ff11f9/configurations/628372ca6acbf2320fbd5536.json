@@ -1,0 +1,31 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "628372ca6acbf2320fbd5536",
+    "name": "zones_urbaines_gpumaj",
+    "layer_name": "zones_urbaines_gpumaj",
+    "type_infos": {
+        "keywords": [],
+        "used_data": [
+            {
+                "stored_data": "628370bb6acbf259cdbd497f",
+                "bottom_level": "18",
+                "top_level": "10"
+            }
+        ],
+        "title": "Zones urbaines du GPU maj complete",
+        "abstract": "Zones urbaines du GPU maj complete"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60e40c08ac44dc06c2e4ca02",
+            "first_name": "Espace",
+            "last_name": "Collaboratif"
+        },
+        "date": "2022-05-17T10:02:51.021Z"
+    }
+}

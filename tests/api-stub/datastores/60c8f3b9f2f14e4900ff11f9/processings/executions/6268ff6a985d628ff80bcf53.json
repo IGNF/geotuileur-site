@@ -1,0 +1,46 @@
+{
+    "_id": "6268ff6a985d628ff80bcf53",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "18",
+        "top_level": "7",
+        "composition": [
+            {
+                "table": "troncons_de_route_08",
+                "bottom_level": "18",
+                "top_level": "7",
+                "attributes": "cleabs,fid,nature"
+            }
+        ],
+        "tippecanoe_options": "-al -ap"
+    },
+    "creation": "2022-04-27T08:31:38.056Z",
+    "status": "SUCCESS",
+    "launch": "2022-04-27T08:31:38.237Z",
+    "start": "2022-04-27T08:31:38.663Z",
+    "finish": "2022-04-27T08:32:51.590Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "6268fe60985d627f3e0bb84e",
+                "name": "troncons_de_route_08",
+                "status": "DELETED",
+                "srs": "EPSG:2154"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "6268ff6a985d62ec8f0bcf4f",
+            "name": "troncons_de_route_08",
+            "status": "GENERATED",
+            "srs": "EPSG:3857"
+        }
+    }
+}

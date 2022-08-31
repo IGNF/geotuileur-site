@@ -2,19 +2,9 @@
 
 namespace App\Controller;
 
-use App\Security\User;
-use App\Service\MailerService;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Route("", name="plage_")
@@ -30,7 +20,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Mentions légales
+     * Mentions légales.
      *
      * @Route("/mentions-legales", name="about", methods={"GET"})
      */
@@ -40,7 +30,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Information d'accessibilité
+     * Information d'accessibilité.
      *
      * @Route("/accessibilite", name="accessibility", methods={"GET"})
      */
@@ -50,7 +40,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Conditions générales d'utilisation
+     * Conditions générales d'utilisation.
      *
      * @Route("/cgu", name="cgu", methods={"GET"})
      */
@@ -60,7 +50,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Gestion des cookies
+     * Gestion des cookies.
      *
      * @Route("/gestion-des-cookies", name="cookies", methods={"GET"})
      */
@@ -68,5 +58,4 @@ class DefaultController extends AbstractController
     {
         return $this->render('pages/cookies.html.twig');
     }
-
 }

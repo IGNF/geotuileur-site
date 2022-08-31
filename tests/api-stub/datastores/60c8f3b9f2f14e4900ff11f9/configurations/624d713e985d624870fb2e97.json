@@ -1,0 +1,41 @@
+{
+    "type": "WMTS-TMS",
+    "metadata": [],
+    "tags": {},
+    "_id": "624d713e985d624870fb2e97",
+    "name": "bdtopo_d90",
+    "layer_name": "bdtopo_d90",
+    "type_infos": {
+        "keywords": [
+            "B\u00e2timent",
+            "Route",
+            "Cours d'eau",
+            "Eaux de surface",
+            "Couverture descriptive pour le th\u00e8me de sol"
+        ],
+        "used_data": [
+            {
+                "stored_data": "624c2843985d62d54af611da",
+                "bottom_level": "16",
+                "top_level": "8"
+            }
+        ],
+        "title": "BD TOPO Territoire de Belfort",
+        "abstract": "Toutes les classes de la BDTopo du Territoire de Belfort, sans attributs."
+    },
+    "attribution": {
+        "title": "IGN, BD TOPO\u00ae",
+        "url": "https:\/\/www.ign.fr"
+    },
+    "status": "PUBLISHED",
+    "last_event": {
+        "title": "Publication",
+        "text": "Publication sur le point d'acc\u00e8s Service tuil\u00e9 PLAGE",
+        "initiator": {
+            "_id": "60c8eb8ca7f7c74d2900f90d",
+            "first_name": "Th\u00e9o",
+            "last_name": "Satabin"
+        },
+        "date": "2022-04-14T09:52:33.311Z"
+    }
+}

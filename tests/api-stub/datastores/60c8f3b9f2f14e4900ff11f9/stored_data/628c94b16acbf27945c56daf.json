@@ -1,0 +1,291 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {
+        "upload_id": "628c948e6acbf250f5c56c96",
+        "proc_int_id": "628c94b16acbf2d641c56db3"
+    },
+    "_id": "628c94b16acbf27945c56daf",
+    "name": "pp_hydro-ardennes-l93 gpkg 2022-05-24",
+    "visibility": "PRIVATE",
+    "contact": "moi",
+    "status": "GENERATED",
+    "last_event": {
+        "title": "Traitement termin\u00e9",
+        "text": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base SUCCESS",
+        "date": "2022-05-24T08:18:01.447Z"
+    },
+    "extent": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    5.824715754094892,
+                    50.151522056154036
+                ],
+                [
+                    5.8535219338561335,
+                    50.15085627131816
+                ],
+                [
+                    5.7360578640620234,
+                    47.97099454605935
+                ],
+                [
+                    5.708435568508307,
+                    47.9716342821872
+                ],
+                [
+                    4.560404810406318,
+                    47.99247427279378
+                ],
+                [
+                    4.302417547281105,
+                    47.99561376759407
+                ],
+                [
+                    4.243187035418937,
+                    47.996254648306746
+                ],
+                [
+                    4.0379644903898075,
+                    47.99824441268334
+                ],
+                [
+                    2.848006806949887,
+                    48.00272493397641
+                ],
+                [
+                    2.8453043903020863,
+                    48.92815671187659
+                ],
+                [
+                    2.037065993175445,
+                    48.924387553700754
+                ],
+                [
+                    2.035940402930255,
+                    48.98513478523617
+                ],
+                [
+                    2.016687625153385,
+                    50.00208604645287
+                ],
+                [
+                    2.0162754535099445,
+                    50.023409285406075
+                ],
+                [
+                    2.014776701472831,
+                    50.10079025801273
+                ],
+                [
+                    2.8417232515650195,
+                    50.1046416251489
+                ],
+                [
+                    2.841475905188861,
+                    50.18387911832251
+                ],
+                [
+                    4.082558790422104,
+                    50.179216036525176
+                ],
+                [
+                    4.296595509123641,
+                    50.17714520452861
+                ],
+                [
+                    4.358369657920065,
+                    50.17647821364247
+                ],
+                [
+                    4.62743446396594,
+                    50.17321081802104
+                ],
+                [
+                    4.678022594971424,
+                    50.172530686384015
+                ],
+                [
+                    4.678026784265734,
+                    50.172657276696164
+                ],
+                [
+                    4.694617108516159,
+                    50.172429691626604
+                ],
+                [
+                    4.727261921511025,
+                    50.17197532930953
+                ],
+                [
+                    4.72900146631459,
+                    50.2229888381327
+                ],
+                [
+                    4.949217253770567,
+                    50.21969751262195
+                ],
+                [
+                    4.948639603234497,
+                    50.204681926104485
+                ],
+                [
+                    4.95042152496704,
+                    50.204653684097906
+                ],
+                [
+                    4.949032112373727,
+                    50.168532286698465
+                ],
+                [
+                    5.824715754094892,
+                    50.151522056154036
+                ]
+            ]
+        ]
+    },
+    "size": 26599424,
+    "srs": "EPSG:2154",
+    "type_infos": {
+        "relations": [
+            {
+                "name": "cours_d_eau",
+                "type": "TABLE",
+                "attributes": {
+                    "date_modification": "timestamp with time zone",
+                    "code_hydrographique": "character varying(19)",
+                    "caractere_permanent": "boolean",
+                    "commentaire_sur_l_objet_hydro": "character varying(70)",
+                    "toponyme": "character varying",
+                    "date_creation": "timestamp with time zone",
+                    "statut_du_toponyme": "character varying",
+                    "importance": "character varying",
+                    "statut": "character varying",
+                    "identifiants_sources": "character varying(254)",
+                    "cleabs": "character varying(24)",
+                    "date_de_confirmation": "date",
+                    "fid": "integer",
+                    "geom": "geometry(MultiLineString,2154)",
+                    "influence_de_la_maree": "boolean",
+                    "date_d_apparition": "date",
+                    "sources": "character varying(127)"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "plan_d_eau",
+                "type": "TABLE",
+                "attributes": {
+                    "nature": "character varying",
+                    "code_hydrographique": "character varying(19)",
+                    "commentaire_sur_l_objet_hydro": "character varying(70)",
+                    "precision_de_l_altitude_moyenne": "character varying",
+                    "mode_d_obtention_de_la_hauteur": "character varying",
+                    "statut": "character varying",
+                    "influence_de_la_maree": "boolean",
+                    "date_d_apparition": "date",
+                    "date_de_confirmation": "date",
+                    "geom": "geometry(MultiPolygon,2154)",
+                    "caractere_permanent": "boolean",
+                    "date_modification": "timestamp with time zone",
+                    "statut_du_toponyme": "character varying",
+                    "hauteur_d_eau_maximale": "double precision",
+                    "toponyme": "character varying",
+                    "date_creation": "timestamp with time zone",
+                    "altitude_moyenne": "double precision",
+                    "importance": "character varying",
+                    "cleabs": "character varying(24)",
+                    "identifiants_sources": "character varying(254)",
+                    "fid": "integer",
+                    "referentiel_de_l_altitude_moyen": "character varying(30)",
+                    "mode_d_obtention_de_l_altitude_": "character varying",
+                    "sources": "character varying(127)"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "troncon_hydrographique",
+                "type": "TABLE",
+                "attributes": {
+                    "code_hydrographique": "character varying(19)",
+                    "nature": "character varying",
+                    "cpx_toponyme_de_cours_d_eau": "character varying",
+                    "commentaire_sur_l_objet_hydro": "character varying(70)",
+                    "mode_d_obtention_de_l_altitude": "character varying",
+                    "etat_de_l_objet": "character varying",
+                    "fictif": "boolean",
+                    "code_du_cours_d_eau_bdcarthage": "character varying(8)",
+                    "navigabilite": "boolean",
+                    "strategie_de_classement": "character varying(30)",
+                    "numero_d_ordre": "character varying(2)",
+                    "statut": "character varying",
+                    "position_par_rapport_au_sol": "character varying",
+                    "precision_planimetrique": "double precision",
+                    "geom": "geometry(MultiLineStringZ,2154)",
+                    "date_de_confirmation": "date",
+                    "date_d_apparition": "date",
+                    "liens_vers_cours_d_eau": "character varying",
+                    "sens_de_l_ecoulement": "character varying",
+                    "type_de_bras": "character varying",
+                    "date_modification": "timestamp with time zone",
+                    "origine": "character varying",
+                    "reseau_principal_coulant": "boolean",
+                    "precision_altimetrique": "double precision",
+                    "date_creation": "timestamp with time zone",
+                    "persistance": "character varying",
+                    "salinite": "boolean",
+                    "lien_vers_entite_de_transition": "character varying(24)",
+                    "liens_vers_surface_hydrographiq": "character varying",
+                    "classe_de_largeur": "character varying",
+                    "cpx_toponyme_d_entite_de_transi": "character varying",
+                    "delimitation": "boolean",
+                    "perimetre_d_utilisation_ou_orig": "character varying(30)",
+                    "identifiants_sources": "character varying(254)",
+                    "cleabs": "character varying(24)",
+                    "code_du_pays": "character varying(8)",
+                    "mode_d_obtention_des_coordonnee": "character varying",
+                    "fid": "integer",
+                    "fosse": "boolean",
+                    "sources": "character varying(127)"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            },
+            {
+                "name": "detail_hydrographique",
+                "type": "TABLE",
+                "attributes": {
+                    "identifiants_sources": "character varying(254)",
+                    "cleabs": "character varying(24)",
+                    "precision_planimetrique": "double precision",
+                    "importance": "character varying",
+                    "sources": "character varying(127)",
+                    "date_de_confirmation": "date",
+                    "geom": "geometry(MultiPoint,2154)",
+                    "fid": "integer",
+                    "date_d_apparition": "date",
+                    "toponyme": "character varying",
+                    "date_creation": "timestamp with time zone",
+                    "statut_du_toponyme": "character varying",
+                    "etat_de_l_objet": "character varying",
+                    "date_modification": "timestamp with time zone",
+                    "nature": "character varying",
+                    "nature_detaillee": "character varying"
+                },
+                "primary_key": [
+                    "fid"
+                ]
+            }
+        ]
+    },
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

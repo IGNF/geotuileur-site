@@ -1,0 +1,16 @@
+{
+    "_id": "627bd81e6acbf25614bc240b",
+    "status": "SUCCESS",
+    "creation": "2022-05-11T15:37:02.099Z",
+    "upload": {
+        "_id": "627bd81a6acbf2c498bc23b9",
+        "name": "zps 3 2022-05-11",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd80f2f14eb42cff11e2",
+        "name": "V\u00e9rification standard"
+    },
+    "start": "2022-05-11T15:37:03.248Z",
+    "finish": "2022-05-11T15:37:08.359Z"
+}

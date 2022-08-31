@@ -1,0 +1,46 @@
+{
+    "_id": "61cdb77d50f6765fa8a64104",
+    "processing": {
+        "_id": "60c8dd84f2f14e9673ff11f1",
+        "name": "Cr\u00e9ation d'une pyramide vecteur"
+    },
+    "parameters": {
+        "tms": "PM",
+        "bottom_level": "14",
+        "top_level": "8",
+        "composition": [
+            {
+                "table": "base_nationale_amenagements_cyclables",
+                "bottom_level": "14",
+                "top_level": "8",
+                "attributes": "project_c,revet_g,statut_d"
+            }
+        ],
+        "tippecanoe_options": "-al -ap"
+    },
+    "creation": "2021-12-30T13:43:25.522Z",
+    "status": "SUCCESS",
+    "launch": "2021-12-30T13:43:25.642Z",
+    "start": "2021-12-30T13:43:26.348Z",
+    "finish": "2021-12-30T13:51:17.831Z",
+    "inputs": {
+        "stored_data": [
+            {
+                "type": "VECTOR-DB",
+                "_id": "61cc64d950f6763200a628b4",
+                "name": "bnac zip 2021-12-29",
+                "status": "DELETED",
+                "srs": "EPSG:4326"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "ROK4-PYRAMID-VECTOR",
+            "_id": "61cdb77d50f6768342a64100",
+            "name": "bnac zip 2021-12-29",
+            "status": "GENERATED",
+            "srs": "EPSG:3857"
+        }
+    }
+}

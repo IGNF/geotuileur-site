@@ -1,0 +1,16 @@
+{
+    "_id": "6268fe52985d621ee70bb7a3",
+    "status": "SUCCESS",
+    "creation": "2022-04-27T08:26:58.507Z",
+    "upload": {
+        "_id": "6268fe4f985d627cb90bb750",
+        "name": "troncons_de_route_08",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-04-27T08:26:59.155Z",
+    "finish": "2022-04-27T08:27:01.730Z"
+}

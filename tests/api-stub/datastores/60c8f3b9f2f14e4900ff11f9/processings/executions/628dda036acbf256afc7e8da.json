@@ -1,0 +1,33 @@
+{
+    "_id": "628dda036acbf256afc7e8da",
+    "processing": {
+        "_id": "615c42ea68207f82abe976c3",
+        "name": "Int\u00e9gration de donn\u00e9es vecteur livr\u00e9es en base"
+    },
+    "parameters": {},
+    "creation": "2022-05-25T07:25:55.675Z",
+    "status": "SUCCESS",
+    "launch": "2022-05-25T07:25:55.851Z",
+    "start": "2022-05-25T07:25:56.474Z",
+    "finish": "2022-05-25T07:25:59.565Z",
+    "inputs": {
+        "upload": [
+            {
+                "_id": "628dd9f06acbf261f8c7e7bd",
+                "name": "comma_troncons_d51 csv 2022-05-25",
+                "type": "VECTOR",
+                "srs": "EPSG:2154",
+                "status": "DELETED"
+            }
+        ]
+    },
+    "output": {
+        "stored_data": {
+            "type": "VECTOR-DB",
+            "_id": "628dda036acbf26925c7e8d6",
+            "name": "comma_troncons_d51 csv 2022-05-25",
+            "status": "GENERATED",
+            "srs": "EPSG:2154"
+        }
+    }
+}

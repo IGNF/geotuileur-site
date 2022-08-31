@@ -1,0 +1,17 @@
+{
+    "public": false,
+    "_id": "60df14fc2204517ad02fcf70",
+    "name": "Bac \u00e0 sable",
+    "technical_name": "bacasable",
+    "supervisor": {
+        "_id": "60c8eb8ca7f7c74d2900f90d",
+        "email": "theo.satabin@ign.fr",
+        "first_name": "Th\u00e9o",
+        "last_name": "Satabin"
+    },
+    "contact": "maria.ibarra@ign.fr",
+    "datastore": {
+        "active": true,
+        "_id": "60df176122045148c82fcfe3"
+    }
+}

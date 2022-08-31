@@ -1,0 +1,80 @@
+{
+    "type": "VECTOR-DB",
+    "tags": {
+        "wfs_url": "https:\/\/qlf-wxs-v.geo.rie.gouv.fr\/geoportail\/wfs",
+        "wfs_layers": "PAYSMONDE-PLUGIN_v2:hydro,PAYSMONDE-PLUGIN_v2:pays,PAYSMONDE-PLUGIN_v2:lacs,PAYSMONDE-PLUGIN_v2:villes",
+        "wms_url": "https:\/\/qlf-wxs-v.geo.rie.gouv.fr\/geoportail\/v\/wms",
+        "wms_layers": "PAYSMONDE-PLUGIN_v2"
+    },
+    "_id": "60df1782ac44dc37eee4c9bc",
+    "name": "Pays du monde",
+    "visibility": "PRIVATE",
+    "contact": "maria.ibarra@ign.fr",
+    "status": "GENERATED",
+    "size": 98304,
+    "srs": "EPSG:4326",
+    "type_infos": {
+        "relations": [
+            {
+                "name": "hydro",
+                "type": "TABLE",
+                "attributes": {
+                    "name": "character varying(40)",
+                    "geom": "geometry",
+                    "system": "character varying(40)",
+                    "id": "integer"
+                },
+                "primary_key": [
+                    "id"
+                ]
+            },
+            {
+                "name": "lacs",
+                "type": "TABLE",
+                "attributes": {
+                    "id": "integer",
+                    "geom": "geometry",
+                    "name": "character varying(40)"
+                },
+                "primary_key": [
+                    "id"
+                ]
+            },
+            {
+                "name": "pays",
+                "type": "TABLE",
+                "attributes": {
+                    "id": "integer",
+                    "continent": "character varying(23)",
+                    "name_long": "character varying(36)",
+                    "pop_est": "double precision",
+                    "geom": "geometry",
+                    "postal": "character varying(4)",
+                    "subregion": "character varying(25)",
+                    "name": "character varying(36)"
+                },
+                "primary_key": [
+                    "id"
+                ]
+            },
+            {
+                "name": "villes",
+                "type": "TABLE",
+                "attributes": {
+                    "id": "integer",
+                    "geom": "geometry",
+                    "capital": "character varying(1)",
+                    "country": "character varying(12)",
+                    "name": "character varying(40)"
+                },
+                "primary_key": [
+                    "id"
+                ]
+            }
+        ]
+    },
+    "storage": {
+        "type": "POSTGRESQL",
+        "tags": []
+    }
+}

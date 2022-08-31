@@ -1,0 +1,16 @@
+{
+    "_id": "628dd9f26acbf2276fc7e810",
+    "status": "SUCCESS",
+    "creation": "2022-05-25T07:25:38.934Z",
+    "upload": {
+        "_id": "628dd9f06acbf261f8c7e7bd",
+        "name": "comma_troncons_d51 csv 2022-05-25",
+        "type": "VECTOR"
+    },
+    "check": {
+        "_id": "60c8dd81f2f14e4f8fff11e6",
+        "name": "V\u00e9rification vecteur"
+    },
+    "start": "2022-05-25T07:25:40.633Z",
+    "finish": "2022-05-25T07:25:45.412Z"
+}
