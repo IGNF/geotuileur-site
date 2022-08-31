@@ -71,7 +71,7 @@ Lancer les tests (mode `headed`, avec visuel) :
 yarn cypress run --browser firefox --headed
 ```
 
-> Le navigateur sur lequel on souhaite tourner les tests doit être installé sur votre machine.
+> Le navigateur sur lequel on souhaite exécuter les tests doit être installé sur votre machine.
 >
 > Liste de navigateurs supportés : https://docs.cypress.io/guides/guides/launching-browsers#Browsers
 
@@ -90,18 +90,15 @@ Structure des tests :
 ```js
 // cypress/e2e/example.cy.js
 
-describe("...", () => {
-    context('...', () => {
-        it('...', () => {
+describe("Description d'une suite de tests", () => {
+    context("Un ensemble de tests qui sont regroupés par un contexte particulier (par ex. utilisateur connecté ou non) (optionnel)", () => {
+        it("(it ou specify) un scenario représenté par une suite de tâches et vérification d'un comportement attendu (quelque chose qui se passe quand l'utilisateur effectue une action)", () => {
             ...
         })
     })
 })
 ```
-
--   `describe` : une suite de tests
--   `context` (optionnel) : un ensemble de tests qui sont regroupés par un contexte particulier (par ex. utilisateur connecté ou non)
--   `it` ou `specify` : un scenario représenté par une suite de tâches et vérification d'un comportement attentu (quelque chose qui se passe quand l'utilisateur effectue une action)
+Voir les exemples dans [/cypress/e2e](../../cypress/e2e/)
 
 > En savoir plus : https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Test-Structure
 

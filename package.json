@@ -49,6 +49,6 @@
         "build": "encore production --progress"
     },
     "devDependencies": {
-        "cypress": "^10.3.1"
+        "cypress": "^10.7.0"
     }
 }
