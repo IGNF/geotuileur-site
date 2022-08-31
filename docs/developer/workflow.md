@@ -69,11 +69,13 @@ Elle est alors **temporairement publiée** pour être visualisable sur une carte
 
 A partir d'une données stockée (`stored_data`) de type pyramide (`ROK4-PYRAMID-VECTOR`), le formulaire de publication va permettre à l'utilisateur de créer une configuration (`configuration`) et une offre (`offering`).
 
-La pyramide (`stored_data` de type `ROK4-PYRAMID-VECTOR`) se voit ajouter le tag `tms_url` qui contient l'url publique du flux de données publié et un tag `published` true.
+La pyramide (`stored_data` de type `ROK4-PYRAMID-VECTOR`) se voit ajouter le tag `tms_url` qui contient l'url publique du flux de données publié.
 
-> NB : Une publication compte pour 1 dans l'utilisation du quota du `endpoint` `TMS`.
+On peut savoir qu'une `stored_data` est publiée si elle porte un tag `tms_url`, mais l'information la plus fiable est encore de consulter la liste des `offerings` liés à la `stored_data`. Dès lors qu'il y en a une, on peut considérer que c'est publié.
 
 Il est possible de modifier les informations de publication d'un flux déjà publié. Dans ce cas il s'agit d'une dépublication/republication du point de vue de l'API.
+
+> NB : Une publication compte pour 1 dans l'utilisation du quota du `endpoint` `TMS`.
 
 ## 4. Diffuser
 
