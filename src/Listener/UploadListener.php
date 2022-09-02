@@ -2,10 +2,10 @@
 
 namespace App\Listener;
 
-use Oneup\UploaderBundle\Event\PostUploadEvent;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\File;
 use ZipArchive;
+use Symfony\Component\Filesystem\Filesystem;
+use Oneup\UploaderBundle\Event\PostUploadEvent;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @author pprevautel
@@ -62,7 +62,7 @@ class UploadListener
 
     /**
      * @param \SplFileInfo $file
-     *                           On autorise pour l'instant que des fichiers zip ne contenant qu'un seul type de fichiers (gpk ou CSV)
+     * On autorise pour l'instant que des fichiers zip ne contenant qu'un seul type de fichiers (gpk ou CSV)
      *
      * @throws \Exception
      */
@@ -134,7 +134,6 @@ class UploadListener
      *
      * @param File   $file
      * @param string $originalName
-     *
      * @return string
      */
     private function zip($file, $originalName)

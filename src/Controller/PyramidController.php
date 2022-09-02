@@ -51,6 +51,8 @@ class PyramidController extends AbstractController
      */
     public function add($datastoreId, Request $request)
     {
+        $samplePyramidId = $request->query->get('samplePyramidId', null);
+        
         $vectordbId = $request->query->get('vectordbId', null);
 
         // just for precaution, normally these errors "shouldn't" occur
@@ -128,6 +130,23 @@ class PyramidController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 try {
+                    // Suppression de l'echantillon
+                    if ($samplePyramidId) {
+                        // suppression de l'offering, puis la config
+                        $offering = $this->plageApi->configuration->getAllOfferings($datastoreId, [
+                            'stored_data' => $samplePyramidId,
+                        ]);
+
+                        $offering = $this->plageApi->configuration->getOffering($datastoreId, $offering[0]['_id']);
+                        $configuration = $this->plageApi->configuration->get($datastoreId, $offering['configuration']['_id']);
+
+                        $this->plageApi->configuration->removeOffering($datastoreId, $offering['_id']);
+                        $this->plageApi->configuration->remove($datastoreId, $configuration['_id']);
+
+                        // suppression de la pyramide échantillon
+                        $this->plageApi->storedData->remove($datastoreId, $samplePyramidId);
+                    }
+
                     $formData = $form->getData();
 
                     // Les niveaux de zoom
@@ -191,7 +210,6 @@ class PyramidController extends AbstractController
                     }
 
                     $this->plageApi->storedData->addTags($datastoreId, $pyramidId, $pyramidTags);
-
                     $this->plageApi->processing->launchExecution($datastoreId, $processingExecution['_id']);
 
                     return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
@@ -1040,26 +1058,11 @@ class PyramidController extends AbstractController
                     break;
 
                 case 'no':
-                    // Modifier les paramètres de génération (on supprime l'échantillon et on revient au formulaire de génération pré-rempli avec les valeurs de la fois d'avant)
-
-                    // suppression de l'offering, puis la config
-                    $offering = $this->plageApi->configuration->getAllOfferings($datastoreId, [
-                        'stored_data' => $pyramid['_id'],
-                    ]);
-
-                    $offering = $this->plageApi->configuration->getOffering($datastoreId, $offering[0]['_id']);
-                    $configuration = $this->plageApi->configuration->get($datastoreId, $offering['configuration']['_id']);
-
-                    $this->plageApi->configuration->removeOffering($datastoreId, $offering['_id']);
-                    $this->plageApi->configuration->remove($datastoreId, $configuration['_id']);
-
-                    // suppression de la pyramide échantillon
-                    $this->plageApi->storedData->remove($datastoreId, $pyramid['_id']);
-
                     return $this->redirectToRoute('plage_pyramid_add', [
                         'datastoreId' => $datastoreId,
                         'vectordbId' => $pyramid['tags']['vectordb_id'],
                         'procCreatPyramidSampleId' => $pyramid['tags']['proc_pyr_creat_id'],
+                        'samplePyramidId' => $pyramid['_id']
                     ]);
 
                 default:

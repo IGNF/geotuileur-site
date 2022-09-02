@@ -202,8 +202,7 @@ export default class MapViewer extends Map {
                 });
                 this.addControl(control);
             }).catch(error => {
-                console.error(error);
-                flash.flashAdd(`L'ajout du flux ${this._streamUrl} s'est mal passé.`, "danger");
+                flash.flashAdd(error.message);
             });
     }
 
@@ -282,14 +281,12 @@ export default class MapViewer extends Map {
             response = await fetch(url);
         } catch(error) {
             // Si bloqué par CORS policy
-            flash.flashAdd(`Impossible d'accéder au flux ${url}. Existe-t-il ?`);
-            throw Error(error);
+            throw Error(`Impossible d'accéder au flux ${url}. Existe-t-il ?`);
         }
 
-        if (!response.ok) {
+        if (! response.ok) {
             // Si réponse autre que 200
-            flash.flashAdd(`Impossible d'accéder au flux ${url}. Existe-t-il ?`);
-            throw Error(`${response.status}: ${response.statusText}`);
+            throw Error(`Erreur ${response.status}: Impossible d'accéder au flux ${url}. Existe-t-il ?`);
         }
 
         const capabilities = await response.text();
@@ -297,22 +294,19 @@ export default class MapViewer extends Map {
         try {
             infos = this.getInfosFromCapabilities(capabilities);
         } catch(error) {
-            flash.flashAdd(`Impossible de lire ${url}. Ce n'est pas un fichier XML valide.`);
-            throw Error(error);
+            throw Error(`Impossible de lire ${url}. Ce n'est pas un fichier XML valide.`);
         }
 
         try {
             response = await fetch(`${url}/metadata.json`);
         } catch(error) {
             // Si bloqué par CORS policy
-            flash.flashAdd(`Impossible d'accéder aux métadonnées ${url}/metadata.json`);
-            throw Error(error);
+            throw Error(`Impossible d'accéder aux métadonnées ${url}/metadata.json`);
         }
 
-        if (!response.ok) {
+        if (! response.ok) {
             // Si réponse autre que 200
-            flash.flashAdd(`Impossible d'accéder aux métadonnées ${url}/metadata.json`);
-            throw Error(`${response.status}: ${response.statusText}`);
+            throw Error(`Erreur ${response.status}: Impossible d'accéder aux métadonnées ${url}/metadata.json`);
         }
 
         let metadatas;
@@ -320,8 +314,7 @@ export default class MapViewer extends Map {
         try {
             metadatas = await response.json();
         } catch(error) {
-            flash.flashAdd(`Impossible de lire ${url}/metadata.json. Ce n'est pas un fichier de métadonnées valide.`);
-            throw Error(error);
+            throw Error(`Impossible de lire ${url}/metadata.json. Ce n'est pas un fichier de métadonnées valide.`);
         }
 
         $.extend(metadatas, infos, { url: `${url}/{z}/{x}/{y}.pbf`});
