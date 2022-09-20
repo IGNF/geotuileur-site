@@ -12,6 +12,7 @@
         "bootbox": "^5.5.2",
         "bootstrap": "^4.6.0",
         "bootswatch": "^4.6.0",
+        "buffer": "^6.0.3",
         "copy-webpack-plugin": "^5.1.1",
         "core-js": "^3.9.1",
         "dotenv": "^9.0.2",
