@@ -2,7 +2,7 @@
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 
-Ce projet constitue un portail web pour l'API entrepôt dédié à la publication de données sous forme de tuiles vectorielles.
+Ce projet constitue un portail web pour l'API entrepôt, dédié à la publication de données sous forme de pyramides de tuiles vectorielles.
 
 Ce dépôt ne contient que le code source du portail et ne contient pas le code de l'API entrepôt.
 
@@ -25,3 +25,9 @@ La documentation utilisateur se trouvant dans [docs/user](docs/user) constitue l
 ## Documentation développeur
 
 Voir la [documentation développeur](docs/developer/README.md).
+
+## Logiciels associés
+
+Les fonctionnalités du Géotuileur ont été intégrées dans un plugin QGIS : [Getotuileur - QGIS Python Plugins Repository](https://plugins.qgis.org/plugins/geotuileur/)
+
+Le code source de ce plugin, développé par Oslandia, est disponible sur [gitlab.com/Oslandia/qgis/ign-geotuileur](https://gitlab.com/Oslandia/qgis/ign-geotuileur).
