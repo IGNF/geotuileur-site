@@ -11,6 +11,8 @@ Etapes principales :
 ```diff
 -         "symfony/*": "4.4.*",
 +         "symfony/*": "5.4.*",
+-         "symfony/*": "^4.4,
++         "symfony/*": "^5.4",
 
 ...
 
