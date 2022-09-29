@@ -17,7 +17,7 @@ class UserApiService extends AbstractPlageApiService
 
         $datastoresList = [];
         $communitiesMember = $me['communities_member'];
-        foreach($communitiesMember as $communityMember) {
+        foreach ($communitiesMember as $communityMember) {
             $community = $communityMember['community'];
             if (isset($community['datastore'])) {
                 $datastoresList[] = $community['datastore'];
@@ -28,7 +28,7 @@ class UserApiService extends AbstractPlageApiService
         foreach ($datastoresList as $datastoreId) {
             try {
                 $datastores[$datastoreId] = $this->plageApi->datastore->get($datastoreId);
-            } catch(PlageApiException $e) {
+            } catch (PlageApiException $e) {
                 // Rien à faire de particulier. On ignore silencieusement l'erreur et pour l'utilisateur c'est comme si ce datastore n'existait pas.
             }
         }

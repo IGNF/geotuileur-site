@@ -31,6 +31,9 @@ class KeycloakAuthenticator extends AbstractGuardAuthenticator
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @SuppressWarnings(UnusedFormalParameter)
+     */
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         return new RedirectResponse($this->urlGenerator->generate(self::LOGIN_ROUTE));
@@ -84,6 +87,9 @@ class KeycloakAuthenticator extends AbstractGuardAuthenticator
         return new RedirectResponse($this->urlGenerator->generate(self::SUCCESS_ROUTE));
     }
 
+    /**
+     * @SuppressWarnings(UnusedFormalParameter)
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         /** @var AppException */

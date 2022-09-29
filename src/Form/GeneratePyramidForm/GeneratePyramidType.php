@@ -39,7 +39,7 @@ class GeneratePyramidType extends AbstractType
             ])
             ->add('composition', HiddenType::class, [
                 'translation_domain' => 'PlageWebClient',
-                'label' => 'pyramid.form_add.composition'
+                'label' => 'pyramid.form_add.composition',
             ])
             // ->add('composition', PyramidCompositionType::class, [
             //     'translation_domain' => 'PlageWebClient',

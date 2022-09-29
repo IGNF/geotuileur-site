@@ -22,6 +22,9 @@ class LogoutListener implements LogoutSuccessHandlerInterface
         $this->session = $session;
     }
 
+    /**
+     * @SuppressWarnings(UnusedFormalParameter)
+     */
     public function onLogoutSuccess(Request $request)
     {
         $keycloakUrl = $this->params->get('iam_url');

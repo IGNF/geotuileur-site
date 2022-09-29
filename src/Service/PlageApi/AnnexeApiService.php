@@ -15,7 +15,7 @@ class AnnexeApiService extends AbstractPlageApiService
     {
         $apiPlageAnnexeUrl = $this->parameters->get('api_plage_annexe_url');
         $response = $this->request('GET', "datastores/$datastoreId/annexes/$annexeId");
-        $response["paths"][0] = $apiPlageAnnexeUrl . $response["paths"][0];
+        $response['paths'][0] = $apiPlageAnnexeUrl.$response['paths'][0];
 
         return $response;
     }

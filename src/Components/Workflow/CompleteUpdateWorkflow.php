@@ -82,11 +82,17 @@ class CompleteUpdateWorkflow extends IntegrationWorkflow
         $plageApi->processing->launchExecution($datastoreId, $updateProcessingExecution['_id']);
     }
 
+    /**
+     * @SuppressWarnings(UnusedFormalParameter)
+     */
     public function launchPyramidCreationProcessingCheckFinished($args = [])
     {
         return true; // on se contente de lancer le traitement, on ne vérifie pas ici s'il a terminé
     }
 
+    /**
+     * @SuppressWarnings(UnusedFormalParameter)
+     */
     public function launchPyramidCreationProcessingCheckSuccess($args = [])
     {
         return true; // on se contente de lancer le traitement, on ne vérifie pas ici s'il a réussi

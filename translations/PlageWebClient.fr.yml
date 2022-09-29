@@ -146,6 +146,7 @@ upload:
         srs: "Indiquez la projection de vos données"
         file: "Fichier"
         submit: "Etape suivante"
+        error_msg_srs_blank: La projection doit être renseignée
     checks:
         types:
             asked: Demandées

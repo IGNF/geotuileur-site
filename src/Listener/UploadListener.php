@@ -2,10 +2,10 @@
 
 namespace App\Listener;
 
-use ZipArchive;
-use Symfony\Component\Filesystem\Filesystem;
 use Oneup\UploaderBundle\Event\PostUploadEvent;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
+use ZipArchive;
 
 /**
  * @author pprevautel
@@ -62,7 +62,7 @@ class UploadListener
 
     /**
      * @param \SplFileInfo $file
-     * On autorise pour l'instant que des fichiers zip ne contenant qu'un seul type de fichiers (gpk ou CSV)
+     *                           On autorise pour l'instant que des fichiers zip ne contenant qu'un seul type de fichiers (gpk ou CSV)
      *
      * @throws \Exception
      */
@@ -71,7 +71,6 @@ class UploadListener
         $maxFiles = 10000;
         $maxSize = 1000000000; // 1 GB
         $maxRatio = 20; // initialement on avait testé 10% mais c'était trop restrictif (https://github.com/IGNF/geotuileur-site/issues/47)
-        $readLength = 1024;
 
         $filename = $file->getFilename();
 
@@ -134,6 +133,7 @@ class UploadListener
      *
      * @param File   $file
      * @param string $originalName
+     *
      * @return string
      */
     private function zip($file, $originalName)

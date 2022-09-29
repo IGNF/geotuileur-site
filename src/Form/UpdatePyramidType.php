@@ -41,7 +41,7 @@ class UpdatePyramidType extends AbstractType
                 'empty_data' => $options['pyramid']['_id'],
                 'attr' => [
                     'disabled' => true,
-                ]
+                ],
             ]);
         }
 
@@ -49,7 +49,7 @@ class UpdatePyramidType extends AbstractType
             'label' => 'Tuiles vectorielles à remplacer',
             'placeholder' => 'Choisissez la pyramide de tuiles vectorielles à remplacer',
             'label_attr' => [
-                'class' => 'control-label'
+                'class' => 'control-label',
             ],
             'choices' => $pyramidChoices,
         ]);
@@ -77,7 +77,7 @@ class UpdatePyramidType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'accept' => 'application/zip,.csv,.gpkg',
-                    'placeholder' => 'pyramid.upload_data.browse_files'
+                    'placeholder' => 'pyramid.upload_data.browse_files',
                 ],
             ])
             ->add('file_data', HiddenType::class)
