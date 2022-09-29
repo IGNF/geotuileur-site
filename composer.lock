@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d48beab0f811e8fe9730bd4acb3cbaf",
+    "content-hash": "13634dd72bde83a0e16a1b84cf79ea77",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -667,16 +667,16 @@
         },
         {
             "name": "oneup/uploader-bundle",
-            "version": "3.2.1",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
-                "reference": "b11ea2060d4d76b7202d24ae170162b70c7a88b6"
+                "reference": "34d22041d40ff45f87de56cd617a580d48cbdd8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/b11ea2060d4d76b7202d24ae170162b70c7a88b6",
-                "reference": "b11ea2060d4d76b7202d24ae170162b70c7a88b6",
+                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/34d22041d40ff45f87de56cd617a580d48cbdd8c",
+                "reference": "34d22041d40ff45f87de56cd617a580d48cbdd8c",
                 "shasum": ""
             },
             "require": {
@@ -698,7 +698,8 @@
                 "doctrine/doctrine-bundle": "^2.4",
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "knplabs/gaufrette": "^0.9",
-                "oneup/flysystem-bundle": "^1.2 || ^2.0 || ^3.0",
+                "m2mtech/flysystem-stream-wrapper": "^1.0",
+                "oneup/flysystem-bundle": "^4.1",
                 "phpstan/phpstan": "^0.12.10",
                 "phpunit/phpunit": "^9.5",
                 "sensio/framework-extra-bundle": "^5.0 || ^6.0",
@@ -710,8 +711,8 @@
             },
             "suggest": {
                 "knplabs/knp-gaufrette-bundle": "0.1.*",
-                "oneup/flysystem-bundle": "^3.0",
-                "twistor/flysystem-stream-wrapper": "^1.0 (Required when using Flysystem)"
+                "m2mtech/flysystem-stream-wrapper": "^1.0 (Required when using Flysystem)",
+                "oneup/flysystem-bundle": "^3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -754,9 +755,9 @@
             ],
             "support": {
                 "issues": "https://github.com/1up-lab/OneupUploaderBundle/issues",
-                "source": "https://github.com/1up-lab/OneupUploaderBundle/tree/3.2.1"
+                "source": "https://github.com/1up-lab/OneupUploaderBundle/tree/4.0.1"
             },
-            "time": "2022-07-25T07:48:07+00:00"
+            "time": "2022-07-25T07:51:47+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
