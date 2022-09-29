@@ -20,11 +20,15 @@ Ce code est sous licence Affero GPL v3.0.
 
 ## Utilisation
 
-La documentation utilisateur se trouvant dans [docs/user](docs/user) constitue la rubrique d'aide en ligne déployée avec le site et mise en forme avec [docsify](https://github.com/docsifyjs/docsify).
+La documentation utilisateur se trouvant dans [docs/user](docs/user) constitue la rubrique d'aide en ligne. Elle est déployée avec le site et mise en forme avec [docsify](https://github.com/docsifyjs/docsify).
 
 ## Documentation développeur
 
 Voir la [documentation développeur](docs/developer/README.md).
+
+## Déploiement
+
+Le Géotuileur est déployé à l'adresse : [https://www.ign.fr/geoplateforme/geotuileur/](https://www.ign.fr/geoplateforme/geotuileur/)
 
 ## Logiciels associés
 
