@@ -31,10 +31,6 @@ RUN apt-get install -qy \
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn
-
 # PHP Configuration & Extensions
 RUN apt-get update
 COPY .docker/php.ini /usr/local/etc/php/conf.d/app.ini
@@ -65,8 +61,17 @@ RUN pecl install xdebug-3.1.3 \
     && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+# Cypress system/native dependencies
 RUN apt-get update -qq && \
     apt-get install -qy libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+# Nodejs
+# https://github.com/nodejs/docker-node/blob/main/14/bullseye/Dockerfile
+# https://stackoverflow.com/a/63108753
+COPY --from=node:14 /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:14 /usr/local/bin/node /usr/local/bin/node
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+RUN npm i -g yarn
 
 # APT Cache Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

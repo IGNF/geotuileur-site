@@ -9,9 +9,8 @@
         "blueimp-file-upload": "^10.31.0",
         "bootbox": "^5.5.2",
         "bootstrap": "^4.6.0",
-        "bootswatch": "^4.6.0",
         "buffer": "^6.0.3",
-        "copy-webpack-plugin": "^5.1.1",
+        "copy-webpack-plugin": "^11.0.0",
         "dotenv": "^9.0.2",
         "file-loader": "^6.0.0",
         "geoportal-extensions-openlayers": "^3.2.11",
@@ -35,12 +34,9 @@
         "react": "^17.0.2",
         "react-content-loader": "^6.0.3",
         "react-dom": "^17.0.2",
-        "sass-loader": "^11.0.1",
-        "stimulus": "^2.0.0"
+        "sass-loader": "^11.0.1"
     },
     "devDependencies": {
-        "@hotwired/stimulus": "^3.0.0",
-        "@symfony/stimulus-bridge": "^3.0.0",
         "@symfony/webpack-encore": "^1.7.0",
         "core-js": "^3.9.1",
         "cypress": "^10.7.0",
