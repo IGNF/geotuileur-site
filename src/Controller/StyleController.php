@@ -119,7 +119,7 @@ class StyleController extends AbstractController
             $id = uniqid();
             $filename = "mapbox-$id.json";
 
-            $filepath = join([$this->params->get('oneup_uploader_gallery_path'), DIRECTORY_SEPARATOR, $filename]);
+            $filepath = join([(string) $this->params->get('oneup_uploader_gallery_path'), DIRECTORY_SEPARATOR, $filename]);
             file_put_contents($filepath, $style);
             $file = new UploadedFile($filepath, $filename, 'application/json', null, true);
 

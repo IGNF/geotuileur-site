@@ -27,5 +27,6 @@ Etapes principales :
 
 -   composer update "symfony/\*" [--with-all-dependencies]
 -   composer update
+-   mettre à niveau les dépendances PHP (composer show pour voir les détails des versions et autres info)
 -   se débarrasser de toutes les dépréciations de code à nouveau
 -   mettre à jour les recettes flex

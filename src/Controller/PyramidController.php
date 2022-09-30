@@ -36,12 +36,9 @@ class PyramidController extends AbstractController
     /** @var TranslatorInterface */
     private $translator;
 
-    private $apiPlageAnnexeUrl;
-
     public function __construct(PlageApiService $plageApi, ParameterBagInterface $parameters, TranslatorInterface $translator)
     {
         $this->plageApi = $plageApi;
-        $this->apiPlageAnnexeUrl = $parameters->get('api_plage_annexe_url');
         $this->params = $parameters;
         $this->translator = $translator;
     }
