@@ -123,9 +123,9 @@ class DatastoreController extends AbstractController
             $vectordb = $this->plageApi->storedData->get($datastoreId, $vectordb['_id']);
 
             if (
-                  array_key_exists('pyramid_id', $vectordb['tags']) // ignorer si vectordb a déjà été utilisé pour générer une pyramide
+                array_key_exists('pyramid_id', $vectordb['tags']) // ignorer si vectordb a déjà été utilisé pour générer une pyramide
                 || (StoredDataStatuses::GENERATED == $vectordb['status'] && array_key_exists('initial_pyramid_id', $vectordb['tags'])) // intégration d'un vectordb (de mise à jour) a réussi
-                ) {
+            ) {
                 continue;
             }
 

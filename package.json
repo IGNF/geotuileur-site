@@ -2,8 +2,6 @@
     "dependencies": {
         "@babel/preset-react": "^7.0.0",
         "@fortawesome/fontawesome-free": "^5.15.3",
-        "@symfony/stimulus-bridge": "2.0.0",
-        "@symfony/webpack-encore": "^1.1.2",
         "@types/proj4": "^2.5.0",
         "@yaireo/tagify": "^4.9.8",
         "autoprefixer": "^10.2.5",
@@ -11,10 +9,8 @@
         "blueimp-file-upload": "^10.31.0",
         "bootbox": "^5.5.2",
         "bootstrap": "^4.6.0",
-        "bootswatch": "^4.6.0",
         "buffer": "^6.0.3",
-        "copy-webpack-plugin": "^5.1.1",
-        "core-js": "^3.9.1",
+        "copy-webpack-plugin": "^11.0.0",
         "dotenv": "^9.0.2",
         "file-loader": "^6.0.0",
         "geoportal-extensions-openlayers": "^3.2.11",
@@ -38,9 +34,13 @@
         "react": "^17.0.2",
         "react-content-loader": "^6.0.3",
         "react-dom": "^17.0.2",
+        "sass-loader": "^11.0.1"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^1.7.0",
+        "core-js": "^3.9.1",
+        "cypress": "^10.7.0",
         "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^11.0.1",
-        "stimulus": "^2.0.0",
         "webpack-notifier": "^1.6.0"
     },
     "scripts": {
@@ -48,8 +48,5 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
-    },
-    "devDependencies": {
-        "cypress": "^10.7.0"
     }
 }

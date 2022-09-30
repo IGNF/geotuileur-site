@@ -22,7 +22,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/mon-compte", name="me", methods={"GET"})
-     *
      * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public function me(): Response

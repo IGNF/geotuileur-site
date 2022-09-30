@@ -9,6 +9,7 @@ use App\Service\PlageApiService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpClient\Exception\JsonException;
 use Symfony\Component\HttpClient\NativeHttpClient;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
@@ -254,10 +255,20 @@ abstract class AbstractPlageApiService
                 return $content;
             }
         } else {
-            $errorResponse = $response->toArray(false);
+            try {
+                $errorResponse = $response->toArray(false);
+            } catch (JsonException $ex) {
+                $errorResponse = $response->getContent(false);
+            }
+
             $this->logger->warning(self::class, [$method, $url, $body, $query, $errorResponse]);
 
-            throw new PlageApiException(in_array('error_description', array_keys($errorResponse)) ? $errorResponse['error_description'] : 'Plage API Error', $statusCode, $errorResponse);
+            $errorMsg = 'Plage API Error';
+            if (is_array($errorResponse) && in_array('error_description', array_keys($errorResponse))) {
+                $errorMsg = $errorResponse['error_description'];
+            }
+
+            throw new PlageApiException($errorMsg, $statusCode, $errorResponse);
         }
     }
 

@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
         ]);
 
         $providerKey = 'main';
-        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+        $token = new UsernamePasswordToken($user, $providerKey, $user->getRoles());
         $tokenStorage->setToken($token);
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {

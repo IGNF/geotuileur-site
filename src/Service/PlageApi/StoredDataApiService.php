@@ -111,7 +111,7 @@ class StoredDataApiService extends AbstractPlageApiService
     /**
      * @param string $datastoreId
      * @param string $storedDataId
-     * @param array $tags
+     * @param array  $tags
      *
      * @return void
      */

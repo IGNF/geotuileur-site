@@ -36,12 +36,9 @@ class PyramidController extends AbstractController
     /** @var TranslatorInterface */
     private $translator;
 
-    private $apiPlageAnnexeUrl;
-
     public function __construct(PlageApiService $plageApi, ParameterBagInterface $parameters, TranslatorInterface $translator)
     {
         $this->plageApi = $plageApi;
-        $this->apiPlageAnnexeUrl = $parameters->get('api_plage_annexe_url');
         $this->params = $parameters;
         $this->translator = $translator;
     }
@@ -52,12 +49,13 @@ class PyramidController extends AbstractController
     public function add($datastoreId, Request $request)
     {
         $samplePyramidId = $request->query->get('samplePyramidId', null);
-        
+
         $vectordbId = $request->query->get('vectordbId', null);
 
         // just for precaution, normally these errors "shouldn't" occur
         if (!$vectordbId) {
             $this->addFlash('error', "Aucune donnée en entrée n'a été fournie");
+
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
@@ -67,12 +65,14 @@ class PyramidController extends AbstractController
             if (Response::HTTP_NOT_FOUND == $ex->getCode()) {
                 $this->addFlash('error', "La donnée en entrée n'existe pas");
             }
+
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
         // Verification de l'existence de l'extent
-        if (! array_key_exists('extent', $vectordb)) {
+        if (!array_key_exists('extent', $vectordb)) {
             $this->addFlash('error', "L'étendue géographique des données n'a pas pu être déterminée. Il n'est pas possible de générer une pyramide de tuiles vectorielles à partir de ces données.");
+
             return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
         }
 
@@ -116,9 +116,9 @@ class PyramidController extends AbstractController
 
         $streamName = 'Tuiles '.$vectordb['name'];
 
-        $topLevelMin    = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['top_level'] : PyramidZoomLevels::TOP_LEVEL_MIN;
+        $topLevelMin = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['top_level'] : PyramidZoomLevels::TOP_LEVEL_MIN;
         $bottomLevelMax = isset($procCreatPyramidSample) ? $procCreatPyramidSample['parameters']['bottom_level'] : PyramidZoomLevels::BOTTOM_LEVEL_MAX;
-       
+
         try {
             $form = $this->createForm(GeneratePyramidType::class, null, [
                 'datastoreId' => $datastoreId,
@@ -1062,7 +1062,7 @@ class PyramidController extends AbstractController
                         'datastoreId' => $datastoreId,
                         'vectordbId' => $pyramid['tags']['vectordb_id'],
                         'procCreatPyramidSampleId' => $pyramid['tags']['proc_pyr_creat_id'],
-                        'samplePyramidId' => $pyramid['_id']
+                        'samplePyramidId' => $pyramid['_id'],
                     ]);
 
                 default:
@@ -1100,6 +1100,8 @@ class PyramidController extends AbstractController
 
     /**
      * Callback function for array_filter.
+     *
+     * @SuppressWarnings(UnusedPrivateMethod)
      */
     private function filterTMSEndpoints($arrayElement)
     {
@@ -1114,6 +1116,8 @@ class PyramidController extends AbstractController
      * @param array $table
      *
      * @return bool
+     *
+     * @SuppressWarnings(UnusedFormalParameter)
      */
     private function hasGeometricColumns($table)
     {

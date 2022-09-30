@@ -2,24 +2,22 @@
 
 namespace App\Service\PlageApi;
 
-use App\Security\User;
-use App\Service\PlageApiService;
 use App\Exception\PlageApiException;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use App\Service\PlageApiService;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AdministratorApiService {
-
+class AdministratorApiService
+{
     /** @var HttpClientInterface */
     protected $apiClient;
 
     /** @var ParameterBagInterface */
     protected $params;
-    
+
     /** @var array */
     protected $me;
 
@@ -27,7 +25,7 @@ class AdministratorApiService {
     protected $token = null;
 
     public function __construct(
-        ParameterBagInterface $params, 
+        ParameterBagInterface $params,
         PlageApiService $plageApi)
     {
         $this->params = $params;
@@ -36,20 +34,20 @@ class AdministratorApiService {
         $this->apiClient = HttpClient::createForBaseUri($this->params->get('api_plage_url'), [
             'proxy' => $this->params->get('http_proxy'),
             'verify_peer' => false,
-            'verify_host' => false
-        ]); 
+            'verify_host' => false,
+        ]);
 
         $this->me = $plageApi->user->getMe();
-        
+
         // Demande de token
         if ($serviceAccount) {
             $this->token = $this->getAccessToken($serviceAccount);
         }
     }
 
-    public function createCommunity($name, $technicalName, $public = false) 
+    public function createCommunity($name, $technicalName, $public = false)
     {
-        if (! $this->token) {
+        if (!$this->token) {
             throw new AccessDeniedException();
         }
 
@@ -58,31 +56,33 @@ class AdministratorApiService {
             'technical_name' => $technicalName,
             'public' => $public,
             'contact' => $this->me['email'],
-            'supervisor' => $this->me['_id']
+            'supervisor' => $this->me['_id'],
         ]);
 
         $response = $this->apiClient->request('POST', 'administrator/communities', $options);
+
         return $this->handleResponse($response);
     }
 
     /**
-     * 
+     * @SuppressWarnings(UnusedLocalVariable)
      */
-    public function createDatastore($communityId) {
+    public function createDatastore($communityId)
+    {
         $quota = 100000000; // ~100Mo
 
         $checks = $this->params->get('api_plage_checks');
         $processings = $this->params->get('api_plage_processings');
-        
+
         $storages = ['data' => []];
 
         /** @var array */
         $apiStorages = $this->params->get('api_plage_storages');
-        foreach($apiStorages as $key => $id) {
+        foreach ($apiStorages as $key => $id) {
             $storages['data'][] = ['quota' => $quota, 'storage' => $id];
         }
 
-        foreach(['uploads', 'annexes'] as $name) {
+        foreach (['uploads', 'annexes'] as $name) {
             $storages[$name] = ['quota' => $quota, 'storage' => $apiStorages['storage_filesystem']];
         }
 
@@ -92,29 +92,29 @@ class AdministratorApiService {
             'checks' => array_values($checks),
             'storages' => $storages,
             'endpoints' => [
-                ['quota' => 2, 'endpoint' => $this->params->get('api_plage_endpoint')]
-            ]
+                ['quota' => 2, 'endpoint' => $this->params->get('api_plage_endpoint')],
+            ],
         ]);
 
         $response = $this->apiClient->request('POST', 'administrator/datastores', $options);
+
         return $this->handleResponse($response);
     }
 
     /**
-     * Active le datastore
+     * Active le datastore.
      *
      * @param string $datastoreId
      */
-    public function activateDatastore($datastoreId) {
+    public function activateDatastore($datastoreId)
+    {
         $options = $this->prepareOptions(['active' => true]);
-        
+
         $response = $this->apiClient->request('PATCH', "administrator/datastores/$datastoreId", $options);
+
         return $this->handleResponse($response);
     }
 
-    /**
-     * 
-     */
     private function prepareOptions($body = [], $query = [], $headers = [])
     {
         $defaultHeaders = [
@@ -132,10 +132,8 @@ class AdministratorApiService {
         return $options;
     }
 
-    /**
-     * 
-     */
-    private function handleResponse($response) {
+    private function handleResponse($response)
+    {
         $content = null;
 
         $statusCode = $response->getStatusCode();
@@ -145,20 +143,21 @@ class AdministratorApiService {
             } else {
                 $content = $response->toArray();
             }
+
             return $content;
         }
-           
+
         $errorResponse = $response->toArray(false);
 
         $description = 'Plage API Error';
         if (in_array('error_description', array_keys($errorResponse))) {
-            $description = $errorResponse['error_description'];    
+            $description = $errorResponse['error_description'];
         }
         throw new PlageApiException($description, $statusCode, $errorResponse);
     }
 
     /**
-     * Recuperation du Token
+     * Recuperation du Token.
      */
     private function getAccessToken($serviceAccount)
     {
@@ -166,18 +165,18 @@ class AdministratorApiService {
             'grant_type' => 'password',
             'username' => $serviceAccount['username'],
             'password' => $serviceAccount['password'],
-            'client_id' => $this->params->get('iam_client_id')
+            'client_id' => $this->params->get('iam_client_id'),
         ];
 
         $uri = $this->params->get('iam_url');
-        if (! preg_match('/\/$/', $uri)) {
-            $uri .= "/" ;   
+        if (!preg_match('/\/$/', $uri)) {
+            $uri .= '/';
         }
         $client = HttpClient::createForBaseUri($uri, [
             'proxy' => $this->params->get('http_proxy'),
             'verify_peer' => false,
-            'verify_host' => false
-        ]); 
+            'verify_host' => false,
+        ]);
         $response = $client->request('POST', 'token', [
             'verify_peer' => false,
             'verify_host' => false,

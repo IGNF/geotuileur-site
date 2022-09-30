@@ -37,14 +37,16 @@ class ContactController extends AbstractController
      */
     public function contact(Request $request, MailerService $mailerService, LoggerInterface $mailerLogger)
     {
+        /** @var User */
         $user = $this->getUser();
+
         $informations = $this->getInformations($request->query->all());
         if ($informations) {
             $text = $this->getTextFromInformations($informations);
         }
 
         $defaultData = [
-            'userEmail' => $user ? $user->getEmail() : '',
+            'userEmail' => null != $user ? $user->getEmail() : '',
         ];
 
         /** @var Form */
@@ -52,7 +54,7 @@ class ContactController extends AbstractController
             ->add('userEmail', EmailType::class, [
                 'translation_domain' => 'PlageWebClient',
                 'label' => 'contact.form.userEmail',
-                'attr' => ['readonly' => $user ? true : false],
+                'attr' => ['readonly' => null != $user ? true : false],
                 'required' => true,
                 'constraints' => [
                     new Assert\Email(),
