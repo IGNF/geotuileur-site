@@ -187,7 +187,7 @@ class PyramidController extends AbstractController
                     $requestBody = [
                         'processing' => $apiPlageProcessings['create_vect_pyr'],
                         'inputs' => ['stored_data' => [$vectordbId]],
-                        'output' => ['stored_data' => ['name' => $vectordb['name']]],
+                        'output' => ['stored_data' => ['name' => $formData['pyramid_name']]],
                         'parameters' => $parameters,
                     ];
 
