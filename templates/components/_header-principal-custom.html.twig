@@ -13,7 +13,8 @@
         <button class="dropdown-toggle btn btn-icon--header"
             id="dropdownUserMenu"
             data-toggle="dropdown"
-            aria-expanded="false">
+            aria-expanded="false"
+            aria-label="{{ 'nav.user_menu_dropdown' | trans }}">
             {% if app.user %}
                 <span class="icons-logged-user"></span>
             {% else %}

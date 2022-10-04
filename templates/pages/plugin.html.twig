@@ -1,0 +1,103 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'plugin.header'| trans %}
+
+{% set sidebarRight = true %}
+
+{% block title %} {{ 'plugin.title'| trans ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ "plugin.meta_desc" | trans }}"/>
+{% endblock %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+	{% apply spaceless %}
+        <div class="js-scrollspy-target container-content">
+            <div class="row flex-xl-row-reverse flex-column-reverse">
+                <div class="col-xl col-sidebar">
+                    {# Sidebar #}
+                    <div class="container-content container-content--sidebar">
+                        <div class="container-content--sidebar-inner affix-top">
+                            <div class="m-encart-infos">
+                                <h2 class="m-encart-infos__title">Téléchargement</h2>
+        
+                                <div class="m-encart-infos__infos">
+                                    <div class="wysiwyg">
+                                        <p class="a-info">
+                                            L'installation du plugin se fait à partir du dépôt officiel d'extensions
+                                            de QGIS. Vous pouvez le rechercher dans le gestionnaire d'extensions.
+                                        </p>
+                                        <p class="a-info">
+                                            Vous pouvez aussi le télécharger directement :<br/>
+                                            <a
+                                                href="https://plugins.qgis.org/plugins/geotuileur/"
+                                                class="external-link"
+                                                target="_blank">
+                                                Téléchargez le plugin
+                                            </a>
+                                        </p>
+                                        <p class="a-info">Pour plus d'informations :<br/>
+                                            <a
+                                                href="https://oslandia.gitlab.io/qgis/ign-geotuileur/"
+                                                class="external-link"
+                                                target="_blank">
+                                                Consultez la documentation
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                </div>  
+                
+
+                {# Contenu principal #}
+                <div class="col-xl col-content">
+                    <div class="container-content container-content--smaller container-content--fake-col">
+                        <div class="wysiwyg">
+                            <p>
+                                Le <strong>plugin Géotuileur - QGIS</strong> vous permet de générer des <strong>flux
+                                de tuiles vectorielles</strong> à partir de <strong>données vecteur</strong>.
+                            </p>
+                            <p>
+                                Un flux, ou service, de tuiles vectorielles met à disposition des
+                                utilisateurs des objets vecteur selon un pré-découpage géographique
+                                régulier : des <strong>tuiles</strong>. Il s'agit d'un service standardisé par l'OGC
+                                (Open Geospatial Consortium) sous le nom TMS (Tile Map Service).
+                            </p>
+                            <p>
+                                Le découpage géographique en tuiles est <strong>multi-échelle</strong>. Les tuiles sont
+                                mises à disposition jusqu'à une vingtaine d'échelles différentes, on
+                                parle alors de <strong>niveaux</strong>.
+                            </p>
+                            <p>
+                                Au niveau zéro, la Terre entière est représentée sur une seule tuile.
+                                Au niveau n+1, il y a 4 fois plus de tuiles qu'au niveau n (Chaque tuile
+                                du niveau n est découpée en 4 au niveau n+1). L'ensemble des tuiles
+                                vectorielles pour une donnée correspond à une <strong>pyramide</strong> de tuiles
+                                vectorielles.
+                            </p>
+
+                            <p>
+                                Vous trouverez le plugin, directement dans le gestionnaire d'extensions de QGIS.
+                            </p>
+
+                            <p>
+                                <img src='{{ asset('build/img/plugin/gestionnaire-extensions-qgis.png') }}'
+                                    alt="Gestionnaire d'extensions de QGIS"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}
