@@ -6,6 +6,5 @@ twig:
     form_themes: ["bundles/Form/ign_theme.html.twig"]
 
     globals:
-        app_title: "%env(APP_TITLE)%"
         app_url: "%env(APP_URL)%"
         url_base_ignkeycloak: "%env(IAM_URL)%"

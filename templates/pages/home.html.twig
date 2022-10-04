@@ -4,7 +4,7 @@
 
 {% import "components/_editorial-macros.html.twig" as editorial_macros %}
 
-{% block title %}{{ 'home.title'| trans ~ ' - ' ~ parent() }}{% endblock %}
+{% block title %}{{ 'home.title_long'| trans }}{% endblock %}
 
 {% set hasBreadcrumb = 0 %}
 
@@ -22,6 +22,10 @@
     {% include "components/_home_header.html.twig"%}
 {% endblock %}
 
+{% block meta %}
+    <meta name="description" content="{{ 'home.meta_desc' | trans }}"/>
+{% endblock %}
+
 {% block body %}
     {% apply spaceless %}
 
@@ -31,19 +35,19 @@
             <div class="mea-container">
                 <div class="mea-item bg-gray-200">
                     <a href="{{ path('plage_doc')~'#upload' }}">
-                        <img class="mea-img" src="{{ asset('build/img/home/Deposer.png') }}"/>
+                        <img class="mea-img" alt="Je dépose ma donnée" src="{{ asset('build/img/home/Deposer.png') }}"/>
                         <h3>Je dépose ma donnée</h3>
                     </a>
                 </div>
                 <div class="mea-item bg-gray-200">
                     <a href="{{ path('plage_doc')~'#generate' }}">
-                        <img class="mea-img" src="{{ asset('build/img/home/Tuile@1x.png') }}"/>
+                        <img class="mea-img" alt="Je crée mon flux" src="{{ asset('build/img/home/Tuile@1x.png') }}"/>
                         <h3>Je crée mon flux</h3>
                     </a>
                 </div>
                 <div class="mea-item bg-gray-200">
                     <a href="{{ path('plage_doc')~'#publish' }}">
-                        <img class="mea-img" src="{{ asset('build/img/home/Diffuser@1x.png') }}"/>
+                        <img class="mea-img" alt="Je publie mon flux" src="{{ asset('build/img/home/Diffuser@1x.png') }}"/>
                         <h3>Je publie mon flux</h3>
                     </a>
                 </div>

@@ -58,4 +58,14 @@ class DefaultController extends AbstractController
     {
         return $this->render('pages/cookies.html.twig');
     }
+
+    /**
+     * Plugin QGIS
+     * 
+     * @Route("/plugin-qgis", name="plugin", methods={"GET"})
+     */
+    public function plugin()
+    {
+        return $this->render('pages/plugin.html.twig');
+    }
 }

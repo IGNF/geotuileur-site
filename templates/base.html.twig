@@ -32,7 +32,7 @@
         {% block meta %} {# pour insertion de balises meta supplementaires #} {% endblock %}
 
         {# Titre sous la forme : Titre de la Page - Nom du site #}
-        <title>{% block title %}{{ app_title }}{% endblock %}</title>
+        <title>{% block title %}{{ "site.title" | trans }}{% endblock %}</title>
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
@@ -57,9 +57,9 @@
                 <div class="header-principal--left">
                     {# logo et menu principal mobile et latéral gauche #}
                     <div class="header-principal__logo">
-                        <a href="{{ path('plage_home')}}" class="header-principal__logo-link" title="{{ "home.title" | trans }} - {{ app_title }}">
+                        <a href="{{ path('plage_home')}}" class="header-principal__logo-link" title="{{ "home.title" | trans }} - {{ "site.title" | trans }}">
                             <img src="{{ asset('build/img/logo-rf-01_0.jpg') }}" alt="Logo programme Géoplateforme">
-                            <span class="header-principal__name">{{ app_title }}</span>
+                            <span class="header-principal__name">{{ "site.header" | trans }}</span>
                         </a>
                     </div>
                 </div>
