@@ -60,8 +60,8 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Plugin QGIS
-     * 
+     * Plugin QGIS.
+     *
      * @Route("/plugin-qgis", name="plugin", methods={"GET"})
      */
     public function plugin()

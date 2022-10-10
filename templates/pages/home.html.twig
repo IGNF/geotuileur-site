@@ -12,7 +12,7 @@
 
 {% set titleLeadContent = 'home.lead' | trans %}
 
-{% if app.user %}
+{% if app.user is defined %}
     {% set titleBtn = {'target': path('plage_datastore_index'), 'text': 'home.start'|trans } %}
 {% else %}
     {% set titleBtn = {'target': path('plage_security_login'), 'text': 'home.start'|trans } %}

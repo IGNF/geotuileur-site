@@ -14,10 +14,17 @@ framework:
         cookie_lifetime: 86400
         cookie_httponly: true
         name: __Host-PHPSESSID
-    
+        storage_factory_id: session.storage.factory.native
+
     ide: vscode
 
     #esi: true
     #fragments: true
     php_errors:
         log: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
