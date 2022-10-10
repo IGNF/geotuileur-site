@@ -2,31 +2,18 @@
 
 namespace App\Security;
 
-use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
-    private $username;
     private $email;
+    private $username;
     private $roles = [];
-    private $accessToken;
-    private $refreshToken;
-    private $tokenExpiryDate;
 
     public function __construct(array $userinfo = [])
     {
-        if (array_key_exists('email', $userinfo)) {
-            $this->setEmail($userinfo['email']);
-        }
-
-        if (array_key_exists('token', $userinfo)) {
-            $this->setToken($userinfo['token']);
-        }
-
-        if (array_key_exists('preferred_username', $userinfo)) {
-            $this->setUsername($userinfo['preferred_username']);
-        }
+        $this->setEmail($userinfo['email']);
+        $this->setUsername($userinfo['preferred_username']);
     }
 
     /**
@@ -34,26 +21,39 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
-    {
-        return (string) $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
     }
 
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of username.
+     */
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set the value of username.
+     *
+     * @return self
+     */
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
 
         return $this;
     }
@@ -78,9 +78,9 @@ class User implements UserInterface
     }
 
     /**
-     * This method is not needed for apps that do not check user passwords.
+     * This method can be removed in Symfony 6.0 - is not needed for apps that do not check user passwords.
      *
-     * @see UserInterface
+     * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
     {
@@ -88,7 +88,7 @@ class User implements UserInterface
     }
 
     /**
-     * This method is not needed for apps that do not check user passwords.
+     * This method can be removed in Symfony 6.0 - is not needed for apps that do not check user passwords.
      *
      * @see UserInterface
      */
@@ -104,50 +104,5 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getAccessToken(): ?string
-    {
-        return $this->accessToken;
-    }
-
-    public function setAccessToken(?string $accessToken): self
-    {
-        $this->accessToken = $accessToken;
-
-        return $this;
-    }
-
-    public function getRefreshToken(): ?string
-    {
-        return $this->refreshToken;
-    }
-
-    public function setRefreshToken(?string $refreshToken): self
-    {
-        $this->refreshToken = $refreshToken;
-
-        return $this;
-    }
-
-    public function getTokenExpiryDate(): ?DateTime
-    {
-        return $this->tokenExpiryDate;
-    }
-
-    public function setTokenExpiryDate(?DateTime $tokenExpiryDate): self
-    {
-        $this->tokenExpiryDate = $tokenExpiryDate;
-
-        return $this;
-    }
-
-    public function setToken(array $token): self
-    {
-        $this->accessToken = $token['access_token'];
-        $this->tokenExpiryDate = (new \DateTime())->add(new \DateInterval('PT'.$token['expires_in'].'S'));
-        $this->refreshToken = $token['refresh_token'];
-
-        return $this;
     }
 }

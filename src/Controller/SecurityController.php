@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Security\User;
-use App\Utils;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,20 +22,16 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="plage_security_login", methods={"GET"})
      */
-    public function login(UrlGeneratorInterface $urlGenerator, Request $request, TokenStorageInterface $tokenStorage, ParameterBagInterface $params)
+    public function login(UrlGeneratorInterface $urlGenerator, Request $request, TokenStorageInterface $tokenStorage, ParameterBagInterface $params, ClientRegistry $clientRegistry)
     {
         if ('test' == $params->get('app_env')) {
             return $this->testLogin($tokenStorage, $request, $urlGenerator);
         }
 
-        $keycloakUrl = $this->getParameter('iam_url');
-        $clientId = $this->getParameter('iam_client_id');
-        $redirectUrl = $urlGenerator->generate('plage_security_login_check', [], UrlGeneratorInterface::ABSOLUTE_URL);
-        $nonce = Utils::generateUid();
+        /** @var KeycloakClient */
+        $client = $clientRegistry->getClient('keycloak');
 
-        $url = "$keycloakUrl/auth?client_id=$clientId&response_type=code&scope=openid%20profile%20email&redirect_uri=$redirectUrl&nonce=$nonce";
-
-        return new RedirectResponse($url);
+        return $client->redirect(['openid', 'profile', 'email']);
     }
 
     /**

@@ -3,9 +3,11 @@
 namespace App\Service\PlageApi;
 
 use App\Exception\PlageApiException;
+// use App\Security\KeycloakUserProvider;
 use App\Security\KeycloakUserProvider;
-use App\Security\User;
 use App\Service\PlageApiService;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -13,8 +15,6 @@ use Symfony\Component\HttpClient\Exception\JsonException;
 use Symfony\Component\HttpClient\NativeHttpClient;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -25,9 +25,6 @@ abstract class AbstractPlageApiService
 
     /** @var PlageApiService */
     protected $plageApi;
-
-    /** @var User */
-    protected $user;
 
     /** @var HttpClientInterface */
     protected $apiClient;
@@ -44,18 +41,17 @@ abstract class AbstractPlageApiService
     /** @var Filesystem */
     protected $fs;
 
+    protected ClientRegistry $clientRegistry;
+
     private $updateApiStubMode = false;
 
-    public function __construct(ParameterBagInterface $parameters, TokenStorageInterface $tokenStorage, KeycloakUserProvider $keycloakUserProvider, LoggerInterface $logger)
+    public function __construct(ParameterBagInterface $parameters, KeycloakUserProvider $keycloakUserProvider, ClientRegistry $clientRegistry, LoggerInterface $logger)
     {
         $this->logger = $logger;
         $this->fs = new Filesystem();
         $this->userProvider = $keycloakUserProvider;
         $this->parameters = $parameters;
-
-        if ($tokenStorage->getToken()->getUser() instanceof User) {
-            $this->user = $tokenStorage->getToken()->getUser();
-        }
+        $this->clientRegistry = $clientRegistry;
 
         $this->apiClient = new NativeHttpClient([
             'base_uri' => $this->parameters->get('api_plage_url'),
@@ -131,7 +127,7 @@ abstract class AbstractPlageApiService
         $contentRangeArr = explode('/', $contentRange);
         $total = $contentRangeArr[1];
 
-        return intval(ceil($total / $limit));
+        return intval(ceil(intval($total) / $limit));
     }
 
     protected function postFile($url, $filepath, $query = [])
@@ -322,30 +318,19 @@ abstract class AbstractPlageApiService
             ];
         }
 
-        $options['headers']['Authorization'] = "Bearer {$this->getToken()}";
+        /** @var AccessToken */
+        $accessToken = $this->userProvider->getToken();
+
+        $options['headers']['Authorization'] = "Bearer {$accessToken->getToken()}";
         $options['query'] = $query;
 
         return $options;
     }
 
-    protected function getToken()
-    {
-        if (!$this->user instanceof User) {
-            throw new AuthenticationException();
-        }
-
-        // performs a token refresh if expired
-        $expiryDate = $this->user->getTokenExpiryDate();
-        if (new \DateTime() > $expiryDate) {
-            $token = $this->userProvider->refreshToken($this->user->getRefreshToken());
-            $this->user->setToken($token);
-        }
-
-        return $this->user->getAccessToken();
-    }
-
     protected function isTest()
     {
-        return 'test_user' == $this->user->getUsername();
+        $user = $this->userProvider->loadUser();
+
+        return 'test_user' == $user->getUserIdentifier();
     }
 }

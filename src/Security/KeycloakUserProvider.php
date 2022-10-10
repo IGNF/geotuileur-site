@@ -2,151 +2,100 @@
 
 namespace App\Security;
 
-use App\Exception\AppException;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
+use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Stevenmaguire\OAuth2\Client\Provider\KeycloakResourceOwner;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class KeycloakUserProvider implements UserProviderInterface
 {
-    private $urlBase;
-    private $clientId;
+    private ClientRegistry $clientRegistry;
+    private RequestStack $requestStack;
+    private LoggerInterface $logger;
 
-    private $client;
-    private $urlGenerator;
-    private $logger;
-
-    public function __construct(ParameterBagInterface $parameters, UrlGeneratorInterface $urlGenerator, LoggerInterface $logger)
+    public function __construct(ClientRegistry $clientRegistry, RequestStack $requestStack, LoggerInterface $logger)
     {
-        $this->urlBase = $parameters->get('iam_url');
-        $this->clientId = $parameters->get('iam_client_id');
-
-        $this->client = HttpClient::createForBaseUri($this->urlBase, [
-            'proxy' => $parameters->get('http_proxy'),
-            'verify_peer' => false,
-            'verify_host' => false,
-        ]);
-
-        $this->urlGenerator = $urlGenerator;
+        $this->clientRegistry = $clientRegistry;
+        $this->requestStack = $requestStack;
         $this->logger = $logger;
     }
 
-    public function getUser($credentials)
+    public function loadUser(AccessToken $accessToken = null): User
     {
-        $token = $this->getAccessToken($credentials['code']);
-        $userInfo = $this->getUserInfo($token);
-
-        return new User($userInfo);
-    }
-
-    public function getAccessToken($code)
-    {
-        $redirectUri = $this->urlGenerator->generate('plage_security_login_check', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $body = [
-            'grant_type' => 'authorization_code',
-            'code' => $code,
-            'client_id' => $this->clientId,
-            'redirect_uri' => $redirectUri,
-        ];
-
-        $url = $this->urlBase.'/token';
-        $response = $this->client->request('POST', $url, [
-            'body' => $body,
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'Accept' => 'application/json',
-            ],
-        ]);
-
-        $this->logger->info(self::class.': getAccessToken', ['POST', $url, $body, $response->getContent(false)]);
-
-        if (Response::HTTP_OK !== $response->getStatusCode()) {
-            $responseData = json_decode($response->getContent(false), true);
-            throw new AppException('Authentication failed', Response::HTTP_INTERNAL_SERVER_ERROR, $responseData);
+        if (null == $accessToken) {
+            $accessToken = $this->getToken();
         }
 
-        return \json_decode($response->getContent(), true);
+        /** @var KeycloakClient */
+        $keycloakClient = $this->clientRegistry->getClient('keycloak');
+
+        dump($accessToken);
+
+        /** @var KeycloakResourceOwner */
+        $keycloakUser = $keycloakClient->fetchUserFromToken($accessToken);
+
+        return new User($keycloakUser->toArray());
     }
 
-    public function getUserInfo($token)
+    /**
+     * Retrieves the access token from the session, refreshes the token via KeycloakClient if expired and stores it in the session, and finally returns the token.
+     */
+    public function getToken(): AccessToken
     {
-        $body = ['access_token' => $token['access_token']];
+        $session = $this->requestStack->getSession();
 
-        $url = $this->urlBase.'/userinfo';
-        $response = $this->client->request('POST', $url, [
-            'body' => $body,
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'Accept' => 'application/json',
-            ],
-        ]);
+        /** @var KeycloakClient */
+        $keycloakClient = $this->clientRegistry->getClient('keycloak');
 
-        $this->logger->info(self::class.': getUserInfo', ['POST', $url, $body, $response->getContent(false)]);
+        // retrieves the token from session
+        /** @var AccessToken */
+        $accessToken = $session->get('keycloak_token');
+        dump($accessToken);
 
-        if (Response::HTTP_OK !== $response->getStatusCode()) {
-            throw new AuthenticationException();
-        }
+        // fetches the token via KeycloakClient if null
+        // if (null == $accessToken) {
+        //     /** @var AccessToken */
+        //     $accessToken = $keycloakClient->getAccessToken();
+        //     $session->set('keycloak_token', $accessToken);
+        // }
 
-        $userInfo = \json_decode($response->getContent(), true);
-        $userInfo['token'] = $token;
+        // TODO hasExpired n'a pas l'air fonctionner
+        // refreshes the token via KeycloakClient if expired
+        // if ($accessToken->hasExpired()) {
+        $this->logger->debug('Token [{id_token}] expired', ['id_token' => $accessToken->getValues()['id_token']]);
 
-        return $userInfo;
-    }
+        /** @var AccessToken */
+        $accessToken = $keycloakClient->refreshAccessToken($accessToken->getRefreshToken());
 
-    public function refreshToken($refreshToken)
-    {
-        $body = [
-            'grant_type' => 'refresh_token',
-            'client_id' => $this->clientId,
-            'refresh_token' => $refreshToken,
-        ];
+        $this->logger->debug('Token [{id_token}] refreshed', ['id_token' => $accessToken->getValues()['id_token']]);
 
-        $url = $this->urlBase.'/token';
-        $response = $this->client->request('POST', $url, [
-            'body' => $body,
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'Accept' => 'application/json',
-            ],
-        ]);
+        $session->set('keycloak_token', $accessToken);
+        // }
 
-        $this->logger->info(self::class.': refreshToken', ['POST', $url, $body, $response->getContent(false)]);
-
-        if (Response::HTTP_OK == $response->getStatusCode()) {
-            return \json_decode($response->getContent(), true);
-        } else {
-            throw new AuthenticationException();
-        }
+        return $accessToken;
     }
 
     /**
      * Symfony calls this method if you use features like switch_user
-     * or remember_me.
+     * or remember_me. If you're not using these features, you do not
+     * need to implement this method.
      *
-     * If you're not using these features, you do not need to implement
-     * this method.
-     *
-     * @return UserInterface
-     *
-     * @throws UsernameNotFoundException if the user is not found
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws UserNotFoundException if the user is not found
      */
-    public function loadUserByUsername($username)
+    public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        // Load a User object from your data source or throw UsernameNotFoundException.
-        // The $username argument may not actually be a username:
-        // it is whatever value is being returned by the getUsername()
-        // method in your User class.
-        throw new \Exception('Not needed: fill in loadUserByUsername() inside '.__FILE__);
+        return $this->loadUser();
+    }
+
+    public function loadUserByUsername(string $username): UserInterface
+    {
+        return $this->loadUserByIdentifier($username);
     }
 
     /**
@@ -168,14 +117,14 @@ class KeycloakUserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
         }
 
-        return $user;
+        return $this->loadUser();
     }
 
     /**
      * Tells Symfony to use this provider for this User class.
      */
-    public function supportsClass($class)
+    public function supportsClass(string $class): bool
     {
-        return User::class === $class;
+        return User::class === $class || is_subclass_of($class, User::class);
     }
 }
