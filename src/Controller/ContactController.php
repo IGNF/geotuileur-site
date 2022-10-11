@@ -117,6 +117,11 @@ class ContactController extends AbstractController
                 $supportMailParams['userId'] = $userApi['_id'];
             }
 
+            $mailerLogger->info('User ({userEmail}) : {message}', [
+                'userEmail' => $userEmail,
+                'message' => $message,
+            ]);
+
             // sending mail to support address
             $mailerService->sendMail($supportAddress, '[Geotuileur] Demande de contact', 'bundles/Mailer/contact.html.twig', $supportMailParams);
 
@@ -124,11 +129,6 @@ class ContactController extends AbstractController
             $mailerService->sendMail($userEmail, '[Geotuileur] Accusé de réception de votre demande', 'bundles/Mailer/contact_acknowledgement.html.twig', [
                 'message' => $message,
                 'sendDate' => $now,
-            ]);
-
-            $mailerLogger->info('User ({userEmail}) : {message}', [
-                'userEmail' => $userEmail,
-                'message' => $message,
             ]);
 
             return $this->redirectToRoute('plage_contact_thanks', ['error' => false]);
