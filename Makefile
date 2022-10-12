@@ -40,6 +40,10 @@ compile-app-prod: ## Update and package all php and javascript dependencies in p
 	yarn install --production
 	yarn encore production
 
+.PHONY: cc
+cc:
+	php bin/console cache:clear
+
 .PHONY: up
 up: ## Launch docker containers
 	docker-compose up -d --build --remove-orphans
