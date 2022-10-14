@@ -2,6 +2,7 @@
     "dependencies": {
         "@babel/preset-react": "^7.0.0",
         "@fortawesome/fontawesome-free": "^5.15.3",
+        "@symfony/webpack-encore": "^1.7.0",
         "@types/proj4": "^2.5.0",
         "@yaireo/tagify": "^4.9.8",
         "autoprefixer": "^10.2.5",
@@ -35,7 +36,6 @@
         "react-content-loader": "^6.0.3",
         "react-dom": "^17.0.2",
         "sass-loader": "^11.0.1",
-        "@symfony/webpack-encore": "^1.7.0",
         "webpack-notifier": "^1.6.0"
     },
     "devDependencies": {

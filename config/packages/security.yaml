@@ -23,6 +23,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/datastores, roles: ROLE_USER }
+        - { path: ^/mon-compte, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/nous-ecrire, roles: PUBLIC_ACCESS }
