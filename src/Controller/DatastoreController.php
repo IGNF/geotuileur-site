@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Constants\StorageTypes;
 use App\Constants\StoredDataStatuses;
 use App\Constants\StoredDataTypes;
+use App\Exception\PlageApiException;
 use App\Service\PlageApi\AdministratorApiService;
 use App\Service\PlageApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -265,8 +266,15 @@ class DatastoreController extends AbstractController
         ]);
 
         foreach ($offerings as &$offering) {
-            $offering = $this->plageApi->configuration->getOffering($datastoreId, $offering['_id']);
-            $offering['configuration'] = $this->plageApi->configuration->get($datastoreId, $offering['configuration']['_id']);
+            try {
+                $offering = $this->plageApi->configuration->getOffering($datastoreId, $offering['_id']);
+                $offering['configuration'] = $this->plageApi->configuration->get($datastoreId, $offering['configuration']['_id']);
+            } catch (PlageApiException $ex) {
+                if (Response::HTTP_NOT_FOUND == $ex->getStatusCode()) {
+                    continue;
+                }
+                throw $ex;
+            }
         }
 
         return $this->render('pages/datastore/storage.html.twig', [

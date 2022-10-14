@@ -129,10 +129,18 @@
                     <div class="col-md d-flex align-items-center">
                         <span>{{ offering.layer_name }}</span>
                     </div>
-                    <div class="col-md d-flex align-items-center justify-content-end">
-                        <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish" data-pyramid-id={{ offering.configuration.type_infos.used_data[0].stored_data }}>Dépublier</a>
-                    </div>
-                </div>
+
+                    {% if offering.configuration is defined %}
+                        <div class="col-md d-flex align-items-center justify-content-end">
+                            <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish" data-pyramid-id={{ offering.configuration.type_infos.used_data[0].stored_data }}>Dépublier</a>
+                        </div>
+                    {% else %}
+                        <div class="col-md d-flex align-items-center justify-content-end">
+                            <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish disabled">Dépublier</a>
+                        </div>
+                    {% endif %}
+                </div>                    
+                
             {% endfor %}
         </div>
     </div>
