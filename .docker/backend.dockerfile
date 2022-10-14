@@ -51,6 +51,8 @@ RUN apt-get install -y libicu-dev \
 RUN apt-get install -y libxslt-dev \
     && docker-php-ext-install xsl
 
+RUN docker-php-ext-install opcache
+
 ## Needed for pecl to succeed
 RUN pear config-set php_ini /usr/local/etc/php/conf.d/app.ini
 RUN if [ "${http_proxy}" != "" ]; then \
