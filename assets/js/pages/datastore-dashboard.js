@@ -36,9 +36,13 @@ const DatastoreDashboard = ({ datastoreId }) => {
                 setActionsRequired(response?.data?.actions_required)
                 setInProgress(response?.data?.in_progress)
                 setPublishedPyramids(response?.data?.published_pyramids)
+            })
+            .catch(error => console.error(error))
+            .finally(() => {
+                // délibération du vérrou à la fin de la requête (succès ou echéc)
                 setIsLoading(false);
                 onGoingRequest.current = false;
-            }).catch(error => console.error(error))
+            });
     }
 
     useEffect(() => {

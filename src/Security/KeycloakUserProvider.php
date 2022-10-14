@@ -8,6 +8,8 @@ use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
 use Stevenmaguire\OAuth2\Client\Provider\KeycloakResourceOwner;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,8 +37,6 @@ class KeycloakUserProvider implements UserProviderInterface
         /** @var KeycloakClient */
         $keycloakClient = $this->clientRegistry->getClient('keycloak');
 
-        dump($accessToken);
-
         /** @var KeycloakResourceOwner */
         $keycloakUser = $keycloakClient->fetchUserFromToken($accessToken);
 
@@ -56,27 +56,24 @@ class KeycloakUserProvider implements UserProviderInterface
         // retrieves the token from session
         /** @var AccessToken */
         $accessToken = $session->get('keycloak_token');
-        dump($accessToken);
 
-        // fetches the token via KeycloakClient if null
-        // if (null == $accessToken) {
-        //     /** @var AccessToken */
-        //     $accessToken = $keycloakClient->getAccessToken();
-        //     $session->set('keycloak_token', $accessToken);
-        // }
+        if (null == $accessToken) {
+            throw new TokenNotFoundException('Votre authentification a échoué', Response::HTTP_UNAUTHORIZED);
+        }
 
-        // TODO hasExpired n'a pas l'air fonctionner
         // refreshes the token via KeycloakClient if expired
-        // if ($accessToken->hasExpired()) {
-        $this->logger->debug('Token [{id_token}] expired', ['id_token' => $accessToken->getValues()['id_token']]);
+        if ($accessToken->hasExpired()) {
+            $this->logger->debug('Token expired [{id_token}]', ['id_token' => $accessToken->getValues()['id_token']]);
 
-        /** @var AccessToken */
-        $accessToken = $keycloakClient->refreshAccessToken($accessToken->getRefreshToken());
+            /** @var AccessToken */
+            $accessToken = $keycloakClient->refreshAccessToken($accessToken->getRefreshToken());
 
-        $this->logger->debug('Token [{id_token}] refreshed', ['id_token' => $accessToken->getValues()['id_token']]);
+            $this->logger->debug('Token refreshed [{id_token}]', ['id_token' => $accessToken->getValues()['id_token']]);
 
-        $session->set('keycloak_token', $accessToken);
-        // }
+            $session->set('keycloak_token', $accessToken);
+        } else {
+            $this->logger->debug('Token still valid [{id_token}]', ['id_token' => $accessToken->getValues()['id_token']]);
+        }
 
         return $accessToken;
     }

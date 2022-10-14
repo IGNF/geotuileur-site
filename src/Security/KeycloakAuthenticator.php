@@ -2,10 +2,13 @@
 
 namespace App\Security;
 
+use App\Exception\AppException;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Psr\Log\LoggerInterface;
+use Stevenmaguire\OAuth2\Client\Provider\KeycloakResourceOwner;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -13,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
@@ -59,11 +64,16 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
 
         $accessToken = $this->fetchAccessToken($keycloakClient);
 
-        dump($accessToken);
+        try {
+            /** @var KeycloakResourceOwner */
+            $keycloakUser = $keycloakClient->fetchUserFromToken($accessToken);
+        } catch (IdentityProviderException $ex) {
+            throw new CustomUserMessageAuthenticationException($ex->getMessage(), $ex->getResponseBody(), $ex->getCode(), $ex);
+        }
 
         $this->requestStack->getSession()->set('keycloak_token', $accessToken);
 
-        $userBadge = new UserBadge($accessToken->getToken());
+        $userBadge = new UserBadge($keycloakUser->getEmail());
 
         return new SelfValidatingPassport($userBadge, [
             new RememberMeBadge(),
@@ -81,6 +91,29 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
+        if ($exception instanceof CustomUserMessageAuthenticationException) {
+            /** @var IdentityProviderException */
+            $ex = $exception->getPrevious(); // récupérer l'exception IdentityProviderException capturée dans la méthode Authenticate
+            $details = $ex->getResponseBody();
+
+            if (array_key_exists('error', $details) && array_key_exists('error_description', $details)) {
+                if ('invalid_grant' == $details['error'] && 'Code not valid' == $details['error_description']) {
+                    throw new AppException("Votre authentification a échoué en raison d'une erreur interne", Response::HTTP_UNAUTHORIZED, $details, $ex);
+                }
+
+                if ('invalid_grant' == $details['error'] && 'Invalid user credentials' == $details['error_description']) {
+                    throw new AppException("Votre authentification a échoué : nom d'utilisateur et/ou mot de passe sont incorrects", Response::HTTP_UNAUTHORIZED, $details, $ex);
+                }
+            }
+
+            throw $ex;
+        }
+
+        // l'exception lancée dans KeycloakUserProvider::getToken
+        if ($exception instanceof TokenNotFoundException) {
+            throw new AppException('Votre authentification a échoué', Response::HTTP_UNAUTHORIZED);
+        }
+
         $message = strtr($exception->getMessageKey(), $exception->getMessageData());
 
         $this->logger->debug(self::class, [$message, $exception]);
