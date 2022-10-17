@@ -7,6 +7,7 @@ use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
 use Stevenmaguire\OAuth2\Client\Provider\KeycloakResourceOwner;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
@@ -18,18 +19,27 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class KeycloakUserProvider implements UserProviderInterface
 {
     private ClientRegistry $clientRegistry;
+    private ParameterBagInterface $params;
     private RequestStack $requestStack;
     private LoggerInterface $logger;
 
-    public function __construct(ClientRegistry $clientRegistry, RequestStack $requestStack, LoggerInterface $logger)
+    public function __construct(ClientRegistry $clientRegistry, ParameterBagInterface $params, RequestStack $requestStack, LoggerInterface $logger)
     {
         $this->clientRegistry = $clientRegistry;
+        $this->params = $params;
         $this->requestStack = $requestStack;
         $this->logger = $logger;
     }
 
     public function loadUser(AccessToken $accessToken = null): User
     {
+        if ('test' == $this->params->get('app_env')) {
+            return new User([
+                'preferred_username' => 'test_user',
+                'email' => 'test@test.com',
+            ]);
+        }
+
         if (null == $accessToken) {
             $accessToken = $this->getToken();
         }
@@ -62,7 +72,7 @@ class KeycloakUserProvider implements UserProviderInterface
         }
 
         // refreshes the token via KeycloakClient if expired
-        if ($accessToken->hasExpired()) {
+        if (($accessToken->getExpires() - 30) < time()) {
             $this->logger->debug('Token expired [{id_token}]', ['id_token' => $accessToken->getValues()['id_token']]);
 
             /** @var AccessToken */

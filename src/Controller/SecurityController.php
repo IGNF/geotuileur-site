@@ -55,11 +55,11 @@ class SecurityController extends AbstractController
             'email' => 'test@test.com',
         ]);
 
-        $providerKey = 'main';
-        $token = new UsernamePasswordToken($user, $providerKey, $user->getRoles());
+        $firewallName = 'main';
+        $token = new UsernamePasswordToken($user, $firewallName, $user->getRoles());
         $tokenStorage->setToken($token);
 
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             $response = new RedirectResponse($targetPath);
         }
 

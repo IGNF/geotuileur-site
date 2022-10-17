@@ -168,10 +168,7 @@ class AdministratorApiService
             'client_id' => $this->params->get('iam_client_id'),
         ];
 
-        $uri = $this->params->get('iam_url');
-        if (!preg_match('/\/$/', $uri)) {
-            $uri .= '/';
-        }
+        $uri = $this->params->get('iam_url').'/realms/'.$this->params->get('iam_realm').'/protocol/openid-connect/';
         $client = HttpClient::createForBaseUri($uri, [
             'proxy' => $this->params->get('http_proxy'),
             'verify_peer' => false,
