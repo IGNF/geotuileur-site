@@ -111,7 +111,7 @@ export default class StylesList extends React.Component {
             self.props.onChange(newStyle?.url);
         }).fail(function () {
             self.props.wait.hide();
-            flash.flashAdd('pyramid.style.remove_failed', 'danger');
+            flash.flashAdd(Translator.trans('pyramid.style.remove_failed', 'danger'));
         })
     }
 
