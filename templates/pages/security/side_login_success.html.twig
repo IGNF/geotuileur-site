@@ -1,0 +1,45 @@
+{% trans_default_domain "PlageWebClient" %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Connexion réussie' }}{% endblock %}
+
+{% set hasBreadcrumb = 0 %}
+
+{% set pageTitle = 'Connexion réussie' %}
+
+{% set titleLeadContent = 'Vous êtes bien connecté' %}
+
+{% block customheaderNav %}
+    {% include "components/_home_header.html.twig"%}
+{% endblock %}
+
+{% block body %}
+    {% apply spaceless %}
+
+    <div class="container-content text-center">
+        <p>Si cette page ne ferme pas automatiquement, vous pouvez la fermer en cliquant sur le bouton fermer</p>
+        
+        <h1 id="spinner">
+            <i class="fas fa-spinner fa-spin mb-4 text-secondary"></i>
+        </h1>
+
+        <button id="btn-close" class="btn btn--plain btn--primary btn-active-effect" onclick="windowClose();">
+            Fermer
+        </button>
+    </div>
+
+    <script language="javascript">
+        function windowClose() {
+            window.close();
+        }
+        (function(){
+            setTimeout(() => {
+                windowClose();
+                document.getElementById('spinner').remove();
+            }, 3000)
+        })()
+    </script>
+
+    {% endapply %}
+{% endblock %}

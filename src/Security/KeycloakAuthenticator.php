@@ -5,6 +5,7 @@ namespace App\Security;
 use App\Exception\AppException;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
+use KnpU\OAuth2ClientBundle\Exception\InvalidStateException;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Psr\Log\LoggerInterface;
@@ -47,16 +48,25 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
         $this->logger = $logger;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         return new RedirectResponse($this->urlGenerator->generate(self::LOGIN_ROUTE));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function supports(Request $request): ?bool
     {
         return self::LOGIN_CHECK_ROUTE === $request->attributes->get('_route');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function authenticate(Request $request): Passport
     {
         /** @var KeycloakClient */
@@ -80,8 +90,15 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
         ]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        if ($request->getSession()->get('side_login', false)) {
+            return new RedirectResponse($this->urlGenerator->generate('plage_security_side_login_success', ['side_login' => true]));
+        }
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
@@ -89,35 +106,38 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
         return new RedirectResponse($this->urlGenerator->generate(self::SUCCESS_ROUTE));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         if ($exception instanceof CustomUserMessageAuthenticationException) {
             /** @var IdentityProviderException */
             $ex = $exception->getPrevious(); // récupérer l'exception IdentityProviderException capturée dans la méthode Authenticate
             $details = $ex->getResponseBody();
+        } else {
+            $ex = $exception;
+            $details = $exception->getMessageData();
+        }
 
-            if (array_key_exists('error', $details) && array_key_exists('error_description', $details)) {
-                if ('invalid_grant' == $details['error'] && 'Code not valid' == $details['error_description']) {
-                    throw new AppException("Votre authentification a échoué en raison d'une erreur interne", Response::HTTP_UNAUTHORIZED, $details, $ex);
-                }
-
-                if ('invalid_grant' == $details['error'] && 'Invalid user credentials' == $details['error_description']) {
-                    throw new AppException("Votre authentification a échoué : nom d'utilisateur et/ou mot de passe sont incorrects", Response::HTTP_UNAUTHORIZED, $details, $ex);
-                }
+        if (array_key_exists('error', $details) && array_key_exists('error_description', $details)) {
+            if ('invalid_grant' == $details['error'] && 'Code not valid' == $details['error_description']) {
+                throw new AppException("Votre authentification a échoué en raison d'une erreur interne", Response::HTTP_UNAUTHORIZED, $details, $ex);
             }
 
-            throw $ex;
+            if ('invalid_grant' == $details['error'] && 'Invalid user credentials' == $details['error_description']) {
+                throw new AppException("Votre authentification a échoué : nom d'utilisateur et/ou mot de passe sont incorrects", Response::HTTP_UNAUTHORIZED, $details, $ex);
+            }
         }
 
         // l'exception lancée dans KeycloakUserProvider::getToken
-        if ($exception instanceof TokenNotFoundException) {
+        if ($exception instanceof TokenNotFoundException || $exception->getPrevious() instanceof InvalidStateException) {
             throw new AppException('Votre authentification a échoué', Response::HTTP_UNAUTHORIZED);
         }
 
         $message = strtr($exception->getMessageKey(), $exception->getMessageData());
-
         $this->logger->debug(self::class, [$message, $exception]);
 
-        return new Response($message, Response::HTTP_FORBIDDEN);
+        throw new AppException($message, Response::HTTP_UNAUTHORIZED);
     }
 }

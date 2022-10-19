@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import ReactDOM from "react-dom"
+import { flashAdd } from "../components/flash-messages"
 import ActionsRequiredSection from "../components/react/ActionsRequiredSection"
 import InProgressSection from "../components/react/InProgressSection"
 import PublishedPyramidsSection from "../components/react/PublishedPyramidsSection"
@@ -16,13 +17,33 @@ const DatastoreDashboard = ({ datastoreId }) => {
 
     let refreshInterval = null;
 
-    const getDashboardData = () => {
+    const getDashboardData = async () => {
         if (!browserTabActive.current) { // passer parce que l'onglet du navigateur ou la fenêtre n'est pas active
             return;
         }
 
         if (onGoingRequest.current) { // passer parce qu'une requête est déjà en cours
             return;
+        }
+
+        try {
+            onGoingRequest.current = true;
+            const response = await axios.get(Routing.generate("plage_security_check_auth"))
+
+            if (!response?.data?.is_authenticated) {
+                flashAdd("Votre authentification a expirée, veuillez rafraîchir la page et vous reconnecter")
+
+                var confirmResult = confirm("Votre connexion a expirée. Voulez-vous vous reconnecter ?");
+                if (confirmResult == true) {
+                    const url = Routing.generate("plage_security_login", { 'side_login': true });
+                    window.open(url, '_blank');
+                }
+                return;
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            onGoingRequest.current = false;
         }
 
         let url = Routing.generate("plage_datastore_get_dashboard_data", {

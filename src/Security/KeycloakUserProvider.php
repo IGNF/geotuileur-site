@@ -4,12 +4,14 @@ namespace App\Security;
 
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
 use Stevenmaguire\OAuth2\Client\Provider\KeycloakResourceOwner;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AuthenticationExpiredException;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -75,8 +77,12 @@ class KeycloakUserProvider implements UserProviderInterface
         if (($accessToken->getExpires() - 30) < time()) {
             $this->logger->debug('Token expired [{id_token}]', ['id_token' => $accessToken->getValues()['id_token']]);
 
-            /** @var AccessToken */
-            $accessToken = $keycloakClient->refreshAccessToken($accessToken->getRefreshToken());
+            try {
+                /** @var AccessToken */
+                $accessToken = $keycloakClient->refreshAccessToken($accessToken->getRefreshToken());
+            } catch (IdentityProviderException $ex) {
+                throw new AuthenticationExpiredException('Votre authentication a expirée, veuillez vous reconnecter', Response::HTTP_UNAUTHORIZED, $ex);
+            }
 
             $this->logger->debug('Token refreshed [{id_token}]', ['id_token' => $accessToken->getValues()['id_token']]);
 
@@ -94,6 +100,8 @@ class KeycloakUserProvider implements UserProviderInterface
      * need to implement this method.
      *
      * @throws UserNotFoundException if the user is not found
+     *
+     * {@inheritDoc}
      */
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
