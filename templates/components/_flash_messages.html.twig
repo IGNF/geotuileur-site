@@ -1,32 +1,47 @@
+{% macro render_flash(type, content) %}
+    {% set is_html = false %}
+    {% set type = type|split('-') %}
+
+    {% if type|length == 2 and type[1] == 'html' %}
+        {% set is_html = true %}
+    {% endif %}
+
+    {% set type = type[0] %}
+
+    {% if type == 'error' %}
+        {% set flash_message_class = 'flash-message-danger' %}
+        {% set flash_icon = 'icons-alert' %}
+    {% elseif type == 'warning' %}
+        {% set flash_message_class = 'flash-message-warning' %}
+        {% set flash_icon = 'icons-status text-warning' %}
+    {% elseif type == 'notice' %}
+        {% set flash_message_class = 'flash-message-info' %}
+        {% set flash_icon = 'icons-status' %}
+    {% elseif type == 'success' %}
+        {% set flash_message_class = 'flash-message-success' %}
+        {% set flash_icon = 'icon-check-circle' %}
+    {% else %}
+        {% set flash_message_class = 'flash-message-danger' %}
+        {% set flash_icon = 'icons-alert' %}
+    {% endif %}
+    
+    <div class="flash-message {{ flash_message_class }}" role="alert">
+        <span class="flash-message-icon {{ flash_icon }}"></span>
+        {% if is_html %}
+            <div class="flash-message-content">{{ content|raw }}</div>
+        {% else %}
+            <div class="flash-message-content">{{ content }}</div>
+        {% endif %}
+        <button class="flash-message-close-btn" role="button" title="Fermer" aria-label="Fermer"><i class="icon-close"></i></button>
+    </div>
+{% endmacro %}
+
 {% block flashMessages %}
     <div id="flash-messages">
-        {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="flash-message flash-message-danger">
-                <span class="flash-message-icon icons-alert"></span>
-                <div class="flash-message-content">{{ flashMessage }}</div>
-                <button class="flash-message-close-btn"><i class="icon-close"></i></button>
-            </div>
-        {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('warning') %}
-            <div class="flash-message flash-message-warning">
-                <span class="flash-message-icon icons-status text-warning"></span>
-                <div class="flash-message-content">{{ flashMessage }}</div>
-                <button class="flash-message-close-btn"><i class="icon-close"></i></button>
-            </div>
-        {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-message flash-message-info">
-                <span class="flash-message-icon icons-status"></span>
-                <div class="flash-message-content">{{ flashMessage }}</div>
-                <button class="flash-message-close-btn"><i class="icon-close"></i></button>
-            </div>
-        {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="flash-message flash-message-success">
-                <span class="flash-message-icon icon-check-circle"></span>
-                <div class="flash-message-content">{{ flashMessage }}</div>
-                <button class="flash-message-close-btn"><i class="icon-close"></i></button>
-            </div>
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                {{ _self.render_flash(type, message) }}
+            {% endfor %}
         {% endfor %}
     </div>
 {% endblock %}
