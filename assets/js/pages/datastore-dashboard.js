@@ -104,7 +104,7 @@ const DatastoreDashboard = ({ datastoreId }) => {
         <>
             {
                 isLoading ? (
-                    <h1 className="text-center text-dark mt-5"><i className="fas fa-spinner fa-spin"></i></h1>
+                    <h1 className="text-center text-dark mt-5"><i className="icon-reinitialiser icons-spin"></i></h1>
                 ) : (
                     <>
                         <ActionsRequiredSection datastoreId={datastoreId} storedDataList={actionsRequired} />

@@ -25,8 +25,6 @@ require("./charte/app.js");
 // Surcharge style application
 require("../scss/main.scss");
 
-require("@fortawesome/fontawesome-free/js/all.js");
-
 require("ol/ol.css");
 require("geoportal-extensions-openlayers/dist/GpPluginOpenLayers.css");
 
