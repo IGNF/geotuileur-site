@@ -4,10 +4,13 @@ add: "Ajouter"
 information: "Information"
 mandatory_fields: "* Champs obligatoires"
 browse: "Parcourir"
+close: "Fermer"
 
 site:
     go_to_content: "Aller au contenu"
 
+    # le title de toutes les pages sauf accueil
+    # est de la forme : "Page - Géotuileur - Géoplateforme"
     title: "Géotuileur - Géoplateforme"
 
     header: "Géotuileur"
@@ -69,11 +72,15 @@ home:
     meta_desc: "Le Géotuileur vous permet de générer des flux de tuiles vectorielles à partir de données vecteur en toute autonomie. Grâce au Géotuileur, vous pouvez déposer une donnée géographique, créer un flux de tuiles vectorielles, appliquer le style de votre choix et diffuser ce flux personnalisé où vous voulez."
     breadcrumb: "Accueil"
     heading: "Transformez vos données géographiques en tuiles vectorielles simplement et diffusez-les n'importe où"
-    lead: ""
     start: "Commencer"
 
-login:
-    title: "Identifiez-vous"
+# La page de login est gérée par un IAM externe
+# Ces textes sont utilisez dans la page /login-success
+login_expired: "Votre connexion a expiré. Veuillez vous reconnecter pour continuer à utiliser cette page du Géotuileur<br/><a href='#' class='btn btn-sm btn-login btn--plain btn--primary' title='(nouvelle fenêtre)'>Reconnexion</a>"
+login_success:
+    title: "Connexion réussie"
+    lead: "Vous êtes bien connecté."
+    closing_notice: "Si cette page ne se ferme pas automatiquement, vous pouvez la fermer en cliquant sur le bouton fermer."
 
 user:
     me:

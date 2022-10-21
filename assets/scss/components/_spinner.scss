@@ -1,0 +1,19 @@
+//Spinnner fait pour fonctionner avec l'icône icon-reinitialiser
+.spinner {
+    color: $gray-600;
+    margin-bottom: 2rem;
+    font-size: 5rem;
+}
+
+.icons-spin::before {
+    animation: spin 2s linear infinite reverse;
+}
+
+@keyframes spin {
+    0% {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}

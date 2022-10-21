@@ -83,7 +83,7 @@ const DatastoreDashboard = ({ datastoreId }) => {
             } else {
                 if (!loginExpiredMsgShown.current) {
                     const url = Routing.generate("plage_security_login", { 'side_login': true });
-                    let flashEl = flash.flashAdd(`Votre connexion a expiré, veuillez vous <a href="#" class="btn-login">reconnecter</a>`, 'error', true)
+                    let flashEl = flash.flashAdd(Translator.trans('login_expired'), 'error', true);
 
                     flashEl.find(".btn-login").on('click', function () {
                         window.open(url, '_blank');

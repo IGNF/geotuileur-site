@@ -10,8 +10,6 @@
 
 {% set pageTitle = "home.heading" | trans %}
 
-{% set titleLeadContent = 'home.lead' | trans %}
-
 {% if app.user %}
     {% set titleBtn = {'target': path('plage_datastore_index'), 'text': 'home.start'|trans } %}
 {% else %}
