@@ -99,3 +99,15 @@
     content: '	\25CF'; // circle
     transform: scale(2) translate(-20%, -5%);
 }
+
+.icons-file::before {
+    content: '\1F5CB';
+}
+
+.icons-folder::before {
+    content: '\1F4C1';
+}
+
+.icons-lg {
+    font-size: 1.25em;
+}

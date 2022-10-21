@@ -56,14 +56,14 @@ const removeDiacritics = function(str) {
  */
 class Wait {
     constructor(options) {
-        options = $.extend({ id: 'body', iconClass: 'fas fa-spinner fa-spin fa-lg'}, options);
+        options = $.extend({ id: 'body', iconClass: 'icon-reinitialiser icons-spin icons-lg'}, options);
         let uuid = guid();
 
         let iconClass = options.iconClass;
         const template = `
             <div class="p-2" id=wait-${uuid}>
                 <div>
-                    <i class="${iconClass} mb-1"></i>
+                    <span class="${iconClass} mb-1"></span>
                 </div>
                 <h6 class="font-weight-bold"></h6>
             </div>`;

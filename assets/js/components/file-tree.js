@@ -13,14 +13,14 @@ function displayTree(tree) {
         if (item.type == "directory") {
             html += '<div class="row ml-1">';
             html += '<div class="col">';
-            html += `<strong><i class="fas fa-folder-open"></i> ${item.name}</strong>`;
+            html += `<strong><span class="icons-folder"></span> ${item.name}</strong>`;
             html += `${displayTree(item.children)}`;
             html += "</div>";
             html += "</div>";
         } else if (item.type == "file") {
             html += '<div class="row ml-1">';
             html += '<div class="col">';
-            html += `<i class="far fa-file"></i> ${item.name}`;
+            html += `<span class="icons-file"></span> ${item.name}`;
             html += "</div>";
             html += "</div>";
         } else {
