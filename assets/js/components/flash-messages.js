@@ -12,6 +12,9 @@ $(function () {
     });
 });
 
+/**
+ * @returns {JQuery<HTMLElement>}
+ */
 function flashAdd(message, type, isHtml = false, autohide = false) {
     let divClass = "flash-message";
     let iconClass = "icons-status";
@@ -66,6 +69,8 @@ function flashAdd(message, type, isHtml = false, autohide = false) {
             flash.remove()
         }, 10000);
     }
+
+    return flash;
 }
 
 module.exports = {

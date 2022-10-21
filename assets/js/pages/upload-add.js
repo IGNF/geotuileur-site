@@ -1,4 +1,6 @@
 const { fileUpload } = require("../components/file-upload");
+import flash from "../components/flash-messages";
+import axios from 'axios';
 
 $(function () {
     function onSend() {
@@ -33,4 +35,41 @@ $(function () {
     }
 
     fileUpload("upload_file", onSend, onDone, onFail);
+
+    /**
+     * AUTHENTIFICATION EXPIRATION
+     */
+    let onGoingRequest = false;
+    let loginExpiredMsgShown = false;
+
+    setInterval(async () => {
+        if (onGoingRequest) return;
+
+        onGoingRequest = true;
+        let response = null;
+
+        try {
+            response = await axios.get(Routing.generate("plage_security_check_auth"))
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            onGoingRequest = false;
+        }
+
+        if (!response?.data?.is_authenticated) {
+            if (!loginExpiredMsgShown) {
+                const url = Routing.generate("plage_security_login", { 'side_login': true });
+                let flashEl = flash.flashAdd(`Votre connexion a expiré, veuillez vous <a href="#" class="btn-login">reconnecter</a>`, 'error', true)
+
+                flashEl.find(".btn-login").on('click', function () {
+                    window.open(url, '_blank');
+                    flashEl.remove();
+                    loginExpiredMsgShown = false;
+                });
+                loginExpiredMsgShown = true
+            }
+        }
+
+    }, 10000);
 });

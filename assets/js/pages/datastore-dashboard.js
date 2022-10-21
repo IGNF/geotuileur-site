@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import ReactDOM from "react-dom"
-import { flashAdd } from "../components/flash-messages"
+import flash from "../components/flash-messages"
 import ActionsRequiredSection from "../components/react/ActionsRequiredSection"
 import InProgressSection from "../components/react/InProgressSection"
 import PublishedPyramidsSection from "../components/react/PublishedPyramidsSection"
@@ -9,6 +9,7 @@ import PublishedPyramidsSection from "../components/react/PublishedPyramidsSecti
 const DatastoreDashboard = ({ datastoreId }) => {
     const browserTabActive = useRef(true);
     const onGoingRequest = useRef(false);
+    const loginExpiredMsgShown = useRef(false);
 
     const [actionsRequired, setActionsRequired] = useState([])
     const [inProgress, setInProgress] = useState([])
@@ -24,26 +25,6 @@ const DatastoreDashboard = ({ datastoreId }) => {
 
         if (onGoingRequest.current) { // passer parce qu'une requête est déjà en cours
             return;
-        }
-
-        try {
-            onGoingRequest.current = true;
-            const response = await axios.get(Routing.generate("plage_security_check_auth"))
-
-            if (!response?.data?.is_authenticated) {
-                flashAdd("Votre authentification a expirée, veuillez rafraîchir la page et vous reconnecter")
-
-                var confirmResult = confirm("Votre connexion a expirée. Voulez-vous vous reconnecter ?");
-                if (confirmResult == true) {
-                    const url = Routing.generate("plage_security_login", { 'side_login': true });
-                    window.open(url, '_blank');
-                }
-                return;
-            }
-        } catch (error) {
-            console.error(error);
-        } finally {
-            onGoingRequest.current = false;
         }
 
         let url = Routing.generate("plage_datastore_get_dashboard_data", {
@@ -78,9 +59,40 @@ const DatastoreDashboard = ({ datastoreId }) => {
             }
         });
 
-        refreshInterval = setInterval(() => {
-            // document.hasFocus()
-            getDashboardData()
+        refreshInterval = setInterval(async () => {
+            if (!browserTabActive.current) { // passer parce que l'onglet du navigateur ou la fenêtre n'est pas active
+                return;
+            }
+
+            if (onGoingRequest.current) { // passer parce qu'une requête est déjà en cours
+                return;
+            }
+
+            onGoingRequest.current = true;
+            let response = null;
+            try {
+                response = await axios.get(Routing.generate("plage_security_check_auth"))
+            } catch (error) {
+                console.error(error);
+            } finally {
+                onGoingRequest.current = false;
+            }
+
+            if (response?.data?.is_authenticated) {
+                getDashboardData()
+            } else {
+                if (!loginExpiredMsgShown.current) {
+                    const url = Routing.generate("plage_security_login", { 'side_login': true });
+                    let flashEl = flash.flashAdd(`Votre connexion a expiré, veuillez vous <a href="#" class="btn-login">reconnecter</a>`, 'error', true)
+
+                    flashEl.find(".btn-login").on('click', function () {
+                        window.open(url, '_blank');
+                        flashEl.remove();
+                        loginExpiredMsgShown.current = false;
+                    });
+                    loginExpiredMsgShown.current = true
+                }
+            }
         }, 5000)
 
         return () => {

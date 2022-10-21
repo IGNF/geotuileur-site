@@ -5,8 +5,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { TippeCanoeList } from '../components/react/Tippecanoe';
 import { PyramidComposition } from '../components/pyramid-add-page/pyramid-composition';
-
-const flash = require("../components/flash-messages");
+import axios from 'axios';
+import flash from "../components/flash-messages";
 
 let datas = $('#part-2').data();
 
@@ -14,7 +14,7 @@ let sampleInstance = null;
 let tippeCanoeList = null;
 let pyramidComposition = null;
 
-let $bbox = $('#generate_pyramid_bbox'); 
+let $bbox = $('#generate_pyramid_bbox');
 let numTables = datas.typeinfos.relations.length;
 let sampleParameters = datas.pyramidsample ? datas.pyramidsample.parameters : null;
 
@@ -69,6 +69,44 @@ function getLevels() {
 
 $(function () {
     /**
+     * AUTHENTIFICATION EXPIRATION
+     */
+    let onGoingRequest = false;
+    let loginExpiredMsgShown = false;
+
+    setInterval(async () => {
+        if (onGoingRequest) return;
+
+        onGoingRequest = true;
+        let response = null;
+
+        try {
+            response = await axios.get(Routing.generate("plage_security_check_auth"))
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            onGoingRequest = false;
+        }
+
+        if (!response?.data?.is_authenticated) {
+            if (!loginExpiredMsgShown) {
+                const url = Routing.generate("plage_security_login", { 'side_login': true });
+                let flashEl = flash.flashAdd(`Votre connexion a expiré, veuillez vous <a href="#" class="btn-login">reconnecter</a>`, 'error', true)
+
+                flashEl.find(".btn-login").on('click', function () {
+                    window.open(url, '_blank');
+                    flashEl.remove();
+                    loginExpiredMsgShown = false;
+                });
+                loginExpiredMsgShown = true
+            }
+        }
+
+    }, 10000);
+
+
+    /**
      * TABLES ET ATTRIBUTS
      */
     pyramidComposition = new PyramidComposition();
@@ -102,7 +140,7 @@ $(function () {
                 max: composition['bottom_level'],
                 topLevel: composition['top_level'],
                 bottomLevel: composition['bottom_level'],
-                defer: true  
+                defer: true
             });
             num++
         });
@@ -129,7 +167,7 @@ $(function () {
     ['part-1', 'part-2'].forEach(part => {
         let id = `#${part}`;
         $(`a[href="${id}"]`).on('click', (e) => {
-            $(`${id} [id*="zoom-levels"]`).zoomrange('refresh'); 
+            $(`${id} [id*="zoom-levels"]`).zoomrange('refresh');
         });
     });
 
@@ -138,7 +176,7 @@ $(function () {
         e.preventDefault();
 
         let num = $(e.currentTarget).data('num');
-        
+
         let infos = getTableInfos(num);
         $(`#table-valid${num}`).show();
         $(`span#table-infos${num}`).text(infos);
