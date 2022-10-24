@@ -69,7 +69,9 @@ const DatastoreDashboard = ({ datastoreId }) => {
             }
 
             onGoingRequest.current = true;
-            let response = null;
+            let response = {
+                data: { is_authenticated: true }
+            }
             try {
                 response = await axios.get(Routing.generate("plage_security_check_auth"))
             } catch (error) {
