@@ -14,7 +14,7 @@ check-todolist: ## List all the "TODO" left in files with line numbers
 .PHONY: check-rules
 check-rules: ## Check code rules in twig and php files using phpmd and phpstan
 	@echo "-- Checking coding rules using Twig Lint Command"
-	-php bin/console lint:twig templates/
+	-php bin/console lint:twig --show-deprecations templates/
 	@echo "-- Checking services autowiring config"
 	-php bin/console lint:container
 	@echo "-- Checking coding rules using phpmd (see @SuppressWarning to bypass control)"

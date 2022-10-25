@@ -23,6 +23,10 @@ framework:
     php_errors:
         log: true
 
+when@dev:
+    framework:
+        trusted_proxies: "127.0.0.1,REMOTE_ADDR"
+
 when@test:
     framework:
         test: true

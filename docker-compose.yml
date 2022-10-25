@@ -3,8 +3,10 @@ version: "3"
 volumes:
     db-data:
 
+
 networks:
-    symfony:
+    web_dev:
+        external: true
 
 services:
     backend:
@@ -21,10 +23,14 @@ services:
             - .:/var/www/html
         extra_hosts:
             - host.docker.internal:host-gateway
-        ports:
-            - "8080:80"
+        # ports:
+        #     - "8080:80"
         env_file:
             - .env.local
         networks:
-            - symfony
+            - web_dev
         restart: unless-stopped
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.geotuileur.rule=Host(`geotuileur.docker.localhost`)"
+            - "traefik.http.routers.geotuileur.entrypoints=websecure"
