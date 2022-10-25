@@ -78,11 +78,12 @@ $(function () {
         if (onGoingRequest) return;
 
         onGoingRequest = true;
-        let response = null;
+        let response = {
+            data: { is_authenticated: true }
+        }
 
         try {
             response = await axios.get(Routing.generate("plage_security_check_auth"))
-
         } catch (error) {
             console.error(error);
         } finally {

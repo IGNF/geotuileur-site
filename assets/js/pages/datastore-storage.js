@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { niceBytes, Wait } from '../utils'
-import { flashAdd } from '../components/flash-messages'
+import flash from '../components/flash-messages'
 
 let datastoreId = null;
 const wait = new Wait({ iconClass: "icon-timer" });
@@ -26,10 +26,10 @@ $(function () {
             axios.post(url)
                 .then(() => {
                     $(this).closest('.row').remove();
-                    flashAdd(`La pyramide ${$(this).data('pyramid-id')} a été dépubliée avec succès`, 'success')
+                    flash.flashAdd(`La pyramide ${$(this).data('pyramid-id')} a été dépubliée avec succès`, 'success')
                 }).catch(error => {
                     console.error(error.response);
-                    flashAdd(`La dépublication de la pyramide ${$(this).data('pyramid-id')} a échoué`, 'error')
+                    flash.flashAdd(`La dépublication de la pyramide ${$(this).data('pyramid-id')} a échoué`, 'error')
                 }).finally(() => {
                     wait.hide();
                 })
@@ -48,10 +48,10 @@ $(function () {
             axios.post(url)
                 .then(() => {
                     $(this).closest('.row').remove();
-                    flashAdd(`La pyramide ${$(this).data('pyramid-id')} a été supprimée avec succès`, 'success')
+                    flash.flashAdd(`La pyramide ${$(this).data('pyramid-id')} a été supprimée avec succès`, 'success')
                 }).catch(error => {
                     console.error(error.response);
-                    flashAdd(`La suppression de la pyramide ${$(this).data('pyramid-id')} a échoué`, 'error')
+                    flash.flashAdd(`La suppression de la pyramide ${$(this).data('pyramid-id')} a échoué`, 'error')
                 }).finally(() => {
                     wait.hide();
                 })
@@ -70,10 +70,10 @@ $(function () {
             axios.post(url)
                 .then(() => {
                     $(this).closest('.row').remove();
-                    flashAdd(`La donnée ${$(this).data('stored-data-id')} a été supprimée avec succès`, 'success')
+                    flash.flashAdd(`La donnée ${$(this).data('stored-data-id')} a été supprimée avec succès`, 'success')
                 }).catch(error => {
                     console.error(error.response);
-                    flashAdd(`La dépublication de la donnée ${$(this).data('stored-data-id')} a échoué`, 'error')
+                    flash.flashAdd(`La dépublication de la donnée ${$(this).data('stored-data-id')} a échoué`, 'error')
                 }).finally(() => {
                     wait.hide();
                 })
@@ -92,10 +92,10 @@ $(function () {
             axios.post(url)
                 .then(() => {
                     $(this).closest('.row').remove();
-                    flashAdd(`La donnée déposée ${$(this).data('upload-id')} a été supprimée avec succès`, 'success')
+                    flash.flashAdd(`La donnée déposée ${$(this).data('upload-id')} a été supprimée avec succès`, 'success')
                 }).catch(error => {
                     console.error(error.response);
-                    flashAdd(`La suppression de la donnée déposée ${$(this).data('upload-id')} a échoué`, 'error')
+                    flash.flashAdd(`La suppression de la donnée déposée ${$(this).data('upload-id')} a échoué`, 'error')
                 }).finally(() => {
                     wait.hide();
                 })
@@ -114,13 +114,52 @@ $(function () {
             axios.post(url)
                 .then(() => {
                     $(this).closest('.row').remove();
-                    flashAdd(`Le fichier annexe ${$(this).data('annexe-id')} a été supprimé avec succès`, 'success')
+                    flash.flashAdd(`Le fichier annexe ${$(this).data('annexe-id')} a été supprimé avec succès`, 'success')
                 }).catch(error => {
                     console.error(error.response);
-                    flashAdd(`La suppression du fichier annexe ${$(this).data('annexe-id')} a échoué`, 'error')
+                    flash.flashAdd(`La suppression du fichier annexe ${$(this).data('annexe-id')} a échoué`, 'error')
                 }).finally(() => {
                     wait.hide();
                 })
         });
     });
+
+    /**
+     * AUTHENTIFICATION EXPIRATION
+     */
+    let onGoingRequest = false;
+    let loginExpiredMsgShown = false;
+
+    setInterval(async () => {
+        if (onGoingRequest) return;
+
+        onGoingRequest = true;
+        let response = {
+            data: { is_authenticated: true }
+        }
+
+        try {
+            response = await axios.get(Routing.generate("plage_security_check_auth"))
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            onGoingRequest = false;
+        }
+
+        if (!response?.data?.is_authenticated) {
+            if (!loginExpiredMsgShown) {
+                const url = Routing.generate("plage_security_login", { 'side_login': true });
+                let flashEl = flash.flashAdd(Translator.trans('login_expired'), 'error', true);
+
+                flashEl.find(".btn-login").on('click', () => {
+                    window.open(url, '_blank');
+                    flashEl.remove();
+                    loginExpiredMsgShown = false;
+                });
+                loginExpiredMsgShown = true
+            }
+        }
+
+    }, 10000);
 });
