@@ -33,7 +33,6 @@ class UploadController extends AbstractController
     public function __construct(PlageApiService $plageApi, ParameterBagInterface $params)
     {
         $this->plageApi = $plageApi;
-
         $this->params = $params;
     }
 

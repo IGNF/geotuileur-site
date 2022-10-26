@@ -91,12 +91,12 @@ abstract class AbstractPlageApiService
 
             case 'size':
                 usort($dataList, function ($data1, $data2) use ($orderDesc) {
-                    try {
-                        $size1 = $data1['size'];
-                        $size2 = $data2['size'];
-                    } catch (\Throwable $th) {
+                    if (!array_key_exists('size', $data1) || !array_key_exists('size', $data2)) {
                         return 1;
                     }
+
+                    $size1 = $data1['size'];
+                    $size2 = $data2['size'];
 
                     if ($orderDesc) {
                         return $size1 < $size2 ? 1 : 0;
@@ -208,7 +208,7 @@ abstract class AbstractPlageApiService
 
         $this->logger->debug(self::class, [$method, $url, $body, $query, $response->getContent(false)]);
 
-        if ($this->updateApiStubMode && !$this->isTest()) {
+        if (true === $this->updateApiStubMode && false === $this->isTest()) {
             $this->updateApiStub($url, $response->getContent(false), $expectJson);
         }
 

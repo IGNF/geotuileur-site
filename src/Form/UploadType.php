@@ -52,7 +52,7 @@ class UploadType extends AbstractType
             'data' => 'EPSG:4326',
             'required' => true,
             'constraints' => [
-                new NotBlank(['message' => $this->translator->trans('upload.form.error_msg_srs_blank')]),
+                new NotBlank(['message' => $this->translator->trans('upload.form.error_msg_srs_blank', [], 'PlageWebClient')]),
             ],
             'label_attr' => [
                 'class' => 'control-label',
