@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types'
 import ContentLoader from "react-content-loader";
 import { StoredDataActionFactory } from "../stored-data-actions";
 
-const flash = require("../flash-messages");
+import flash from "../flash-messages";
 
 const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
     const isMounted = useRef(true);
@@ -156,7 +157,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                                 {
                                     isPyramidInitial || isPyramidUpdate || isPyramidSample ? ('') : (<a className="dropdown-item" href={Routing.generate("plage_pyramid_update_publish", { datastoreId: datastoreId, pyramidId: storedData?._id })}>{Translator.trans('datastore.dashboard.menus.update_published')}</a>)
                                 }
-                                
+
                                 {
                                     isPyramidInitial || isPyramidUpdate || isPyramidSample ? ('') : (<a className="dropdown-item" href="#" onClick={(e) => handleAction('unpublish', e)}>{Translator.trans('datastore.dashboard.menus.unpublish')}</a>)
                                 }
@@ -165,7 +166,7 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                     }
                     {
                         // On peut toujours voir le rapport
-                        (<a className="dropdown-item"href={Routing.generate("plage_stored_data_report", { datastoreId: datastoreId, storedDataId: storedData?._id })}>{Translator.trans('datastore.dashboard.menus.report')}</a>)
+                        (<a className="dropdown-item" href={Routing.generate("plage_stored_data_report", { datastoreId: datastoreId, storedDataId: storedData?._id })}>{Translator.trans('datastore.dashboard.menus.report')}</a>)
                     }
                     {
                         // On peut tout supprimer sauf si une pyramide sert toujours de base à une mise à jour
@@ -259,14 +260,14 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
                 uploadId: storedData?.input_upload_id,
             });
 
-            actionPossibleMain = <a href={url} className="btn btn--gray btn-sm w-100">Voir l'avancement</a>
+            actionPossibleMain = <a href={url} className="btn btn--gray btn-sm w-100">{Translator.trans('datastore.dashboard.menus.check_progress')}</a>
         }
         else if (storedData?.type == 'ROK4-PYRAMID-VECTOR') {
             let url = Routing.generate("plage_stored_data_report", {
                 datastoreId: datastoreId,
                 storedDataId: storedDataId
             });
-            actionPossibleMain = <a href={url} className="btn btn--gray btn-sm w-100">Voir l'avancement</a>
+            actionPossibleMain = <a href={url} className="btn btn--gray btn-sm w-100">{Translator.trans('datastore.dashboard.menus.check_progress')}</a>
         }
 
     } else if (storedData?.status == 'UNSTABLE') {
@@ -324,6 +325,12 @@ const StoredData = ({ datastoreId, storedDataId, autoRefresh }) => {
             }
         </div >
     )
+}
+
+StoredData.propTypes = {
+    datastoreId: PropTypes.string,
+    storedDataId: PropTypes.string,
+    autoRefresh: PropTypes.bool,
 }
 
 export default StoredData;

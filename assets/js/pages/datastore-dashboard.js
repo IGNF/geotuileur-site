@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import ReactDOM from "react-dom"
+import PropTypes from 'prop-types';
 import flash from "../components/flash-messages"
 import ActionsRequiredSection from "../components/react/ActionsRequiredSection"
 import InProgressSection from "../components/react/InProgressSection"
@@ -117,6 +118,10 @@ const DatastoreDashboard = ({ datastoreId }) => {
             }
         </>
     )
+}
+
+DatastoreDashboard.propTypes = {
+    datastoreId: PropTypes.string
 }
 
 $(function () {

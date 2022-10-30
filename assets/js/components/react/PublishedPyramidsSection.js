@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import StoredData from './StoredData';
 
 const PublishedPyramidsSection = ({ datastoreId, storedDataList }) => {
@@ -8,9 +9,9 @@ const PublishedPyramidsSection = ({ datastoreId, storedDataList }) => {
                 <div className="col">
                     <div className="row">
                         <h2 className="mt-2">Mes flux publiés
-                            { storedDataList?.length > 0 ?
-                            <small className="ml-2"><span>{storedDataList?.length}</span> flux</small>
-                            : "" }
+                            {storedDataList?.length > 0 ?
+                                <small className="ml-2"><span>{storedDataList?.length}</span> flux</small>
+                                : ""}
                         </h2>
                     </div>
 
@@ -21,7 +22,7 @@ const PublishedPyramidsSection = ({ datastoreId, storedDataList }) => {
                             ) : (
                                 <div className="row border border-darken-1 mb-1 p-1">
                                     <div className="col-md-6 my-auto d-flex align-items-center">
-                                        <i className="icons-tiles"></i>&nbsp;Vous n'avez publié aucun flux
+                                        <i className="icons-tiles"></i>&nbsp;{Translator.trans('datastore.dashboard.no_published_pyramids')}
                                     </div>
                                     <div className="col-md-2 offset-md-3 d-flex align-items-center">
                                         <a href={Routing.generate('plage_upload_add', { datastoreId: datastoreId })} className="btn btn--plain btn--primary btn-sm w-100">Lancez-vous</a>
@@ -33,6 +34,11 @@ const PublishedPyramidsSection = ({ datastoreId, storedDataList }) => {
             </div>
         </>
     )
+}
+
+PublishedPyramidsSection.propTypes = {
+    datastoreId: PropTypes.string,
+    storedDataList: PropTypes.array
 }
 
 export default PublishedPyramidsSection;

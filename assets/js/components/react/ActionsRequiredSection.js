@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import StoredData from './StoredData';
 
 const ActionsRequiredSection = ({ datastoreId, storedDataList }) => {
@@ -23,6 +24,11 @@ const ActionsRequiredSection = ({ datastoreId, storedDataList }) => {
             }
         </>
     )
+}
+
+ActionsRequiredSection.propTypes = {
+    datastoreId: PropTypes.string,
+    storedDataList: PropTypes.array,
 }
 
 export default ActionsRequiredSection

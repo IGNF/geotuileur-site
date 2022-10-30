@@ -1,6 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+import flash from "./../../components/flash-messages"
 
-export default class StylesList extends React.Component {
+class StylesList extends React.Component {
     constructor(props) {
         super(props);
 
@@ -154,3 +156,14 @@ export default class StylesList extends React.Component {
         );
     }
 }
+
+StylesList.propTypes = {
+    datastoreId: PropTypes.string,
+    pyramidId: PropTypes.string,
+    styles: PropTypes.array,
+    defaultStyle: PropTypes.object,
+    onChange: PropTypes.func,
+    wait: PropTypes.object,
+}
+
+export default StylesList

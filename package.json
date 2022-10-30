@@ -29,7 +29,6 @@
         "popper.js": "^1.16.1",
         "postcss-loader": "^5.1.0",
         "proj4": "^2.7.4",
-        "prop-types": "^15.7.2",
         "react": "^17.0.2",
         "react-content-loader": "^6.0.3",
         "react-dom": "^17.0.2",
@@ -37,14 +36,22 @@
         "webpack-notifier": "^1.6.0"
     },
     "devDependencies": {
+        "@babel/eslint-parser": "^7.19.1",
         "core-js": "^3.9.1",
         "cypress": "^10.7.0",
+        "eslint": "^8.26.0",
+        "eslint-plugin-react": "^7.31.10",
+        "eslint-watch": "^8.0.0",
+        "eslint-webpack-plugin": "^3.2.0",
+        "prop-types": "^15.8.1",
         "regenerator-runtime": "^0.13.2"
     },
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "build": "encore production --progress",
+        "lint": "eslint assets/js",
+        "lint:watch": "esw assets/js --watch"
     }
 }

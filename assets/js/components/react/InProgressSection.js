@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import StoredData from './StoredData';
 
 const InProgressSection = ({ datastoreId, storedDataList }) => {
@@ -23,6 +24,11 @@ const InProgressSection = ({ datastoreId, storedDataList }) => {
             }
         </>
     )
+}
+
+InProgressSection.propTypes = {
+    datastoreId: PropTypes.string,
+    storedDataList: PropTypes.array
 }
 
 export default InProgressSection;

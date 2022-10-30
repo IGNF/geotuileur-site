@@ -115,7 +115,9 @@ datastore:
             unpublish: "Dépublier"
             report: "Voir le rapport"
             remove: "Supprimer"
+            check_progress: Voir l'avancement
         back_to_index: "Revenir à la liste de mes espaces de travail"
+        no_published_pyramids: Vous n'avez publié aucun flux
 
     storage:
         title: "Gérer l'espace de %name%"
@@ -123,19 +125,16 @@ datastore:
             le volume de vos données et votre situation par rapport aux différents \
             quotas qui vous sont alloués."
         POSTGRESQL_storage: "Données intégrées en base"
-        POSTGRESQL_storage_details:
-            "Il s'agit de l'espace occupé par des données \
+        POSTGRESQL_storage_details: "Il s'agit de l'espace occupé par des données \
             sur les serveurs PostgreSQL de votre espace de travail. Il s'agit de données \
             intermédiaires qui ne sont pas directement visibles de vos utilisateurs."
         FILESYSTEM_storage: "Données intégrées sous forme de fichiers"
         FILESYSTEM_storage_details: "Cet espace est utilisé par le Géotuileur pour le stockage des pyramides de tuiles vectorielles."
         S3_storage: "Stockage de masse"
-        S3_storage_details:
-            "Cet espace est utilisé par le Géotuileur pour le stockage des pyramides de \
+        S3_storage_details: "Cet espace est utilisé par le Géotuileur pour le stockage des pyramides de \
             tuiles vectorielles. Il est plus performant que le stockage sous forme de fichiers."
         uploads_storage: "Données déposées"
-        uploads_storage_details:
-            "Il s'agit de l'espace occupé par les fichiers de \
+        uploads_storage_details: "Il s'agit de l'espace occupé par les fichiers de \
             données bruts que vous avez téléversés (fichiers csv, geopackage...). \
             Ces fichiers sont normalement supprimés dès l'intégration en base réussie \
             de vos données. Il est possible qu'il reste des traces de fichiers dans \
