@@ -24,124 +24,137 @@
             </p>
 
             {% for data_storage in datastore.storages.data %}
-                <h2>{{ ('datastore.storage.' ~ data_storage.type ~ '_storage') | trans}}</h2>
-                <span class="nice-bytes hidden">{{ data_storage.use }}</span> / <span class="nice-bytes hidden">{{ data_storage.quota }}</span>
-                {{ storage_use.progress_bar(data_storage.use, data_storage.quota)}}
-                <p>{{ ('datastore.storage.' ~ data_storage.type ~ '_storage_details') | trans}}</p>
+                <div class="storage-container" data-storage-type="stored_data_{{ data_storage.type }}">
+                    <h2>{{ ('datastore.storage.' ~ data_storage.type ~ '_storage') | trans}}</h2>
+                    <span class="storage-use nice-bytes hidden">{{ data_storage.use }}</span> / <span class="storage-quota nice-bytes hidden">{{ data_storage.quota }}</span>
+                    {{ storage_use.progress_bar(data_storage.use, data_storage.quota)}}
+                    <p>{{ ('datastore.storage.' ~ data_storage.type ~ '_storage_details') | trans}}</p>
 
-                {% if data_storage.type == 'FILESYSTEM' %}
-                    {% set stored_data_list = stored_data_filesystem %}
-                {% elseif data_storage.type == 'POSTGRESQL' %}
-                    {% set stored_data_list = stored_data_postgres %}
-                {% elseif data_storage.type == 'S3' %}
-                    {% set stored_data_list = stored_data_s3 %}
-                {% endif %}
+                    {% if data_storage.type == 'FILESYSTEM' %}
+                        {% set stored_data_list = stored_data_filesystem %}
+                    {% elseif data_storage.type == 'POSTGRESQL' %}
+                        {% set stored_data_list = stored_data_postgres %}
+                    {% elseif data_storage.type == 'S3' %}
+                        {% set stored_data_list = stored_data_s3 %}
+                    {% endif %}
 
-                {% for stored_data in stored_data_list %}
+                    {% for stored_data in stored_data_list %}
+                        <div class="row border p-1">
+                            <div class="col-md d-flex align-items-center">
+                                <span>{{ stored_data.name }}</span>
+                            </div>
+                            <div class="col-md-auto d-flex align-items-center">
+                                <span>{{ "stored_data.global.data_type.#{stored_data.type}"| trans }}</span>
+                            </div>
+                            <div class="col-md d-flex align-items-center justify-content-end fw-bold">
+                                {% if stored_data.size is defined %}
+                                    <span class="nice-bytes hidden">{{ stored_data.size }}</span>
+                                {% else %}
+                                    taille inconnue
+                                {% endif %}
+                            </div>
+                            <div class="col-md d-flex align-items-center justify-content-end">
+                                {% set stored_data_storage_type = '' %}
+                                {% if stored_data.storage.type is defined %}
+                                    {% set stored_data_storage_type = stored_data.storage.type %}
+                                {% endif %}
+
+                                {% if stored_data.type == 'ROK4-PYRAMID-VECTOR' and stored_data.tags.tms_url is defined %}
+                                    <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish stored-data-section" data-pyramid-id={{ stored_data._id }}>Dépublier</a>
+                                    <a href="#" class="btn btn--plain btn--danger btn-sm btn-pyramid-delete-published" data-pyramid-id={{ stored_data._id }} data-storage-type="{{ stored_data_storage_type }}">Supprimer</a>
+
+                                {% else %}
+                                    <a href="#" class="btn btn--plain btn--danger btn-sm btn-stored-data-delete" data-stored-data-id={{ stored_data._id }} data-storage-type="{{ stored_data_storage_type }}">Supprimer</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div class="storage-container" data-storage-type="uploads">
+                <h2>{{ 'datastore.storage.uploads_storage' | trans}}</h2>
+                <span class="storage-use nice-bytes hidden">{{ datastore.storages.uploads.use }}</span> / <span class="storage-quota nice-bytes hidden">{{ datastore.storages.uploads.quota }}</span>
+                {{ storage_use.progress_bar(datastore.storages.uploads.use, datastore.storages.uploads.quota)}}
+                <p>{{ 'datastore.storage.uploads_storage_details' | trans}}</p>
+                {% for upload in uploads %}
                     <div class="row border p-1">
                         <div class="col-md d-flex align-items-center">
-                            <span>{{ stored_data.name }}</span>
+                            <span>{{ upload.name }}</span>
                         </div>
                         <div class="col-md-auto d-flex align-items-center">
-                            <span>{{ "stored_data.global.data_type.#{stored_data.type}"| trans }}</span>
+                            <span>{{ "upload.global.data_type.#{upload.type}"| trans }}</span>
                         </div>
                         <div class="col-md d-flex align-items-center justify-content-end fw-bold">
-                            {% if stored_data.size is defined %}
-                                <span class="nice-bytes hidden">{{ stored_data.size }}</span>
+                            {% if upload.size is defined %}
+                                <span class="nice-bytes hidden">{{ upload.size }}</span>
                             {% else %}
                                 taille inconnue
                             {% endif %}
                         </div>
                         <div class="col-md d-flex align-items-center justify-content-end">
-                            {% if stored_data.type == 'ROK4-PYRAMID-VECTOR' and stored_data.tags.tms_url is defined %}
-                                <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish" data-pyramid-id={{ stored_data._id }}>Dépublier</a>
-                                <a href="#" class="btn btn--plain btn--danger btn-sm btn-pyramid-delete-published" data-pyramid-id={{ stored_data._id }}>Supprimer</a>
-
-                            {% else %}
-                                <a href="#" class="btn btn--plain btn--danger btn-sm btn-stored-data-delete" data-stored-data-id={{ stored_data._id }}>Supprimer</a>
+                            {% if upload.tags.tms_url is defined %}
+                                <a href="#" class="btn btn--plain btn--primary btn-sm">Dépublier</a>
                             {% endif %}
+                            
+                            <a href="#" class="btn btn--plain btn--danger btn-sm btn-upload-delete" data-upload-id={{ upload._id }}>Supprimer</a>
                         </div>
                     </div>
                 {% endfor %}
-            {% endfor %}
+            </div>
 
-            <h2>{{ 'datastore.storage.uploads_storage' | trans}}</h2>
-            <span class="nice-bytes hidden">{{ datastore.storages.uploads.use }}</span> / <span class="nice-bytes hidden">{{ datastore.storages.uploads.quota }}</span>
-            {{ storage_use.progress_bar(datastore.storages.uploads.use, datastore.storages.uploads.quota)}}
-            <p>{{ 'datastore.storage.uploads_storage_details' | trans}}</p>
-            {% for upload in uploads %}
-                <div class="row border p-1">
-                    <div class="col-md d-flex align-items-center">
-                        <span>{{ upload.name }}</span>
-                    </div>
-                    <div class="col-md-auto d-flex align-items-center">
-                        <span>{{ "upload.global.data_type.#{upload.type}"| trans }}</span>
-                    </div>
-                    <div class="col-md d-flex align-items-center justify-content-end fw-bold">
-                        {% if upload.size is defined %}
-                            <span class="nice-bytes hidden">{{ upload.size }}</span>
-                        {% else %}
-                            taille inconnue
-                        {% endif %}
-                    </div>
-                    <div class="col-md d-flex align-items-center justify-content-end">
-                        {% if upload.tags.tms_url is defined %}
-                            <a href="#" class="btn btn--plain btn--primary btn-sm">Dépublier</a>
-                        {% endif %}
-                        
-                        <a href="#" class="btn btn--plain btn--danger btn-sm btn-upload-delete" data-upload-id={{ upload._id }}>Supprimer</a>
-                    </div>
-                </div>
-            {% endfor %}
+            <div class="storage-container" data-storage-type="annexes">
+                <h2>{{ 'datastore.storage.annexes_storage' | trans}}</h2>
+                <span class="storage-use nice-bytes hidden">{{ datastore.storages.annexes.use }}</span> / <span class="storage-quota nice-bytes hidden">{{ datastore.storages.annexes.quota }}</span>
+                {{ storage_use.progress_bar(datastore.storages.annexes.use, datastore.storages.annexes.quota)}}
+                <p>{{ 'datastore.storage.annexes_storage_details' | trans}}</p>
 
-            <h2>{{ 'datastore.storage.annexes_storage' | trans}}</h2>
-            <span class="nice-bytes hidden">{{ datastore.storages.annexes.use }}</span> / <span class="nice-bytes hidden">{{ datastore.storages.annexes.quota }}</span>
-            {{ storage_use.progress_bar(datastore.storages.annexes.use, datastore.storages.annexes.quota)}}
-            <p>{{ 'datastore.storage.annexes_storage_details' | trans}}</p>
-
-            {% for annexe in annexes %}
-                <div class="row border p-1">
-                    <div class="col-md d-flex align-items-center">
-                        <span>{{ annexe.paths[0] }}</span>
-                    </div>
-                    <div class="col-md d-flex align-items-center justify-content-end fw-bold">
-                        {% if annexe.size is defined %}
-                            <span class="nice-bytes hidden">{{ annexe.size }}</span>
-                        {% else %}
-                            taille inconnue
-                        {% endif %}
-                    </div>
-                    <div class="col-md d-flex align-items-center justify-content-end">
-                        <a href="#" class="btn btn--plain btn--danger btn-sm btn-annexe-delete" data-annexe-id={{ annexe._id }}>Supprimer</a>
-                    </div>
-                </div>
-            {% endfor %}
-
-            <h2>{{ 'datastore.storage.endpoints' | trans}}</h2>
-            {% for endpoint in datastore.endpoints %}
-                {{ endpoint.use }} / {{ endpoint.quota }} {{ endpoint.endpoint.type }}
-                {{ storage_use.progress_bar(endpoint.use, endpoint.quota)}}
-            {% endfor %}
-            <p>{{ 'datastore.storage.endpoints_details' | trans}}</p>
-
-            {% for offering in offerings %}
-                <div class="row border p-1">
-                    <div class="col-md d-flex align-items-center">
-                        <span>{{ offering.layer_name }}</span>
-                    </div>
-
-                    {% if offering.configuration is defined %}
-                        <div class="col-md d-flex align-items-center justify-content-end">
-                            <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish" data-pyramid-id={{ offering.configuration.type_infos.used_data[0].stored_data }}>Dépublier</a>
+                {% for annexe in annexes %}
+                    <div class="row border p-1">
+                        <div class="col-md-6 d-flex align-items-center">
+                            <span>{{ annexe.paths[0] }}</span>
                         </div>
-                    {% else %}
-                        <div class="col-md d-flex align-items-center justify-content-end">
-                            <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish disabled">Dépublier</a>
+                        <div class="col-md d-flex align-items-center justify-content-end fw-bold">
+                            {% if annexe.size is defined %}
+                                <span class="nice-bytes hidden">{{ annexe.size }}</span>
+                            {% else %}
+                                taille inconnue
+                            {% endif %}
                         </div>
-                    {% endif %}
-                </div>                    
-                
-            {% endfor %}
+                        <div class="col-md d-flex align-items-center justify-content-end">
+                            <a href="#" class="btn btn--plain btn--danger btn-sm btn-annexe-delete" data-annexe-id={{ annexe._id }}>Supprimer</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="storage-container" data-storage-type="offerings">
+                <h2>{{ 'datastore.storage.endpoints' | trans}}</h2>
+                {% for endpoint in datastore.endpoints %}
+                    <span class="storage-use">{{ endpoint.use }}</span> / <span class="storage-quota">{{ endpoint.quota }}</span> {{ endpoint.endpoint.type }}
+                    {{ storage_use.progress_bar(endpoint.use, endpoint.quota)}}
+                {% endfor %}
+                <p>{{ 'datastore.storage.endpoints_details' | trans}}</p>
+
+                {% for offering in offerings %}
+                    <div class="row border p-1">
+                        <div class="col-md d-flex align-items-center">
+                            <span>{{ offering.layer_name }}</span>
+                        </div>
+
+                        {% if offering.configuration is defined %}
+                            <div class="col-md d-flex align-items-center justify-content-end">
+                                <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish" data-pyramid-id={{ offering.configuration.type_infos.used_data[0].stored_data }}>Dépublier</a>
+                            </div>
+                        {% else %}
+                            <div class="col-md d-flex align-items-center justify-content-end">
+                                <a href="#" class="btn btn--plain btn--primary btn-sm btn-pyramid-unpublish disabled">Dépublier</a>
+                            </div>
+                        {% endif %}
+                    </div>                    
+                    
+                {% endfor %}
+            </div>
         </div>
     </div>
     {% endapply %}

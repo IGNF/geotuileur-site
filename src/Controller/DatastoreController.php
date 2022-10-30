@@ -107,6 +107,16 @@ class DatastoreController extends AbstractController
     }
 
     /**
+     * @Route("/{datastoreId}/get-datastore-ajax", name="get_datastore_ajax", methods={"GET"}, options={"expose"=true})
+     */
+    public function getAjax($datastoreId): JsonResponse
+    {
+        $datastore = $this->plageApi->datastore->get($datastoreId);
+
+        return $this->json($datastore);
+    }
+
+    /**
      * @Route("/{datastoreId}/dashboard-data", name="get_dashboard_data", methods={"GET"}, options={"expose"=true})
      */
     public function getDashboardData($datastoreId): JsonResponse
@@ -221,7 +231,6 @@ class DatastoreController extends AbstractController
     public function manageStorage($datastoreId): Response
     {
         $datastore = $this->plageApi->datastore->get($datastoreId);
-        $community = $this->plageApi->community->get($datastore['community']['_id']);
 
         // les données stockées
         $storedDataList = $this->plageApi->storedData->getAll($datastoreId);
@@ -279,7 +288,6 @@ class DatastoreController extends AbstractController
 
         return $this->render('pages/datastore/storage.html.twig', [
             'datastore' => $datastore,
-            'community' => $community,
             'stored_data_postgres' => $this->plageApi->storedData->sort($storedDataPostgresList, 'size'),
             'stored_data_filesystem' => $this->plageApi->storedData->sort($storedDataFilesystemList, 'size'),
             'stored_data_s3' => $this->plageApi->storedData->sort($storedDataS3List, 'size'),

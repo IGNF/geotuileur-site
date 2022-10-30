@@ -25,8 +25,15 @@ $(function () {
             wait.show();
             axios.post(url)
                 .then(() => {
-                    $(this).closest('.row').remove();
+                    if ($(this).hasClass('stored-data-section')) {
+                        $(this).remove();
+                    } else {
+                        $(this).closest('.row').remove();
+                    }
+
                     flash.flashAdd(`La pyramide ${$(this).data('pyramid-id')} a été dépubliée avec succès`, 'success')
+
+                    updateStorageUsage('offerings')
                 }).catch(error => {
                     console.error(error.response);
                     flash.flashAdd(`La dépublication de la pyramide ${$(this).data('pyramid-id')} a échoué`, 'error')
@@ -49,6 +56,10 @@ $(function () {
                 .then(() => {
                     $(this).closest('.row').remove();
                     flash.flashAdd(`La pyramide ${$(this).data('pyramid-id')} a été supprimée avec succès`, 'success')
+
+                    const storedDataStorageType = $(this).data('storage-type')
+                    updateStorageUsage('stored_data', storedDataStorageType);
+                    updateStorageUsage('offerings')
                 }).catch(error => {
                     console.error(error.response);
                     flash.flashAdd(`La suppression de la pyramide ${$(this).data('pyramid-id')} a échoué`, 'error')
@@ -71,6 +82,9 @@ $(function () {
                 .then(() => {
                     $(this).closest('.row').remove();
                     flash.flashAdd(`La donnée ${$(this).data('stored-data-id')} a été supprimée avec succès`, 'success')
+
+                    const storedDataStorageType = $(this).data('storage-type')
+                    updateStorageUsage('stored_data', storedDataStorageType);
                 }).catch(error => {
                     console.error(error.response);
                     flash.flashAdd(`La dépublication de la donnée ${$(this).data('stored-data-id')} a échoué`, 'error')
@@ -93,6 +107,8 @@ $(function () {
                 .then(() => {
                     $(this).closest('.row').remove();
                     flash.flashAdd(`La donnée déposée ${$(this).data('upload-id')} a été supprimée avec succès`, 'success')
+
+                    updateStorageUsage('uploads');
                 }).catch(error => {
                     console.error(error.response);
                     flash.flashAdd(`La suppression de la donnée déposée ${$(this).data('upload-id')} a échoué`, 'error')
@@ -163,3 +179,115 @@ $(function () {
 
     }, 10000);
 });
+
+async function getDatastore() {
+    let url = Routing.generate('plage_datastore_get_datastore_ajax', { datastoreId: datastoreId })
+    let response = null;
+    try {
+        response = (await axios.get(url)).data
+    } catch (error) {
+        console.error(error);
+    } finally {
+        return response;
+    }
+}
+
+/**
+ * 
+ * @param {JQuery<HTMLElement>} dataContainerDiv 
+ * @param {Number|String} use 
+ * @param {Number|String} quota 
+ */
+function updateProgressBar(dataContainerDiv, use, quota) {
+    use = parseInt(use);
+    quota = parseInt(quota);
+    const nbUse = niceBytes(use)
+    const nbQuota = niceBytes(quota)
+
+    const progressBar = dataContainerDiv.find('.progress-bar')
+    const spanStorageUse = dataContainerDiv.find('.storage-use')
+    const spanStorageQuota = dataContainerDiv.find('.storage-quota')
+
+    if (spanStorageUse.hasClass('nice-bytes')) {
+        spanStorageUse.text(nbUse)
+        spanStorageQuota.text(nbQuota)
+    } else {
+        spanStorageUse.text(use)
+        spanStorageQuota.text(quota)
+    }
+
+    const progressPercentage = ((use / quota) * 100).toFixed(1)
+    const progressBarClass = 'progress-bar ' + (progressPercentage > 75 ? 'bg-danger' : 'bg-success')
+
+    progressBar.attr('class', progressBarClass)
+    progressBar.attr('style', `width: ${progressPercentage}%`)
+    progressBar.attr('aria-valuenow', use)
+    progressBar.attr('aria-valuemax', quota)
+    progressBar.text(`${progressPercentage}%`)
+}
+
+/**
+ * 
+ * @param {String} storageType
+  * @param {String} storedDataStorageType
+ * @returns 
+ */
+async function updateStorageUsage(storageType, storedDataStorageType = null) {
+    let use = null
+    let quota = null
+    let dataContainerDiv = null
+    const datastore = await getDatastore();
+
+    switch (storageType) {
+        case 'uploads':
+            dataContainerDiv = $('.storage-container[data-storage-type="uploads"]')
+            use = datastore?.storages?.uploads?.use
+            quota = datastore?.storages?.uploads?.quota
+            break;
+
+        case 'stored_data':
+            dataContainerDiv = $(`.storage-container[data-storage-type="stored_data_${storedDataStorageType}"]`)
+            const dataStorage = datastore?.storages?.data.find(d => d.type == storedDataStorageType)
+            use = dataStorage.use
+            quota = dataStorage.quota
+            break;
+
+        case "offerings":
+            dataContainerDiv = $('.storage-container[data-storage-type="offerings"]')
+            use = datastore.endpoints[0].use
+            quota = datastore.endpoints[0].quota
+            break;
+
+        case 'annexes':
+            dataContainerDiv = $('.storage-container[data-storage-type="annexes"]')
+            use = datastore?.storages?.annexes?.use
+            quota = datastore?.storages?.annexes?.quota
+            break;
+
+        default:
+            return;
+    }
+
+    updateProgressBar(dataContainerDiv, use, quota)
+    const hasLowStorage = datastoreHasLowStorage(datastore);
+
+    if (!hasLowStorage) {
+        $('.notifications-bar').remove()
+        $('.body-wrapper').removeClass('with-notifications-bar')
+    }
+}
+
+function datastoreHasLowStorage(datastore) {
+    const storages = [...datastore?.storages?.data, datastore?.storages?.uploads, datastore?.storages?.annexes, datastore?.endpoints[0]];
+
+    let hasLowStorage = false;
+
+    storages.forEach(storage => {
+        const usage = (storage.use / storage.quota) * 100
+        if (usage >= 90) {
+            hasLowStorage = true
+        }
+    });
+
+    return hasLowStorage
+}
