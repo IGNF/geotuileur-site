@@ -126,7 +126,7 @@ datastore:
         POSTGRESQL_storage_details:
             "Il s'agit de l'espace occupé par des données \
             sur les serveurs PostgreSQL de votre espace de travail. Il s'agit de données \
-            intérmédiaires qui ne sont pas directement visibles de vos utilisateurs."
+            intermédiaires qui ne sont pas directement visibles de vos utilisateurs."
         FILESYSTEM_storage: "Données intégrées sous forme de fichiers"
         FILESYSTEM_storage_details: "Cet espace est utilisé par le Géotuileur pour le stockage des pyramides de tuiles vectorielles."
         S3_storage: "Stockage de masse"
