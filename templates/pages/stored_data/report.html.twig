@@ -50,10 +50,11 @@
 {% block title %} {{ pageTitle ~ ' - ' ~ parent() }} {% endblock %}
 
 {% set checkTypes = constant('App\\Constants\\UploadCheckTypes::TYPES_LIST') %}
-{% set context = {datastore_id: datastore._id, stored_data_id: stored_data._id} %}
+{% set context = {datastore_id: datastore._id, datastore_name: datastore.name, stored_data_id: stored_data._id} %}
 
 {# Macro pour chacune des étapes du rapport #}
 {% macro check_or_process_details(type, execution, context) %}
+    <strong>{{ 'stored_data.report.datastore' | trans }}</strong>&nbsp;{{ context.datastore_id }} ({{ context.datastore_name }}) <br/>
     <strong>{{ 'stored_data.report.execution_id' | trans }}</strong>&nbsp;{{ execution._id }}<br/>
     {% if type == 'processing' %}
         <strong>{{ 'stored_data.report.output_data_id' | trans }}</strong>&nbsp;{{ execution.output.stored_data._id }}&nbsp;

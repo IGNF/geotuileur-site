@@ -203,6 +203,7 @@ stored_data:
         generation_help: "Vos tuiles vectorielles ont été générées avec succès à partir de vos données."
         generation_failure_help: "Les tuiles vectorielles n'ont pas pu être générées correctement. Vous trouverez ci-dessous des informations techniques concernant les processus exécutés et les problèmes rencontrés."
         stored_data_deleted_help: "Cette donnée a été supprimée. Vous ne pouvez plus l'utiliser mais cette page conserve la trace des actions qui l'ont concerné."
+        datastore: "Espace de travail :"
         step_upload: "Téléversement du fichier"
         details: "Détails techniques :"
         upload_name: "Nom :"
