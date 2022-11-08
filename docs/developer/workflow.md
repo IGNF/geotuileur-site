@@ -93,7 +93,7 @@ Cette phase facultative consiste à fabriquer des fichiers de styles applicables
 
 > NB : Cette étape est facultative car l'application d'un style sur un flux de tuiles vectorielles pour fabriquer une carte est réalisée par l'application cliente de l'utilisateur final (SIG ou application web par exemple). Le style peut être fourni complètement séparément du flux de données et n'a pas obligatoirement à être géré par le Géotuileur.
 
-L'interface permet de téléverser un fichier de style au format JSON Mapbox et le rendre disponible sur le web via le concept d'annexe (`annexe`) de l'API. C'est le Géotuileur qui décide du chemin d'accès public (`path`) à cette annexe.
+L'interface permet de téléverser un fichier de style au format JSON Mapbox (tout autre format est transformé à l'aide de [geostyler](./style.md)) et le rendre disponible sur le web via le concept d'annexe (`annexe`) de l'API. C'est le Géotuileur qui décide du chemin d'accès public (`path`) à cette annexe.
 
 Une fois une annexe ajoutée, la donnée stockée se voit ajouter l'identifiant de cette annexe dans son étiquette `styles` qui contient un objet de la forme :
 
