@@ -12,6 +12,10 @@ $(function () {
 
     var extent = $('#extent-map').data('extent');
 
+    if (!extent) {
+        return;
+    }
+
     var features = new GeoJSON({
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
