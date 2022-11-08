@@ -2,7 +2,7 @@
 
 ## Installation et configuration
 
-Le portail est construit sur le framework PHP Symfony. Il nécessite l'installation d'un moteur php >=7.1.3 avec les extensions `xsl` et `intl` ainsi que le logiciel Yarn.
+Le portail est construit sur le framework PHP Symfony. Il nécessite l'installation d'un moteur php >=7.4 avec les extensions `xsl` et `intl` ainsi que le logiciel Yarn.
 
 1. S'assurer que le proxy est correctement configuré (par exemple au moyen des variables d'environnement `http_proxy` et `https_proxy`)
 
