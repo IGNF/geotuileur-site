@@ -81,7 +81,7 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
             throw new CustomUserMessageAuthenticationException($ex->getMessage(), $ex->getResponseBody(), $ex->getCode(), $ex);
         }
 
-        $this->requestStack->getSession()->set('keycloak_token', $accessToken);
+        $this->requestStack->getSession()->set(KeycloakTokenManager::KEYCLOAK_TOKEN_SESSION_KEY, $accessToken);
 
         $userBadge = new UserBadge($keycloakUser->getEmail());
 

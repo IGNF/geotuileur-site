@@ -35,4 +35,17 @@ class UserApiService extends AbstractPlageApiService
 
         return $datastores;
     }
+
+    public function getMyCommunityRights($communityId)
+    {
+        $me = $this->getMe();
+
+        foreach ($me['communities_member'] as $communityRights) {
+            if ($communityRights['community']['_id'] == $communityId) {
+                return $communityRights;
+            }
+        }
+
+        return null;
+    }
 }

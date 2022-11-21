@@ -36,6 +36,7 @@ Encore
     .addEntry("file-tree", "./assets/js/components/file-tree.js")
     .addEntry("datastore-dashboard", "./assets/js/pages/datastore-dashboard.js")
     .addEntry("datastore-storage", "./assets/js/pages/datastore-storage.js")
+    .addEntry("datastore-view-members", "./assets/js/pages/datastore-view-members.js")
     .addEntry("upload-add", "./assets/js/pages/upload-add.js")
     .addEntry("upload-integration", "./assets/js/pages/upload-integration.js")
     .addEntry("pyramid-add", "./assets/js/pages/pyramid-add.js")

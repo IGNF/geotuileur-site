@@ -17,12 +17,14 @@
     <span id="datastore-id" data-datastore-id="{{ datastore._id }}"></span>
 
     <div class="container-content container-content--smaller mb-2">
-        <div class="row justify-content-center text-muted">
-            <p>
-                <i class="icon-user" aria-hidden="true"></i>&nbsp;
-                {{ "datastore.dashboard.number_of_members"|trans({'%count%': community_members_count}) }}
-            </p>
-        </div>
+        {% if community_members_count != -1 %}
+            <div class="row justify-content-center text-muted">
+                <p>
+                    <i class="icon-user" aria-hidden="true"></i>&nbsp;
+                    {{ "datastore.dashboard.number_of_members"|trans({'%count%': community_members_count}) }}
+                </p>
+            </div>            
+        {% endif %}
 
         <div class="row justify-content-center">
             <a href="{{ path('plage_upload_add', {datastoreId: datastore._id}) }}" class="btn btn--plain btn--primary mr-1">

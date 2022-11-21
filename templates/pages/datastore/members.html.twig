@@ -25,9 +25,31 @@
                         {% if app.user.email == member.user.email %}
                             <em class="text-success">{{ 'datastore.members.you'| trans }}</em>
                         {% endif %}
+
+                        {% if app.user.email != member.user.email and community.supervisor._id != member.user._id %}
+                            <btn class="btn btn--plain btn--danger btn-sm btn-active-effect remove-member" data-datastore-id="{{ datastore._id }}" data-user="{{ member.user|serialize(format = 'json') }}">Supprimer</btn>                            
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>
+
+            {% if user_community_rights is not null and user_community_rights.rights.community_rights %}
+                <h3 class="text-primary">Ajouter un utilisateur dans l'espace de travail</h3>
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        <div class="float-target-parent">
+                            {{ form_label(form.user_id) }}
+                            {{ form_widget(form.user_id) }}
+                        </div>
+                        {{ form_errors(form.user_id) }}
+                        <p class="description">
+                            <i class="icon-question"></i>&nbsp;
+                            {{ 'datastore.members.form_add_user_to_community.user_id_help'| trans({ "%url%": path('plage_users_me') })|raw }}
+                        </p>
+                    </div>
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            {% endif %}
         </div>
     </div>
 {% endapply %}
@@ -35,4 +57,5 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('datastore-view-members') }}
 {% endblock %}

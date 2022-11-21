@@ -10,23 +10,24 @@ use App\Service\PlageApi\AdministratorApiService;
 use App\Service\PlageApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/datastores", name="plage_datastore_")
  */
 class DatastoreController extends AbstractController
 {
-    /** @var PlageApiService */
-    private $plageApi;
-
-    /** @var ParameterBagInterface */
-    private $params;
-
-    /** @var AdministratorApiService */
-    private $adminApiService;
+    private PlageApiService $plageApi;
+    private ParameterBagInterface $params;
+    private AdministratorApiService $adminApiService;
 
     public function __construct(PlageApiService $plageApi, ParameterBagInterface $params, AdministratorApiService $adminApi)
     {
@@ -48,11 +49,19 @@ class DatastoreController extends AbstractController
         $myDatastores = array_values($this->plageApi->user->getMyDatastores());
 
         $datastores = [];
-        $datastoreBAS = ['_id' => -1, 'name' => 'Bac à sable'];
+        $datastoreBAS = [
+            '_id' => -1,
+            'name' => 'Bac à sable',
+            'technical_name' => 'bacasable-xxxxxxxxxxxxx',
+        ];
+        $regexBacasable = '/^bacasable-[a-zA-Z0-9]{13}$/';
+
         foreach ($myDatastores as $datastore) {
-            if ('Bac à sable' != $datastore['name']) {
+            preg_match($regexBacasable, $datastore['technical_name'], $matches);
+
+            if (0 == count($matches)) { // n'est pas un bacasable
                 $datastores[] = $datastore;
-            } else {
+            } else { // est un bacasable
                 $datastoreBAS = $datastore;
             }
         }
@@ -96,13 +105,20 @@ class DatastoreController extends AbstractController
         $user = $this->plageApi->user->getMe();
         $datastore = $this->plageApi->datastore->get($datastoreId);
         $community = $this->plageApi->community->get($datastore['community']['_id']);
-        $comMembers = $this->plageApi->community->getMembers($community['_id']);
+
+        $membersCount = -1;
+
+        $userCommunityRights = $this->plageApi->user->getMyCommunityRights($datastore['community']['_id']);
+        if ($userCommunityRights['rights']['community_rights']) {
+            $comMembers = $this->plageApi->community->getMembers($community['_id']);
+            $membersCount = count($comMembers);
+        }
 
         return $this->render('pages/datastore/dashboard.html.twig', [
             'datastore' => $datastore,
             'community' => $community,
             'user' => $user,
-            'community_members_count' => count($comMembers),
+            'community_members_count' => $membersCount,
         ]);
     }
 
@@ -206,21 +222,95 @@ class DatastoreController extends AbstractController
     }
 
     /**
-     * Liste des membres d'un espace de travail.
+     * Liste des membres d'un espace de travail ou ajouter un utilisateur dans l'espace de travail.
      *
-     * @Route("/{datastoreId}/members", name="view_members", methods={"GET"})
+     * @Route("/{datastoreId}/members", name="view_members", methods={"GET", "POST"})
      */
-    public function viewMembers($datastoreId): Response
+    public function viewMembers($datastoreId, Request $request, TranslatorInterface $translator): Response
     {
         $datastore = $this->plageApi->datastore->get($datastoreId);
+        $userCommunityRights = $this->plageApi->user->getMyCommunityRights($datastore['community']['_id']);
+
+        if (!$userCommunityRights['rights']['community_rights']) {
+            $this->addFlash('warning', "Vous n'avez la permission nécessaire pour consulter la liste des membres de cet espace de travail");
+
+            return $this->redirectToRoute('plage_datastore_view', ['datastoreId' => $datastoreId]);
+        }
+
         $community = $this->plageApi->community->get($datastore['community']['_id']);
         $comMembers = $this->plageApi->community->getMembers($community['_id']);
+
+        $form = $this->createFormBuilder()
+            ->add('user_id', TextType::class, [
+                'data' => '',
+                'translation_domain' => 'PlageWebClient',
+                'label' => 'datastore.members.form_add_user_to_community.user_id',
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(24, null, null, 'UTF-8', null, $translator->trans('datastore.members.form_add_user_to_community.user_id_constraint_length', [], 'PlageWebClient', $request->getLocale())),
+                ],
+            ])
+            ->add('submit', SubmitType::class, [
+                'translation_domain' => 'PlageWebClient',
+                'label' => 'datastore.members.form_add_user_to_community.submit',
+                'attr' => [
+                    'class' => 'btn btn--plain btn--primary btn-width--lg',
+                ],
+            ])
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $rights = [
+                'community_rights' => false,
+                'uploads_rights' => true,
+                'processings_rights' => true,
+                'stored_data_rights' => true,
+                'datastore_rights' => true,
+                'broadcast_rights' => true,
+            ];
+
+            $this->plageApi->community->addOrModifyUserRights($community['_id'], $data['user_id'], $rights);
+
+            return $this->redirect($request->getUri());
+        }
 
         return $this->render('pages/datastore/members.html.twig', [
             'datastore' => $datastore,
             'community' => $community,
             'members' => $comMembers,
+            'user_community_rights' => $userCommunityRights,
+            'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Supprimer les droits d'un utilisateur sur un espace de travail.
+     *
+     * @Route("/{datastoreId}/members/remove-member", name="members_remove", methods={"DELETE"}, options={"expose"=true})
+     */
+    public function removeMember($datastoreId, Request $request)
+    {
+        $userId = $request->query->get('user_id', null);
+
+        $regex = '/^[a-z0-9]{24}$/';
+        preg_match($regex, $userId, $matches);
+
+        if (0 == count($matches)) {
+            return new JsonResponse('Query param [user_id] must be a 24 character string', Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $datastore = $this->plageApi->datastore->get($datastoreId);
+            $this->plageApi->community->removeUserRights($datastore['community']['_id'], $userId);
+
+            return new JsonResponse(null, Response::HTTP_OK);
+        } catch (PlageApiException $ex) {
+            return new JsonResponse($ex->getMessage(), $ex->getStatusCode());
+        }
     }
 
     /**

@@ -150,6 +150,17 @@ datastore:
     members:
         title: "Membres de %name%"
         you: "(c'est vous)"
+        form_add_user_to_community:
+            user_id: Identifiant de l'utilisateur
+            user_id_constraint_length: L'identifiant de l'utilisateur doit être une chaîne de {{ limit }} caractères alphanumériques.
+            submit: Ajouter
+            user_id_help: Vous ne connaissez pas l'uuid de la personne que vous voulez ajouter ? Demandez-lui de consulter la page <a href="%url%" target="_blank">Mon Compte</a> pour le trouver et vous l'envoyer.
+        remove_user:
+            modal:
+                title: Révocation de l'accès à votre espace de travail
+                message: Êtes vous sûr de vouloir révoquer l'accès de %name% à votre espace de travail ?
+            success: L'accès de %name% à votre espace de travail a bien été révoqué
+            failure: La révocation de droits a échoué
 
 upload:
     view:

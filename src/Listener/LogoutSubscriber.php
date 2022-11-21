@@ -2,6 +2,7 @@
 
 namespace App\Listener;
 
+use App\Security\KeycloakTokenManager;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Stevenmaguire\OAuth2\Client\Provider\Keycloak;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,7 +29,7 @@ class LogoutSubscriber implements EventSubscriberInterface
     public function onLogout(LogoutEvent $event): void
     {
         $session = $event->getRequest()->getSession();
-        $session->remove('keycloak_token');
+        $session->remove(KeycloakTokenManager::KEYCLOAK_TOKEN_SESSION_KEY);
 
         /** @var Keycloak */
         $keycloak = $this->clientRegistry->getClient('keycloak')->getOAuth2Provider();

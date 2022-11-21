@@ -3,10 +3,9 @@
 namespace App\Service\PlageApi;
 
 use App\Exception\PlageApiException;
+use App\Security\KeycloakTokenManager;
 // use App\Security\KeycloakUserProvider;
-use App\Security\KeycloakUserProvider;
 use App\Service\PlageApiService;
-use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -23,35 +22,21 @@ abstract class AbstractPlageApiService
     public const CHECK_TYPES = ['asked', 'in_progress', 'passed', 'failed'];
     public const API_STUB_PATH_ROOT = __DIR__.'/../../../tests/api-stub/';
 
-    /** @var PlageApiService */
-    protected $plageApi;
-
-    /** @var HttpClientInterface */
-    protected $apiClient;
-
-    /** @var KeycloakUserProvider */
-    protected $userProvider;
-
-    /** @var ParameterBagInterface */
-    protected $parameters;
-
-    /** @var LoggerInterface */
-    protected $logger;
-
-    /** @var Filesystem */
-    protected $fs;
-
-    protected ClientRegistry $clientRegistry;
+    protected PlageApiService $plageApi;
+    protected HttpClientInterface $apiClient;
+    protected KeycloakTokenManager $keycloakTokenManager;
+    protected ParameterBagInterface $parameters;
+    protected LoggerInterface $logger;
+    protected Filesystem $fs;
 
     private $updateApiStubMode = false;
 
-    public function __construct(ParameterBagInterface $parameters, KeycloakUserProvider $keycloakUserProvider, ClientRegistry $clientRegistry, LoggerInterface $logger)
+    public function __construct(ParameterBagInterface $parameters, KeycloakTokenManager $keycloakTokenManager, LoggerInterface $logger)
     {
         $this->logger = $logger;
         $this->fs = new Filesystem();
-        $this->userProvider = $keycloakUserProvider;
+        $this->keycloakTokenManager = $keycloakTokenManager;
         $this->parameters = $parameters;
-        $this->clientRegistry = $clientRegistry;
 
         $this->apiClient = new NativeHttpClient([
             'base_uri' => $this->parameters->get('api_plage_url'),
@@ -319,7 +304,7 @@ abstract class AbstractPlageApiService
         }
 
         /** @var AccessToken */
-        $accessToken = $this->userProvider->getToken();
+        $accessToken = $this->keycloakTokenManager->getToken();
 
         $options['headers']['Authorization'] = "Bearer {$accessToken->getToken()}";
         $options['query'] = $query;
@@ -329,8 +314,6 @@ abstract class AbstractPlageApiService
 
     protected function isTest()
     {
-        $user = $this->userProvider->loadUser();
-
-        return 'test_user' == $user->getUserIdentifier();
+        return 'test' == $this->parameters->get('app_env');
     }
 }

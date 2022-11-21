@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Security\KeycloakTokenManager;
 use App\Security\User;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\Provider\KeycloakClient;
@@ -66,7 +67,7 @@ class SecurityController extends AbstractController
         }
 
         /** @var ?AccessToken */
-        $accessToken = $session->get('keycloak_token');
+        $accessToken = $session->get(KeycloakTokenManager::KEYCLOAK_TOKEN_SESSION_KEY);
         $authenticated = false;
 
         if (null == $accessToken) { // token not found in session

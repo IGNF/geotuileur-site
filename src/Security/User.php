@@ -6,14 +6,39 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
-    private $email;
-    private $username;
-    private $roles = [];
+    // keycloak user info
+    private string $email;
+    private string $username;
+    private array $roles = ['ROLE_USER'];
 
-    public function __construct(array $userinfo = [])
+    // api user info
+    private string $id;
+    private \DateTimeInterface $accountCreationDate;
+    private string $firstName;
+    private string $lastName;
+    private \DateTimeInterface $lastApiCallDate;
+    private array $communitiesMember = [];
+
+    public function __construct(array $keycloakUserinfo = [], $apiUser = null)
     {
-        $this->setEmail($userinfo['email']);
-        $this->setUsername($userinfo['preferred_username']);
+        $this->email = $keycloakUserinfo['email'];
+        $this->username = $keycloakUserinfo['preferred_username'];
+
+        if ($apiUser) {
+            if (array_key_exists('administrator', $apiUser) && $apiUser['administrator']) {
+                array_push($this->roles, 'ROLE_ADMIN');
+            }
+
+            $this->id = $apiUser['_id'];
+            $this->accountCreationDate = new \DateTime($apiUser['creation']);
+            $this->firstName = $apiUser['first_name'];
+            $this->lastName = $apiUser['last_name'];
+            $this->lastApiCallDate = new \DateTime($apiUser['last_call']);
+
+            foreach ($apiUser['communities_member'] as $community) {
+                $this->communitiesMember[$community['community']['_id']] = $community;
+            }
+        }
     }
 
     /**
@@ -31,13 +56,6 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     /**
      * Get the value of username.
      */
@@ -47,34 +65,11 @@ class User implements UserInterface
     }
 
     /**
-     * Set the value of username.
-     *
-     * @return self
-     */
-    public function setUsername(string $username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
+        return $this->roles;
     }
 
     /**
@@ -104,5 +99,37 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    public function getAccountCreationDate(): ?\DateTimeInterface
+    {
+        return $this->accountCreationDate;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function getLastApiCallDate(): ?\DateTimeInterface
+    {
+        return $this->lastApiCallDate;
+    }
+
+    public function getCommunitiesMember(): array
+    {
+        return $this->communitiesMember;
     }
 }
