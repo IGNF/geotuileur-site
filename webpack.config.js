@@ -121,4 +121,12 @@ Encore
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery();
 
-module.exports = Encore.getWebpackConfig();
+var config = Encore.getWebpackConfig();
+config.resolve = {
+    fallback: {
+        "fs": false,
+        "path": false,
+    }
+}
+
+module.exports = config;

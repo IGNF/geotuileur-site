@@ -21,6 +21,7 @@ import { applyStyle as mapboxApplyStyle } from "ol-mapbox-style";
 
 import MapboxStyleParser from 'geostyler-mapbox-parser';
 import OlStyleParser from 'geostyler-openlayers-parser';
+import { Style as GsStyle } from 'geostyler';
 
 const flash = require("./flash-messages");
 
@@ -82,15 +83,15 @@ export default class MapViewer extends Map {
         });
 
         this._streamUrl = streamUrl;
-        this._styleUrl  = styleUrl;
-        this._options   = options;
-        
+        this._styleUrl = styleUrl;
+        this._options = options;
+
         this._layerSwitcher = controls.item(controls.getLength() - 1);
-        
+
         /* metadatas du flux et couche */
         this._metadatas = null;
-        this._tmsLayer  = null;
-        
+        this._tmsLayer = null;
+
         // Ajout de la couche de fond
         this.addBackgroundLayer();
 
@@ -126,7 +127,7 @@ export default class MapViewer extends Map {
             const l = layers.find(layer => {
                 return layer['Identifier'] == layerName;
             });
-            if (! l) {
+            if (!l) {
                 throw Error();
             }
             let wmtsOptions = optionsFromCapabilities(capabilities, {
@@ -153,7 +154,7 @@ export default class MapViewer extends Map {
         this.getMetadatas(this._streamUrl)
             .then(metadatas => {
                 this._metadatas = metadatas;
-                
+
                 /* Modification de la view */
                 let zoom = this.getView().getZoom();
                 if (zoom < metadatas.minzoom || zoom > metadatas.maxzoom) {
@@ -191,7 +192,7 @@ export default class MapViewer extends Map {
                     attribution: metadatas.attribution
                 });
                 this.dispatchEvent({ type: 'tmslayeradded', metadatas: metadatas });
-                
+
                 let control = new GetFeatureInfo({
                     options: {
                         auto: true,
@@ -243,7 +244,7 @@ export default class MapViewer extends Map {
      * @param {string} styleUrl 
      */
     setStyle(styleUrl) {
-        if (! styleUrl) {
+        if (!styleUrl) {
             this._tmsLayer.setStyle(undefined);
             return;
         }
@@ -255,16 +256,33 @@ export default class MapViewer extends Map {
                 let mbp = new MapboxStyleParser();
                 mbp.readStyle(mapboxStyle).then(gStyle => {
                     let olp = new OlStyleParser();
-                    olp.writeStyle(gStyle.output).then(olStyle =>{
-                        this._tmsLayer.setStyle(olStyle.output);   
+                    olp.writeStyle(gStyle.output).then(olStyle => {
+                        this._tmsLayer.setStyle(olStyle.output);
                     }).catch(() => {
                         flash.flashAdd("La création du style Openlayers a échoué ", "warning");
-                    });   
+                    });
                 }).catch(() => {
-                    flash.flashAdd(Translator.trans('pyramid.style.parse_failed'), "warning");   
+                    flash.flashAdd(Translator.trans('pyramid.style.parse_failed'), "warning");
                 });
             }).catch(() => {
                 flash.flashAdd(`Le style n'a pas été trouvé. Le style par défaut a été appliqué`, "warning");
+            });
+    }
+
+    /**
+     * Visualisation du style modifié via Geostyler
+     * 
+     * @param {GsStyle} gsStyle 
+     */
+    setGeostylerStyle(gsStyle) {
+        let olp = new OlStyleParser()
+        olp
+            .writeStyle(gsStyle)
+            .then(olStyle => {
+                this._tmsLayer.setStyle(olStyle.output)
+            })
+            .catch(() => {
+                flash.flashAdd("L'application du style a échoué ", "warning");
             });
     }
 
@@ -279,12 +297,12 @@ export default class MapViewer extends Map {
         let response;
         try {
             response = await fetch(url);
-        } catch(error) {
+        } catch (error) {
             // Si bloqué par CORS policy
             throw Error(`Impossible d'accéder au flux ${url}. Existe-t-il ?`);
         }
 
-        if (! response.ok) {
+        if (!response.ok) {
             // Si réponse autre que 200
             throw Error(`Erreur ${response.status}: Impossible d'accéder au flux ${url}. Existe-t-il ?`);
         }
@@ -293,18 +311,18 @@ export default class MapViewer extends Map {
         let infos;
         try {
             infos = this.getInfosFromCapabilities(capabilities);
-        } catch(error) {
+        } catch (error) {
             throw Error(`Impossible de lire ${url}. Ce n'est pas un fichier XML valide.`);
         }
 
         try {
             response = await fetch(`${url}/metadata.json`);
-        } catch(error) {
+        } catch (error) {
             // Si bloqué par CORS policy
             throw Error(`Impossible d'accéder aux métadonnées ${url}/metadata.json`);
         }
 
-        if (! response.ok) {
+        if (!response.ok) {
             // Si réponse autre que 200
             throw Error(`Erreur ${response.status}: Impossible d'accéder aux métadonnées ${url}/metadata.json`);
         }
@@ -313,11 +331,11 @@ export default class MapViewer extends Map {
 
         try {
             metadatas = await response.json();
-        } catch(error) {
+        } catch (error) {
             throw Error(`Impossible de lire ${url}/metadata.json. Ce n'est pas un fichier de métadonnées valide.`);
         }
 
-        $.extend(metadatas, infos, { url: `${url}/{z}/{x}/{y}.pbf`});
+        $.extend(metadatas, infos, { url: `${url}/{z}/{x}/{y}.pbf` });
 
         // Transformation de l'extent et du centre
         metadatas.bounds = transformExtent(metadatas.bounds, 'EPSG:4326', 'EPSG:3857');
@@ -348,7 +366,7 @@ export default class MapViewer extends Map {
 
         // Mots clés et attribution
         let keywordNodes = tileNode.getElementsByTagName('KeywordList');
-        for (let k=0; k < keywordNodes.length; ++k) {
+        for (let k = 0; k < keywordNodes.length; ++k) {
             result.keywords.push(keywordNodes[k].textContent);
         }
 
@@ -372,15 +390,15 @@ export default class MapViewer extends Map {
 
         return result;
     }
-    
+
     synchronizeViewWith(otherMapViewer) {
         this.setView(otherMapViewer.getView());
     }
 
     getAttribution() {
-        if (! this._metadatas) return null;
-        if (! this._metadatas.attribution) return null;
-        
+        if (!this._metadatas) return null;
+        if (!this._metadatas.attribution) return null;
+
         if ('url' in this._metadatas.attribution) {
             return `<a href=${metadatas.attribution.url}>${this._metadatas.attribution.title}</a>`;
         } else return this._metadatas.attribution.title;

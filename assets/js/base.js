@@ -6,24 +6,24 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-const $ = require("jquery");
-global.$ = global.jQuery = $;
+import $ from "jquery";
+window.$ = window.jQuery = $;
 
-require("bootstrap");
+import 'bootstrap';
 
 // bootbox avec boutons en francais
-bootbox = require('bootbox');
-bootbox.setDefaults({ 'locale': 'fr' });
+import bootbox from 'bootbox'
+window.bootbox = bootbox.setDefaults({ 'locale': 'fr' });
 
 // jquery overlayScrollbars
-require("overlayscrollbars/js/jquery.overlayScrollbars.js");
+import "overlayscrollbars/js/jquery.overlayScrollbars.js";
 
 // Charte graphique IGN 2020
-require("../css/style-carto.css");
-require("./charte/app.js");
+import "../css/style-carto.css";
+import "./charte/app.js";
 
 // Surcharge style application
-require("../scss/main.scss");
+import "../scss/main.scss";
 
-require("ol/ol.css");
-require("geoportal-extensions-openlayers/dist/GpPluginOpenLayers.css");
+import "ol/ol.css";
+import "geoportal-extensions-openlayers/dist/GpPluginOpenLayers.css";

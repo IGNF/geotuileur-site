@@ -1,9 +1,11 @@
 {
     "dependencies": {
+        "@ant-design/icons": "^4.8.0",
         "@babel/preset-react": "^7.0.0",
         "@symfony/webpack-encore": "^4.0.0",
         "@types/proj4": "^2.5.0",
         "@yaireo/tagify": "^4.9.8",
+        "antd": "^5.0.1",
         "autoprefixer": "^10.4.13",
         "axios": "^0.21.2",
         "blueimp-file-upload": "^10.31.0",
@@ -14,6 +16,7 @@
         "dotenv": "^9.0.2",
         "file-loader": "^6.0.0",
         "geoportal-extensions-openlayers": "^3.2.17",
+        "geostyler": "^10.1.0",
         "geostyler-mapbox-parser": "^2.0.0",
         "geostyler-openlayers-parser": "^3.0.2",
         "geostyler-qgis-parser": "^1.0.0",
