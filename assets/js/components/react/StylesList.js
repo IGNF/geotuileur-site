@@ -160,8 +160,8 @@ class StylesList extends React.Component {
 StylesList.propTypes = {
     datastoreId: PropTypes.string,
     pyramidId: PropTypes.string,
-    styles: PropTypes.array,
-    defaultStyle: PropTypes.object,
+    styles: PropTypes.object,
+    defaultStyle: PropTypes.string,
     onChange: PropTypes.func,
     wait: PropTypes.object,
 }
