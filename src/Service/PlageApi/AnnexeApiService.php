@@ -26,11 +26,19 @@ class AnnexeApiService extends AbstractPlageApiService
         $filepath = $directory.'/'.$annexeFile->getClientOriginalName();
         $annexeFile->move($directory, $annexeFile->getClientOriginalName());
 
-        $response = $this->postFile("datastores/$datastoreId/annexes", $filepath, [
+        $response = $this->sendFile('POST', "datastores/$datastoreId/annexes", $filepath, [
             'published' => 'true',
             'paths' => $path,
         ]);
 
+        $this->fs->remove($filepath);
+
+        return $response;
+    }
+
+    public function modify($datastoreId, $annexeId, $filepath)
+    {
+        $response = $this->sendFile('PUT', "datastores/$datastoreId/annexes/$annexeId", $filepath);
         $this->fs->remove($filepath);
 
         return $response;

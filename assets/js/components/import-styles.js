@@ -8,6 +8,8 @@ import GeostylerUI from './react/GeostylerUI';
 import flash from '../components/flash-messages'
 import { Wait } from '../utils';
 import MapboxStyleParser from 'geostyler-mapbox-parser';
+import axios from 'axios';
+
 var wait = new Wait({ id: 'styles' });
 
 export class ImportStyles {
@@ -93,7 +95,7 @@ export class ImportStyles {
                                     console.error(mbStyle?.errors);
                                     flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
                                 } else {
-                                    this._ajaxCall(gsStyle.name, mbStyle.output)
+                                    this._ajaxAddStyle(gsStyle.name, mbStyle.output)
                                 }
                             })
                             .catch(reason => {
@@ -101,7 +103,23 @@ export class ImportStyles {
                                 flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
                             })
                     },
-                    replaceCurrentStyle: () => { }
+                    replaceCurrentStyle: (gsStyle) => {
+                        let mbp = new MapboxStyleParser()
+                        mbp
+                            .writeStyle(gsStyle)
+                            .then(mbStyle => {
+                                if (mbStyle?.errors?.length > 0) {
+                                    console.error(mbStyle?.errors);
+                                    flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                                } else {
+                                    this._ajaxReplaceStyle(style.id, mbStyle.output)
+                                }
+                            })
+                            .catch(reason => {
+                                console.error(reason);
+                                flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                            })
+                    }
                 }),
                 document.getElementById('geostyler-div')
             )
@@ -383,7 +401,7 @@ export class ImportStyles {
      * @param string name Nom du style
      * @param string style Style
      */
-    _ajaxCall(name, style) {
+    _ajaxAddStyle(name, style) {
         let self = this;
 
         let formData = new FormData();
@@ -408,6 +426,31 @@ export class ImportStyles {
     }
 
     /**
+     * Appel ajax pour le remplacement d'un style existant
+     * @param string name Nom du style
+     * @param string style Style
+     */
+    _ajaxReplaceStyle(annexeId, style) {
+        const url = Routing.generate("plage_annexe_modify_style_string_ajax", { datastoreId: this._datastoreId, annexeId: annexeId })
+        wait.show()
+
+        axios
+            .post(url, {}, {
+                params: { "style-string": style }
+            })
+            .then(() => {
+                flash.flashAdd("Le style a bien été enregistré", "success")
+            })
+            .catch(error => {
+                console.error(error)
+                flash.flashAdd(Translator.trans('pyramid.style.add_failed'), 'danger');
+            })
+            .finally(() => {
+                wait.hide();
+            })
+    }
+
+    /**
      * Appel ajax pour l'enregistrement du style JSON
      * @param string name 
      * @param File file 
@@ -423,7 +466,7 @@ export class ImportStyles {
                 }).forEach(layer => {
                     layer.source = this._metadatas.name;
                 });
-                this._ajaxCall(name, JSON.stringify(style));
+                this._ajaxAddStyle(name, JSON.stringify(style));
             }).catch(err => {
                 wait.hide();
                 flash.flashAdd(err.message);
@@ -444,7 +487,7 @@ export class ImportStyles {
 
         this._styleFileReader.readFiles(datas.name, datas.styles)
             .then(style => {
-                this._ajaxCall(datas.name, JSON.stringify(style));
+                this._ajaxAddStyle(datas.name, JSON.stringify(style));
             }).catch(err => {
                 wait.hide();
                 flash.flashAdd(err.message);

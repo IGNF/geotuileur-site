@@ -7,8 +7,6 @@ import {
     CardStyle,
     Style,
     locale as GsLocale,
-    ConfigProvider as GsConfigProvider,
-    GeoStylerLocale
 } from 'geostyler'
 import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer';
 
@@ -136,9 +134,7 @@ const GeostylerUI = ({ styleAnnexe, applyStyle, saveNewStyle, replaceCurrentStyl
     }
 
     const handleClickReplaceCurrrentStyle = () => {
-        // TODO
-        // mapboxStyleParser.writeStyle(style) 
-        console.warn("TODO implémenter l'enregistrement du style handleClickReplaceCurrrentStyle")
+        replaceCurrentStyle(style)
     }
 
     renderLegend()
@@ -155,11 +151,11 @@ const GeostylerUI = ({ styleAnnexe, applyStyle, saveNewStyle, replaceCurrentStyl
                 },
                 components: {
                     Breadcrumb: {
-                        colorLink: "#000"
+                        colorLink: "#000",
                     },
                     Card: {
                         margin: 0
-                    }
+                    },
                 }
             }}
             locale={appLocale}

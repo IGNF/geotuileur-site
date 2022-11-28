@@ -115,7 +115,7 @@ abstract class AbstractPlageApiService
         return intval(ceil(intval($total) / $limit));
     }
 
-    protected function postFile($url, $filepath, $query = [])
+    protected function sendFile($method, $url, $filepath, $query = [])
     {
         $formFields = [
             'filename' => DataPart::fromPath($filepath),
@@ -125,7 +125,7 @@ abstract class AbstractPlageApiService
         $prepHeaders = $formData->getPreparedHeaders()->toArray();
         $headers['Content-Type'] = substr($prepHeaders[0], 14);
 
-        return $this->request('POST', $url, $formData->bodyToIterable(), $query, $headers, true);
+        return $this->request($method, $url, $formData->bodyToIterable(), $query, $headers, true);
     }
 
     /**
