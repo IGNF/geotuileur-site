@@ -30,6 +30,7 @@ Ce plan liste les routes visibles de l'utilisateur (c'est-à-dire les pages rée
 
         - `/` : Tableau de bord : vue synthétique des actions à terminer, actions en cours et flux publiés dans l'espace de travail mentionné dans l'URL (l'espace de travail peut-être un espace de test ou un espace de travail de production sans distinction)
         - `/members` : Liste les utilisateurs membres d'un espace de travail
+            - Si l'utilisateur a les `community_rights`, alors il peut ajouter un utilisateur (connaissant son uuid) ou en supprimer un sauf le `supervisor` de la `community` ou lui-même.
         - `/manage-storage` : Consultation du détail de tous les éléments contenus dans les différents systèmes de stockages de l'espace de travail (fichiers, bases de données...).
         - `/uploads`
             - `/add` : Charger des données (le point de départ pour créer un flux)

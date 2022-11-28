@@ -113,7 +113,6 @@ Un flux publié et personnalisé dans le tableau de bord est donc une `stored_da
 * `vectordb_id` : identifiant de la base de données
 * `proc_pyr_create_id` : identifiant de l'exécution du traitement de génération de la pyramide
 * `tms_url` : URL publique du flux de données
-* `published` : true
 * `styles` : tableau associatif contenant les identifiants des annexes contenant les styles et leurs noms
 * `default_style` : identifiant de l'annexe du style par défaut
 
