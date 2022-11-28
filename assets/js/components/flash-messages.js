@@ -26,6 +26,7 @@ function flashAdd(message, type, isHtml = false, autohide = false) {
             break;
 
         case "notice":
+        case "info":
             divClass += " flash-message-info";
             iconClass = "icons-status";
             break;
@@ -36,6 +37,9 @@ function flashAdd(message, type, isHtml = false, autohide = false) {
             break;
 
         case "error":
+        case "danger":
+        case "failure":
+        case "fail":
         default:
             divClass += " flash-message-danger";
             iconClass = "icons-alert";

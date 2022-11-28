@@ -23,7 +23,7 @@ import MapboxStyleParser from 'geostyler-mapbox-parser';
 import OlStyleParser from 'geostyler-openlayers-parser';
 import { Style as GsStyle } from 'geostyler';
 
-const flash = require("./flash-messages");
+import flash from './flash-messages'
 
 /**
  * Extension de Map d'openlayers

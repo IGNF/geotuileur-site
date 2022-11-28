@@ -8,7 +8,9 @@
 {% block title %} {{ 'pyramid.style.title'| trans ~ ' - ' ~ parent() }} {% endblock %}
 
 {% block stylesheets %}
+    {{ encore_entry_link_tags("antd") }}
     {{ parent() }}
+    {{ encore_entry_link_tags('pyramid-style') }}
 {% endblock %}
 
 {% block customheaderNav %}
@@ -17,12 +19,12 @@
 
 {% block body %}
 	{% apply spaceless %}
-	<div class="container-content">
+	<div class="container-content container-fluid">
         {% set _pyramid = pyramid|json_encode()|raw %}
         {% set _styles = styles|json_encode()|raw %}
         <div class="style">
             {# La carte #}
-            <div id="map-target" data-datastoreid={{ datastore._id }} data-pyramid="{{ _pyramid }}" data-styles="{{ _styles }}" data-defstyle="{{ defaultStyle }}"></div>
+            <div id="map-target" class="map" data-datastoreid={{ datastore._id }} data-pyramid="{{ _pyramid }}" data-styles="{{ _styles }}" data-defstyle="{{ defaultStyle }}"></div>
 
             {# gestion des styles #}
             <div class="p-1" id="styles">

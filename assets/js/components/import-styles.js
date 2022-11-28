@@ -7,6 +7,7 @@ import GeostylerUI from './react/GeostylerUI';
 
 import flash from '../components/flash-messages'
 import { Wait } from '../utils';
+import MapboxStyleParser from 'geostyler-mapbox-parser';
 var wait = new Wait({ id: 'styles' });
 
 export class ImportStyles {
@@ -77,9 +78,33 @@ export class ImportStyles {
             this._stylesList = ReactDOM.render(re, document.getElementById('styles-wrapper'));
             this._setMetadatas(event.metadatas);
 
-            let _geostyler = ReactDOM.render(<GeostylerUI pyramidData={pyramidDatas} styleAnnexe={style} onStyleChange={(gsStyle) => {
-                this._viewer.setGeostylerStyle(gsStyle)
-            }} />, document.getElementById('geostyler-div'))
+            ReactDOM.render(
+                React.createElement(GeostylerUI, {
+                    styleAnnexe: style,
+                    applyStyle: (gsStyle) => {
+                        this._viewer.setGeostylerStyle(gsStyle)
+                    },
+                    saveNewStyle: (gsStyle) => {
+                        let mbp = new MapboxStyleParser()
+                        mbp
+                            .writeStyle(gsStyle)
+                            .then(mbStyle => {
+                                if (mbStyle?.errors?.length > 0) {
+                                    console.error(mbStyle?.errors);
+                                    flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                                } else {
+                                    this._ajaxCall(gsStyle.name, mbStyle.output)
+                                }
+                            })
+                            .catch(reason => {
+                                console.error(reason);
+                                flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                            })
+                    },
+                    replaceCurrentStyle: () => { }
+                }),
+                document.getElementById('geostyler-div')
+            )
 
             // Recuperation du nom des couches
             this._metadatas.vector_layers.forEach(layer => {
@@ -374,6 +399,7 @@ export class ImportStyles {
         }).done(style => {
             wait.hide();
             self._stylesList.add(style);
+            flash.flashAdd("Le style a bien été enregistré", "success")
         }).fail(() => {
             wait.hide();
             let message = Translator.trans('pyramid.style.add_failed');

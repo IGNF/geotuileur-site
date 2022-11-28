@@ -108,7 +108,7 @@ class StyleController extends AbstractController
      * )
      * Response JSON
      */
-    public function ajaxAddMapbox($datastoreId, $pyramidId, Request $request)
+    public function ajaxAddStyle($datastoreId, $pyramidId, Request $request)
     {
         try {
             $tagStyles = $this->plageApi->storedData->getTagStyles($datastoreId, $pyramidId);
@@ -157,7 +157,7 @@ class StyleController extends AbstractController
      * )
      * Response JSON
      */
-    public function ajaxChangeDefault($datastoreId, $pyramidId, $annexeId)
+    public function ajaxChangeDefaultStyle($datastoreId, $pyramidId, $annexeId)
     {
         try {
             // Mise a jour des tags de $pyramid
@@ -181,7 +181,7 @@ class StyleController extends AbstractController
      * )
      * Response JSON
      */
-    public function ajaxRemove($datastoreId, $pyramidId, $annexeId)
+    public function ajaxRemoveStyle($datastoreId, $pyramidId, $annexeId)
     {
         try {
             // On recupere les styles
