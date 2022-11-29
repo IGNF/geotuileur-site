@@ -5,7 +5,6 @@ namespace App\Listener;
 use Oneup\UploaderBundle\Event\PostUploadEvent;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
-use ZipArchive;
 
 /**
  * @author pprevautel
@@ -70,6 +69,7 @@ class UploadListener
     {
         $maxFiles = 10000;
         $maxSize = 1000000000; // 1 GB
+        $oneGiga = 1000000000;
         $maxRatio = 20; // initialement on avait testé 10% mais c'était trop restrictif (https://github.com/IGNF/geotuileur-site/issues/47)
 
         $filename = $file->getFilename();
@@ -109,7 +109,7 @@ class UploadListener
 
             $size = $stats['size'];
             if ($size > $maxSize) {
-                throw new \Exception("La taille du fichier $filename excède $maxSize");
+                throw new \Exception(sprintf("La taille du fichier $filename excède %s GB", $maxSize / $oneGiga));
             }
 
             if ($stats['comp_size']) {
@@ -153,7 +153,7 @@ class UploadListener
         $zipFile = join(DIRECTORY_SEPARATOR, [$folder, "$uuid.zip"]);
 
         $zip = new \ZipArchive();
-        $res = $zip->open($zipFile, ZipArchive::CREATE);
+        $res = $zip->open($zipFile, \ZipArchive::CREATE);
         if (true === $res) {
             $zip->addFile($outfile, "$originalName");
             $zip->close();
