@@ -93,6 +93,7 @@ user:
         creation: "Date d'inscription"
         id: "Identifiant technique"
         member: "Vous avez accès aux espaces de travail :"
+        supervisor: "Superviseur"
 
 datastore:
     index:
