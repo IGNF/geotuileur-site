@@ -15,6 +15,8 @@
         <div class="container-content">
             <div class="o-mea">
                 <div class="mea-container">
+
+                    {# Espaces de travail "standards" #}
                     {% for datastore in datastores %}
                         <div class="mea-item">
                             <a href="{{ path('plage_datastore_view', { datastoreId: datastore._id }) }}">
@@ -26,9 +28,11 @@
                             </a>
                         </div>
                     {% endfor %}
+
+                    {# Mon espace de test (Bac à sable) #}
                     {% set target = '' %}
-                    {% if datastoreBAS._id != -1 %}
-                        {% set target = path('plage_datastore_view', { datastoreId: datastoreBAS._id }) %}
+                    {% if mySandboxDatastore._id != -1 %}
+                        {% set target = path('plage_datastore_view', { datastoreId: mySandboxDatastore._id }) %}
                     {% elseif serviceAccount is not empty %}
                         {% set target = path('plage_datastore_create_sandbox') %}
                     {% endif %}
@@ -43,6 +47,19 @@
                             </a>
                         </div>
                     {% endif %}
+
+                    {# Les bacs à sable des autres #}
+                    {% for datastore in otherSandboxDatastores %}
+                        <div class="mea-item">
+                            <a href="{{ path('plage_datastore_view', { datastoreId: datastore._id }) }}">
+                                <img class="mea-img" src="{{ asset('build/img/datastore/bac-a-sable.svg') }}"/>
+                                <h3>{{ 'datastore.index.access_other_test' | trans({'%first_name%': datastore.community.supervisor.first_name, '%last_name%': datastore.community.supervisor.last_name}) }}</h3>
+                                <p>
+                                    <span class="btn btn--plain btn--accent">{{ 'datastore.index.access_action' | trans }}</span>
+                                </p>
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
