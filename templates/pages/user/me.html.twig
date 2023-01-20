@@ -23,11 +23,12 @@
 
             <p>{{ "user.me.member"| trans }}</p>
             <ul>
-            {% for member in user.communities_member %}
+            {% for community in communities %}
                 <li>
-                    <a href="{{ path('plage_datastore_view', { datastoreId: member.community.datastore }) }}">
-                        {{ member.community.name }}
+                    <a href="{{ path('plage_datastore_view', { datastoreId: community.datastore._id }) }}">
+                        {{ community.name }}
                     </a>
+                    ({{ "user.me.supervisor"| trans }}&nbsp;: {{ community.supervisor.first_name }} {{ community.supervisor.last_name }})
                 </li>
             {% endfor %}
             </ul>

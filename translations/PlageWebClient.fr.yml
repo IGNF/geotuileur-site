@@ -93,6 +93,7 @@ user:
         creation: "Date d'inscription"
         id: "Identifiant technique"
         member: "Vous avez accès aux espaces de travail :"
+        supervisor: "Superviseur"
 
 datastore:
     index:
@@ -101,6 +102,7 @@ datastore:
         access_action: "Accéder"
         access_test: "Testez le service sur l'espace de test"
         access_test_action: "Accéder"
+        access_other_test: "Accédez à l'espace de test de %first_name% %last_name%"
         contact: "Contactez nos services pour ajouter un espace de travail"
 
     dashboard:

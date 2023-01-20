@@ -37,7 +37,10 @@ class DatastoreController extends AbstractController
     }
 
     /**
-     * Liste des espaces de travail.
+     * Liste les espaces de travail accessibles de l'utilisateur en distinguant :
+     *  - les datastores "standards"
+     *  - l'espace de test (bac à sable) dont l'utilisateur est superviseur
+     *  - les autres espaces de test (bacs à sable d'autres utilisateurs)
      *
      * @Route("/", name="index", methods={"GET"})
      */
@@ -46,10 +49,14 @@ class DatastoreController extends AbstractController
         /** @var array */
         $serviceAccount = $this->params->get('service_account');
 
+        $user = $this->plageApi->user->getMe();
+        $currentUserId = $user['_id'];
+
         $myDatastores = array_values($this->plageApi->user->getMyDatastores());
 
         $datastores = [];
-        $datastoreBAS = [
+        $otherSandboxDatastores = [];
+        $mySandboxDatastore = [
             '_id' => -1,
             'name' => 'Bac à sable',
             'technical_name' => 'bacasable-xxxxxxxxxxxxx',
@@ -59,17 +66,25 @@ class DatastoreController extends AbstractController
         foreach ($myDatastores as $datastore) {
             preg_match($regexBacasable, $datastore['technical_name'], $matches);
 
-            if (0 == count($matches)) { // n'est pas un bacasable
+            if (0 == count($matches)) { // n'est pas un bac à sable
                 $datastores[] = $datastore;
-            } else { // est un bacasable
-                $datastoreBAS = $datastore;
+            } else { // est un bac à sable
+                $community = $this->plageApi->community->get($datastore['community']['_id']);
+                if ($community['supervisor']['_id'] == $currentUserId) { // est mon bac à sable
+                    $mySandboxDatastore = $datastore;
+                } else { // est le bac à sable de quelqu'un d'autre
+                    // ajoute les informations du superviseur
+                    $datastore['community']['supervisor'] = $community['supervisor'];
+                    $otherSandboxDatastores[] = $datastore;
+                }
             }
         }
 
         return $this->render('pages/datastore/index.html.twig', [
             'serviceAccount' => $serviceAccount['username'],
             'datastores' => $datastores,
-            'datastoreBAS' => $datastoreBAS,
+            'mySandboxDatastore' => $mySandboxDatastore,
+            'otherSandboxDatastores' => $otherSandboxDatastores,
         ]);
     }
 

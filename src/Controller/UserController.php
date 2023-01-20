@@ -26,8 +26,17 @@ class UserController extends AbstractController
      */
     public function me(): Response
     {
+        $me = $this->plageApi->user->getMe();
+
+        $communities = [];
+        $communitiesMember = $me['communities_member'];
+        foreach ($communitiesMember as $communityMember) {
+            $communities[] = $this->plageApi->community->get($communityMember['community']['_id']);
+        }
+
         return $this->render('pages/user/me.html.twig', [
-            'user' => $this->plageApi->user->getMe(),
+            'user' => $me,
+            'communities' => $communities
         ]);
     }
 }
