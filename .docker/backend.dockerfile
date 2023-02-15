@@ -68,11 +68,12 @@ RUN apt-get update -qq && \
     apt-get install -qy libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
 # Nodejs
-# https://github.com/nodejs/docker-node/blob/main/14/bullseye/Dockerfile
+# https://github.com/nodejs/docker-node/blob/main/16/bullseye/Dockerfile
 # https://stackoverflow.com/a/63108753
-COPY --from=node:14 /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node:14 /usr/local/bin/node /usr/local/bin/node
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+COPY --from=node:16 /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:16 /usr/local/bin/node /usr/local/bin/node
+RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+    && ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 RUN npm i -g yarn
 
 # APT Cache Cleanup
