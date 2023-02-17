@@ -3,36 +3,44 @@
 namespace App\Listener;
 
 use Oneup\UploaderBundle\Event\PostUploadEvent;
+use Oneup\UploaderBundle\Uploader\Response\ResponseInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @author pprevautel
  */
 class UploadListener
 {
+    private const VALID_FILE_EXTENSIONS = ['csv', 'gpkg'];
+
     public function onUpload(PostUploadEvent $event)
     {
+        /** @var UploadedFile */
         $uploadedFile = $event->getRequest()->files->get('upload')['file'];
         $originalName = $uploadedFile->getClientOriginalName();
 
+        /** @var ResponseInterface */
         $response = $event->getResponse();
         $file = $event->getFile();
 
         try {
             $filename = $file->getFilename();
-
             $extension = strtolower($file->getExtension());
-            if (!in_array($extension, ['zip', 'csv', 'gpkg'])) {
+
+            $validFileExtensionsAndZip = array_merge(self::VALID_FILE_EXTENSIONS, ['zip']);
+            if (!in_array($extension, $validFileExtensionsAndZip)) {
                 throw new \Exception("L'extension du fichier $filename n'est pas correcte");
             }
 
-            if (in_array($extension, ['csv', 'gpkg'])) {
-                if (!$file->getSize()) {
-                    throw new \Exception("Le fichier $filename ne doit pas être vide");
-                }
-            } else {
-                $this->checkArchive($file);
+            if ('zip' == $extension) {
+                $this->cleanArchive($file);
+                $this->validateArchive($file);
+            }
+
+            if (!$file->getSize()) {
+                throw new \Exception("Le fichier $filename ne doit pas être vide");
             }
 
             $srids = $this->getSrids($file);    // seulement les gpkg et archives gpkg
@@ -60,12 +68,54 @@ class UploadListener
     }
 
     /**
-     * @param \SplFileInfo $file
-     *                           On autorise pour l'instant que des fichiers zip ne contenant qu'un seul type de fichiers (gpk ou CSV)
+     * Supprime tous les fichiers qui ne sont pas un gpkg ou CSV du zip.
+     *
+     * @return void
      *
      * @throws \Exception
      */
-    private function checkArchive($file)
+    private function cleanArchive(\SplFileInfo $file)
+    {
+        $filename = $file->getFilename();
+
+        $zip = new \ZipArchive();
+        if (!$zip->open($file->getPathname())) {
+            throw new \Exception("L'ouverture de l'archive $filename a echoué");
+        }
+
+        $numDeletedFiles = 0;
+        $numFiles = $zip->numFiles;
+
+        for ($i = 0; $i < $zip->numFiles; ++$i) {
+            $filename = $zip->getNameIndex($i);
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            if (!in_array($extension, self::VALID_FILE_EXTENSIONS)) {
+                $zip->deleteName($filename);
+                ++$numDeletedFiles;
+            }
+        }
+        $zip->close();
+
+        if ($numDeletedFiles == $numFiles) {
+            throw new \Exception("L'archive ne contient aucun fichier acceptable");
+        }
+    }
+
+    /**
+     * Effectue des contrôles sur l'archive zip.
+     *
+     * Critères de validation :
+     * - doit contenir au moins un fichier gpkg ou CSV
+     * - ne peut contenir qu'un seul type de fichiers
+     * - ne peut contenir plus de 10000 fichiers
+     * - taille max du zip : 1 Go
+     * - ratio de compression max : 20%
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
+    private function validateArchive(\SplFileInfo $file)
     {
         $maxFiles = 10000;
         $maxSize = 1000000000; // 1 GB
@@ -103,9 +153,7 @@ class UploadListener
 
             $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
             $extensions[] = $extension;
-            if (!in_array($extension, ['csv', 'gpkg'])) {
-                throw new \Exception("L'extension du fichier $filename n'est pas correcte.");
-            }
+            // il n'y a plus besoin de vérifier l'extension parce qu'on a déjà supprimé tous les fichiers qui ne sont pas csv ou gpkg (voir cleanArchive)
 
             $size = $stats['size'];
             if ($size > $maxSize) {
@@ -123,7 +171,7 @@ class UploadListener
         $zip->close();
         $unicity = array_unique($extensions);
         if (1 != count($unicity)) {
-            throw new \Exception("L'archive ne doit contenir qu'un seul type de fichier (gpkg ou CSV)");
+            throw new \Exception(sprintf("L'archive ne doit contenir qu'un seul type de fichier (%s)", implode(' ou ', self::VALID_FILE_EXTENSIONS)));
         }
     }
 
@@ -172,7 +220,7 @@ class UploadListener
         $extension = strtolower($file->getExtension());
         if ('csv' == $extension) {
             return [];
-        }    // difficile de connaitre le srd d'un fichier CSV
+        }    // difficile de connaitre le srid d'un fichier CSV
 
         $srids = [];
         if ('gpkg' == $extension) {

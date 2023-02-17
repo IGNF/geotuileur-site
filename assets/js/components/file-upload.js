@@ -28,7 +28,7 @@ export function fileUpload(
             let fileExtension = filename.split(".").pop().toLowerCase();
             if (!extensions.includes(fileExtension)) {
                 flash.flashAdd(
-                    `Le type du fichier [${filename}] n'est pas correct`
+                    `Le type du fichier [${filename}] n'est pas correct. Extensions acceptées : ${ACCEPTED_EXTENSIONS.join(', ')}`
                 );
                 return false;
             }
