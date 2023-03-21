@@ -1,8 +1,4 @@
-version: "3"
-
-volumes:
-    db-data:
-
+version: "3.4"
 
 networks:
     web_dev:
@@ -23,8 +19,9 @@ services:
             - .:/var/www/html
         extra_hosts:
             - host.docker.internal:host-gateway
+        # décommenter pour utilisation sans traefik
         # ports:
-        #     - "8080:80"
+        #     - "9090:80"
         env_file:
             - .env.local
         networks:
