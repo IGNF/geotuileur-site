@@ -164,12 +164,13 @@ class UploadController extends AbstractController
         $integrationWorkflow->currentStep = $workflowIntStep;
         $integrationWorkflow->progress = $workflowIntProgress;
 
-        WorkflowRunner::runWorkflow([
+        $args = [
             'datastoreId' => $datastoreId,
             'upload' => $upload,
             'plageApi' => $this->plageApi,
             'params' => $this->params,
-        ], $integrationWorkflow, $logger);
+        ];
+        WorkflowRunner::runWorkflow($integrationWorkflow, $args, $logger);
 
         $this->plageApi->upload->addTags($datastoreId, $uploadId, [
             'workflow_integration_step' => $integrationWorkflow->currentStep,
