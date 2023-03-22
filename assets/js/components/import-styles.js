@@ -3,83 +3,138 @@ import ReactDOM from 'react-dom';
 import MapViewer from "../components/MapViewer";
 import { StyleFileReader } from "../components/style-file-reader"
 import StylesList from "../components/react/StylesList";
+import GeostylerUI from './react/GeostylerUI';
 
+import flash from '../components/flash-messages'
+import { Wait } from '../utils';
+import MapboxStyleParser from 'geostyler-mapbox-parser';
+import axios from 'axios';
+
+var wait = new Wait({ id: 'styles' });
 
 export class ImportStyles {
-	constructor(pyramidDatas) {
+    constructor(pyramidDatas) {
         this._types = ['json', 'sld', 'qml'];
 
-		this._datastoreId = pyramidDatas.datastoreid;
-		this._pyramid     = pyramidDatas.pyramid;
+        this._datastoreId = pyramidDatas.datastoreid;
+        this._pyramid = pyramidDatas.pyramid;
 
         let params = {
-            datastoreId: this._datastoreId, 
+            datastoreId: this._datastoreId,
             pyramidId: this._pyramid._id
         };
-		this._url = Routing.generate('plage_style_add_ajax_mapbox', params)
-		
-		this._metadatas         = null;
-        this._layerNames        = [];
-		this._styleFileReader   = null;
-        this._fileType          = 'json';
-        this._num               = 0;
+        this._url = Routing.generate('plage_style_add_ajax_mapbox', params)
+
+        this._metadatas = null;
+        this._layerNames = [];
+        this._styleFileReader = null;
+        this._fileType = 'json';
+        this._num = 0;
 
         let importText = Translator.trans('pyramid.style.import');
         this._templateImport = '<div class="block-import">'
             + '<label class="btn btn-sm btn--ghost btn--primary" for="style-file-NUM">'
-            + `<span class="icon-load-file"></span>&nbsp;${importText}</label>`                  
+            + `<span class="icon-load-file"></span>&nbsp;${importText}</label>`
             + '<input type="file" id="style-file-NUM" accept=".TYPE" data-layer="LAYER" data-num="NUM"></input>'
             + '</div>';
-			
-		// Url du style par defaut
-		let styles = pyramidDatas.styles;
-		if (Array.isArray(styles)) {
-			styles = {};
-		}
 
-		let style;
-		let ids = Object.keys(styles);
-		if (ids.length) {   // Toujours le premier
-			style = Object.assign({ id: ids[0] }, styles[ids[0]]);
-		}
+        // Url du style par defaut
+        let styles = pyramidDatas.styles;
+        if (Array.isArray(styles)) {
+            styles = {};
+        }
 
-		let streamUrl = this._pyramid.tags.tms_url;
-		this._viewer = new MapViewer('map-target', streamUrl, style?.url, { 
-			layerSwitcherControl: true
-		});
-		
-		// La couche TMS a ete ajoutee
-		this._viewer.on('tmslayeradded', (event) => {
+        let style;
+        let ids = Object.keys(styles);
+        if (ids.length) {   // Toujours le premier
+            style = Object.assign({ id: ids[0] }, styles[ids[0]]);
+        }
+
+        let streamUrl = this._pyramid.tags.tms_url;
+        this._viewer = new MapViewer('map-target', streamUrl, style?.url, {
+            layerSwitcherControl: true
+        });
+
+        // La couche TMS a ete ajoutee
+        this._viewer.on('tmslayeradded', (event) => {
             // Mise a jour de l'entete de la page
             $('.o-page-title h1').text(event.metadatas.title);
 
-			/**
-			 * STYLES LIST
-			 */
-			let re = React.createElement(StylesList, {
-				datastoreId: this._datastoreId,
-				pyramidId: this._pyramid._id,
-				styles: styles, 
-				defaultStyle: style?.id,
-				wait: wait,
-				onChange: url => {
-					this._viewer.setStyle(url);
-				}
-			});
-			this._stylesList = ReactDOM.render(re, document.getElementById('styles-wrapper'));
-			this._setMetadatas(event.metadatas);
+            /**
+             * STYLES LIST
+             */
+            let re = React.createElement(StylesList, {
+                datastoreId: this._datastoreId,
+                pyramidId: this._pyramid._id,
+                styles: styles,
+                defaultStyle: style?.id,
+                wait: wait,
+                onChange: url => {
+                    this._viewer.setStyle(url);
+                }
+            });
+
+            // TODO
+            // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-render-return-value.md
+            // https://deepscan.io/docs/rules/react-async-render-return-value
+            this._stylesList = ReactDOM.render(re, document.getElementById('styles-wrapper'));
+            this._setMetadatas(event.metadatas);
+
+            ReactDOM.render(
+                React.createElement(GeostylerUI, {
+                    styleAnnexe: style,
+                    applyStyle: (gsStyle) => {
+                        this._viewer.setGeostylerStyle(gsStyle)
+                    },
+                    saveNewStyle: (gsStyle) => {
+                        let mbp = new MapboxStyleParser()
+                        mbp
+                            .writeStyle(gsStyle)
+                            .then(mbStyle => {
+                                if (mbStyle?.errors?.length > 0) {
+                                    console.error(mbStyle?.errors);
+                                    flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                                } else {
+                                    this._ajaxAddStyle(gsStyle.name, mbStyle.output)
+                                }
+                            })
+                            .catch(reason => {
+                                console.error(reason);
+                                flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                            })
+                    },
+                    replaceCurrentStyle: (gsStyle) => {
+                        let mbp = new MapboxStyleParser()
+                        mbp
+                            .writeStyle(gsStyle)
+                            .then(mbStyle => {
+                                if (mbStyle?.errors?.length > 0) {
+                                    console.error(mbStyle?.errors);
+                                    flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                                } else {
+                                    this._ajaxReplaceStyle(style.id, mbStyle.output)
+                                }
+                            })
+                            .catch(reason => {
+                                console.error(reason);
+                                flash.flashAdd("La conversion du style au format Mapbox a échoué", "error")
+                            })
+                    }
+                }),
+                document.getElementById('geostyler-div')
+            )
 
             // Recuperation du nom des couches
             this._metadatas.vector_layers.forEach(layer => {
                 this._layerNames.push(layer.id);
             });
-		});
+        });
 
         $('#import-styles').on('click', () => {
             this.showDialog();
         });
-	}
-	
+    }
+
     /**
      * Construction du formulaire
      * @returns 
@@ -89,7 +144,7 @@ export class ImportStyles {
 
         const template = document.getElementById("template-dlg-multiple");
         const clone = template.content.cloneNode(true);
-        ['sld', 'qml'].forEach(type => { this._build(clone, type)});
+        ['sld', 'qml'].forEach(type => { this._build(clone, type) });
 
         return clone;
     }
@@ -102,7 +157,7 @@ export class ImportStyles {
         let self = this;
 
         let clone = this.buildForm();
-        let dlg = bootbox.dialog({ 
+        let dlg = bootbox.dialog({
             title: Translator.trans('pyramid.style.import_modal_title'),
             message: clone,
             closeButton: false,
@@ -110,7 +165,7 @@ export class ImportStyles {
                 cancel: {
                     label: Translator.trans('cancel'),
                     className: 'btn btn-sm btn--ghost btn--primary',
-                    callback: () => {}
+                    callback: () => { }
                 },
                 add: {
                     label: Translator.trans('add'),
@@ -119,7 +174,7 @@ export class ImportStyles {
                         let $form = $('.form-multiple');
 
                         let name = $form.find('#style-name').val();
-                        if (! name) {
+                        if (!name) {
                             self._showError(Translator.trans('pyramid.style.name_not_empty'));
                             return false;
                         }
@@ -134,12 +189,12 @@ export class ImportStyles {
                                 self._jsonFileCallback(name, files[0]);
                             }
                             return true;
-                        } 
-                        
+                        }
+
                         let selector = `.form-multiple #${self._fileType}-style input[type="file"]`;
-                       
+
                         let styles = {};
-                        $(selector).each(function() {
+                        $(selector).each(function () {
                             let files = $(this).prop('files');
                             if (files.length) {
                                 let layer = $(this).data('layer');
@@ -156,7 +211,7 @@ export class ImportStyles {
         dlg.init(() => {
             //let self = this;
             let $form = $('.form-multiple');
-            
+
             // Changement de type de fichier
             $form.find('input[name="file-type"]').on('change', (e) => {
                 this._toggleType($(e.currentTarget).val());
@@ -167,13 +222,13 @@ export class ImportStyles {
 
             // Changement de fichier SLD ou QML
             $form.find('input[id^=style-file]').on('change', (e) => { this._onFileChange(e); });
-           
+
             // Suppression du fichier d'import
             $form.find('.remove-style').on('click', (e) => {
-                let $this   = $(e.currentTarget);
-                
-                let num     = $this.data('num'); 
-                let layer   = $(`#layer-${num}`).data('layer');
+                let $this = $(e.currentTarget);
+
+                let num = $this.data('num');
+                let layer = $(`#layer-${num}`).data('layer');
                 $(`#filename-${num}`).text("");
                 $(`#style-file-${num}`).val("");
                 $(`#layer-${num}`).text(layer);
@@ -189,12 +244,12 @@ export class ImportStyles {
         this._num = 0;
         this._fileType = 'json';
     }
-	
+
     /**
      * Suppression du message
      */
     _clearError() {
-        $('.form-multiple').find('.style-error').html("");   
+        $('.form-multiple').find('.style-error').html("");
     }
 
     /**
@@ -203,7 +258,7 @@ export class ImportStyles {
      */
     _showError(message) {
         let $error = $('.form-multiple').find('.style-error');
-        $error.html(`<span class="icons-alert message-icon"></span>${message}`);    
+        $error.html(`<span class="icons-alert message-icon"></span>${message}`);
     }
 
     /**
@@ -230,15 +285,15 @@ export class ImportStyles {
             let json = JSON.parse(content);
 
             const layers = json.layers.filter(layer => this._layerNames.includes(layer["source-layer"]));
-            if (! layers.length) {
+            if (!layers.length) {
                 throw new Error(Translator.trans('pyramid.style.file_not_match'));
             }
             $('#filename-json').text(file.name);
-        } catch(err) {
+        } catch (err) {
             $this.val("");
             $('#filename-json').text("");
 
-            this._showError(err.message);    
+            this._showError(err.message);
         }
     }
 
@@ -246,14 +301,14 @@ export class ImportStyles {
      * Le fichier SLD ou QML a change
      * @param Event e 
      */
-     async _onFileChange(e) {
+    async _onFileChange(e) {
         this._clearError();
 
-        let $this   = $(e.currentTarget);
-        
-        let file    = $this.prop('files')[0];
-        let num     = $this.data('num');
-        let layer   = $(`#layer-${num}`).data('layer');
+        let $this = $(e.currentTarget);
+
+        let file = $this.prop('files')[0];
+        let num = $this.data('num');
+        let layer = $(`#layer-${num}`).data('layer');
 
         // On cache
         let $btnRemove = $(`button[data-num=${num}]`);
@@ -264,13 +319,13 @@ export class ImportStyles {
             $(`#filename-${num}`).text(file.name);
             $(`#layer-${num}`).html(`${layer}&nbsp;<i class="icon-check"></i>`);
             $btnRemove.show();
-        } catch(err) {
+        } catch (err) {
             $(`#filename-${num}`).text("");
             $(`#layer-${num}`).html(`${layer}`);
             $this.val("");
             $btnRemove.hide();
-            
-            this._showError(err.message);    
+
+            this._showError(err.message);
         }
     }
 
@@ -280,8 +335,8 @@ export class ImportStyles {
      * @returns 
      */
     async _checkFile(file) {
-        if (! this._hasRightExtension(file)) {
-            throw new Error(Translator.trans('pyramid.style.type_not_authorized'));  
+        if (!this._hasRightExtension(file)) {
+            throw new Error(Translator.trans('pyramid.style.type_not_authorized'));
         }
 
         let content = await this._styleFileReader.parseFile(file).catch(err => { throw err; });
@@ -309,24 +364,24 @@ export class ImportStyles {
      * Initialisation
      * @param Object metadatas 
      */
-	_setMetadatas(metadatas) {
-		this._metadatas = metadatas;
-		this._styleFileReader = new StyleFileReader(metadatas);
-	}
-	
+    _setMetadatas(metadatas) {
+        this._metadatas = metadatas;
+        this._styleFileReader = new StyleFileReader(metadatas);
+    }
+
     /**
      * Construction des sous formulaires SLD et QML
      * @param HTMLElement clone 
      * @param string type SLD, QML
      */
-	_build(clone, type) {
+    _build(clone, type) {
         this._metadatas.vector_layers.forEach(layer => {
             let $main = $(clone).find(`div#${type}-style`);
-            let $row = $('<div>', { class: 'd-flex flex-row'}).appendTo($main);
+            let $row = $('<div>', { class: 'd-flex flex-row' }).appendTo($main);
 
             let $div = $('<div>', { class: 'flex-grow-1' }).appendTo($row);
             $('<label>', { class: "form-label mb-0", id: `layer-${this._num}`, text: layer.id, 'data-layer': layer.id }).appendTo($div);
-            $('<div>', {class: 'filename', id: `filename-${this._num}`}).appendTo($div);
+            $('<div>', { class: 'filename', id: `filename-${this._num}` }).appendTo($div);
 
             let divImport = this._templateImport.replaceAll('NUM', this._num);
             divImport = divImport.replaceAll('TYPE', type);
@@ -334,11 +389,11 @@ export class ImportStyles {
             $(divImport).appendTo($row);
 
             let $btnRemove = $('<button>', { class: 'btn btn-sm btn--ghost remove-style', 'data-num': this._num }).css('display', 'none');
-            $btnRemove.append($('<i>', { class: 'icons-trash'}));
+            $btnRemove.append($('<i>', { class: 'icons-trash' }));
             $row.append($btnRemove);
- 
+
             this._num++;
-        });    
+        });
     }
 
     /**
@@ -346,9 +401,9 @@ export class ImportStyles {
      * @param string name Nom du style
      * @param string style Style
      */
-    _ajaxCall(name, style) {
+    _ajaxAddStyle(name, style) {
         let self = this;
-        
+
         let formData = new FormData();
         formData.append("name", name);
         formData.append("style", style);
@@ -362,13 +417,39 @@ export class ImportStyles {
         }).done(style => {
             wait.hide();
             self._stylesList.add(style);
+            flash.flashAdd("Le style a bien été enregistré", "success")
         }).fail(() => {
             wait.hide();
             let message = Translator.trans('pyramid.style.add_failed');
             flash.flashAdd(message, 'danger');
-        })   
+        })
     }
-    
+
+    /**
+     * Appel ajax pour le remplacement d'un style existant
+     * @param string name Nom du style
+     * @param string style Style
+     */
+    _ajaxReplaceStyle(annexeId, style) {
+        const url = Routing.generate("plage_annexe_modify_style_string_ajax", { datastoreId: this._datastoreId, annexeId: annexeId })
+        wait.show()
+
+        axios
+            .post(url, {}, {
+                params: { "style-string": style }
+            })
+            .then(() => {
+                flash.flashAdd("Le style a bien été enregistré", "success")
+            })
+            .catch(error => {
+                console.error(error)
+                flash.flashAdd(Translator.trans('pyramid.style.add_failed'), 'danger');
+            })
+            .finally(() => {
+                wait.hide();
+            })
+    }
+
     /**
      * Appel ajax pour l'enregistrement du style JSON
      * @param string name 
@@ -385,7 +466,7 @@ export class ImportStyles {
                 }).forEach(layer => {
                     layer.source = this._metadatas.name;
                 });
-                this._ajaxCall(name, JSON.stringify(style));
+                this._ajaxAddStyle(name, JSON.stringify(style));
             }).catch(err => {
                 wait.hide();
                 flash.flashAdd(err.message);
@@ -398,7 +479,7 @@ export class ImportStyles {
      * @param File file 
      */
     _otherTypesFileCallback(datas) {
-        if (! Object.keys(datas).length) {
+        if (!Object.keys(datas).length) {
             return;
         }
 
@@ -406,7 +487,7 @@ export class ImportStyles {
 
         this._styleFileReader.readFiles(datas.name, datas.styles)
             .then(style => {
-                this._ajaxCall(datas.name, JSON.stringify(style));
+                this._ajaxAddStyle(datas.name, JSON.stringify(style));
             }).catch(err => {
                 wait.hide();
                 flash.flashAdd(err.message);

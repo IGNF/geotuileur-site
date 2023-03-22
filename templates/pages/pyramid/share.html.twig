@@ -23,7 +23,7 @@
         {% set _styles = styles|json_encode()|raw %}
         <div class="share">
             {# La carte #}
-            <div id="map-target" data-pyramid="{{ _pyramid }}" data-styles="{{ _styles }}" data-defstyle="{{ defaultStyle }}"></div> 
+            <div id="map-target" class="map" data-pyramid="{{ _pyramid }}" data-styles="{{ _styles }}" data-defstyle="{{ defaultStyle }}"></div> 
             {# Les differents liens #}
             <div id="links" class="p-1">
                 <div class="wysiwyg">

@@ -30,6 +30,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+    // javascript
     .addEntry("app", "./assets/js/base.js")
     .addEntry("flash-messages", "./assets/js/components/flash-messages.js")
     .addEntry("notifications-bar", "./assets/js/components/notifications-bar.js")
@@ -49,6 +50,9 @@ Encore
     .addEntry("report", "./assets/js/pages/report.js")
     .addEntry("viewer", "./assets/js/pages/viewer.js")
     .addEntry("doc", "./assets/js/pages/doc.js")
+
+    // styles
+    .addEntry("antd", "./assets/scss/antd.scss")
 
     .copyFiles([
         {
@@ -121,4 +125,12 @@ Encore
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery();
 
-module.exports = Encore.getWebpackConfig();
+var config = Encore.getWebpackConfig();
+config.resolve = {
+    fallback: {
+        "fs": false,
+        "path": false,
+    }
+}
+
+module.exports = config;
