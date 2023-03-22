@@ -1,33 +1,23 @@
 version: "3.4"
 
 networks:
-    web_dev:
-        external: true
+    geotuileur_network:
+
 
 services:
-    backend:
+    app:
         build:
             context: .
-            dockerfile: .docker/backend.dockerfile
+            dockerfile: .docker/prod.dockerfile
             args:
                 - http_proxy
                 - https_proxy
                 - HTTP_PROXY
                 - HTTPS_PROXY
-        working_dir: /var/www/html
-        volumes:
-            - .:/var/www/html
-        extra_hosts:
-            - host.docker.internal:host-gateway
-        # décommenter pour utilisation sans traefik
-        # ports:
-        #     - "9090:80"
+        ports:
+            - "9090:8000"
         env_file:
             - .env.local
         networks:
-            - web_dev
+            - geotuileur_network
         restart: unless-stopped
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.geotuileur.rule=Host(`geotuileur.docker.localhost`)"
-            - "traefik.http.routers.geotuileur.entrypoints=websecure"

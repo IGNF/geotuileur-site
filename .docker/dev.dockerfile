@@ -1,7 +1,5 @@
-### backend.dockerfile
-
 # Base image
-FROM php:8.2-apache
+FROM php:8.2-apache as base
 
 # ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN rm /etc/apt/preferences.d/no-debian-php
@@ -50,19 +48,11 @@ RUN apt-get update -qq \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 #----------------------------------------------------------------------
-# Configure PHP and pecl
-#----------------------------------------------------------------------
-COPY .docker/php.ini /usr/local/etc/php/conf.d/app.ini
-RUN pear config-set php_ini /usr/local/etc/php/conf.d/app.ini
-RUN if [ "${http_proxy}" != "" ]; then \
-    pear config-set http_proxy ${http_proxy} \
-    ;fi
-
-#----------------------------------------------------------------------
 # PHP Configuration & Extensions
 #----------------------------------------------------------------------
 RUN apt-get update
 COPY .docker/php.ini /usr/local/etc/php/conf.d/app.ini
+RUN pear config-set php_ini /usr/local/etc/php/conf.d/app.ini
 
 RUN apt-get install -y \
     libzip-dev \
@@ -78,17 +68,6 @@ RUN apt-get install -y libxslt-dev \
 
 RUN docker-php-ext-install opcache
 
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-#----------------------------------------------------------------------
-# Cypress system/native dependencies
-#----------------------------------------------------------------------
-RUN apt-get update -qq && \
-    apt-get install -qy libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-
 #----------------------------------------------------------------------
 # Install Nodejs
 # https://github.com/nodejs/docker-node/blob/main/16/bullseye/Dockerfile
@@ -98,8 +77,7 @@ COPY --from=node:16 /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node:16 /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs \
     && ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
-RUN npm i -g npm
-RUN npm i -g yarn
+RUN npm i -g npm yarn
 
 #----------------------------------------------------------------------
 # APT Cache Cleanup
@@ -107,17 +85,35 @@ RUN npm i -g yarn
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #----------------------------------------------------------------------
-# Configure Apache TODO
+# Configure apache
 #----------------------------------------------------------------------
-COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY .docker/apache.conf /etc/apache2/conf-available/z-app.conf
+COPY .docker/apache-ports.conf /etc/apache2/ports.conf
+COPY .docker/apache-security.conf /etc/apache2/conf-enabled/security.conf
+COPY .docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 
-RUN a2enmod rewrite remoteip && \
-    a2enconf z-app
+RUN a2enmod rewrite remoteip
 
-RUN useradd -ms /bin/bash app_user
+#----------------------------------------------------------------------
+# This dev dockerfile should be the same as prod dockerfile upto this point
+#----------------------------------------------------------------------
 
-RUN chown -R app_user .
-# RUN chmod 777 -R .
+#----------------------------------------------------------------------
+# Dev environment specific setup
+#----------------------------------------------------------------------
+RUN if [ "${http_proxy}" != "" ]; then \
+    pear config-set http_proxy ${http_proxy} \
+    ;fi
 
-USER app_user
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+VOLUME [ "/opt/geotuileur-site" ]
+WORKDIR /opt/geotuileur-site
+
+RUN chown -R www-data .
+EXPOSE 8000
+
+RUN useradd -ms /bin/bash dev_user
+USER dev_user
