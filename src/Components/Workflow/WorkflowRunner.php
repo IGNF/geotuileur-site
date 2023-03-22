@@ -11,7 +11,7 @@ class WorkflowRunner
     private const FUNC_SUFFIX_CHECK_SUCCESS = 'CheckSuccess';
     private const FUNC_SUFFIX_ACTION_AFTER_SUCCESS = 'ActionAfterSuccess';
 
-    public static function runWorkflow($workflow, $args = [], LoggerInterface $logger)
+    public static function runWorkflow($workflow, $args, LoggerInterface $logger)
     {
         if ($workflow->currentStep == count($workflow->steps)) {
             return $workflow->progress;
