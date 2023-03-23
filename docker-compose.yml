@@ -6,6 +6,7 @@ networks:
 
 services:
     app:
+        image: ignf/geotuileur-site:latest
         build:
             context: .
             dockerfile: .docker/Dockerfile
