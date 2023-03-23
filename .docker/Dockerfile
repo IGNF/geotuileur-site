@@ -1,4 +1,4 @@
-# Base image
+# Prod image
 FROM php:8.2-apache
 
 # ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -88,17 +88,16 @@ RUN a2enmod rewrite remoteip
 #----------------------------------------------------------------------
 # Install geotuileur-site (production specific)
 #----------------------------------------------------------------------
-COPY . /opt/geotuileur-site
+COPY --chown=www-data:www-data . /opt/geotuileur-site
 WORKDIR /opt/geotuileur-site
+USER www-data
 
-RUN composer install --no-dev --optimize-autoloader \
+RUN composer install --prefer-dist --no-dev --no-cache --optimize-autoloader --no-progress \
     && APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear \
     && php bin/console assets:install
 
-RUN yarn install --production \
-    && yarn encore production
-
-RUN chown -R www-data:www-data /opt/geotuileur-site
-USER www-data
+RUN yarn install --production --frozen-lockfile \
+    && yarn encore production \
+    && yarn cache clean
 
 EXPOSE 8000

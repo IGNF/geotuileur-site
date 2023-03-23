@@ -1,5 +1,5 @@
-# Base image
-FROM php:8.2-apache as base
+# Dev image
+FROM php:8.2-apache
 
 # ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN rm /etc/apt/preferences.d/no-debian-php
@@ -94,7 +94,7 @@ COPY .docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite remoteip
 
 #----------------------------------------------------------------------
-# This dev dockerfile should be the same as prod dockerfile upto this point
+# This dev dockerfile MUST be the same as prod dockerfile upto this point
 #----------------------------------------------------------------------
 
 #----------------------------------------------------------------------
