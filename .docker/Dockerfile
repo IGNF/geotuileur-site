@@ -92,7 +92,8 @@ COPY --chown=www-data:www-data . /opt/geotuileur-site
 WORKDIR /opt/geotuileur-site
 USER www-data
 
-RUN APP_ENV=prod composer install --prefer-dist --no-dev --no-cache --optimize-autoloader --no-progress \
+RUN export APP_ENV=prod \
+    && APP_ENV=prod composer install --prefer-dist --no-dev --no-cache --optimize-autoloader --no-progress \
     && APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear \
     && php bin/console assets:install
 
