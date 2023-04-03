@@ -12,7 +12,7 @@ require("dotenv").config({
     path: "./.env.local",
 });
 
-if ("" !== process.env.ENCORE_PUBLIC_PATH) {
+if (process.env.ENCORE_PUBLIC_PATH != undefined && "" !== process.env.ENCORE_PUBLIC_PATH) {
     publicPath = process.env.ENCORE_PUBLIC_PATH;
 }
 
