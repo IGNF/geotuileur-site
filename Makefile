@@ -5,6 +5,7 @@ PHP_MD_RULES=./phpmd.xml
 
 .PHONY: help
 help:
+	@echo "<!> Only for dev purposes <!>"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: check-todolist
@@ -35,13 +36,6 @@ compile-app: ## Update and package all php and javascript dependencies
 	yarn install
 	yarn encore dev
 
-.PHONY: compile-app-prod
-compile-app-prod: ## Update and package all php and javascript dependencies in production mode
-	composer update
-	php bin/console assets:install
-	yarn install --production
-	yarn encore production
-
 .PHONY: cc
 cc:
 	php bin/console cache:clear
@@ -56,8 +50,8 @@ down: ## Take down docker containers
 
 .PHONY: bash
 bash: ## Enter with bash into the php docker container
-	docker exec -it geotuileur-site_backend_1 bash
+	docker exec -it geotuileur-site_app_dev_1 bash
 
 .PHONY: d
 d: ## Run any command in the php docker container
-	docker exec -it geotuileur-site_backend_1 $(c)
+	docker exec -it geotuileur-site_app_dev_1 $(c)
