@@ -22,7 +22,7 @@
         "jquery": "^3.6.0",
         "jquery-ui": "^1.13.2",
         "less-loader": "^11.1.0",
-        "ol": "6.9.0",
+        "ol": "6.15.1",
         "ol-mapbox-style": "^6.4.1",
         "overlayscrollbars": "^1.13.0",
         "popper.js": "^1.16.1",
