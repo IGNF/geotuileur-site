@@ -30,4 +30,4 @@ services:
             - "traefik.enable=true"
             - "traefik.http.routers.geotuileur.rule=Host(`geotuileur-dev.docker.localhost`)"
             - "traefik.http.routers.geotuileur.entrypoints=websecure"
-            - "traefik.http.services.validator-api-service.loadbalancer.server.port=8000"
+            - "traefik.http.services.geotuileur.loadbalancer.server.port=8000"
