@@ -23,7 +23,7 @@
         "symfony/flex": "^1.19",
         "symfony/form": "5.4.*",
         "symfony/framework-bundle": "5.4.*",
-        "symfony/http-client": "5.4.20",
+        "symfony/http-client": "5.4.26",
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
         "symfony/monolog-bundle": "^3.8",
