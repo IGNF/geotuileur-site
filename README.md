@@ -8,6 +8,10 @@ Ce dépôt ne contient que le code source du portail et ne contient pas le code 
 
 Ce code est sous licence Affero GPL v3.0.
 
+## ❗ Note importante
+
+**Le Géotuileur a été déployé et testé dans le cadre d'une expérimentation entre l'été 2022 et l'été 2023. L'expérimentation est terminée et les fonctionnalités sont ou seront reprises dans d'autres projets. Ce dépôt est par conséquent archivé et les issues ou PR encore référencées ne seront plus traitées.**
+
 ## Fonctionnalités clés
 
 -   Accès aux Espaces de travail (`datastores`) de l'utilisateur
